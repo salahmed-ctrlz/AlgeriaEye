@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "title": "Algeria Eye — Discover Algeria",
+    "description": "Explore Algeria's 48 wilayas. Book hotels, restaurants, tours, and unique experiences across the country."
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Explore",
+    "dashboard": "Dashboard",
+    "messages": "Messages",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "language": "العربية",
+    "explore": "Explore",
+    "about": "About",
+    "theme": "Theme"
+  },
+  "aboutPage": {
+    "title": "About Algeria Eye",
+    "subtitle": "Redefining Tourism in Algeria",
+    "missionTitle": "Our Mission",
+    "missionDesc": "To showcase the hidden beauty of Algeria to the world, providing a seamless platform for tourists to discover authentic experiences and for locals to share their heritage.",
+    "whatWeDoTitle": "What We Do",
+    "whatWeDoDesc": "We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.",
+    "features": {
+      "title": "Why Choose Us?",
+      "f1": "Authentic Experiences",
+      "f2": "Verified Local Hosts",
+      "f3": "24/7 Support",
+      "f4": "Secure Bookings"
+    },
+    "ctaTitle": "Ready to Explore?",
+    "ctaButton": "Start Your Journey"
+  },
+  "hero": {
+    "title": "Discover the Beauty of Algeria",
+    "subtitle": "From Saharan dunes to Mediterranean shores — explore 48 unique wilayas through handpicked hotels, tours, and local experiences.",
+    "searchPlaceholder": "Search destinations, hotels, experiences...",
+    "searchButton": "Search",
+    "badge": "🇩🇿 #1 Tourism Platform in Algeria",
+    "trust1": "48 Wilayas",
+    "trust2": "Verified Hosts",
+    "trust3": "24/7 Support"
+  },
+  "home": {
+    "wilayasTitle": "Explore All 48 Wilayas",
+    "wilayasSubtitle": "Each wilaya holds its own story, waiting to be discovered",
+    "featuredWilayasTitle": "Featured Destinations",
+    "featuredWilayasSubtitle": "Handpicked wilayas you'll fall in love with",
+    "featuredTitle": "Featured Listings",
+    "featuredSubtitle": "Hand-picked experiences across Algeria",
+    "categoriesTitle": "Browse by Category",
+    "categoriesSubtitle": "Find exactly what you're looking for",
+    "statsWilayas": "Wilayas",
+    "statsListings": "Listings",
+    "statsTravelers": "Travelers",
+    "statsHosts": "Verified Hosts",
+    "featuresTitle": "Why Algeria Eye?",
+    "featuresSubtitle": "Everything you need for an unforgettable Algerian journey",
+    "feature1Title": "Verified Hosts",
+    "feature1Desc": "Every property is vetted and verified by our team to ensure quality and authenticity.",
+    "feature2Title": "Best Prices",
+    "feature2Desc": "Compare prices across hundreds of listings to find the perfect match for your budget.",
+    "feature3Title": "Local Experiences",
+    "feature3Desc": "Discover hidden gems curated by locals who know Algeria's beauty inside out.",
+    "ctaTitle": "Own a Property in Algeria?",
+    "ctaSubtitle": "Join hundreds of hosts earning income by listing their properties on Algeria Eye.",
+    "ctaButton": "List Your Property"
+  },
+  "wilayas": {
+    "algiers": {
+      "name": "Algiers",
+      "desc": "The White City — Algeria's vibrant capital on the Mediterranean coast"
+    },
+    "oran": {
+      "name": "Oran",
+      "desc": "The Radiant City — a melting pot of culture and coastal beauty"
+    },
+    "annaba": {
+      "name": "Annaba",
+      "desc": "Pearl of the East — ancient Hippo Regius meets modern seaside charm"
+    },
+    "msila": {
+      "name": "M'sila",
+      "desc": "Gateway to the Hodna — vast plains and rich Berber heritage"
+    },
+    "biskra": {
+      "name": "Biskra",
+      "desc": "Queen of the Ziban — where the Sahara begins in golden splendor"
+    },
+    "tamanrasset": {
+      "name": "Tamanrasset",
+      "desc": "Heart of the Hoggar — desert mountains and Tuareg culture"
+    },
+    "constantine": {
+      "name": "Constantine",
+      "desc": "The City of Bridges — suspended in history and breathtaking views"
+    }
+  },
+  "categories": {
+    "exploreByType": "Explore by Category",
+    "hotels": "Hotels",
+    "hotel": "Hotels",
+    "agencies": "Travel Agencies",
+    "agency": "Travel Agency",
+    "transport": "Transport",
+    "guides": "Tour Guides",
+    "guide": "Tour Guide",
+    "tours": "Tours",
+    "tour": "Guided Tours",
+    "activities": "Activities",
+    "activity": "Activity",
+    "restaurant": "Restaurants",
+    "guesthouse": "Guesthouses",
+    "experience": "Experiences"
+  },
+  "search": {
+    "title": "Search Results",
+    "filters": "Filters",
+    "priceRange": "Price Range",
+    "type": "Type",
+    "allTypes": "All Types",
+    "hotel": "Hotel",
+    "restaurant": "Restaurant",
+    "guesthouse": "Guesthouse",
+    "tour": "Tour",
+    "experience": "Experience",
+    "transport": "Transport",
+    "noResults": "No listings found. Try adjusting your filters.",
+    "resultsCount": "{count} listings found"
+  },
+  "listing": {
+    "bookNow": "Book Now",
+    "perNight": "/ night",
+    "gallery": "Gallery",
+    "description": "Description",
+    "details": "Details",
+    "location": "Location",
+    "reviews": "Reviews",
+    "rating": "Rating",
+    "noReviews": "No reviews yet"
+  },
+  "booking": {
+    "title": "Complete Your Booking",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "totalPrice": "Total Price",
+    "confirm": "Confirm Booking",
+    "paymentSimulated": "Payment Simulated",
+    "success": "Booking confirmed successfully!",
+    "notes": "Special Requests"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to your account",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Join Algeria Eye today",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "role": "I am a...",
+    "tourist": "Tourist",
+    "owner": "Property Owner",
+    "loginButton": "Sign In",
+    "registerButton": "Create Account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "orContinueWith": "or continue with"
+  },
+  "dashboard": {
+    "title": "Owner Dashboard",
+    "myListings": "My Listings",
+    "addListing": "Add Listing",
+    "editListing": "Edit Listing",
+    "bookings": "Bookings",
+    "noListings": "You haven't added any listings yet.",
+    "listingForm": {
+      "title": "Title",
+      "description": "Description",
+      "type": "Type",
+      "wilaya": "Wilaya",
+      "address": "Address",
+      "price": "Price per Night (DZD)",
+      "images": "Images",
+      "submit": "Save Listing"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "dzd": "DZD",
+    "exploreAll": "View All",
+    "learnMore": "Learn More"
+  },
+  "footer": {
+    "description": "Your gateway to discovering Algeria's hidden gems — from Saharan oases to Mediterranean coastlines.",
+    "quickLinks": "Quick Links",
+    "explore": "Explore",
+    "support": "Support",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Get the latest travel tips and deals",
+    "emailPlaceholder": "your@email.com",
+    "subscribe": "Subscribe",
+    "contact": "Contact",
+    "helpCenter": "Help Center",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with ❤️ in Algeria"
+  }
+}

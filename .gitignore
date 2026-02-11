@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# sensitive data
+*.sql
+.env.production
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
