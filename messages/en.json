@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Algeria Eye — Discover Algeria",
-    "description": "Explore Algeria's 48 wilayas. Book hotels, restaurants, tours, and unique experiences across the country."
+    "description": "Explore Algeria's 69 wilayas. Book hotels, restaurants, tours, and unique experiences across the country."
   },
   "nav": {
     "home": "Home",
@@ -18,33 +18,75 @@
   },
   "aboutPage": {
     "title": "About Algeria Eye",
-    "subtitle": "Redefining Tourism in Algeria",
-    "missionTitle": "Our Mission",
-    "missionDesc": "To showcase the hidden beauty of Algeria to the world, providing a seamless platform for tourists to discover authentic experiences and for locals to share their heritage.",
-    "whatWeDoTitle": "What We Do",
-    "whatWeDoDesc": "We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.",
-    "features": {
-      "title": "Why Choose Us?",
-      "f1": "Authentic Experiences",
-      "f2": "Verified Local Hosts",
-      "f3": "24/7 Support",
-      "f4": "Secure Bookings"
+    "subtitle": "Your Smart Companion to Algeria's Hidden Gems",
+    "story": {
+      "title": "Our Vision",
+      "desc1": "Algeria Eye isn't just a travel guide; it's a comprehensive digital ecosystem designed to revolutionize tourism in Algeria. Born from a desire to bridge the gap between Algeria's breathtaking landscapes and the world, we provide a seamless, personalized experience for every traveler.",
+      "desc2": "From the golden sands of the Sahara to the azure Mediterranean coast, we combine advanced AI technology with human warmth to offer tailored itineraries, certified local guides, and instant bookings for hotels, transport, and events."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "desc": "To empower travelers with a smart, all-in-one platform that simplifies exploration. We aim to showcase Algeria's rich history, diverse culture, and stunning nature while providing practical solutions like transportation guidance, language translation, and secure accommodation bookings."
+    },
+    "whatWeDo": {
+      "title": "What We Offer",
+      "subtitle": "A complete suite of services for the modern explorer.",
+      "items": {
+        "guide": {
+          "title": "Smart Guidance",
+          "desc": "AI-driven recommendations and personalized itineraries based on your interests—whether it's history, shopping, or nature."
+        },
+        "connect": {
+          "title": "Local Connection",
+          "desc": "Direct access to certified tour guides who facilitate translation and cultural immersion."
+        },
+        "logistics": {
+          "title": "Seamless Logistics",
+          "desc": "Hassle-free booking for hotels, transport (car, bus, tram), and event organization."
+        },
+        "events": {
+          "title": "Cultural Events",
+          "desc": "Discover and participate in national exhibitions, festivals, and local competitions."
+        }
+      }
+    },
+    "values": {
+      "title": "Core Values",
+      "subtitle": "The principles that guide everything we do.",
+      "authenticity": {
+        "title": "Authenticity",
+        "desc": "Deep dives into local culture, from food tasting to historical storytelling."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "desc": "Leveraging technology to solve travel hurdles like language barriers and navigation."
+      },
+      "hospitality": {
+        "title": "Hospitality",
+        "desc": "Ensuring every guest feels at home with 24/7 support and verified hosts."
+      }
+    },
+    "join": {
+      "title": "Be Part of the Story",
+      "desc": "Whether you are a traveler seeking adventure or a local business ready to welcome the world, Algeria Eye is your platform.",
+      "touristBtn": "Plan Your Trip",
+      "hostBtn": "Partner With Us"
     },
     "ctaTitle": "Ready to Explore?",
     "ctaButton": "Start Your Journey"
   },
   "hero": {
     "title": "Discover the Beauty of Algeria",
-    "subtitle": "From Saharan dunes to Mediterranean shores — explore 48 unique wilayas through handpicked hotels, tours, and local experiences.",
+    "subtitle": "From Saharan dunes to Mediterranean shores — explore 69 unique wilayas through handpicked hotels, tours, and local experiences.",
     "searchPlaceholder": "Search destinations, hotels, experiences...",
     "searchButton": "Search",
     "badge": "🇩🇿 #1 Tourism Platform in Algeria",
-    "trust1": "48 Wilayas",
+    "trust1": "69 Wilayas",
     "trust2": "Verified Hosts",
     "trust3": "24/7 Support"
   },
   "home": {
-    "wilayasTitle": "Explore All 48 Wilayas",
+    "wilayasTitle": "Explore All 69 Wilayas",
     "wilayasSubtitle": "Each wilaya holds its own story, waiting to be discovered",
     "featuredWilayasTitle": "Featured Destinations",
     "featuredWilayasSubtitle": "Handpicked wilayas you'll fall in love with",
@@ -57,6 +99,8 @@
     "statsTravelers": "Travelers",
     "statsHosts": "Verified Hosts",
     "featuresTitle": "Why Algeria Eye?",
+    "welcomeOwner": "Make them feel at home..",
+    "welcomeTourist": "Ready to discover Algeria today?",
     "featuresSubtitle": "Everything you need for an unforgettable Algerian journey",
     "feature1Title": "Verified Hosts",
     "feature1Desc": "Every property is vetted and verified by our team to ensure quality and authenticity.",
@@ -128,7 +172,28 @@
     "experience": "Experience",
     "transport": "Transport",
     "noResults": "No listings found. Try adjusting your filters.",
-    "resultsCount": "{count} listings found"
+    "resultsCount": "{count} listings found",
+    "cuisine": "Cuisine",
+    "vibe": "Vibe",
+    "cuisines": {
+      "traditional": "Traditional",
+      "modern": "Modern",
+      "fastFood": "Fast Food",
+      "seafood": "Seafood",
+      "italian": "Italian",
+      "french": "French",
+      "asian": "Asian",
+      "syrian": "Syrian"
+    },
+    "vibes": {
+      "casual": "Casual",
+      "fancy": "Fancy",
+      "familyFriendly": "Family Friendly",
+      "business": "Business",
+      "romantic": "Romantic",
+      "cafe": "Cafe",
+      "streetFood": "Street Food"
+    }
   },
   "listing": {
     "bookNow": "Book Now",
@@ -200,6 +265,87 @@
     "dzd": "DZD",
     "exploreAll": "View All",
     "learnMore": "Learn More"
+  },
+  "explore": {
+    "title": "Explore Algeria",
+    "subtitle": "Discover the rich history, vibrant culture, and delicious cuisine of the largest country in Africa.",
+    "backHome": "Back Home",
+    "tabs": {
+      "culture": "Culture & Traditions",
+      "history": "History & Landmarks",
+      "food": "Food & Cuisine",
+      "clothing": "Traditional Attire"
+    },
+    "culture": {
+      "title": "Algerian Culture & Traditions",
+      "desc": "A blend of Berber, Arab, French, and Mediterranean influences, Algerian culture is rich in music, literature, and hospitality.",
+      "fantasia": {
+        "title": "Fantasia (Tbourida)",
+        "desc": "A traditional equestrian performance simulating military assaults, often seen at weddings and festivals. Riders charge in a line and fire muskets simultaneously."
+      },
+      "tea": {
+        "title": "The Tea Ceremony",
+        "desc": "Serving mint tea is a central part of hospitality. In the Sahara, the Tuareg people have a specific ritual involving three rounds of tea, each with a different flavor profile."
+      },
+      "music": {
+        "title": "Music: Rai & Chaabi",
+        "desc": "Algerian music is world-renowned, especially Raï, which originated in Oran and speaks of social issues and love. Chaabi is the folk music of Algiers, characterized by mandole accompaniment and poetic lyrics."
+      }
+    },
+    "food": {
+      "title": "Taste of Algeria",
+      "desc": "Mediterranean flavors meet African spices. Couscous, Tajine, and sweet honey pastries await.",
+      "items": {
+        "couscous": {
+          "title": "Couscous",
+          "desc": "The national dish, steamed semolina granules usually served with a stew of vegetables and meat."
+        },
+        "chakhchoukha": {
+          "title": "Chakhchoukha",
+          "desc": "A chaotic mix of torn flatbread pieces soaked in a spicy tomato sauce with chickpeas and meat."
+        },
+        "mhajeb": {
+          "title": "Mhajeb",
+          "desc": "Flaky, stuffed flatbread usually filled with a spicy onion and tomato mixture. A popular street food."
+        },
+        "kelb": {
+          "title": "Kalb El Louz",
+          "desc": "A semolina-based dessert soaked in syrup and rose water, meaning 'Heart of the Almond'."
+        }
+      }
+    },
+    "history": {
+      "title": "Historical Landmarks",
+      "desc": "From Roman ruins to Islamic architecture, Algeria's history spans millennia.",
+      "items": {
+        "timgad": {
+          "title": "Timgad (Thamugadi)",
+          "desc": "Known as the 'Pompeii of Africa', this Roman city in the Aurès Mountains is a UNESCO World Heritage site featuring a massive grid layout, library, and arch."
+        },
+        "poste": {
+          "title": "Grande Poste d'Alger",
+          "desc": "A masterpiece of Neo-Moorish architecture built in 1910, serving as a symbol of Algiers center."
+        },
+        "hammad": {
+          "title": "Al Qal'a of Beni Hammad",
+          "desc": "The first capital of the Hammadid emirs, founded in 1007. It is home to one of the largest mosques in Algeria."
+        }
+      }
+    },
+    "clothing": {
+      "title": "Traditional Attire",
+      "desc": "A colorful display of heritage, varying significantly from region to region.",
+      "items": {
+        "karakou": {
+          "title": "The Karakou",
+          "desc": "Originating from Algiers, this consists of a velvet jacket embroidered with gold threads (Majboud) and usually worn with 'Seroual Chelqa' (traditional trousers)."
+        },
+        "chedda": {
+          "title": "Chedda of Tlemcen",
+          "desc": "A UNESCO Intangible Cultural Heritage, this bridal dress from Tlemcen involves layers of fabric, jewelry, and a conical hat."
+        }
+      }
+    }
   },
   "footer": {
     "description": "Your gateway to discovering Algeria's hidden gems — from Saharan oases to Mediterranean coastlines.",

@@ -1,9 +1,14 @@
 import SearchPage from "../search/page";
+import { getTranslations } from "next-intl/server";
 
-export const metadata = {
-    title: "Explore Listings | Algeria Eye",
-    description: "Find the best hotels, transport, and tours in Algeria.",
-};
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+    const t = await getTranslations({ locale, namespace: "explore" });
+
+    return {
+        title: `${t("title")} | Algeria Eye`,
+        description: t("subtitle"),
+    };
+}
 
 export default function ExplorePage() {
     return <SearchPage />;

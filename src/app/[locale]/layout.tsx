@@ -45,7 +45,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     disableTransitionOnChange
                 >
                     <NextIntlClientProvider messages={messages}>
-                        <div className="flex min-h-screen flex-col">
+                        <div className="flex min-h-screen flex-col relative">
                             <Navbar />
                             <main className="flex-1">{children}</main>
                             <Footer />

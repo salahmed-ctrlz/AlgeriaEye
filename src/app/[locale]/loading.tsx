@@ -1,9 +1,10 @@
-import { Loader2 } from "lucide-react";
+import ZelijSpinner from "@/components/ui/ZelijSpinner";
 
 export default function Loading() {
     return (
         <div className="flex h-[50vh] w-full items-center justify-center">
-            <Loader2 className="h-10 w-10 animate-spin text-brand" />
+            {/* The spinner visual is handled by the component's internal styles */}
+            <ZelijSpinner className="h-24 w-24 text-brand animate-spin-slow" />
         </div>
     );
 }

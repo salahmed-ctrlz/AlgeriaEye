@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { Building2, Map, Car, Briefcase, Tent, Palmtree } from "lucide-react";
 import { cn } from "@/lib/utils";

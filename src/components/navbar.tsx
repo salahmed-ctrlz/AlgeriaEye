@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import {
@@ -76,11 +75,11 @@ export function Navbar() {
     };
 
     const navLinks = [
-        { href: `/${locale}`, label: t("home"), icon: Home, active: pathname === `/${locale}` },
-        { href: `/${locale}/explore`, label: t("explore"), icon: Compass, active: pathname.includes("/explore") },
+        { href: "/", label: t("home"), icon: Home, active: pathname === `/${locale}` },
+        { href: "/explore", label: t("explore"), icon: Compass, active: pathname.includes("/explore") },
         ...(user ? [
-            { href: `/${locale}/dashboard`, label: t("dashboard"), icon: LayoutDashboard, active: pathname.includes("/dashboard") },
-            { href: `/${locale}/messages`, label: t("messages"), icon: MessageSquare, active: pathname.includes("/messages") },
+            { href: "/dashboard", label: t("dashboard"), icon: LayoutDashboard, active: pathname.includes("/dashboard") },
+            { href: "/messages", label: t("messages"), icon: MessageSquare, active: pathname.includes("/messages") },
         ] : []),
     ];
 
@@ -88,7 +87,7 @@ export function Navbar() {
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
             <div className="container mx-auto flex h-24 items-center justify-between px-4 sm:px-8 relative">
                 {/* Logo - Left */}
-                <Link href={`/${locale}`} className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                     <div className="relative h-16 w-[20rem] max-w-[40vw]">
                         {mounted ? (
                             <Image
@@ -118,12 +117,12 @@ export function Navbar() {
                             {link.label}
                         </Link>
                     ))}
-                    <Link href={`/${locale}/about`} className="text-sm font-medium text-muted-foreground hover:text-brand transition-colors">{t("about")}</Link>
+                    <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-brand transition-colors">{t("about")}</Link>
                 </nav>
 
                 {/* Desktop Actions - Right */}
                 <div className="hidden items-center gap-4 md:flex">
-                    <Link href={localePath} className="text-muted-foreground hover:text-foreground transition-colors mr-2">
+                    <Link href={pathname} locale={otherLocale} className="text-muted-foreground hover:text-foreground transition-colors mr-2">
                         <span className="flex items-center justify-center h-9 w-9 rounded-full hover:bg-muted transition-colors">
                             {locale === "en" ? <span className="text-lg font-bold">EN</span> : <span className="text-lg font-bold">ع</span>}
                         </span>
@@ -141,13 +140,13 @@ export function Navbar() {
                         <span className="sr-only">Toggle theme</span>
                     </Button>
 
-                    <Link href={`/${locale}/contact`} className="flex items-center justify-center h-9 w-9 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                    <Link href="/contact" className="flex items-center justify-center h-9 w-9 rounded-full bg-brand/10 text-brand hover:bg-brand/20 transition-colors">
                         <Phone className="h-5 w-5" />
                     </Link>
 
                     {user ? (
                         <div className="flex items-center gap-2">
-                            <Link href={`/${locale}/dashboard?tab=profile`}>
+                            <Link href="/dashboard?tab=profile">
                                 <Button variant="ghost" size="icon" className="rounded-full">
                                     <UserCircle className="h-6 w-6" />
                                 </Button>
@@ -158,7 +157,7 @@ export function Navbar() {
                             </Button>
                         </div>
                     ) : (
-                        <Link href={`/${locale}/login`}>
+                        <Link href="/login">
                             <Button size="sm" className="bg-brand text-white hover:bg-brand-light">
                                 {t("login")}
                             </Button>
@@ -210,7 +209,7 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <Link
-                                href={`/${locale}/about`}
+                                href="/about"
                                 onClick={() => setIsOpen(false)}
                                 className="flex items-center gap-4 rounded-xl px-4 py-4 text-xl font-medium transition-all hover:bg-muted active:scale-95 text-foreground"
                             >
@@ -218,7 +217,7 @@ export function Navbar() {
                                 {t("about")}
                             </Link>
                             <Link
-                                href={`/${locale}/contact`}
+                                href="/contact"
                                 onClick={() => setIsOpen(false)}
                                 className="flex items-center gap-4 rounded-xl px-4 py-4 text-xl font-medium transition-all hover:bg-muted active:scale-95 text-foreground"
                             >
@@ -229,7 +228,7 @@ export function Navbar() {
 
                         <div className="p-6 border-t bg-muted/20">
                             <div className="grid grid-cols-2 gap-4 mb-6">
-                                <Link href={localePath} onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 rounded-lg bg-background border p-3 shadow-sm active:scale-95 transition-transform">
+                                <Link href={pathname} locale={otherLocale} onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 rounded-lg bg-background border p-3 shadow-sm active:scale-95 transition-transform">
                                     <span className="text-xl">{locale === "en" ? "🇺🇸" : "🇩🇿"}</span>
                                     <span className="font-medium">{locale === "en" ? "English" : "العربية"}</span>
                                 </Link>
@@ -253,7 +252,7 @@ export function Navbar() {
                                     {t("logout")}
                                 </Button>
                             ) : (
-                                <Link href={`/${locale}/login`} onClick={() => setIsOpen(false)}>
+                                <Link href="/login" onClick={() => setIsOpen(false)}>
                                     <Button className="w-full bg-brand text-white text-lg h-12">
                                         {t("login")}
                                     </Button>

@@ -1,48 +1,53 @@
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 
 export default function ClothingPage() {
+    const t = useTranslations("explore.clothing");
+
     return (
         <div className="space-y-8">
             <section className="text-center space-y-4">
-                <h2 className="text-3xl font-bold tracking-tight">Traditional Attire</h2>
+                <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                    A colorful display of heritage, varying significantly from region to region.
+                    {t("desc")}
                 </p>
             </section>
 
             <div className="grid md:grid-cols-2 gap-8">
-                <Card className="flex flex-col md:flex-row overflow-hidden">
-                    <div className="relative h-64 md:h-auto md:w-1/2">
-                        <Image
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Karakou_alg%C3%A9rois.jpg/800px-Karakou_alg%C3%A9rois.jpg"
-                            alt="Karakou"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                    <div className="p-6 md:w-1/2 flex flex-col justify-center">
-                        <CardTitle className="mb-2">The Karakou</CardTitle>
-                        <p className="text-muted-foreground">
-                            Originating from Algiers, this consists of a velvet jacket embroidered with gold threads (Majboud) and usually worn with 'Seroual Chelqa' (traditional trousers).
-                        </p>
+                <Card className="group relative overflow-hidden rounded-xl h-[500px] border-none shadow-xl">
+                    <Image
+                        src="/images/explore/karakou.jpg"
+                        alt={t("items.karakou.title")}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 p-8 w-full">
+                        <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 text-white">
+                            <CardTitle className="mb-4 text-3xl font-bold">{t("items.karakou.title")}</CardTitle>
+                            <p className="text-gray-200 text-lg leading-relaxed">
+                                {t("items.karakou.desc")}
+                            </p>
+                        </div>
                     </div>
                 </Card>
 
-                <Card className="flex flex-col md:flex-row overflow-hidden">
-                    <div className="relative h-64 md:h-auto md:w-1/2">
-                        <Image
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Chedda_Tlemcen_Wedding_Dress.jpg/800px-Chedda_Tlemcen_Wedding_Dress.jpg"
-                            alt="Chedda"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                    <div className="p-6 md:w-1/2 flex flex-col justify-center">
-                        <CardTitle className="mb-2">Chedda of Tlemcen</CardTitle>
-                        <p className="text-muted-foreground">
-                            A UNESCO Intangible Cultural Heritage, this bridal dress from Tlemcen involves layers of fabric, jewelry, and a conical hat.
-                        </p>
+                <Card className="group relative overflow-hidden rounded-xl h-[500px] border-none shadow-xl">
+                    <Image
+                        src="/images/explore/Chedda.jpg"
+                        alt={t("items.chedda.title")}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 p-8 w-full">
+                        <div className="backdrop-blur-md bg-white/10 p-6 rounded-xl border border-white/10 text-white">
+                            <CardTitle className="mb-4 text-3xl font-bold">{t("items.chedda.title")}</CardTitle>
+                            <p className="text-gray-200 text-lg leading-relaxed">
+                                {t("items.chedda.desc")}
+                            </p>
+                        </div>
                     </div>
                 </Card>
             </div>

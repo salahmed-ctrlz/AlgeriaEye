@@ -60,10 +60,13 @@ export function BookingModal({
             : 0;
 
     const subtotal = nights * pricePerNight;
-    const serviceFee = Math.round(subtotal * 0.05); // 5% service fee
-    const items = subtotal + serviceFee;
-    const taxes = Math.round(items * 0.19); // 19% TVA (Algerian VAT)
-    const totalPrice = subtotal + serviceFee + taxes;
+    // const serviceFee = Math.round(subtotal * 0.05); // 5% service fee
+    // const items = subtotal + serviceFee;
+    // const taxes = Math.round(items * 0.19); // 19% TVA (Algerian VAT)
+    // const totalPrice = subtotal + serviceFee + taxes;
+    const serviceFee = 0;
+    const taxes = 0;
+    const totalPrice = subtotal;
 
     // Reset state when modal opens/closes
     useEffect(() => {

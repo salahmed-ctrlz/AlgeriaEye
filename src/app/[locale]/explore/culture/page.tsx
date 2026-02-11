@@ -1,61 +1,61 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 
+import { useTranslations } from "next-intl";
+
 export default function CulturePage() {
+    const t = useTranslations("explore.culture");
     return (
         <div className="space-y-8">
             <section className="text-center space-y-4">
-                <h2 className="text-3xl font-bold tracking-tight">Algerian Culture & Traditions</h2>
+                <h2 className="text-3xl font-bold tracking-tight">{t("title")}</h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                    A blend of Berber, Arab, French, and Mediterranean influences, Algerian culture is rich in music, literature, and hospitality.
+                    {t("desc")}
                 </p>
             </section>
 
             <div className="grid md:grid-cols-2 gap-8">
-                <Card>
-                    <div className="relative h-64 w-full">
-                        <Image
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Fantasia_Alg%C3%A9rie.jpg/1280px-Fantasia_Alg%C3%A9rie.jpg"
-                            alt="Fantasia"
-                            fill
-                            className="object-cover rounded-t-lg"
-                        />
+                <Card className="group relative overflow-hidden rounded-xl h-96 border-none shadow-xl">
+                    <Image
+                        src="/images/explore/fantasia.jpg"
+                        alt={t("fantasia.title")}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 p-6 w-full">
+                        <div className="backdrop-blur-md bg-white/10 p-4 rounded-lg border border-white/10 text-white">
+                            <CardTitle className="mb-2 text-2xl font-bold">{t("fantasia.title")}</CardTitle>
+                            <p className="text-gray-200 leading-relaxed font-medium">
+                                {t("fantasia.desc")}
+                            </p>
+                        </div>
                     </div>
-                    <CardHeader>
-                        <CardTitle>Fantasia (Tbourida)</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">
-                            A traditional equestrian performance simulating military assaults, often seen at weddings and festivals. Riders charge in a line and fire muskets simultaneously.
-                        </p>
-                    </CardContent>
                 </Card>
 
-                <Card>
-                    <div className="relative h-64 w-full">
-                        <Image
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Tuareg_Tea.jpg/1280px-Tuareg_Tea.jpg"
-                            alt="Tea Ceremony"
-                            fill
-                            className="object-cover rounded-t-lg"
-                        />
+                <Card className="group relative overflow-hidden rounded-xl h-96 border-none shadow-xl">
+                    <Image
+                        src="/images/explore/tea.jpg"
+                        alt={t("tea.title")}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 p-6 w-full">
+                        <div className="backdrop-blur-md bg-white/10 p-4 rounded-lg border border-white/10 text-white">
+                            <CardTitle className="mb-2 text-2xl font-bold">{t("tea.title")}</CardTitle>
+                            <p className="text-gray-200 leading-relaxed font-medium">
+                                {t("tea.desc")}
+                            </p>
+                        </div>
                     </div>
-                    <CardHeader>
-                        <CardTitle>The Tea Ceremony</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">
-                            Serving mint tea is a central part of hospitality. In the Sahara, the Tuareg people have a specific ritual involving three rounds of tea, each with a different flavor profile.
-                        </p>
-                    </CardContent>
                 </Card>
             </div>
 
             <section className="bg-muted/50 p-8 rounded-xl">
-                <h3 className="text-2xl font-bold mb-4">Music: Rai & Chaabi</h3>
+                <h3 className="text-2xl font-bold mb-4">{t("music.title")}</h3>
                 <p>
-                    Algerian music is world-renowned, especially <strong>Raï</strong>, which originated in Oran and speaks of social issues and love. <br />
-                    <strong>Chaabi</strong> is the folk music of Algiers, characterized by mandole accompaniment and poetic lyrics.
+                    {t("music.desc")}
                 </p>
             </section>
         </div>

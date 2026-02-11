@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 
 export function WelcomeHeader() {
     const t = useTranslations("home");
+    const [userRole, setUserRole] = useState<string>("tourist");
     const [userName, setUserName] = useState<string>("");
     const [loading, setLoading] = useState(true);
 
@@ -17,12 +18,13 @@ export function WelcomeHeader() {
             if (user) {
                 const { data: profile } = await supabase
                     .from("profiles")
-                    .select("full_name")
+                    .select("full_name, role")
                     .eq("id", user.id)
                     .single();
 
-                if (profile?.full_name) {
-                    setUserName(profile.full_name.split(" ")[0]); // First name
+                if (profile) {
+                    if (profile.full_name) setUserName(profile.full_name.split(" ")[0]);
+                    if (profile.role) setUserRole(profile.role);
                 }
             }
             setLoading(false);
@@ -47,7 +49,7 @@ export function WelcomeHeader() {
                         {getGreeting()} {userName ? `, ${userName}` : ""} 👋
                     </span>
                     <span className="block text-muted-foreground mt-2 text-2xl sm:text-3xl">
-                        Ready to discover Algeria today?
+                        {userRole === "owner" ? t("welcomeOwner") : t("welcomeTourist")}
                     </span>
                 </h1>
             </div>

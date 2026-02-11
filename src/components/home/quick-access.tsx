@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import {
     Map,
     Hotel,
@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 const tiles = [
     { icon: Map, label: "Tourist Spots", href: "/search?category=spots", color: "text-blue-500", bg: "bg-blue-500/10" },
     { icon: Hotel, label: "Hotels", href: "/search?category=hotels", color: "text-indigo-500", bg: "bg-indigo-500/10" },
-    { icon: Utensils, label: "Restaurants", href: "/search?category=restaurants", color: "text-orange-500", bg: "bg-orange-500/10" },
+    { icon: Utensils, label: "Restaurants", href: "/search/restaurants", color: "text-orange-500", bg: "bg-orange-500/10" },
     { icon: User, label: "Guides", href: "/search?category=guides", color: "text-green-500", bg: "bg-green-500/10" },
     { icon: Bus, label: "Trips", href: "/search?category=trips", color: "text-yellow-500", bg: "bg-yellow-500/10" },
     { icon: Home, label: "Realty", href: "/search?category=realty", color: "text-purple-500", bg: "bg-purple-500/10" },
