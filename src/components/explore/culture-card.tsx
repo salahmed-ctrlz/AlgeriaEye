@@ -16,14 +16,15 @@ interface CultureCardProps {
 }
 
 /* ─── Gallery Carousel ─── */
-function GalleryCarousel({ images, title }: { images: string[]; title: string }) {
+function GalleryCarousel({ images, title, gridMode = false }: { images: string[]; title: string; gridMode?: boolean }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const touchStartX = useRef(0);
     const touchDeltaX = useRef(0);
 
-    const visible = 2;
-    const maxIndex = Math.max(0, images.length - visible);
+    const perPage = gridMode ? 4 : 2;
+    const totalPages = Math.ceil(images.length / perPage);
+    const maxIndex = Math.max(0, totalPages - 1);
 
     const goTo = useCallback((idx: number) => {
         setCurrentIndex(Math.max(0, Math.min(idx, maxIndex)));
@@ -63,24 +64,104 @@ function GalleryCarousel({ images, title }: { images: string[]; title: string })
 
     if (images.length === 0) return null;
 
+    // Grid mode: paginate in groups of 4, render each page as a 2×2 grid
+    if (gridMode) {
+        const pages: string[][] = [];
+        for (let i = 0; i < images.length; i += perPage) {
+            pages.push(images.slice(i, i + perPage));
+        }
+
+        return (
+            <div className="relative group">
+                <div
+                    className="overflow-hidden rounded-xl"
+                    dir="ltr"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                >
+                    <div
+                        className="flex transition-transform duration-500 ease-out"
+                        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                    >
+                        {pages.map((page, pageIdx) => (
+                            <div key={pageIdx} className="shrink-0" style={{ minWidth: '100%' }}>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {page.map((img, i) => (
+                                        <div key={i} className="relative aspect-square rounded-lg overflow-hidden">
+                                            <Image
+                                                src={img}
+                                                alt={`${title} gallery ${pageIdx * perPage + i + 1}`}
+                                                fill
+                                                className="object-cover hover:scale-105 transition-transform duration-300"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Nav Buttons (desktop only) */}
+                {totalPages > 1 && (
+                    <>
+                        <button
+                            onClick={() => { prev(); resetTimer(); }}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                            onClick={() => { next(); resetTimer(); }}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </>
+                )}
+
+                {/* Dots indicator */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center gap-1.5 mt-3">
+                        {Array.from({ length: totalPages }).map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => { goTo(i); resetTimer(); }}
+                                className={cn(
+                                    "w-1.5 h-1.5 rounded-full transition-all duration-300",
+                                    i === currentIndex ? "bg-emerald-400 w-4" : "bg-white/30 hover:bg-white/50"
+                                )}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // Default mode: 2 visible, sliding by 1
+    const maxSlideIndex = Math.max(0, images.length - perPage);
+
     return (
         <div className="relative group">
             {/* Track */}
             <div
                 className="overflow-hidden rounded-xl"
+                dir="ltr"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
             >
                 <div
                     className="flex transition-transform duration-500 ease-out"
-                    style={{ transform: `translateX(-${currentIndex * (100 / visible)}%)` }}
+                    style={{ transform: `translateX(-${currentIndex * (100 / perPage)}%)` }}
                 >
                     {images.map((img, i) => (
                         <div
                             key={i}
                             className="shrink-0 px-1.5"
-                            style={{ width: `${100 / visible}%` }}
+                            style={{ width: `${100 / perPage}%` }}
                         >
                             <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
                                 <Image
@@ -96,7 +177,7 @@ function GalleryCarousel({ images, title }: { images: string[]; title: string })
             </div>
 
             {/* Nav Buttons (desktop only) */}
-            {images.length > visible && (
+            {images.length > perPage && (
                 <>
                     <button
                         onClick={() => { prev(); resetTimer(); }}
@@ -114,9 +195,9 @@ function GalleryCarousel({ images, title }: { images: string[]; title: string })
             )}
 
             {/* Dots indicator */}
-            {images.length > visible && (
+            {images.length > perPage && (
                 <div className="flex justify-center gap-1.5 mt-3">
-                    {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+                    {Array.from({ length: maxSlideIndex + 1 }).map((_, i) => (
                         <button
                             key={i}
                             onClick={() => { goTo(i); resetTimer(); }}
@@ -317,6 +398,7 @@ export function CultureCard({
                                     <GalleryCarousel
                                         images={item.media.gallery}
                                         title={item.title}
+                                        gridMode={item.category === "food" || item.category === "clothing"}
                                     />
                                 )}
 

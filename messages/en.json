@@ -290,7 +290,15 @@
       },
       "music": {
         "title": "Music: Rai & Chaabi",
-        "desc": "Algerian music is world-renowned, especially Raï, which originated in Oran and speaks of social issues and love. Chaabi is the folk music of Algiers, characterized by mandole accompaniment and poetic lyrics."
+        "description": "Algeria's musical landscape is as diverse as its geography. Two genres stand out for their global impact and cultural depth: the rebellious Rai and the poetic Chaabi.",
+        "rai": {
+          "title": "Raï: The Voice of Youth",
+          "desc": "Born in Oran in the 1920s, Raï (meaning 'Opinion') began as a bedouin tradition before evolving into a rebellious fusion of folk, rock, and electronic music. It speaks of freedom, love, and social struggle. Icons like Cheb Khaled, Cheb Mami, and Cheb Hasni propelled it to the global stage, earning it UNESCO World Heritage status in 2022."
+        },
+        "chaabi": {
+          "title": "Chaâbi: The Soul of the Casbah",
+          "desc": "Originating in the winding streets of the Casbah of Algiers in the early 20th century, Chaâbi is the music of the people. Characterized by the mandole and poetic lyrics (Melhoun) derived from Andalusian tradition, it creates an intimate atmosphere. Masters like El Hadj M'Hamed El Anka defined the genre, making it a staple of weddings and religious celebrations."
+        }
       }
     },
     "food": {
