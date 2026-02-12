@@ -9,6 +9,9 @@ import { MapPin, History, Camera, Info } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 
+// Force dynamic rendering — cookies() conflicts with generateStaticParams on Netlify
+export const dynamic = "force-dynamic";
+
 interface Listing {
     id: string;
     title: string;
