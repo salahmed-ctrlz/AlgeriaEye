@@ -25,7 +25,7 @@ interface Listing {
     type: string;
     wilaya: string;
     images: string[];
-    price_details: Record<string, number>;
+    price_per_night: number;
     rating_avg: number;
     features: string[]; // Using features to store cuisine/vibe tags for now
 }
@@ -251,7 +251,7 @@ export default function RestaurantSearchPage() {
                             type={listing.type}
                             wilaya={listing.wilaya}
                             image={listing.images?.[0]}
-                            price={listing.price_details?.per_night}
+                            price={listing.price_per_night}
                             ratingAvg={listing.rating_avg}
                         />
                     ))}

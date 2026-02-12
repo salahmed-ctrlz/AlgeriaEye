@@ -21,7 +21,8 @@ import {
     CalendarDays,
     BarChart3,
     Receipt,
-    ShoppingBag
+    ShoppingBag,
+    Utensils
 } from "lucide-react";
 import {
     Dialog,
@@ -52,6 +53,7 @@ import { cn } from "@/lib/utils";
 import { ListingForm } from "@/components/listing-form";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { MenuManager } from "@/components/dashboard/menu-manager";
 
 // Specialized Dashboards
 import { GuideDashboard } from "@/components/dashboard/guide-view";
@@ -87,8 +89,8 @@ interface Profile {
 interface Booking {
     id: string;
     listing: Listing;
-    check_in: string;
-    check_out: string;
+    start_date: string;
+    end_date: string;
     status: string;
     total_price: number;
     payment_status: string;
@@ -118,6 +120,7 @@ export default function DashboardPage() {
     // Listing Dialog State
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingListing, setEditingListing] = useState<Listing | null>(null);
+    const [selectedListingForMenu, setSelectedListingForMenu] = useState<Listing | null>(null);
 
     // Profile Form State
     const [profileSaving, setProfileSaving] = useState(false);
@@ -481,6 +484,16 @@ export default function DashboardPage() {
                                                 >
                                                     <Trash2 className="mr-2 h-3 w-3" /> Delete
                                                 </Button>
+                                                {listing.type === "restaurant" && (
+                                                    <Button
+                                                        variant="secondary"
+                                                        size="sm"
+                                                        className="col-span-2 mt-2 bg-brand/10 text-brand hover:bg-brand/20"
+                                                        onClick={() => setSelectedListingForMenu(listing)}
+                                                    >
+                                                        <Utensils className="mr-2 h-3 w-3" /> Manage Menu
+                                                    </Button>
+                                                )}
                                             </CardFooter>
                                         </Card>
                                     ))
@@ -488,6 +501,18 @@ export default function DashboardPage() {
                             </div>
                         </>
                     )}
+
+                    {/* Menu Manager Dialog */}
+                    <Dialog open={!!selectedListingForMenu} onOpenChange={(open) => !open && setSelectedListingForMenu(null)}>
+                        <DialogContent className="sm:max-w-[95vw] w-[1400px] max-h-[92vh] overflow-hidden p-0">
+                            <DialogHeader className="px-6 pt-5 pb-4 border-b bg-muted/30">
+                                <DialogTitle className="text-xl">Manage Menu: {selectedListingForMenu?.title}</DialogTitle>
+                            </DialogHeader>
+                            <div className="px-6 py-5 overflow-y-auto max-h-[calc(92vh-80px)]">
+                                {selectedListingForMenu && <MenuManager listingId={selectedListingForMenu.id} />}
+                            </div>
+                        </DialogContent>
+                    </Dialog>
 
                     {activeTab === "trips" && role === "tourist" && (
                         <>
@@ -529,7 +554,7 @@ export default function DashboardPage() {
                                                 <div className="mt-4 flex gap-4 text-sm">
                                                     <div className="flex items-center gap-2">
                                                         <CalendarDays className="h-4 w-4 text-muted-foreground" />
-                                                        <span>{booking.check_in} - {booking.check_out}</span>
+                                                        <span>{booking.start_date} - {booking.end_date}</span>
                                                     </div>
                                                 </div>
                                                 <div className="mt-2 font-medium">
@@ -648,18 +673,20 @@ export default function DashboardPage() {
                     )}
 
                     {activeTab === "profile" && (
-                        /* Profile Tab */
-                        <div className="max-w-2xl mx-auto">
-                            <Card className="shadow-sm">
-                                <CardHeader>
-                                    <CardTitle>Profile Information</CardTitle>
-                                    <CardDescription>Update your personal details and public profile.</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <form onSubmit={onSubmitProfile} className="space-y-8">
-                                        <div className="flex flex-col items-center gap-6 sm:flex-row">
-                                            <div className="relative">
-                                                <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-muted">
+                        /* Profile Tab - Redesigned */
+                        <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
+                            <div className="grid gap-6 md:grid-cols-[250px_1fr]">
+                                <nav className="flex flex-col space-y-1">
+                                    <Button variant="ghost" className="justify-start font-semibold bg-muted">General</Button>
+                                    <Button variant="ghost" className="justify-start">Security</Button>
+                                    <Button variant="ghost" className="justify-start">Notifications</Button>
+                                </nav>
+
+                                <div className="space-y-6">
+                                    <Card className="border-none shadow-md overflow-hidden">
+                                        <div className="h-32 bg-gradient-to-r from-brand/80 to-brand/40 relative">
+                                            <div className="absolute -bottom-12 left-8">
+                                                <div className="h-24 w-24 rounded-full border-4 border-background overflow-hidden bg-background shadow-sm">
                                                     {profileForm.avatar_url ? (
                                                         // eslint-disable-next-line @next/next/no-img-element
                                                         <img
@@ -669,98 +696,122 @@ export default function DashboardPage() {
                                                         />
                                                     ) : (
                                                         <div className="flex h-full w-full items-center justify-center bg-muted">
-                                                            <UserCircle className="h-12 w-12 text-muted-foreground/50" />
+                                                            <UserCircle className="h-12 w-12 text-muted-foreground/40" />
                                                         </div>
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="flex-1 space-y-2 text-center sm:text-left">
-                                                <div>
-                                                    <h3 className="font-medium">Profile Picture</h3>
-                                                    <p className="text-sm text-muted-foreground">JPG, GIF or PNG. Max 5MB.</p>
+                                        </div>
+                                        <CardHeader className="pt-16 pb-8 px-8">
+                                            <CardTitle className="text-2xl">Personal Information</CardTitle>
+                                            <CardDescription>Manage your public profile and private details.</CardDescription>
+                                        </CardHeader>
+                                        <CardContent className="px-8 pb-8">
+                                            <form onSubmit={onSubmitProfile} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                                <div className="grid gap-8 lg:grid-cols-[200px_1fr]">
+                                                    <div className="space-y-4 text-center lg:text-left">
+                                                        <div className="flex flex-col gap-2">
+                                                            <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Profile Picture</Label>
+                                                            <div className="mx-auto lg:mx-0">
+                                                                <ImageUpload
+                                                                    value={profileForm.avatar_url ? [profileForm.avatar_url] : []}
+                                                                    onChange={(urls) =>
+                                                                        setProfileForm({ ...profileForm, avatar_url: urls[0] || "" })
+                                                                    }
+                                                                    maxFiles={1}
+                                                                    bucketName="avatars"
+                                                                    className="mt-0 w-full max-w-[200px]"
+                                                                />
+                                                            </div>
+                                                            <p className="text-[10px] text-muted-foreground">
+                                                                Max 5MB. Formats: JPG, PNG.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="space-y-6">
+                                                        <div className="grid gap-6 md:grid-cols-2">
+                                                            <div className="space-y-2">
+                                                                <Label htmlFor="full_name">Full Name</Label>
+                                                                <Input
+                                                                    id="full_name"
+                                                                    value={profileForm.full_name}
+                                                                    onChange={(e) => setProfileForm({ ...profileForm, full_name: e.target.value })}
+                                                                    placeholder="e.g. Amine Benali"
+                                                                    className="h-10"
+                                                                />
+                                                            </div>
+                                                            <div className="space-y-2">
+                                                                <Label htmlFor="wilaya">Location</Label>
+                                                                <Select
+                                                                    value={profileForm.wilaya}
+                                                                    onValueChange={(val) => setProfileForm({ ...profileForm, wilaya: val })}
+                                                                >
+                                                                    <SelectTrigger className="h-10">
+                                                                        <SelectValue placeholder="Select your wilaya..." />
+                                                                    </SelectTrigger>
+                                                                    <SelectContent className="max-h-[250px]">
+                                                                        {wilayas.map((w) => (
+                                                                            <SelectItem key={w.code} value={w.slug}>
+                                                                                {w.code} - {getWilayaName(w, "en")}
+                                                                            </SelectItem>
+                                                                        ))}
+                                                                    </SelectContent>
+                                                                </Select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="space-y-2">
+                                                            <Label htmlFor="phone">Phone Number</Label>
+                                                            <Input
+                                                                id="phone"
+                                                                value={profileForm.phone}
+                                                                onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                                                                placeholder="+213 555 123 456"
+                                                                className="h-10"
+                                                            />
+                                                        </div>
+
+                                                        <div className="space-y-2">
+                                                            <Label htmlFor="bio">Bio</Label>
+                                                            <Textarea
+                                                                id="bio"
+                                                                value={profileForm.bio}
+                                                                onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
+                                                                placeholder="Tell the community about yourself..."
+                                                                rows={4}
+                                                                className="resize-none min-h-[100px]"
+                                                            />
+                                                        </div>
+
+                                                        <div className="flex justify-end pt-4">
+                                                            <Button type="submit" disabled={profileSaving} className="bg-brand text-white hover:bg-brand-light min-w-[150px] h-10 shadow-sm transition-all hover:shadow">
+                                                                {profileSaving ? (
+                                                                    <>
+                                                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        <Save className="mr-2 h-4 w-4" /> Save Changes
+                                                                    </>
+                                                                )}
+                                                            </Button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="max-w-xs mx-auto sm:mx-0">
-                                                    <ImageUpload
-                                                        value={profileForm.avatar_url ? [profileForm.avatar_url] : []}
-                                                        onChange={(urls) =>
-                                                            setProfileForm({ ...profileForm, avatar_url: urls[0] || "" })
-                                                        }
-                                                        maxFiles={1}
-                                                        bucketName="avatars"
-                                                        className="mt-2"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
+                                            </form>
+                                        </CardContent>
+                                    </Card>
 
-                                        <div className="grid gap-6 md:grid-cols-2">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="full_name">Full Name</Label>
-                                                <Input
-                                                    id="full_name"
-                                                    value={profileForm.full_name}
-                                                    onChange={(e) => setProfileForm({ ...profileForm, full_name: e.target.value })}
-                                                    placeholder="Your Name"
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="wilaya">Location</Label>
-                                                <Select
-                                                    value={profileForm.wilaya}
-                                                    onValueChange={(val) => setProfileForm({ ...profileForm, wilaya: val })}
-                                                >
-                                                    <SelectTrigger>
-                                                        <SelectValue placeholder="Select..." />
-                                                    </SelectTrigger>
-                                                    <SelectContent className="max-h-[200px]">
-                                                        {wilayas.map((w) => (
-                                                            <SelectItem key={w.code} value={w.slug}>
-                                                                {w.code} - {getWilayaName(w, "en")}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
-                                            </div>
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="phone">Phone Number</Label>
-                                            <Input
-                                                id="phone"
-                                                value={profileForm.phone}
-                                                onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
-                                                placeholder="+213..."
-                                            />
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="bio">Bio</Label>
-                                            <Textarea
-                                                id="bio"
-                                                value={profileForm.bio}
-                                                onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
-                                                placeholder="Tell us about yourself..."
-                                                rows={4}
-                                            />
-                                            <p className="text-xs text-muted-foreground">Brief description for your profile.</p>
-                                        </div>
-
-                                        <div className="flex justify-end">
-                                            <Button type="submit" disabled={profileSaving} className="bg-brand text-white hover:bg-brand-light">
-                                                {profileSaving ? (
-                                                    <>
-                                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <Save className="mr-2 h-4 w-4" /> Save Changes
-                                                    </>
-                                                )}
-                                            </Button>
-                                        </div>
-                                    </form>
-                                </CardContent>
-                            </Card>
+                                    {/* Placeholder for future settings */}
+                                    <Card className="opacity-50 pointer-events-none">
+                                        <CardHeader>
+                                            <CardTitle>Notifications (Coming Soon)</CardTitle>
+                                            <CardDescription>Manage your email and push notifications.</CardDescription>
+                                        </CardHeader>
+                                    </Card>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>

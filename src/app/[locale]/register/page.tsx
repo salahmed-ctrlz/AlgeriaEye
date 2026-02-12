@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye as EyeIcon, CheckCircle2, User, Building2, Briefcase, Car, Map, Plane } from "lucide-react";
+import { Eye as EyeIcon, CheckCircle2, User, Building2, Briefcase, Car, Map, Plane, Utensils } from "lucide-react";
 // @ts-ignore
 import { getData } from "country-list";
 import { toast } from "sonner";
@@ -285,6 +285,12 @@ export default function RegisterPage() {
                                                 <div className="flex items-center gap-2">
                                                     <Map className="h-4 w-4" />
                                                     <span>Tour Guide</span>
+                                                </div>
+                                            </SelectItem>
+                                            <SelectItem value="restaurant">
+                                                <div className="flex items-center gap-2">
+                                                    <Utensils className="h-4 w-4" />
+                                                    <span>Restaurant</span>
                                                 </div>
                                             </SelectItem>
                                         </SelectContent>

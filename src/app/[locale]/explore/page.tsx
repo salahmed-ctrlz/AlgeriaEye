@@ -1,7 +1,9 @@
-import SearchPage from "../search/page";
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
+    const params = await props.params;
+    const { locale } = params;
     const t = await getTranslations({ locale, namespace: "explore" });
 
     return {
@@ -10,6 +12,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
     };
 }
 
-export default function ExplorePage() {
-    return <SearchPage />;
+export default async function ExplorePage(props: { params: Promise<{ locale: string }> }) {
+    const params = await props.params;
+    redirect(`/${params.locale}/explore/culture`);
 }

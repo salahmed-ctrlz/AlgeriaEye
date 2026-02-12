@@ -49,12 +49,13 @@ interface Listing {
     type: string;
     wilaya: string;
     address: string;
-    price_details: Record<string, number>;
+    price_per_night: number;
     images: string[];
     rating_avg: number;
     rating_count: number;
     created_at: string;
     features: string[] | null;
+    location_url?: string;
 }
 
 export default function ListingPage() {
@@ -191,7 +192,7 @@ export default function ListingPage() {
         );
     }
 
-    const price = listing.price_details?.per_night || 0;
+    const price = listing.price_per_night || 0;
 
     return (
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -277,12 +278,30 @@ export default function ListingPage() {
                                 <MapPin className="h-4 w-4" />
                                 {listing.wilaya}
                                 {listing.address && ` — ${listing.address}`}
+
                             </span>
                             {listing.rating_avg > 0 && (
                                 <span className="flex items-center gap-1">
                                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                                     {listing.rating_avg} ({listing.rating_count})
                                 </span>
+                            )}
+                            {listing.location_url && (
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="h-8 gap-2 text-brand border-brand/20 hover:bg-brand/5 hover:text-brand"
+                                    asChild
+                                >
+                                    <a
+                                        href={listing.location_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <MapPin className="h-3.5 w-3.5" />
+                                        View on Map
+                                    </a>
+                                </Button>
                             )}
                         </div>
                     </div>
@@ -307,8 +326,20 @@ export default function ListingPage() {
                         )}
                     </div>
 
-                    {/* Divider */}
-                    <hr className="my-8" />
+                    {/* Description */}
+                    <div>
+                        <h2 className="text-lg font-semibold">{t("description")}</h2>
+                        <p className="mt-3 leading-relaxed text-muted-foreground whitespace-pre-line">
+                            {listing.description || "No description available."}
+                        </p>
+                    </div>
+
+                    <Separator />
+
+                    {/* Restaurant Menu Section */}
+                    {listing.type === "restaurant" && <RestaurantMenu listingId={listing.id} />}
+
+                    <Separator />
 
                     {/* Reviews Section */}
                     <div className="space-y-6">
@@ -356,14 +387,6 @@ export default function ListingPage() {
                             </div>
                         )}
                     </div>
-
-                    {/* Description */}
-                    <div>
-                        <h2 className="text-lg font-semibold">{t("description")}</h2>
-                        <p className="mt-3 leading-relaxed text-muted-foreground whitespace-pre-line">
-                            {listing.description || "No description available."}
-                        </p>
-                    </div>
                 </div>
 
                 {/* Right: Booking Card */}
@@ -376,7 +399,7 @@ export default function ListingPage() {
                                 </span>
                                 <span className="text-sm text-muted-foreground">
                                     {" "}
-                                    {t("perNight")}
+                                    {listing.type === "restaurant" ? "average cost" : t("perNight")}
                                 </span>
                             </div>
                         )}
@@ -386,7 +409,7 @@ export default function ListingPage() {
                             className="w-full bg-brand text-white hover:bg-brand-light"
                             size="lg"
                         >
-                            {t("bookNow")}
+                            {listing.type === "restaurant" ? "Reserve Table" : t("bookNow")}
                         </Button>
 
                         {listing.rating_avg > 0 && (
@@ -409,7 +432,117 @@ export default function ListingPage() {
                 listingTitle={listing.title}
                 ownerId={listing.owner_id}
                 pricePerNight={price}
+                listingType={listing.type}
             />
         </div >
+    );
+}
+
+function RestaurantMenu({ listingId }: { listingId: string }) {
+    const [menus, setMenus] = useState<any[]>([]);
+    const [items, setItems] = useState<any[]>([]);
+    const [activeMenu, setActiveMenu] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMenuData = async () => {
+            const supabase = createClient();
+            const { data: menuData } = await supabase
+                .from("menus")
+                .select("*")
+                .eq("listing_id", listingId)
+                .order("created_at", { ascending: false });
+
+            setMenus(menuData || []);
+            if (menuData && menuData.length > 0) {
+                setActiveMenu(menuData[0].id);
+            }
+            setLoading(false);
+        };
+        fetchMenuData();
+    }, [listingId]);
+
+    useEffect(() => {
+        if (!activeMenu) return;
+        const fetchItems = async () => {
+            const supabase = createClient();
+            const { data } = await supabase
+                .from("menu_items")
+                .select("*")
+                .eq("menu_id", activeMenu)
+                .order("category", { ascending: true });
+            setItems(data || []);
+        };
+        fetchItems();
+    }, [activeMenu]);
+
+    if (loading) return null;
+    if (menus.length === 0) return null;
+
+    // Group items by category
+    const groupedItems = items.reduce((acc, item) => {
+        const cat = item.category || "General";
+        if (!acc[cat]) acc[cat] = [];
+        acc[cat].push(item);
+        return acc;
+    }, {} as Record<string, any[]>);
+
+    return (
+        <div className="space-y-6">
+            <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold">Our Menu</h2>
+            </div>
+
+            {/* Menu Tabs */}
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                {menus.map((menu) => (
+                    <button
+                        key={menu.id}
+                        onClick={() => setActiveMenu(menu.id)}
+                        className={cn(
+                            "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors border",
+                            activeMenu === menu.id
+                                ? "bg-brand text-white border-brand"
+                                : "bg-muted/50 text-muted-foreground border-transparent hover:bg-muted"
+                        )}
+                    >
+                        {menu.title}
+                    </button>
+                ))}
+            </div>
+
+            {/* Menu Content */}
+            <div className="space-y-8">
+                {Object.entries(groupedItems).map(([category, categoryItems]) => (
+                    <div key={category}>
+                        <h3 className="text-lg font-semibold mb-3 text-brand">{category}</h3>
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {(categoryItems as any[]).map((item) => (
+                                <div key={item.id} className="flex gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow">
+                                    <div className="h-20 w-20 bg-muted rounded-md shrink-0 overflow-hidden">
+                                        {item.image_url ? (
+                                            <img src={item.image_url} alt={item.name} className="h-full w-full object-cover" />
+                                        ) : (
+                                            <div className="h-full w-full flex items-center justify-center bg-muted/50">
+                                                <Utensils className="h-8 w-8 text-muted-foreground/20" />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex-1 min-w-0 flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex justify-between items-start gap-2">
+                                                <h4 className="font-medium line-clamp-1">{item.name}</h4>
+                                                <span className="font-semibold text-sm shrink-0">{item.price} DA</span>
+                                            </div>
+                                            <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }

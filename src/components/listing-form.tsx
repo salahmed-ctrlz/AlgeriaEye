@@ -45,6 +45,7 @@ export function ListingForm({ userId, initialData, onSuccess, onCancel }: Listin
             type: initialData.type,
             wilaya: initialData.wilaya,
             address: initialData.address,
+            location_url: initialData.location_url || "",
             price: initialData.price_per_night?.toString(),
             images: initialData.images || [],
             features: Array.isArray(initialData.features) ? initialData.features : [], // Ensure array
@@ -165,9 +166,11 @@ export function ListingForm({ userId, initialData, onSuccess, onCancel }: Listin
                 )}
             </div>
 
-            {/* Dynamic Features Section */}
-            <div className="space-y-3">
+            {/* Dynamic Features & Tags Section */}
+            <div className="space-y-4">
                 <Label className="text-base font-semibold">Features & Amenities</Label>
+
+                {/* Standard Features */}
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     {availableFeatures.map((feature) => (
                         <label
@@ -184,6 +187,30 @@ export function ListingForm({ userId, initialData, onSuccess, onCancel }: Listin
                         </label>
                     ))}
                 </div>
+
+                {/* Additional Tags for Restaurants */}
+                {selectedType === "restaurant" && (
+                    <div className="space-y-3 pt-2 border-t">
+                        <Label className="text-sm font-medium">Cuisine & Vibe (Select to add)</Label>
+                        <div className="flex flex-wrap gap-2">
+                            {["Traditional", "Modern", "Fast Food", "Seafood", "Italian", "French", "Asian", "Syrian", "Casual", "Fancy", "Family Friendly", "Romantic", "Cafe", "Street Food"].map(tag => (
+                                <button
+                                    key={tag}
+                                    type="button"
+                                    onClick={() => toggleFeature(tag)}
+                                    className={cn(
+                                        "px-3 py-1 rounded-full text-xs font-medium border transition-all",
+                                        currentFeatures.includes(tag)
+                                            ? "bg-brand text-white border-brand"
+                                            : "bg-background text-muted-foreground border-border hover:border-brand/50"
+                                    )}
+                                >
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="space-y-2">
@@ -200,6 +227,14 @@ export function ListingForm({ userId, initialData, onSuccess, onCancel }: Listin
                         placeholder="Full Address"
                         {...register("address")}
                     />
+                    <div className="col-span-2">
+                        <Input
+                            id="location_url"
+                            placeholder="Google Maps Location URL (Optional)"
+                            {...register("location_url")}
+                        />
+                        {errors.location_url && <p className="text-xs text-destructive mt-1">{errors.location_url.message}</p>}
+                    </div>
                 </div>
                 {errors.price && <p className="text-xs text-destructive">{errors.price.message}</p>}
                 {errors.address && <p className="text-xs text-destructive">{errors.address.message}</p>}

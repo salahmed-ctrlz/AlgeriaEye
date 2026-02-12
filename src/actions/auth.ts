@@ -65,7 +65,7 @@ export async function registerUser(data: RegisterFormData) {
     // The profiles table column names must match.
     // metadata: business_type -> profiles: business_type (matches)
 
-    const { error: profileError } = await adminClient.from("profiles").insert(profileData);
+    const { error: profileError } = await adminClient.from("profiles").upsert(profileData);
 
     if (profileError) {
         console.error("Profile creation failed:", profileError);

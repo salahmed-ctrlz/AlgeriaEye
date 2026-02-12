@@ -24,11 +24,15 @@ interface Listing {
     type: string;
     wilaya: string;
     images: string[];
-    price_details: Record<string, number>;
+    price_per_night: number;
     rating_avg: number;
 }
 
-export default function SearchPage() {
+interface SearchPageProps {
+    hideTitle?: boolean;
+}
+
+export default function SearchPage({ hideTitle = false }: SearchPageProps) {
     const t = useTranslations("search");
     const locale = useLocale();
     const searchParams = useSearchParams();
@@ -43,42 +47,18 @@ export default function SearchPage() {
     const [selectedWilaya, setSelectedWilaya] = useState(wilayaParam);
     const [showFilters, setShowFilters] = useState(false);
 
+    const listingTypes = [
+        "hotel",
+        "restaurant",
+        "guesthouse",
+        "tour",
+        "experience",
+        "transport",
+    ] as const;
+
     useEffect(() => {
         fetchListings();
     }, [query, type, selectedWilaya]);
-
-    // ... (fetchListings remains same)
-
-    // ... (inside return)
-
-    {/* Results */ }
-    {
-        loading ? (
-            <div className="flex items-center justify-center py-20">
-                <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand border-t-transparent" />
-            </div>
-        ) : listings.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-in-up">
-                <p className="text-lg text-muted-foreground">{t("noResults")}</p>
-            </div>
-        ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-fade-in-up">
-                {listings.map((listing, index) => (
-                    <div key={listing.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 50}ms` }}>
-                        <ListingCard
-                            id={listing.id}
-                            title={listing.title}
-                            type={listing.type}
-                            wilaya={listing.wilaya}
-                            image={listing.images?.[0]}
-                            price={listing.price_details?.per_night}
-                            ratingAvg={listing.rating_avg}
-                        />
-                    </div>
-                ))}
-            </div>
-        )
-    }
 
     const fetchListings = async () => {
         setLoading(true);
@@ -87,8 +67,7 @@ export default function SearchPage() {
         let q = supabase.from("listings").select("*");
 
         if (query) {
-            // Search across multiple text columns (excluding 'type' enum to avoid errors)
-            q = q.or(`title.ilike.%${query}%,description.ilike.%${query}%,wilaya.ilike.%${query}%,city.ilike.%${query}%,address.ilike.%${query}%`);
+            q = q.or(`title.ilike.%${query}%,description.ilike.%${query}%,wilaya.ilike.%${query}%,address.ilike.%${query}%`);
         }
         if (type && type !== "all") {
             q = q.eq("type", type);
@@ -102,25 +81,18 @@ export default function SearchPage() {
         setLoading(false);
     };
 
-    const listingTypes = [
-        "hotel",
-        "restaurant",
-        "guesthouse",
-        "tour",
-        "experience",
-        "transport",
-    ] as const;
-
     return (
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
-                {!loading && (
-                    <p className="mt-2 text-sm text-muted-foreground">
-                        {t("resultsCount", { count: listings.length })}
-                    </p>
-                )}
-            </div>
+            {!hideTitle && (
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
+                    {!loading && (
+                        <p className="mt-2 text-sm text-muted-foreground">
+                            {t("resultsCount", { count: listings.length })}
+                        </p>
+                    )}
+                </div>
+            )}
 
             {/* Filters Toggle */}
             <div className="mb-6">
@@ -205,7 +177,7 @@ export default function SearchPage() {
                             type={listing.type}
                             wilaya={listing.wilaya}
                             image={listing.images?.[0]}
-                            price={listing.price_details?.per_night}
+                            price={listing.price_per_night}
                             ratingAvg={listing.rating_avg}
                         />
                     ))}

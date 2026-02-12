@@ -29,6 +29,7 @@ export const listingSchema = z.object({
     price: z.string().min(1, "Price is required"),
     images: z.array(z.string()).optional(),
     features: z.array(z.string()).optional(),
+    location_url: z.string().url("Must be a valid URL").optional().or(z.literal("")),
 });
 
 export type ListingFormData = z.infer<typeof listingSchema>;

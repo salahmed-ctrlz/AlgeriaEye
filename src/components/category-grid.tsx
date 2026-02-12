@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { Building2, Map, Car, Briefcase, Tent, Palmtree } from "lucide-react";
+import { Building2, Map, Car, Briefcase, Tent, Palmtree, Utensils } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const categories = [
@@ -10,6 +10,13 @@ const categories = [
         color: "text-brand",
         bg: "bg-brand/10",
         href: "/search?type=hotel"
+    },
+    {
+        icon: Utensils,
+        key: "restaurants",
+        color: "text-brand",
+        bg: "bg-brand/10",
+        href: "/search?type=restaurant"
     },
     {
         icon: Briefcase,
