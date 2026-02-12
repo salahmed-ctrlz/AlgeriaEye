@@ -4,7 +4,8 @@ import { getWilayaBySlug, getWilayaName, wilayas } from "@/data/wilayas";
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import { ListingCard } from "@/components/listing-card";
-import { ListingCarousel } from "@/components/ui/listing-carousel";
+import { AttractionCard } from "@/components/wilaya/attraction-card";
+import { WilayaListingGrid } from "@/components/wilaya/wilaya-listing-grid";
 import { MapPin, History, Camera, Info } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -103,53 +104,44 @@ export default async function WilayaPage({ params }: Props) {
                             <Camera className="h-6 w-6 text-brand" />
                             <h2 className="text-2xl font-bold tracking-tight">{locale === "ar" ? "أماكن تستحق الزيارة" : "Best Places to Visit"}</h2>
                         </div>
-                        {/* Best Places Gallery */}
-                        <div className="mb-16">
-                            <ListingCarousel
-                                items={bestPlaces.map(place => ({
-                                    name: place.name[locale as "ar" | "en"],
-                                    image: place.image
-                                }))}
-                            />
+                        {/* Best Places Grid */}
+                        <div className="mb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {bestPlaces.map((place, index) => (
+                                <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+                                    <AttractionCard
+                                        attraction={place}
+                                        index={index}
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </section>
                 )}
 
                 {/* Listings Section */}
                 <section id="listings" className="animate-fade-in-up">
-                    <div className="flex items-center justify-between gap-2 mb-8">
-                        <h2 className="text-2xl font-bold tracking-tight">
-                            {locale === "ar" ? `قوائم في ${name}` : `Listings in ${name}`}
-                        </h2>
-                        <span className="text-sm text-muted-foreground">
-                            {listings?.length || 0} {locale === "ar" ? "إعلان" : "listings"}
-                        </span>
-                    </div>
-
-                    {!listings || listings.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-12 text-center rounded-xl border border-dashed bg-muted/30">
-                            <MapPin className="mb-4 h-12 w-12 text-muted-foreground/30" />
-                            <p className="text-lg text-muted-foreground">
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 className="text-3xl font-bold tracking-tight mb-2">
+                                {locale === "ar" ? "أماكن للإقامة وتناول الطعام" : "Places to Stay & Eat"}
+                            </h2>
+                            <p className="text-muted-foreground">
                                 {locale === "ar"
-                                    ? "لم يتم العثور على نتائج في هذه الولاية بعد."
-                                    : "No listings found in this wilaya yet."}
+                                    ? `اكتشف أفضل الفنادق والمطاعم في ${name}`
+                                    : `Discover top rated hotels and restaurants in ${name}`}
                             </p>
                         </div>
+                    </div>
+
+                    {listings && listings.length > 0 ? (
+                        <WilayaListingGrid listings={listings} />
                     ) : (
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {(listings as Listing[]).map((listing, index) => (
-                                <div key={listing.id} style={{ animationDelay: `${index * 100}ms` }} className="animate-fade-in-up">
-                                    <ListingCard
-                                        id={listing.id}
-                                        title={listing.title}
-                                        type={listing.type}
-                                        wilaya={listing.wilaya}
-                                        image={listing.images?.[0]}
-                                        price={listing.price_per_night}
-                                        ratingAvg={listing.rating_avg}
-                                    />
-                                </div>
-                            ))}
+                        <div className="text-center py-12 bg-muted/30 rounded-2xl border border-dashed border-muted-foreground/20">
+                            <p className="text-muted-foreground">
+                                {locale === "ar"
+                                    ? "لا توجد قوائم متاحة حتى الآن."
+                                    : "No listings available yet."}
+                            </p>
                         </div>
                     )}
                 </section>

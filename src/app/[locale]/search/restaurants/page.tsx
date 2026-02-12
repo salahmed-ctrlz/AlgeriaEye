@@ -27,7 +27,7 @@ interface Listing {
     images: string[];
     price_per_night: number;
     rating_avg: number;
-    features: string[]; // Using features to store cuisine/vibe tags for now
+    amenities: string[]; // Using amenities to store cuisine/vibe tags
 }
 
 export default function RestaurantSearchPage() {
@@ -110,7 +110,7 @@ export default function RestaurantSearchPage() {
             filtered = filtered.filter(l =>
                 l.title.toLowerCase().includes(selectedCuisineLabel.toLowerCase()) ||
                 l.title.toLowerCase().includes(cuisine.toLowerCase()) ||
-                (l.features && l.features.some(f => f.toLowerCase().includes(selectedCuisineLabel.toLowerCase()) || f.toLowerCase().includes(cuisine.toLowerCase())))
+                (l.amenities && l.amenities.some(f => f.toLowerCase().includes(selectedCuisineLabel.toLowerCase()) || f.toLowerCase().includes(cuisine.toLowerCase())))
             );
         }
 
@@ -120,7 +120,7 @@ export default function RestaurantSearchPage() {
             filtered = filtered.filter(l =>
                 l.title.toLowerCase().includes(selectedVibeLabel.toLowerCase()) ||
                 l.title.toLowerCase().includes(vibe.toLowerCase()) ||
-                (l.features && l.features.some(f => f.toLowerCase().includes(selectedVibeLabel.toLowerCase()) || f.toLowerCase().includes(vibe.toLowerCase())))
+                (l.amenities && l.amenities.some(f => f.toLowerCase().includes(selectedVibeLabel.toLowerCase()) || f.toLowerCase().includes(vibe.toLowerCase())))
             );
         }
 

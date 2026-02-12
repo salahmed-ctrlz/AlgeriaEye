@@ -52,9 +52,6 @@ export default function HomePage() {
 
             <Separator className="my-4 opacity-20 max-w-7xl mx-auto" />
 
-            {/* Categories */}
-            <CategoryGrid />
-
             {/* Secondary Content */}
             <StatsSection />
             <FeaturesSection />

@@ -13,12 +13,31 @@ export function HeroSearch() {
     const router = useRouter();
     const [query, setQuery] = useState("");
 
+    // Smart Redirect Map (Scalable)
+    const WILAYA_REDIRECTS: Record<string, string> = {
+        "algiers": "algiers",
+        "alger": "algiers",
+        "el djazair": "algiers",
+        "wilaya 16": "algiers",
+        "16": "algiers",
+        // Future: "oran": "oran", "wahran": "oran", ...
+    };
+
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        if (query.trim()) {
-            router.push(
-                `/${locale}/search?q=${encodeURIComponent(query.trim())}`
-            );
+        const trimmedQuery = query.trim();
+
+        if (trimmedQuery) {
+            const normalizedQuery = trimmedQuery.toLowerCase();
+            const redirectSlug = WILAYA_REDIRECTS[normalizedQuery];
+
+            if (redirectSlug) {
+                router.push(`/${locale}/wilaya/${redirectSlug}`);
+            } else {
+                router.push(
+                    `/${locale}/search?q=${encodeURIComponent(trimmedQuery)}`
+                );
+            }
         }
     };
 

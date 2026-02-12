@@ -1,0 +1,10 @@
+﻿≡ƒöì Checking Database Content...
+Γ£à Owners found: 3
+Γ£à Listings found: 3
+Γ£à Menus found: 1
+Γ£à Menu Items found: 4
+
+--- Listing Details ---
+- [hotel] Sheeraton (annaba)
+- [tour] Annaba Tour  (annaba)
+- [restaurant] Benet Bladi, Yulmaz (algiers)

@@ -6,26 +6,32 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+import { createClient } from "@/lib/supabase/client";
+import { ListingCard } from "@/components/listing-card";
+
 export function OffersSection() {
-    // Mock data
-    const offers = [
-        {
-            id: 1,
-            title: "Summer in Bejaia",
-            discount: "30% OFF",
-            timeLeft: "2 days",
-            image: "https://images.unsplash.com/photo-1627823624326-8c0817c1bf1d?auto=format&fit=crop&w=800&q=80",
-            provider: "Numidia Travel"
-        },
-        {
-            id: 2,
-            title: "Sahara Adventure",
-            discount: "15% OFF",
-            timeLeft: "5 hours",
-            image: "https://images.unsplash.com/photo-1549643276-fbc2bd380629?auto=format&fit=crop&w=800&q=80",
-            provider: "Touareg Tours"
-        }
-    ];
+    const [offers, setOffers] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchOffers = async () => {
+            const supabase = createClient();
+            const { data, error } = await supabase
+                .from("listings")
+                .select("*")
+                .order("price_per_night", { ascending: true }) // Cheapest first
+                .limit(4);
+
+            if (data) {
+                setOffers(data);
+            }
+            setLoading(false);
+        };
+
+        fetchOffers();
+    }, []);
+
+    if (loading) return null;
 
     return (
         <section className="py-8 px-4 md:px-8">
@@ -38,31 +44,22 @@ export function OffersSection() {
                     <Button variant="link" className="text-brand">View All</Button>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     {offers.map((offer) => (
-                        <div key={offer.id} className="group relative overflow-hidden rounded-xl bg-background border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row h-full sm:h-48">
-                            <div className="w-full sm:w-2/5 relative">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={offer.image}
-                                    alt={offer.title}
-                                    className="h-full w-full object-cover"
-                                />
-                                <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-                                    {offer.discount}
-                                </Badge>
-                            </div>
-                            <div className="p-4 flex flex-col justify-between w-full sm:w-3/5">
-                                <div>
-                                    <span className="text-xs text-muted-foreground uppercase tracking-wider">{offer.provider}</span>
-                                    <h3 className="text-lg font-bold mt-1 group-hover:text-brand transition-colors">{offer.title}</h3>
-                                    <div className="flex items-center gap-1 text-sm text-red-500 mt-2">
-                                        <Clock className="h-3 w-3" />
-                                        <span>Ends in {offer.timeLeft}</span>
-                                    </div>
-                                </div>
-                                <Button className="w-full mt-4 bg-brand text-white hover:bg-brand-light">Book Now</Button>
-                            </div>
+                        <div key={offer.id} className="relative">
+                            <ListingCard
+                                id={offer.id}
+                                title={offer.title}
+                                type={offer.type}
+                                wilaya={offer.wilaya}
+                                price={offer.price_per_night}
+                                ratingAvg={offer.rating_avg}
+                                image={offer.images?.[0]}
+                            />
+                            {/* Overlay Discount Badge */}
+                            <Badge className="absolute top-3 left-3 bg-red-500 hover:bg-red-600 z-10">
+                                Best Price
+                            </Badge>
                         </div>
                     ))}
                 </div>

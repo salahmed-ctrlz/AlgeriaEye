@@ -7,7 +7,18 @@ export interface Wilaya {
     description?: { en: string; ar: string };
     history?: { en: string; ar: string };
     funFacts?: { en: string[]; ar: string[] };
-    bestPlaces?: { name: { en: string; ar: string }; image: string }[];
+    bestPlaces?: Attraction[];
+}
+
+export interface Attraction {
+    name: { en: string; ar: string };
+    image: string;
+    category?: string;
+    description?: { en: string; ar: string };
+    traditions?: { en: string; ar: string };
+    locationUrl?: string;
+    lat?: number;
+    lng?: number;
 }
 
 export const wilayas: Wilaya[] = [
@@ -32,10 +43,86 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "The Casbah of Algiers", ar: "قصبة الجزائر العتيقة" }, image: "/images/wilayas/Algiers/casbah.webp" },
-            { name: { en: "Djamaa el Djazaïr (Great Mosque of Algiers)", ar: "جامع الجزائر الأعظم" }, image: "/images/wilayas/Algiers/mosque.jpg" },
-            { name: { en: "The Hamma Garden of Experiments", ar: "حديقة التجارب بالحامة" }, image: "/images/wilayas/Algiers/hamma.webp" },
-            { name: { en: "Notre Dame d'Afrique", ar: "السيدة الإفريقية (نوتردام دافريك)" }, image: "/images/wilayas/Algiers/notre_dame.webp" },
+            {
+                name: { en: "The Casbah of Algiers", ar: "قصبة الجزائر" },
+                category: "History",
+                image: "/images/explore/Casbah.jpeg",
+                description: {
+                    en: "A UNESCO World Heritage site and a masterpiece of Islamic architecture. The Casbah is a winding labyrinth of whitewashed houses, Ottoman palaces, and ancient mosques cascading down to the sea.",
+                    ar: "موقع تراث عالمي لليونسكو وتحفة من العمارة الإسلامية. القصبة هي متاهة متعرجة من المنازل البيضاء والقصور العثمانية والمساجد القديمة التي تنحدر نحو البحر."
+                },
+                traditions: {
+                    en: "Home to the Chaabi music legend El Anka. It represents the heart of Algerian resistance and traditional craftsmanship (dinanderie).",
+                    ar: "موطن أسطورة الشعبي العنقة. تمثل قلب المقاومة الجزائرية والحرف التقليدية (النحاسيات)."
+                },
+                locationUrl: "https://www.google.com/maps/place/36.78694,3.06056",
+                lat: 36.78694,
+                lng: 3.06056
+            },
+            {
+                name: { en: "Maqam Echahid", ar: "مقام الشهيد" },
+                category: "Landmark",
+                image: "/images/wilayas/Algiers/hero.jpg",
+                description: {
+                    en: "The Martyrs' Memorial is an iconic concrete monument overlooking the city, commemorating the Algerian war for independence. It represents three palm leaves sheltering the eternal flame.",
+                    ar: "نصب تذكاري أيقوني يطل على المدينة، يخلد ذكرى حرب الاستقلال الجزائرية. يمثل ثلاث سعفات نخيل تحمي الشعلة الأبدية."
+                },
+                traditions: {
+                    en: "A symbol of national unity. It is visited on every national holiday (November 1st, July 5th) to pay respects.",
+                    ar: "رمز للوحدة الوطنية. يتم زيارته في كل عيد وطني (1 نوفمبر، 5 يوليو) لتقديم الاحترام."
+                },
+                locationUrl: "https://www.google.com/maps/place/36.74571,3.06973",
+                lat: 36.74571,
+                lng: 3.06973
+            },
+            {
+                name: { en: "Jardin d'Essai du Hamma", ar: "حديقة الحامة" },
+                category: "Nature",
+                image: "/images/wilayas/Algiers/hamma.webp",
+                description: {
+                    en: "One of the most beautiful botanical gardens in the world, featuring grand avenues of plane trees, exotic palms, and a mix of French and English garden styles.",
+                    ar: "واحدة من أجمل الحدائق النباتية في العالم، تتميز بممرات ضخمة من أشجار الدلب، ونخيل غريب، ومزيج من الأنماط الحدائقية الفرنسية والإنجليزية."
+                },
+                traditions: {
+                    en: "Famous for being the filming location of the original Tarzan movie (1932). A favorite weekend spot for Algiers families.",
+                    ar: "تشتهر بأنها موقع تصوير فيلم طرزان الأصلي (1932). مكان مفضّل لعطلة نهاية الأسبوع لعائلات الجزائر العاصمة."
+                },
+                locationUrl: "https://www.google.com/maps/place/36.74819,3.0757",
+                lat: 36.74819,
+                lng: 3.07570
+            },
+            {
+                name: { en: "Notre Dame d'Afrique", ar: "السيدة الإفريقية" },
+                category: "Culture",
+                image: "/images/wilayas/Algiers/notre_dame.webp",
+                description: {
+                    en: "Known as 'Lalla Madame l'Afrique', this basilica sits on a cliff overlooking the Bay of Algiers. Its Neo-Byzantine architecture is stunning inside and out.",
+                    ar: "تُعرف باسم 'لالة مدام إفريقيا'، وتقع هذه الكنيسة على جرف يطل على خليج الجزائر. هندستها المعمارية النيو-بيزنطية مذهلة من الداخل والخارج."
+                },
+                traditions: {
+                    en: "The inscription 'Pray for us and for the Muslims' highlights the unique coexistence and respect in Algerian culture.",
+                    ar: "النقش 'صلوا من أجلنا ومن أجل المسلمين' يسلط الضوء على التعايش والاحترام الفريد في الثقافة الجزائرية."
+                },
+                locationUrl: "https://www.google.com/maps/place/36.80106,3.04263",
+                lat: 36.80106,
+                lng: 3.04263
+            },
+            {
+                name: { en: "La Grande Poste", ar: "البريد المركزي" },
+                category: "Architecture",
+                image: "/images/explore/grande_poste.jpg",
+                description: {
+                    en: "The heart of downtown Algiers. A magnificent example of Neo-Moorish architecture built in 1910, famous for its grand arches and intricate interior.",
+                    ar: "قلب وسط مدينة الجزائر. مثال رائع على العمارة النيو-مغاربية بني في عام 1910، ويشتهر بأقواسه الضخمة وتصميمه الداخلي المعقد."
+                },
+                traditions: {
+                    en: "The central meeting point for all Algiers residents ('Netlaqaw 9eddam La Poste').",
+                    ar: "نقطة اللقاء المركزية لجميع سكان الجزائر العاصمة ('نتلاقاو قدام لا بوست')."
+                },
+                locationUrl: "https://www.google.com/maps/place/36.7725,3.0592",
+                lat: 36.77250,
+                lng: 3.05920
+            }
         ]
     },
     {
@@ -59,9 +146,27 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "Fort Santa Cruz", ar: "قلعة وكنيسة سانتا كروز" }, image: "/images/wilayas/Oran/santa_cruz.jpg" },
-            { name: { en: "Place du 1er Novembre", ar: "ساحة أول نوفمبر (ساحة السلاح سابقاً)" }, image: "/images/wilayas/Oran/place_1er_nov.jpg" },
-            { name: { en: "Ahmed Zabana Museum", ar: "متحف أحمد زبانة" }, image: "/images/wilayas/Oran/zabana_museum.jpg" },
+            {
+                name: { en: "Fort Santa Cruz", ar: "قلعة وكنيسة سانتا كروز" },
+                image: "/images/wilayas/Oran/santa_cruz.jpg",
+                locationUrl: "https://www.google.com/maps/place/35.7183,0.6264",
+                lat: 35.7183,
+                lng: 0.6264
+            },
+            {
+                name: { en: "Place du 1er Novembre", ar: "ساحة أول نوفمبر (ساحة السلاح سابقاً)" },
+                image: "/images/wilayas/Oran/place_1er_nov.jpg",
+                locationUrl: "https://www.google.com/maps/place/35.6967,0.6417",
+                lat: 35.6967,
+                lng: 0.6417
+            },
+            {
+                name: { en: "Ahmed Zabana Museum", ar: "متحف أحمد زبانة" },
+                image: "/images/wilayas/Oran/zabana_museum.jpg",
+                locationUrl: "https://www.google.com/maps/place/35.6944,0.6356",
+                lat: 35.6944,
+                lng: 0.6356
+            },
         ]
     },
     {
@@ -85,10 +190,34 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "Sidi M'Cid Bridge", ar: "جسر سيدي مسيد المعلق" }, image: "/images/wilayas/Constantine/sidi_mcid.jpg" },
-            { name: { en: "Palace of Ahmed Bey", ar: "قصر أحمد باي" }, image: "/images/wilayas/Constantine/ahmed_bey.jpg" },
-            { name: { en: "Emir Abdelkader Mosque", ar: "مسجد الأمير عبد القادر" }, image: "/images/wilayas/Constantine/emir_abdelkader.webp" },
-            { name: { en: "Monument to the Dead", ar: "نصب الأموات" }, image: "/images/wilayas/Constantine/monument_dead.webp" },
+            {
+                name: { en: "Sidi M'Cid Bridge", ar: "جسر سيدي مسيد المعلق" },
+                image: "/images/wilayas/Constantine/sidi_mcid.jpg",
+                locationUrl: "https://www.google.com/maps/place/36.37253,6.61434",
+                lat: 36.37253,
+                lng: 6.61434
+            },
+            {
+                name: { en: "Palace of Ahmed Bey", ar: "قصر أحمد باي" },
+                image: "/images/wilayas/Constantine/ahmed_bey.jpg",
+                locationUrl: "https://www.google.com/maps/place/36.367654,6.611195",
+                lat: 36.367654,
+                lng: 6.611195
+            },
+            {
+                name: { en: "Emir Abdelkader Mosque", ar: "مسجد الأمير عبد القادر" },
+                image: "/images/wilayas/Constantine/emir_abdelkader.webp",
+                locationUrl: "https://www.google.com/maps/place/36.34667,6.60306",
+                lat: 36.34667,
+                lng: 6.60306
+            },
+            {
+                name: { en: "Monument to the Dead", ar: "نصب الأموات" },
+                image: "/images/wilayas/Constantine/monument_dead.webp",
+                locationUrl: "https://www.google.com/maps/place/36.3751528,6.6134864",
+                lat: 36.3751528,
+                lng: 6.6134864
+            },
         ]
     },
     {
@@ -112,10 +241,34 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "Hippo Regius Ruins", ar: "آثار هيبون القديمة" }, image: "/images/wilayas/Annaba/hippo_regius.webp" },
-            { name: { en: "Basilica of St. Augustine", ar: "كنيسة القديس أوغسطين" }, image: "/images/wilayas/Annaba/st_augustine.jpg" },
-            { name: { en: "Seraïdi Mountains & Beach", ar: "جبال وشاطئ سرايدي" }, image: "/images/wilayas/Annaba/seraidi.jpg" },
-            { name: { en: "Ain Achir Beach", ar: "منارة رأس الحمراء" }, image: "/images/wilayas/Annaba/ain_achir.JPG" },
+            {
+                name: { en: "Hippo Regius Ruins", ar: "آثار هيبون القديمة" },
+                image: "/images/wilayas/Annaba/hippo_regius.webp",
+                locationUrl: "https://www.google.com/maps/place/36.8269,7.7711",
+                lat: 36.8269,
+                lng: 7.7711
+            },
+            {
+                name: { en: "Basilica of St. Augustine", ar: "كنيسة القديس أوغسطين" },
+                image: "/images/wilayas/Annaba/st_augustine.jpg",
+                locationUrl: "https://www.google.com/maps/place/36.826,7.766",
+                lat: 36.826,
+                lng: 7.766
+            },
+            {
+                name: { en: "Seraïdi Mountains & Beach", ar: "جبال وشاطئ سرايدي" },
+                image: "/images/wilayas/Annaba/seraidi.jpg",
+                locationUrl: "https://www.google.com/maps/place/36.85,7.75",
+                lat: 36.85,
+                lng: 7.75
+            },
+            {
+                name: { en: "Ain Achir Beach", ar: "منارة رأس الحمراء" },
+                image: "/images/wilayas/Annaba/ain_achir.JPG",
+                locationUrl: "https://www.google.com/maps/place/36.90,7.80",
+                lat: 36.90,
+                lng: 7.80
+            },
         ]
     },
     {
@@ -139,10 +292,32 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "Al Kalaa of Beni Hammad (UNESCO)", ar: "قلعة بني حماد (يونسكو)" }, image: "/images/wilayas/Msila/kalaa.webp" },
-            { name: { en: "The Hodna Chott (Salt Lake)", ar: "شط الحضنة (بحيرة ملحية)" }, image: "/images/wilayas/Msila/hodna.webp" },
-            { name: { en: "Bousaada Oasis (nearby)", ar: "مدينة بوسعادة السياحية (قريبة)" }, image: "/images/wilayas/Msila/bousaada.png" },
-            { name: { en: "Mosque of Omar ibn Elkhetab", ar: "مسجد عمر بن الخطاب (المعاضيد)" }, image: "/images/wilayas/Msila/mosquee.webp" },
+            {
+                name: { en: "Al Kalaa of Beni Hammad (UNESCO)", ar: "قلعة بني حماد (يونسكو)" },
+                image: "/images/wilayas/Msila/kalaa.webp",
+                locationUrl: "https://www.google.com/maps/place/35.8000,4.7833",
+                lat: 35.8000,
+                lng: 4.7833
+            },
+            {
+                name: { en: "The Hodna Chott (Salt Lake)", ar: "شط الحضنة (بحيرة ملحية)" },
+                image: "/images/wilayas/Msila/hodna.webp",
+                locationUrl: "https://www.google.com/maps/place/35.50,4.50",
+                lat: 35.50,
+                lng: 4.50
+            },
+            {
+                name: { en: "Bousaada Oasis (nearby)", ar: "مدينة بوسعادة السياحية (قريبة)" },
+                image: "/images/wilayas/Msila/bousaada.png",
+                locationUrl: "https://www.google.com/maps/place/35.3333,4.2000",
+                lat: 35.3333,
+                lng: 4.2000
+            },
+            {
+                name: { en: "Mosque of Omar ibn Elkhetab", ar: "مسجد عمر بن الخطاب (المعاضيد)" },
+                image: "/images/wilayas/Msila/mosquee.webp",
+                locationUrl: "https://www.google.com/maps/search/?api=1&query=Mosque+Omar+ibn+Elkhetab+M%27sila+Algeria"
+            },
         ]
     },
     {
@@ -166,10 +341,34 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "The Garden of London (Jardin Landon)", ar: "حديقة لاندون الساحرة" }, image: "/images/wilayas/Biskra/jardin_london.webp" },
-            { name: { en: "Hammam Salhine (Roman Baths)", ar: "حمام الصالحين (حمامات رومانية قديمة)" }, image: "/images/wilayas/Biskra/hammam_salhine.jpg" },
-            { name: { en: "El Kantara Gorge", ar: "مضيق القنطرة (البوابة الطبيعية للصحراء)" }, image: "/images/wilayas/Biskra/el_kantra.jpg" },
-            { name: { en: "Tolga Palm Groves", ar: "واحات طولقة" }, image: "/images/wilayas/Biskra/tolga.jpg" },
+            {
+                name: { en: "The Garden of London (Jardin Landon)", ar: "حديقة لاندون الساحرة" },
+                image: "/images/wilayas/Biskra/jardin_london.webp",
+                locationUrl: "https://www.google.com/maps/place/34.852,5.727",
+                lat: 34.852,
+                lng: 5.727
+            },
+            {
+                name: { en: "Hammam Salhine (Roman Baths)", ar: "حمام الصالحين (حمامات رومانية قديمة)" },
+                image: "/images/wilayas/Biskra/hammam_salhine.jpg",
+                locationUrl: "https://www.google.com/maps/place/34.85,5.73",
+                lat: 34.85,
+                lng: 5.73
+            },
+            {
+                name: { en: "El Kantara Gorge", ar: "مضيق القنطرة (البوابة الطبيعية للصحراء)" },
+                image: "/images/wilayas/Biskra/el_kantra.jpg",
+                locationUrl: "https://www.google.com/maps/place/35.20,5.70",
+                lat: 35.20,
+                lng: 5.70
+            },
+            {
+                name: { en: "Tolga Palm Groves", ar: "واحات طولقة" },
+                image: "/images/wilayas/Biskra/tolga.jpg",
+                locationUrl: "https://www.google.com/maps/place/34.883,5.383",
+                lat: 34.883,
+                lng: 5.383
+            },
         ]
     },
     {
@@ -193,10 +392,34 @@ export const wilayas: Wilaya[] = [
             ]
         },
         bestPlaces: [
-            { name: { en: "Assekrem Plateau", ar: "هضبة الأسكرام" }, image: "/images/wilayas/Tamanrasset/assekrem.webp" },
-            { name: { en: "Hoggar National Park", ar: "الحظيرة الثقافية للأهقار" }, image: "/images/wilayas/Tamanrasset/hoggar.jpg" },
-            { name: { en: "Hermitage of Charles de Foucauld", ar: "محبسة شارل دو فوكو" }, image: "/images/wilayas/Tamanrasset/hermitage.jpg" },
-            { name: { en: "Guelta d'Afilal", ar: "قلة أفيلال (واحة مائية)" }, image: "/images/wilayas/Tamanrasset/guelta.jpg" },
+            {
+                name: { en: "Assekrem Plateau", ar: "هضبة الأسكرام" },
+                image: "/images/wilayas/Tamanrasset/assekrem.webp",
+                locationUrl: "https://www.google.com/maps/place/23.2667,5.6333",
+                lat: 23.2667,
+                lng: 5.6333
+            },
+            {
+                name: { en: "Hoggar National Park", ar: "الحظيرة الثقافية للأهقار" },
+                image: "/images/wilayas/Tamanrasset/hoggar.jpg",
+                locationUrl: "https://www.google.com/maps/place/22.9667,5.5333",
+                lat: 22.9667,
+                lng: 5.5333
+            },
+            {
+                name: { en: "Hermitage of Charles de Foucauld", ar: "محبسة شارل دو فوكو" },
+                image: "/images/wilayas/Tamanrasset/hermitage.jpg",
+                locationUrl: "https://www.google.com/maps/place/23.27,5.63",
+                lat: 23.27,
+                lng: 5.63
+            },
+            {
+                name: { en: "Guelta d'Afilal", ar: "قلة أفيلال (واحة مائية)" },
+                image: "/images/wilayas/Tamanrasset/guelta.jpg",
+                locationUrl: "https://www.google.com/maps/place/22.9167,5.55",
+                lat: 22.9167,
+                lng: 5.55
+            },
         ]
     },
     // ... rest of simple wilayas

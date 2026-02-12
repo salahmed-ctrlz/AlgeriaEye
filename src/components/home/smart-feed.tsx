@@ -9,31 +9,27 @@ import { Sparkles } from "lucide-react";
 
 export function SmartFeed() {
     const [recommendations, setRecommendations] = useState<any[]>([]);
-    const [loading, setLoading] = useState(false); // Default false for now as we mock
+    const [loading, setLoading] = useState(true);
 
-    // Simulator for "Smart Algorithm"
-    // In real app: fetch based on user tags, history, location
     useEffect(() => {
-        // Mock data
-        setRecommendations([
-            {
-                id: "rec1",
-                title: "Sunset in Timgad",
-                wilaya: "Batna",
-                price_per_night: 4000,
-                rating: 4.8,
-                images: ["https://images.unsplash.com/photo-1590074256667-8e1263c9327d?auto=format&fit=crop&w=800&q=80"]
-            },
-            {
-                id: "rec2",
-                title: "Casbah Tour",
-                wilaya: "Algiers",
-                price_per_night: 2500,
-                rating: 4.9,
-                images: ["https://images.unsplash.com/photo-1627823624326-8c0817c1bf1d?auto=format&fit=crop&w=800&q=80"]
+        const fetchRecommendations = async () => {
+            const supabase = createClient();
+            const { data, error } = await supabase
+                .from("listings")
+                .select("*")
+                .order("created_at", { ascending: false })
+                .limit(4);
+
+            if (data) {
+                setRecommendations(data);
             }
-        ]);
+            setLoading(false);
+        };
+
+        fetchRecommendations();
     }, []);
+
+    if (loading) return null; // Or a skeleton
 
     return (
         <section className="py-8 px-4 md:px-8 bg-muted/20">
@@ -45,26 +41,16 @@ export function SmartFeed() {
 
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     {recommendations.map((item) => (
-                        <div key={item.id} className="group relative overflow-hidden rounded-xl bg-background border border-border/50 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                            <div className="aspect-[4/3] overflow-hidden">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={item.images[0]}
-                                    alt={item.title}
-                                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                />
-                            </div>
-                            <div className="p-4">
-                                <h3 className="font-semibold text-lg line-clamp-1">{item.title}</h3>
-                                <p className="text-sm text-muted-foreground mb-2">{item.wilaya}</p>
-                                <div className="flex items-center justify-between">
-                                    <span className="font-bold text-brand">{item.price_per_night} DZD</span>
-                                    <span className="text-xs bg-brand/10 text-brand px-2 py-1 rounded-full">
-                                        Match 98%
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <ListingCard
+                            key={item.id}
+                            id={item.id}
+                            title={item.title}
+                            type={item.type}
+                            wilaya={item.wilaya}
+                            price={item.price_per_night}
+                            ratingAvg={item.rating_avg}
+                            image={item.images?.[0]}
+                        />
                     ))}
                 </div>
             </div>
