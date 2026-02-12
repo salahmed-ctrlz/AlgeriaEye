@@ -84,7 +84,7 @@ const ALGIERS_DATA = [
         image_keyword: "skyscraper hotel luxury"
     },
 
-    // --- RESTAURANTS (Traditional) ---
+    // --- RESTAURANTS ---
     {
         email: "hello@darlahlou.dz",
         title: "Dar Lahlou",
@@ -145,8 +145,6 @@ const ALGIERS_DATA = [
         description: "A hidden gem in the Casbah serving a mix of Mediterranean and Algerian classics. Great for a quiet lunch after exploring.",
         image_keyword: "mediterranean food restaurant"
     },
-
-    // --- RESTAURANTS (Seafood & Modern) ---
     {
         email: "contact@chebec-port.dz",
         title: "Chebec Restaurant",
@@ -179,10 +177,78 @@ const ALGIERS_DATA = [
     }
 ];
 
+const CONSTANTINE_DATA = [
+    // --- HOTELS ---
+    {
+        email: "booking@marriott-constantine.dz",
+        title: "Constantine Marriott Hotel",
+        type: "hotel",
+        price: 22000,
+        wilaya: "constantine",
+        address: "Oued Rhumal Street, Cité des Arcades Romaines, Constantine",
+        description: "A 5-star luxury hotel combining history and modernity. Features a spa, outdoor pool, and proximity to the Emir Abdelkader Mosque.",
+        image_keyword: "marriott hotel exterior luxury"
+    },
+    {
+        email: "stay@novotel-constantine.dz",
+        title: "Novotel Constantine",
+        type: "hotel",
+        price: 14000,
+        wilaya: "constantine",
+        address: "1 Square Hadj Ali, Constantine",
+        description: "Centrally located with panoramic views of the city. Modern rooms, fitness center, and meeting facilities perfect for business.",
+        image_keyword: "modern hotel room city view"
+    },
+    {
+        email: "welcome@ibis-constantine.dz",
+        title: "ibis Constantine",
+        type: "hotel",
+        price: 9000,
+        wilaya: "constantine",
+        address: "2 Square Hadj Ali, Constantine",
+        description: "Affordable comfort in the heart of the city. Features modern, cozy rooms and an all-you-can-eat breakfast buffet.",
+        image_keyword: "ibis hotel exterior"
+    },
+
+    // --- RESTAURANTS ---
+    {
+        email: "dine@laconcorde.dz",
+        title: "Restaurant La Concorde",
+        type: "restaurant",
+        price: 2800,
+        wilaya: "constantine",
+        address: "Abane Ramdane St, Constantine",
+        description: "A historic spot offering traditional Constantinian cuisine. Famous for its authentic Chakhchoukha and cozy, family-friendly vibe.",
+        image_keyword: "traditional algerian restaurant interior"
+    },
+    {
+        email: "info@scodella.dz",
+        title: "Scodella Restaurant",
+        type: "restaurant",
+        price: 3200,
+        wilaya: "constantine",
+        address: "Sidi Mabrouk, Constantine",
+        description: "A modern culinary experience blending Italian and Mediterranean flavors. Known for its pasta, steaks, and chic decor.",
+        image_keyword: "modern restaurant dining"
+    },
+    {
+        email: "eat@meetandeat.dz",
+        title: "Meet and Eat",
+        type: "restaurant",
+        price: 1200,
+        wilaya: "constantine",
+        address: "Nouvelle Ville Ali Mendjeli",
+        description: "Popular fast-casual spot for burgers, tacos, and grilled sandwiches. Great for students and families in the new city.",
+        image_keyword: "burger fast food"
+    }
+];
+
+const ALL_DATA = [...ALGIERS_DATA, ...CONSTANTINE_DATA];
+
 function getMenuImagesForRestaurant(restaurantTitle: string) {
     const title = restaurantTitle.toLowerCase();
 
-    // 1. SEAFOOD MENUS (Chebec, Presqu'ile, O'fish)
+    // 1. SEAFOOD MENUS
     if (title.includes('chebec') || title.includes('presqu') || title.includes('fish')) {
         return [
             { name: "Grilled Dorade Royale", price: 2500, img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600", category: "Mains" },
@@ -192,17 +258,27 @@ function getMenuImagesForRestaurant(restaurantTitle: string) {
         ];
     }
 
-    // 2. TRADITIONAL MENUS (Dar Lahlou, El Walima, Yemma, Zellige, Sapori)
-    if (title.includes('dar') || title.includes('walima') || title.includes('sapori') || title.includes('grotte')) {
+    // 2. TRADITIONAL MENUS
+    if (title.includes('dar') || title.includes('walima') || title.includes('sapori') || title.includes('grotte') || title.includes('concorde')) {
         return [
-            { name: "Royal Couscous", price: 1800, img: "https://images.unsplash.com/photo-1585937421612-70a008356f36?auto=format&fit=crop&w=600", category: "Mains" },
-            { name: "Rechta Algiers", price: 1500, img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600", category: "Mains" },
+            { name: title.includes('concorde') ? "Chakhchoukha Constantine" : "Royal Couscous", price: 1800, img: "https://images.unsplash.com/photo-1585937421612-70a008356f36?auto=format&fit=crop&w=600", category: "Mains" },
+            { name: "Rechta", price: 1500, img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600", category: "Mains" },
             { name: "Lamb Tajine with Prunes", price: 2200, img: "https://images.unsplash.com/photo-1511690656952-34342d5c71df?auto=format&fit=crop&w=600", category: "Mains" },
-            { name: "Mint Tea & Makroud", price: 400, img: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600", category: "Desserts" }
+            { name: title.includes('concorde') ? "Djouzia & Tea" : "Mint Tea & Makroud", price: 500, img: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600", category: "Desserts" }
         ];
     }
 
-    // 3. HOTEL DINING / GENERIC
+    // 3. FAST FOOD / PIZZA (Scodella, Meet and Eat)
+    if (title.includes('scodella') || title.includes('meet')) {
+        return [
+            { name: "Gourmet Burger", price: 900, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600", category: "Mains" },
+            { name: "Pasta Alfredo", price: 1200, img: "https://images.unsplash.com/photo-1626844431056-6678d336b3eb?auto=format&fit=crop&w=600", category: "Mains" },
+            { name: "Tacos", price: 700, img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600", category: "Mains" },
+            { name: "Tiramisu", price: 600, img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600", category: "Desserts" }
+        ];
+    }
+
+    // 4. HOTEL DINING / GENERIC
     return [
         { name: "Club Sandwich", price: 1200, img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600", category: "Mains" },
         { name: "Grilled Steak", price: 3500, img: "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=600", category: "Mains" },
@@ -214,7 +290,7 @@ function getMenuImagesForRestaurant(restaurantTitle: string) {
 async function seed() {
     console.log("🌱 Starting Seeding Process...");
 
-    for (const data of ALGIERS_DATA) {
+    for (const data of ALL_DATA) {
         console.log(`Processing: ${data.title}`);
 
         // A. Create/Get User (Owner)
@@ -254,7 +330,7 @@ async function seed() {
             .update({
                 role: "owner",
                 full_name: data.title + " Owner",
-                wilaya: "algiers"
+                wilaya: data.wilaya
             })
             .eq("id", ownerId);
 

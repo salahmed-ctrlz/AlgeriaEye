@@ -819,7 +819,7 @@ export default function DashboardPage() {
 
             {/* Listing Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[800px]">
+                <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[1000px] md:max-w-[1200px]">
                     <DialogHeader>
                         <DialogTitle>{editingListing ? "Edit Listing" : "Create New Listing"}</DialogTitle>
                         <DialogDescription>

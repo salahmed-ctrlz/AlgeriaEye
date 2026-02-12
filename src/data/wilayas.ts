@@ -8,6 +8,8 @@ export interface Wilaya {
     history?: { en: string; ar: string };
     funFacts?: { en: string[]; ar: string[] };
     bestPlaces?: Attraction[];
+    culture?: Culture[];
+    featured?: boolean;
 }
 
 export interface Attraction {
@@ -21,27 +23,75 @@ export interface Attraction {
     lng?: number;
 }
 
+export interface Culture {
+    title: { en: string; ar: string };
+    description: { en: string; ar: string };
+    image: string;
+    tags?: string[];
+}
+
 export const wilayas: Wilaya[] = [
     {
         code: 16,
         slug: "algiers",
         name: { en: "Algiers", ar: "الجزائر العاصمة" },
+        featured: true,
         image: "/images/wilayas/Algiers/hero.jpg",
         tagline: { en: "The White City", ar: "المحروسة" },
         description: {
-            en: "Algiers is a captivating blend of history and modernity, where the ancient Casbah cascades down to the sparkling Mediterranean bay. Known as \"Algiers the White,\" it offers a journey through Ottoman palaces, French colonial architecture, and vibrant contemporary life.",
-            ar: "الجزائر \"المحروسة\" أو \"البيضاء\"، مزيج ساحر يعانق فيه التاريخ عبق الحداثة. تمتد من أزقة القصبة العتيقة نزولاً إلى خليج المتوسط المتلألئ. هي رحلة عبر الزمن، من القصور العثمانية والمعمار الكولونيالي إلى نبض الحياة العصرية في قلب العاصمة."
+            en: "Algiers is one of the oldest cities in the Mediterranean, witnessing Phoenician, Roman, Islamic, Zirid, and Ottoman civilizations. The Ottoman era left a clear mark on the Casbah, mosques, and palaces. During the French colonial period (1830–1962), it saw significant urban expansion. Today, the Casbah of Algiers is a UNESCO World Heritage site known for its historical and architectural value.",
+            ar: "الجزائر العاصمة من أقدم مدن البحر الأبيض المتوسط، تعاقبت عليها الحضارات الفينيقية والرومانية، ثم الفتح الإسلامي، فالعهد الزيري، وبعده العثماني الذي ترك بصمة واضحة في القصبة والمساجد والقصور. في الفترة الاستعمارية الفرنسية (1830–1962) شهدت توسعًا عمرانياً كبيرًا. تُعد قصبة الجزائر اليوم موقعًا مصنفًا ضمن التراث العالمي لليونسكو لما تحمله من قيمة تاريخية ومعمارية."
         },
         funFacts: {
             en: [
                 "The Casbah is a UNESCO World Heritage site and a masterpiece of Islamic architecture.",
-                "It has one of the longest continuous promenades in Africa (Sablière)."
+                "It is famous for Chaabi music, Dinanderie (copper craft), and traditional attire like Karakou and Haik.",
+                "Famous dishes include Rechta, Mtewem, and Dolma."
             ],
             ar: [
                 "\"القصبة\" ليست مجرد حي قديم، بل هي تحفة معمارية إسلامية مصنفة ضمن التراث العالمي لليونسكو.",
-                "تمتلك العاصمة واحدة من أجمل الواجهات البحرية في حوض المتوسط (الواجهة البحرية)."
+                "تشتهر بموسيقى الشعبي، وحرفة النحاس (الدينانديري)، واللباس التقليدي (الكاراكو والحايك).",
+                "من أشهر مأكولاتها: الرشطة، المثوم، والدولمة."
             ]
         },
+        culture: [
+            {
+                title: { en: "The Casbah Life", ar: "الحياة في القصبة" },
+                description: {
+                    en: "A labyrinth of narrow streets, Ottoman palaces, and ancient mosques. The Casbah is not just a place; it's a way of life that has preserved the city's soul for centuries.",
+                    ar: "متاهة من الشوارع الضيقة والقصور العثمانية والمساجد القديمة. القصبة ليست مجرد مكان؛ إنها أسلوب حياة حافظ على روح المدينة لقرون."
+                },
+                image: "/images/explore/Casbah.jpeg",
+                tags: ["History", "Architecture"]
+            },
+            {
+                title: { en: "Chaabi Music", ar: "موسيقى الشعبي" },
+                description: {
+                    en: "Born in the Casbah, Chaabi is the soulful sound of Algiers. Masters like El Anka and El Hasnaoui tell stories of love, exile, and daily life through mandole rhythms.",
+                    ar: "وُلدت في القصبة، الشعبي هو الصوت الروحي للجزائر العاصمة. يروي أساتذة مثل العنقة والحسناوي قصص الحب والمنفى والحياة اليومية من خلال إيقاعات المندول."
+                },
+                image: "/images/culture/chaabi.jpg",
+                tags: ["Music", "Art"]
+            },
+            {
+                title: { en: "Algiers Cuisine", ar: "المطبخ العاصمي" },
+                description: {
+                    en: "Famous for refined dishes like 'Rechta' (noodles with white sauce), 'Mtewem' (garlic meatballs), and 'Chorba Beida' (white soup). Every meal is a celebration of heritage.",
+                    ar: "يشتهر بأطباق راقية مثل 'الرشطة' (نودلز بالمرق الأبيض)، 'المثوم' (كرات اللحم بالثوم)، و'شوربة بيضاء'. كل وجبة هي احتفال بالتراث."
+                },
+                image: "/images/culture/cuisine_algiers.jpg",
+                tags: ["Food", "Gastronomy"]
+            },
+            {
+                title: { en: "Traditional Attire", ar: "اللباس التقليدي" },
+                description: {
+                    en: "The 'Karakou', a velvet jacket embroidered with gold thread, is the crown jewel of Algiers fashion, worn by brides and women at weddings.",
+                    ar: "'الكاراكو'، سترة مخملية مطرزة بخيوط الذهب، هي جوهرة تاج أزياء الجزائر العاصمة، ترتديها العرائس والنساء في الأعراس."
+                },
+                image: "/images/culture/karakou.jpg",
+                tags: ["Fashion", "Heritage"]
+            }
+        ],
         bestPlaces: [
             {
                 name: { en: "The Casbah of Algiers", ar: "قصبة الجزائر" },
@@ -76,7 +126,7 @@ export const wilayas: Wilaya[] = [
                 lng: 3.06973
             },
             {
-                name: { en: "Jardin d'Essai du Hamma", ar: "حديقة الحامة" },
+                name: { en: "Jardin d'Essai du Hamma", ar: "حديقة التجارب بالحامة" },
                 category: "Nature",
                 image: "/images/wilayas/Algiers/hamma.webp",
                 description: {
@@ -92,7 +142,7 @@ export const wilayas: Wilaya[] = [
                 lng: 3.07570
             },
             {
-                name: { en: "Notre Dame d'Afrique", ar: "السيدة الإفريقية" },
+                name: { en: "Notre Dame d'Afrique", ar: "كاتدرائية السيدة الإفريقية" },
                 category: "Culture",
                 image: "/images/wilayas/Algiers/notre_dame.webp",
                 description: {
@@ -129,6 +179,7 @@ export const wilayas: Wilaya[] = [
         code: 31,
         slug: "oran",
         name: { en: "Oran", ar: "وهران" },
+        featured: true,
         image: "/images/wilayas/Oran/hero.jpg",
         tagline: { en: "The Radiant", ar: "الباهية" },
         description: {
@@ -173,39 +224,99 @@ export const wilayas: Wilaya[] = [
         code: 25,
         slug: "constantine",
         name: { en: "Constantine", ar: "قسنطينة" },
+        featured: true,
         image: "/images/wilayas/Constantine/hero.webp",
         tagline: { en: "The City of Bridges", ar: "مدينة الجسور المعلقة" },
         description: {
-            en: "Defying gravity, Constantine is perched atop a massive limestone plateau split by a dramatic gorge. Known as the \"City of Bridges,\" it is one of the oldest cities in the world, offering breathtaking views and a deep, scholarly history.",
-            ar: "قسنطينة، مدينة تتحدى الجاذبية وتطفو فوق صخرة عتيقة يشقها وادي الرمال العميق. \"مدينة الجسور المعلقة\" وعاصمة الثقافة والعلم، تعد من أقدم مدن العالم المأهولة، حيث يلتقي سحر الطبيعة القاسي بعبقرية الهندسة البشرية."
+            en: "Constantine, the City of Suspension Bridges and Capital of Eastern Algeria, is one of the oldest cities in the world, dating back over 2,500 years. Built on a hard limestone rock split by the deep Rhumel Gorge, it served as a natural and historical fortress. It has seen Numidian, Roman, and Ottoman civilizations and is famous for its seven bridges, authentic Malouf music, and ancient cuisine.",
+            ar: "قسنطينة، مدينة الجسور المعلقة وعاصمة الشرق الجزائري، هي إحدى أقدم المدن في العالم حيث يعود تاريخها لأكثر من 2500 سنة. شُيدت فوق صخرة من الكلس القاسي يشقها وادي الرمال العميق، مما جعلها حصنًا طبيعيًا وتاريخيًا. تعاقبت عليها الحضارات النوميدية والرومانية والعثمانية، وتشتهر بجسورها السبعة التي تربط أطراف المدينة، وبفن المالوف الأصيل ومطبخها العريق."
         },
         funFacts: {
             en: [
                 "It has seven iconic bridges connecting the city's neighborhoods across the gorge.",
-                "The city is over 2,500 years old, dating back to the Numidian kings."
+                "Famous for Malouf Music, Copperware, and Distillation of Rose Water.",
+                "Traditional dishes include Chakhchoukha and Djouzia (Nougat)."
             ],
             ar: [
                 "تشتهر بجسورها السبعة التي تربط أطراف المدينة فوق الهاوية، مما يمنحها منظراً لا مثيل له في العالم.",
-                "تاريخها يمتد لأكثر من 2500 سنة، كانت عاصمة للمملكة النوميدية وتنفست حضارات متعاقبة."
+                "معروفة بفن المالوف، صناعة النحاس، وتقطير ماء الزهر والورد.",
+                "من أشهر مأكولاتها: شخشوخة قسنطينة وحلوى الجوزية."
             ]
         },
+        culture: [
+            {
+                title: { en: "City of Bridges", ar: "مدينة الجسور" },
+                description: {
+                    en: "Constantine's seven bridges are engineering marvels suspended over the Rhumel Gorge. They define the city's unique silhouette and daily commute.",
+                    ar: "جسور قسنطينة السبعة هي روائع هندسية معلقة فوق وادي الرمال. إنها تحدد الصورة الظلية الفريدة للمدينة وتنقلاتها اليومية."
+                },
+                image: "/images/culture/bridges.jpg",
+                tags: ["Architecture", "Landmark"]
+            },
+            {
+                title: { en: "Malouf Music", ar: "موسيقى المالوف" },
+                description: {
+                    en: "An Andalusian classical music tradition that found its home in Constantine. It uses instruments like the oud, violin, and zither to create enchanting melodies.",
+                    ar: "تقليد موسيقي أندلسي كلاسيكي وجد موطنه في قسنطينة. يستخدم آلات مثل العود والكمان والقانون لخلق ألحان ساحرة."
+                },
+                image: "/images/culture/malouf.jpg",
+                tags: ["Music", "Art"]
+            },
+            {
+                title: { en: "Rose & Orange Water", ar: "تقطير ماء الزهر والورد" },
+                description: {
+                    en: "Every spring, families distill orange blossoms and roses (ras el qtar) to create fragrant waters used in desserts and traditional remedies.",
+                    ar: "في كل ربيع، تقوم العائلات بتقطير أزهار البرتقال والورد (رأس القطار) لصنع مياه عطرية تستخدم في الحلويات والعلاجات التقليدية."
+                },
+                image: "/images/culture/distillation.jpg",
+                tags: ["Heritage", "Craft"]
+            },
+            {
+                title: { en: "Constantinian Cuisine", ar: "المطبخ القسنطيني" },
+                description: {
+                    en: "Famous for 'Chakhchoukha' (torn flatbread with sauce), 'Trida', and the sweet honey-nut nougat called 'Djouzia'.",
+                    ar: "تشتهر بـ 'الشخشوخة' (رقائق العجين بالمرق)، 'التريدة'، وحلوى العسل والمكسرات التي تسمى 'الجوزية'."
+                },
+                image: "/images/culture/djouzia.jpg",
+                tags: ["Food", "Gastronomy"]
+            }
+        ],
         bestPlaces: [
             {
                 name: { en: "Sidi M'Cid Bridge", ar: "جسر سيدي مسيد المعلق" },
+                category: "Landmark",
                 image: "/images/wilayas/Constantine/sidi_mcid.jpg",
+                description: {
+                    en: "A stunning suspension bridge connecting the Kasbah to Sidi M'Cid. It offers vertiginous views of the gorge below.",
+                    ar: "جسر معلق مذهل يربط القصبة بسيدي مسيد. يوفر إطلالات عمودية مذهلة على الوادي بالأسفل."
+                },
                 locationUrl: "https://www.google.com/maps/place/36.37253,6.61434",
                 lat: 36.37253,
                 lng: 6.61434
             },
             {
+                name: { en: "Sidi Rached Viaduct", ar: "جسر سيدي راشد" },
+                category: "Architecture",
+                image: "/images/wilayas/Constantine/sidi_rached.jpg", // Assuming image exists or fallback
+                locationUrl: "https://www.google.com/maps/place/36.364,6.614",
+                lat: 36.364,
+                lng: 6.614
+            },
+            {
                 name: { en: "Palace of Ahmed Bey", ar: "قصر أحمد باي" },
+                category: "History",
                 image: "/images/wilayas/Constantine/ahmed_bey.jpg",
+                description: {
+                    en: "One of the finest examples of Ottoman architecture in the Maghreb, featuring lush gardens and intricate tile work.",
+                    ar: "واحد من أروع نماذج العمارة العثمانية في المغرب العربي، يتميز بحدائق غناء ونقوش زليج معقدة."
+                },
                 locationUrl: "https://www.google.com/maps/place/36.367654,6.611195",
                 lat: 36.367654,
                 lng: 6.611195
             },
             {
                 name: { en: "Emir Abdelkader Mosque", ar: "مسجد الأمير عبد القادر" },
+                category: "Culture",
                 image: "/images/wilayas/Constantine/emir_abdelkader.webp",
                 locationUrl: "https://www.google.com/maps/place/36.34667,6.60306",
                 lat: 36.34667,
@@ -213,17 +324,27 @@ export const wilayas: Wilaya[] = [
             },
             {
                 name: { en: "Monument to the Dead", ar: "نصب الأموات" },
+                category: "Landmark",
                 image: "/images/wilayas/Constantine/monument_dead.webp",
                 locationUrl: "https://www.google.com/maps/place/36.3751528,6.6134864",
                 lat: 36.3751528,
                 lng: 6.6134864
             },
+            {
+                name: { en: "Tiddis Roman Ruins", ar: "مدينة تيديس الأثرية" },
+                category: "History",
+                image: "/images/wilayas/Constantine/tiddis.jpg", // Assuming image exists
+                locationUrl: "https://www.google.com/maps/place/36.46,6.49",
+                lat: 36.46,
+                lng: 6.49
+            }
         ]
     },
     {
         code: 23,
         slug: "annaba",
         name: { en: "Annaba", ar: "عنابة" },
+        featured: true,
         image: "/images/wilayas/Annaba/hero.webp",
         tagline: { en: "The Jujube City", ar: "جوهرة الشرق" },
         description: {
@@ -275,6 +396,7 @@ export const wilayas: Wilaya[] = [
         code: 28,
         slug: "msila",
         name: { en: "M'sila", ar: "المسيلة" },
+        featured: true,
         image: "/images/wilayas/Msila/hero.webp",
         tagline: { en: "Capital of the Hodna", ar: "عاصمة الحضنة" },
         description: {
@@ -324,6 +446,7 @@ export const wilayas: Wilaya[] = [
         code: 7,
         slug: "biskra",
         name: { en: "Biskra", ar: "بسكرة" },
+        featured: true,
         image: "/images/wilayas/Biskra/hero.jpg",
         tagline: { en: "Queen of the Zibans", ar: "عروس الزيبان" },
         description: {
@@ -375,6 +498,7 @@ export const wilayas: Wilaya[] = [
         code: 11,
         slug: "tamanrasset",
         name: { en: "Tamanrasset", ar: "تمنراست" },
+        featured: true,
         image: "/images/wilayas/Tamanrasset/hero.jpg",
         tagline: { en: "The Capital of the Ahaggar", ar: "عاصمة الهقار" },
         description: {

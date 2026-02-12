@@ -234,7 +234,7 @@ async function seedContent() {
         console.log(`Processing: ${data.title}`);
 
         // 1. Check if user exists, if not Create one
-        let user = users.find(u => u.email === data.email);
+        const user = users.find(u => u.email === data.email);
         let ownerId = user?.id;
 
         if (!user) {

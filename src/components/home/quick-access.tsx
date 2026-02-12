@@ -17,14 +17,14 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const tiles = [
-    { icon: Map, label: "Tourist Spots", href: "/search?category=spots", color: "text-blue-500", bg: "bg-blue-500/10" },
-    { icon: Hotel, label: "Hotels", href: "/search?category=hotels", color: "text-indigo-500", bg: "bg-indigo-500/10" },
-    { icon: Utensils, label: "Restaurants", href: "/search/restaurants", color: "text-orange-500", bg: "bg-orange-500/10" },
-    { icon: User, label: "Guides", href: "/search?category=guides", color: "text-green-500", bg: "bg-green-500/10" },
-    { icon: Bus, label: "Trips", href: "/search?category=trips", color: "text-yellow-500", bg: "bg-yellow-500/10" },
-    { icon: Home, label: "Realty", href: "/search?category=realty", color: "text-purple-500", bg: "bg-purple-500/10" },
+    { icon: Map, label: "Tourist Spots", href: "/search?type=experience", color: "text-blue-500", bg: "bg-blue-500/10" },
+    { icon: Hotel, label: "Hotels", href: "/search?type=hotel", color: "text-indigo-500", bg: "bg-indigo-500/10" },
+    { icon: Utensils, label: "Restaurants", href: "/search?type=restaurant", color: "text-orange-500", bg: "bg-orange-500/10" },
+    { icon: User, label: "Guides", href: "/search?type=tour", color: "text-green-500", bg: "bg-green-500/10" },
+    { icon: Bus, label: "Trips", href: "/search?type=transport", color: "text-yellow-500", bg: "bg-yellow-500/10" },
+    { icon: Home, label: "Realty", href: "/search?type=guesthouse", color: "text-purple-500", bg: "bg-purple-500/10" },
     { icon: ShoppingBag, label: "Shop", href: "/shop", color: "text-pink-500", bg: "bg-pink-500/10" },
-    { icon: Car, label: "Transport", href: "/search?category=transport", color: "text-red-500", bg: "bg-red-500/10" },
+    { icon: Car, label: "Transport", href: "/search?type=transport", color: "text-red-500", bg: "bg-red-500/10" },
     { icon: Compass, label: "Map", href: "/map", color: "text-teal-500", bg: "bg-teal-500/10" },
     { icon: BookOpen, label: "Culture", href: "/explore", color: "text-amber-500", bg: "bg-amber-500/10" },
 ];

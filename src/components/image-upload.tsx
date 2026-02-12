@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Upload, X, Image as ImageIcon, Loader2, Star } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -120,23 +120,50 @@ export function ImageUpload({
 
     return (
         <div className={cn("space-y-4", className)}>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                {value.map((url) => (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {value.map((url, index) => (
                     <div
                         key={url}
-                        className="group relative aspect-square overflow-hidden rounded-lg border bg-muted"
+                        className={cn(
+                            "group relative aspect-square overflow-hidden rounded-lg border bg-muted transition-all",
+                            index === 0 && "ring-2 ring-brand ring-offset-2"
+                        )}
                     >
-                        <div className="absolute right-1 top-1 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+                        <div className="absolute right-1 top-1 z-10 opacity-0 transition-opacity group-hover:opacity-100 flex flex-col gap-1">
                             <Button
                                 type="button"
                                 onClick={() => onRemove(url)}
                                 variant="destructive"
                                 size="icon"
-                                className="h-6 w-6"
+                                className="h-6 w-6 shadow-sm"
                             >
                                 <X className="h-3 w-3" />
                             </Button>
+                            {index !== 0 && (
+                                <Button
+                                    type="button"
+                                    onClick={() => {
+                                        const newValue = [url, ...value.filter((u) => u !== url)];
+                                        onChange(newValue);
+                                    }}
+                                    variant="secondary"
+                                    size="icon"
+                                    className="h-6 w-6 shadow-sm bg-white/90 hover:bg-white"
+                                    title="Make Primary"
+                                >
+                                    <Star className="h-3 w-3 text-yellow-500" />
+                                </Button>
+                            )}
                         </div>
+
+                        {index === 0 && (
+                            <div className="absolute left-1 top-1 z-10">
+                                <span className="bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
+                                    Primary
+                                </span>
+                            </div>
+                        )}
+
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={url}

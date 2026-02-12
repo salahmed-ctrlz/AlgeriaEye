@@ -112,9 +112,19 @@ export default function MapPage() {
     }, [searchQuery, activeFilter, locations]);
 
     // Calculate center based on filtered locations or default to Algiers
-    const mapCenter: [number, number] = filteredLocations.length > 0
-        ? [filteredLocations[0].lat, filteredLocations[0].lng]
-        : [36.75, 3.05];
+    // BUT allow overriding if user clicks a card
+    const [viewCenter, setViewCenter] = useState<[number, number] | null>(null);
+
+    const mapCenter: [number, number] = viewCenter
+        ? viewCenter
+        : (filteredLocations.length > 0
+            ? [filteredLocations[0].lat, filteredLocations[0].lng]
+            : [36.75, 3.05]);
+
+    const handleLocationClick = (loc: MapLocation) => {
+        setViewCenter([loc.lat, loc.lng]);
+        setViewMode("map");
+    };
 
     return (
         <div className="flex flex-col h-[calc(100vh-4rem)]">
@@ -169,7 +179,7 @@ export default function MapPage() {
                         <MapFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
                     </div>
 
-                    <Map locations={filteredLocations} center={mapCenter} zoom={13} />
+                    <Map locations={filteredLocations} center={mapCenter} zoom={viewCenter ? 15 : 13} />
 
                     {/* Mobile Floating Filter for Map Mode */}
                     {viewMode === "map" && (
@@ -208,7 +218,11 @@ export default function MapPage() {
                         </div>
 
                         {filteredLocations.map((loc) => (
-                            <Card key={loc.id} className="cursor-pointer hover:shadow-md transition-shadow">
+                            <Card
+                                key={loc.id}
+                                className="cursor-pointer hover:shadow-md transition-shadow"
+                                onClick={() => handleLocationClick(loc)}
+                            >
                                 <CardContent className="p-0 flex flex-row">
                                     <div className="w-1/3 h-28 bg-muted relative">
                                         {loc.image ? (

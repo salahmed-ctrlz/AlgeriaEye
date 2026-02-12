@@ -23,7 +23,7 @@ export async function registerUser(data: RegisterFormData) {
     const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
     // Prepare metadata based on role
-    let metadata: any = {
+    const metadata: any = {
         full_name: role === 'tourist' ? formData.fullName : formData.businessName,
         role: role,
     };
