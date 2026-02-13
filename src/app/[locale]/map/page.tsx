@@ -10,6 +10,9 @@ import { MapFilters } from "@/components/map/MapFilters";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { createClient } from "@/lib/supabase/client";
+import { touristSpots } from "@/lib/data/tourist-spots";
+import { useSearchParams } from "next/navigation";
+
 import { wilayas } from "@/data/wilayas";
 import { useLocale } from "next-intl";
 
@@ -33,16 +36,26 @@ interface MapLocation {
     image?: string;
     price?: number;
     slug?: string; // for navigation
+    mapsUrl?: string; // External google maps link
 }
 
 export default function MapPage() {
     const t = useTranslations("common");
     const locale = useLocale();
     const isAr = locale === "ar";
+    const searchParams = useSearchParams();
+    const initialFilter = searchParams.get("filter") || "all";
+
     const [searchQuery, setSearchQuery] = useState("");
-    const [activeFilter, setActiveFilter] = useState("all");
+    const [activeFilter, setActiveFilter] = useState(initialFilter);
     const [viewMode, setViewMode] = useState<"map" | "list">("map");
     const [locations, setLocations] = useState<MapLocation[]>([]);
+
+    useEffect(() => {
+        if (initialFilter) {
+            setActiveFilter(initialFilter);
+        }
+    }, [initialFilter]);
 
     useEffect(() => {
         const fetchLocations = async () => {
@@ -72,7 +85,7 @@ export default function MapPage() {
                 });
             }
 
-            // 2. Fetch Attractions from Wilayas Data (Cultural & Nature)
+            // 2. Fetch Attractions from Wilayas Data (Cultural & Nature) - keeping this for backward compatibility if needed, or we can rely on the new touristSpots
             wilayas.forEach(w => {
                 if (w.bestPlaces) {
                     w.bestPlaces.forEach((p, idx) => {
@@ -96,11 +109,25 @@ export default function MapPage() {
                 }
             });
 
+            // 3. Add New Tourist Spots
+            touristSpots.forEach(spot => {
+                allLocations.push({
+                    id: spot.id,
+                    title: isAr ? spot.name.ar : (locale === 'fr' ? spot.name.fr : spot.name.en),
+                    lat: spot.location.lat,
+                    lng: spot.location.lng,
+                    type: spot.type,
+                    address: spot.city, // or wilaya
+                    image: spot.image,
+                    mapsUrl: spot.mapsUrl // Pass specific maps URL
+                });
+            });
+
             setLocations(allLocations);
         };
 
         fetchLocations();
-    }, [isAr]);
+    }, [isAr, locale]);
 
     const filteredLocations = useMemo(() => {
         return locations.filter((loc) => {

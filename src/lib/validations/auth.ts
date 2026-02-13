@@ -24,7 +24,7 @@ export const partnerSchema = z.object({
     ...emailPassword,
     businessName: z.string().min(2, "Business Name must be at least 2 characters"),
     role: z.literal("owner"),
-    businessType: z.enum(["hotel", "agency", "taxi", "guide", "restaurant"]),
+    businessType: z.enum(["hotel", "agency", "taxi", "guide", "restaurant", "landlord"]),
     wilaya: z.string().min(1, "Please select a wilaya"),
     phone: z.string().min(10, "Please enter a valid phone number").optional(),
 });

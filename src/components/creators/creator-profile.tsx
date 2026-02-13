@@ -33,16 +33,19 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
     ).length;
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
             {/* ── Hero ── */}
             <div className="relative w-full overflow-hidden">
                 {/* Layered background */}
-                <div className="absolute inset-0">
-                    {/* Base gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand/15 via-brand/5 to-purple-500/10" />
+                <div className="absolute inset-0 z-0">
+                    {/* Dark mode background - hidden in light mode */}
+                    <div className="absolute inset-0 bg-background dark:bg-black transition-colors duration-300" />
+
+                    {/* Base gradient - adjusted for better contrast in both modes */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-purple-500/10 dark:from-brand/15 dark:via-brand/5 dark:to-purple-500/10" />
 
                     {/* Blurred avatar as backdrop */}
-                    <div className="absolute inset-0 opacity-20">
+                    <div className="absolute inset-0 opacity-10 dark:opacity-20">
                         <Image
                             src={creator.avatar}
                             alt=""
@@ -53,17 +56,10 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                         />
                     </div>
 
-                    {/* Noise texture overlay */}
-                    <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-[0.03] mix-blend-overlay" />
-
                     {/* Gradient fade to background */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
                 </div>
-
-                {/* Decorative orbs */}
-                <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-brand/10 blur-[100px] pointer-events-none" />
-                <div className="absolute -bottom-10 -left-20 h-60 w-60 rounded-full bg-purple-500/10 blur-[80px] pointer-events-none" />
 
                 {/* Content */}
                 <div className="container mx-auto px-4 md:px-8 relative z-10 pt-24 pb-16 md:pt-32 md:pb-20">
@@ -73,7 +69,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                             {/* Glow ring */}
                             <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-brand/50 via-purple-500/30 to-brand/50 opacity-60 blur-sm group-hover:opacity-80 transition-opacity duration-500" />
 
-                            <div className="relative h-28 w-28 md:h-36 md:w-36 rounded-full border-[3px] border-background/80 overflow-hidden shadow-2xl">
+                            <div className="relative h-28 w-28 md:h-36 md:w-36 rounded-full border-[3px] border-background overflow-hidden shadow-2xl">
                                 <Image
                                     src={creator.avatar}
                                     alt={creator.name}
@@ -91,7 +87,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                         {/* Name + Verified + Handle */}
                         <div className="space-y-2">
                             <div className="flex items-center justify-center gap-2.5">
-                                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
                                     {creator.name}
                                 </h1>
                                 <BadgeCheck className="h-7 w-7 md:h-8 md:w-8 text-brand fill-brand/20 shrink-0" />
@@ -112,46 +108,46 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                             </div>
                         </div>
 
-                        {/* Bio (if available) */}
+                        {/* Bio (if available) - Safe Access */}
                         {creator.bio && (
                             <p className="text-muted-foreground text-base md:text-lg max-w-lg leading-relaxed">
                                 {typeof creator.bio === "string"
                                     ? creator.bio
-                                    : creator.bio[locale] || creator.bio.en}
+                                    : (creator.bio?.[locale] || creator.bio?.en || "")}
                             </p>
                         )}
 
                         {/* Stats row */}
                         <div className="flex items-center gap-1">
                             {/* Glass stat cards */}
-                            <div className="flex items-center gap-3 px-5 py-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl">
+                            <div className="flex items-center gap-3 px-5 py-3 rounded-2xl border border-border/50 bg-background/50 backdrop-blur-xl shadow-sm dark:bg-white/[0.03] dark:border-white/[0.06]">
                                 <div className="flex items-center gap-2">
                                     <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-brand/10">
                                         <Grid3X3 className="h-4 w-4 text-brand" />
                                     </div>
                                     <div className="text-left">
-                                        <p className="text-lg font-bold text-white leading-none">
-                                            {creator.content.length}
+                                        <p className="text-lg font-bold text-foreground leading-none">
+                                            {creator.content?.length || 0}
                                         </p>
-                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground/50 font-medium">
+                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium">
                                             Posts
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="h-8 w-px bg-white/[0.06]" />
+                                <div className="h-8 w-px bg-border/50 dark:bg-white/[0.06]" />
 
                                 {instagramCount > 0 && (
                                     <>
                                         <div className="flex items-center gap-2">
                                             <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-pink-500/10">
-                                                <Instagram className="h-4 w-4 text-pink-400" />
+                                                <Instagram className="h-4 w-4 text-pink-500" />
                                             </div>
                                             <div className="text-left">
-                                                <p className="text-lg font-bold text-white leading-none">
+                                                <p className="text-lg font-bold text-foreground leading-none">
                                                     {instagramCount}
                                                 </p>
-                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground/50 font-medium">
+                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium">
                                                     Reels
                                                 </p>
                                             </div>
@@ -161,16 +157,16 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
 
                                 {youtubeCount > 0 && (
                                     <>
-                                        <div className="h-8 w-px bg-white/[0.06]" />
+                                        <div className="h-8 w-px bg-border/50 dark:bg-white/[0.06]" />
                                         <div className="flex items-center gap-2">
                                             <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-red-500/10">
-                                                <Youtube className="h-4 w-4 text-red-400" />
+                                                <Youtube className="h-4 w-4 text-red-500" />
                                             </div>
                                             <div className="text-left">
-                                                <p className="text-lg font-bold text-white leading-none">
+                                                <p className="text-lg font-bold text-foreground leading-none">
                                                     {youtubeCount}
                                                 </p>
-                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground/50 font-medium">
+                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium">
                                                     Videos
                                                 </p>
                                             </div>
@@ -187,7 +183,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <Button className="rounded-full px-6 gap-2 bg-gradient-to-r from-brand to-purple-500 hover:from-brand/90 hover:to-purple-500/90 border-0 shadow-lg shadow-brand/20 transition-all duration-300 hover:shadow-xl hover:shadow-brand/30 hover:scale-[1.02]">
+                                <Button className="rounded-full px-6 gap-2 bg-gradient-to-r from-brand to-purple-500 hover:from-brand/90 hover:to-purple-500/90 text-white border-0 shadow-lg shadow-brand/20 transition-all duration-300 hover:shadow-xl hover:shadow-brand/30 hover:scale-[1.02]">
                                     <Instagram className="h-4 w-4" />
                                     Follow on Instagram
                                 </Button>
@@ -206,7 +202,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                             <Sparkles className="h-5 w-5 text-brand" />
                         </div>
                         <div>
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight">
+                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
                                 Latest Content
                             </h2>
                             <p className="text-sm text-muted-foreground/60">
@@ -219,14 +215,14 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                     <div className="flex items-center gap-2">
                         <Badge
                             variant="outline"
-                            className="border-white/[0.08] bg-white/[0.03] backdrop-blur-sm px-3 py-1.5 cursor-pointer hover:bg-white/[0.06] transition-colors"
+                            className="border-border bg-background hover:bg-muted text-foreground px-3 py-1.5 cursor-pointer transition-colors"
                         >
-                            All ({creator.content.length})
+                            All ({creator.content?.length || 0})
                         </Badge>
                         {instagramCount > 0 && (
                             <Badge
                                 variant="outline"
-                                className="border-pink-500/20 bg-pink-500/5 text-pink-400 px-3 py-1.5 cursor-pointer hover:bg-pink-500/10 transition-colors"
+                                className="border-pink-500/20 bg-pink-500/5 text-pink-500 px-3 py-1.5 cursor-pointer hover:bg-pink-500/10 transition-colors"
                             >
                                 <Instagram className="h-3 w-3 mr-1" />
                                 Reels ({instagramCount})
@@ -235,7 +231,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                         {youtubeCount > 0 && (
                             <Badge
                                 variant="outline"
-                                className="border-red-500/20 bg-red-500/5 text-red-400 px-3 py-1.5 cursor-pointer hover:bg-red-500/10 transition-colors"
+                                className="border-red-500/20 bg-red-500/5 text-red-500 px-3 py-1.5 cursor-pointer hover:bg-red-500/10 transition-colors"
                             >
                                 <Youtube className="h-3 w-3 mr-1" />
                                 Videos ({youtubeCount})
@@ -246,23 +242,23 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
 
                 {/* Masonry grid with glass cards */}
                 <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
-                    {creator.content.map((item, index) => (
+                    {creator.content?.map((item, index) => (
                         <div key={item.id} className="break-inside-avoid">
                             {/* Glass card wrapper */}
                             <div
                                 className={[
                                     "group relative rounded-2xl overflow-hidden",
-                                    "border border-white/[0.06]",
-                                    "bg-white/[0.02] backdrop-blur-xl",
-                                    "shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_4px_24px_-4px_rgba(0,0,0,0.25)]",
-                                    "hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_32px_-4px_rgba(0,0,0,0.35)]",
-                                    "hover:border-white/[0.1]",
-                                    "hover:bg-white/[0.04]",
+                                    "border border-border/40 dark:border-white/[0.06]",
+                                    "bg-card dark:bg-white/[0.02] backdrop-blur-xl",
+                                    "shadow-sm dark:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_4px_24px_-4px_rgba(0,0,0,0.25)]",
+                                    "hover:shadow-md dark:hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_32px_-4px_rgba(0,0,0,0.35)]",
+                                    "hover:border-primary/20 dark:hover:border-white/[0.1]",
+                                    "hover:bg-muted/50 dark:hover:bg-white/[0.04]",
                                     "transition-all duration-500 ease-out",
                                 ].join(" ")}
                             >
                                 {/* Top highlight */}
-                                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent z-10" />
+                                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/5 dark:via-white/[0.08] to-transparent z-10" />
 
                                 {/* Hover glow */}
                                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-brand/[0.03] via-transparent to-transparent pointer-events-none z-10" />
@@ -270,22 +266,22 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                                 {/* Content */}
                                 <div className="relative p-2.5 pb-3">
                                     {item.type === "instagram" ? (
-                                        <div className="rounded-xl overflow-hidden ring-1 ring-white/[0.04]">
+                                        <div className="rounded-xl overflow-hidden ring-1 ring-border/50 dark:ring-white/[0.04]">
                                             <InstagramEmbed
                                                 url={item.url}
                                                 captioned={false}
                                             />
                                         </div>
                                     ) : (
-                                        <div className="aspect-video bg-black/20 rounded-xl flex items-center justify-center ring-1 ring-white/[0.04]">
-                                            <Youtube className="h-8 w-8 text-red-400/40" />
+                                        <div className="aspect-video bg-muted rounded-xl flex items-center justify-center ring-1 ring-border/50 dark:ring-white/[0.04]">
+                                            <Youtube className="h-8 w-8 text-red-500/40" />
                                         </div>
                                     )}
 
                                     {/* Card footer */}
                                     <div className="flex items-center justify-between mt-2.5 px-1.5">
                                         <div className="flex items-center gap-2">
-                                            <div className="relative h-6 w-6 rounded-full overflow-hidden ring-1 ring-white/[0.08]">
+                                            <div className="relative h-6 w-6 rounded-full overflow-hidden ring-1 ring-border dark:ring-white/[0.08]">
                                                 <Image
                                                     src={creator.avatar}
                                                     alt=""
@@ -295,7 +291,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                                                 />
                                             </div>
                                             <div className="flex items-center gap-1">
-                                                <span className="text-xs font-medium text-muted-foreground/70">
+                                                <span className="text-xs font-medium text-muted-foreground">
                                                     @{creator.slug}
                                                 </span>
                                                 <BadgeCheck className="h-3 w-3 text-brand/60 fill-brand/10" />
@@ -304,13 +300,13 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
 
                                         <div className="flex items-center gap-2">
                                             {item.type === "instagram" ? (
-                                                <Instagram className="h-3 w-3 text-pink-400/40" />
+                                                <Instagram className="h-3 w-3 text-pink-500/40" />
                                             ) : (
-                                                <Youtube className="h-3 w-3 text-red-400/40" />
+                                                <Youtube className="h-3 w-3 text-red-500/40" />
                                             )}
-                                            <span className="text-[10px] text-muted-foreground/30 font-mono tracking-wider">
+                                            <span className="text-[10px] text-muted-foreground/50 font-mono tracking-wider">
                                                 {String(index + 1).padStart(2, "0")}/
-                                                {String(creator.content.length).padStart(2, "0")}
+                                                {String(creator.content?.length || 0).padStart(2, "0")}
                                             </span>
                                         </div>
                                     </div>
@@ -322,12 +318,12 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
 
                 {/* Bottom CTA */}
                 <div className="flex justify-center mt-16">
-                    <div className="flex flex-col items-center gap-4 p-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-xl max-w-md w-full text-center">
+                    <div className="flex flex-col items-center gap-4 p-8 rounded-2xl border border-border/50 bg-card/50 dark:border-white/[0.06] dark:bg-white/[0.02] backdrop-blur-xl max-w-md w-full text-center">
                         <div className="flex items-center justify-center h-12 w-12 rounded-full bg-brand/10">
                             <Heart className="h-5 w-5 text-brand" />
                         </div>
                         <div>
-                            <p className="font-semibold text-white mb-1">
+                            <p className="font-semibold text-foreground mb-1">
                                 Enjoy {creator.name}&apos;s content?
                             </p>
                             <p className="text-sm text-muted-foreground/60">
@@ -341,7 +337,7 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                         >
                             <Button
                                 variant="outline"
-                                className="rounded-full px-6 gap-2 border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-sm"
+                                className="rounded-full px-6 gap-2 border-border dark:border-white/[0.08] bg-background dark:bg-white/[0.03] hover:bg-muted dark:hover:bg-white/[0.08] backdrop-blur-sm"
                             >
                                 <Instagram className="h-4 w-4" />
                                 Follow @{creator.slug}

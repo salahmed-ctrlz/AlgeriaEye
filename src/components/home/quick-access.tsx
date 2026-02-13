@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
 const tiles = [
-    { icon: Map, label: "Tourist Spots", href: "/search/activities", color: "text-blue-500", bg: "bg-blue-500/10" },
+    { icon: Map, label: "Tourist Spots", href: "/map?filter=nature", color: "text-blue-500", bg: "bg-blue-500/10" },
     { icon: Hotel, label: "Hotels", href: "/search/hotels", color: "text-indigo-500", bg: "bg-indigo-500/10" },
     { icon: Utensils, label: "Restaurants", href: "/search/restaurants", color: "text-orange-500", bg: "bg-orange-500/10" },
     { icon: User, label: "Guides", href: "/search/tours", color: "text-green-500", bg: "bg-green-500/10" },
@@ -35,18 +35,18 @@ export function QuickAccessGrid() {
     return (
         <section className="px-4 md:px-8">
             <div className="mx-auto max-w-5xl">
-                <Card className="p-8 shadow-sm border-border/40 bg-card/60 backdrop-blur-sm">
-                    <h2 className="mb-8 text-xl font-medium text-center text-muted-foreground/80">{t("quickAccess")}</h2>
+                <Card className="p-8 shadow-xl border-white/20 bg-white/10 backdrop-blur-md">
+                    <h2 className="mb-8 text-xl font-medium text-center text-foreground/90">{t("quickAccess")}</h2>
                     <div className="flex flex-wrap justify-center gap-x-10 gap-y-8">
                         {tiles.map((tile) => (
                             <Link key={tile.label} href={tile.href} className="group flex flex-col items-center gap-3">
                                 <div className={cn(
-                                    "flex h-14 w-14 items-center justify-center rounded-2xl bg-muted/50 transition-all duration-300 group-hover:bg-primary/10 group-hover:scale-110 group-hover:-translate-y-1",
-                                    "border border-border/40 shadow-sm"
+                                    "flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 group-hover:-translate-y-1",
+                                    "border border-white/10 shadow-lg"
                                 )}>
-                                    <tile.icon className="h-6 w-6 text-muted-foreground/70 group-hover:text-primary transition-colors duration-300" />
+                                    <tile.icon className="h-6 w-6 text-foreground/80 group-hover:text-primary transition-colors duration-300" />
                                 </div>
-                                <span className="text-xs font-medium text-muted-foreground/80 group-hover:text-foreground text-center transition-colors duration-300">
+                                <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground text-center transition-colors duration-300">
                                     {tile.label}
                                 </span>
                             </Link>

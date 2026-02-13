@@ -13,6 +13,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { creators } from "@/data/creators";
 import { InstagramEmbed } from "@/components/creators/instagram-embed";
+import { touristSpots } from "@/lib/data/tourist-spots";
 
 // Force dynamic rendering — cookies() conflicts with generateStaticParams on Netlify
 export const dynamic = "force-dynamic";
@@ -106,7 +107,7 @@ export default async function WilayaPage({ params }: Props) {
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 space-y-24">
 
                 {/* 2. Best Places to Visit */}
-                {bestPlaces && bestPlaces.length > 0 && (
+                {(bestPlaces && bestPlaces.length > 0) && (
                     <section className="animate-fade-in-up">
                         <div className="flex items-center gap-3 mb-10 border-b border-border/40 pb-4">
                             <Camera className="h-8 w-8 text-brand" />
@@ -124,6 +125,62 @@ export default async function WilayaPage({ params }: Props) {
                         </div>
                     </section>
                 )}
+
+                {/* 2.5. Natural Touristic Spots (New Section) */}
+                {(() => {
+                    const spots = touristSpots.filter(s => s.wilaya === slug);
+                    if (spots.length === 0) return null;
+
+                    return (
+                        <section className="animate-fade-in-up">
+                            <div className="flex items-center gap-3 mb-10 border-b border-border/40 pb-4">
+                                <MapPin className="h-8 w-8 text-green-600" />
+                                <h2 className="text-3xl font-bold tracking-tight">
+                                    {locale === 'ar' ? 'المواقع السياحية الطبيعية' : (locale === 'fr' ? 'Sites Touristiques Naturels' : 'Natural Touristic Spots')}
+                                </h2>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {spots.map((spot, index) => (
+                                    <div key={spot.id} className="group relative overflow-hidden rounded-3xl bg-background border border-border/50 shadow-sm hover:shadow-md transition-all flex flex-col h-full animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+                                        <div className="relative h-64 w-full overflow-hidden">
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img
+                                                src={spot.image}
+                                                alt={locale === 'ar' ? spot.name.ar : (locale === 'fr' ? spot.name.fr : spot.name.en)}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+                                            <div className="absolute top-4 right-4 bg-background/90 text-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm backdrop-blur-sm">
+                                                {spot.type}
+                                            </div>
+                                            <div className="absolute bottom-4 left-4 right-4 text-white">
+                                                <h3 className="text-xl font-bold leading-tight mb-1">
+                                                    {locale === 'ar' ? spot.name.ar : (locale === 'fr' ? spot.name.fr : spot.name.en)}
+                                                </h3>
+                                                <p className="text-white/80 text-sm flex items-center gap-1">
+                                                    <MapPin className="h-3 w-3" />
+                                                    {spot.city}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="p-6 flex-1 flex flex-col justify-end bg-card">
+                                            <Button
+                                                variant="default"
+                                                className="w-full gap-2 border-primary/20 hover:bg-primary/90"
+                                                asChild
+                                            >
+                                                <a href={spot.mapsUrl || `https://www.google.com/maps/dir/?api=1&destination=${spot.location.lat},${spot.location.lng}`} target="_blank" rel="noopener noreferrer">
+                                                    <MapPin className="h-4 w-4" />
+                                                    {locale === 'ar' ? 'عرض على الخريطة' : (locale === 'fr' ? 'Voir sur la carte' : 'View on Map')}
+                                                </a>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    );
+                })()}
 
                 {/* 3. Restaurants */}
                 <section id="restaurants" className="animate-fade-in-up">

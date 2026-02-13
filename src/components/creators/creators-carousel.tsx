@@ -105,7 +105,7 @@ export function CreatorsCarousel() {
                             </Button>
                         </div>
                         <div className="h-8 w-px bg-white/[0.06]" />
-                        <Link href={`/creators/${featuredCreator.slug}`}>
+                        <Link href="/creators">
                             <Button
                                 variant="ghost"
                                 className="group text-sm font-medium hover:bg-white/[0.05]"

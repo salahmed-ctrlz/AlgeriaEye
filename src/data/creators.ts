@@ -22,8 +22,14 @@ export interface Creator {
         youtube?: string;
         tiktok?: string;
         facebook?: string;
+        website?: string;
     };
     content: Content[];
+    stats: {
+        followers: string;
+        following?: string;
+        posts?: number;
+    };
 }
 
 export const creators: Creator[] = [
@@ -40,6 +46,9 @@ export const creators: Creator[] = [
         socials: {
             instagram: 'https://www.instagram.com/khoubai',
             youtube: 'https://www.youtube.com/@KhoubaibKouas'
+        },
+        stats: {
+            followers: "1.8M"
         },
         content: [
             {

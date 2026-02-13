@@ -54,10 +54,10 @@ export default function ExploreLayout({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl tracking-tight">
+                        <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/90 mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tighter">
                             {t("title")}
                         </h1>
-                        <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-md">
+                        <p className="text-2xl md:text-3xl text-white max-w-3xl mx-auto font-bold leading-relaxed drop-shadow-lg">
                             {t("subtitle")}
                         </p>
                     </motion.div>

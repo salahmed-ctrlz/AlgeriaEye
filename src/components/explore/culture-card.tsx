@@ -373,6 +373,16 @@ export function CultureCard({
 
                                 <div className="space-y-4">
                                     <h3 className={cn("text-xl font-medium border-emerald-500 pl-4", isAr ? "border-r-2 pr-4 pl-0" : "border-l-2 pl-4")}>
+                                        {isAr ? "الوصف" : (isFr ? "Description" : "Description")}
+                                    </h3>
+                                    <div
+                                        className="text-gray-300 leading-relaxed font-light text-lg [&_a]:text-emerald-400 [&_a]:underline [&_a]:decoration-emerald-400/30 [&_a:hover]:text-emerald-300 [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mb-2"
+                                        dangerouslySetInnerHTML={{ __html: description }}
+                                    />
+                                </div>
+
+                                <div className="space-y-4">
+                                    <h3 className={cn("text-xl font-medium border-emerald-500 pl-4", isAr ? "border-r-2 pr-4 pl-0" : "border-l-2 pl-4")}>
                                         {isAr ? "التاريخ والسياق" : (isFr ? "Histoire & Contexte" : "History & Context")}
                                     </h3>
                                     <p className="text-gray-300 leading-relaxed font-light text-lg">
@@ -434,9 +444,10 @@ export function CultureCard({
                                 </h4>
                                 <h3 className="mb-2 text-2xl font-bold">{title}</h3>
                             </div>
-                            <p className="text-gray-200 leading-relaxed text-sm line-clamp-2">
-                                {description}
-                            </p>
+                            <div
+                                className="text-gray-200 leading-relaxed text-sm line-clamp-2 [&_ul]:list-disc [&_ul]:pl-4"
+                                dangerouslySetInnerHTML={{ __html: description }}
+                            />
                         </div>
                     </div>
                 )}

@@ -27,6 +27,7 @@ interface Location {
     type: string;
     image?: string;
     address?: string;
+    mapsUrl?: string; // External google maps link
 }
 
 interface MapProps {
@@ -37,6 +38,7 @@ interface MapProps {
 
 function LocationMarker({ location }: { location: Location }) {
     const locale = useLocale();
+    const isTouristSpot = location.id.startsWith("spot-");
 
     return (
         <Marker position={[location.lat, location.lng]}>
@@ -53,12 +55,21 @@ function LocationMarker({ location }: { location: Location }) {
                     <h3 className="font-semibold text-base mb-1">{location.title}</h3>
                     <p className="text-xs text-muted-foreground mb-2">{location.address}</p>
                     <div className="flex gap-2">
-                        <Link href={`/${locale}/listing/${location.id}`} className="flex-1">
-                            <Button size="sm" className="w-full">View Details</Button>
-                        </Link>
-                        <Button size="sm" variant="outline" onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`)}>
-                            <Navigation className="h-3 w-3" />
-                        </Button>
+                        {isTouristSpot || location.mapsUrl ? (
+                            <Button size="sm" className="w-full flex items-center gap-2" onClick={() => window.open(location.mapsUrl || `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`)}>
+                                <Navigation className="h-3 w-3" />
+                                {location.mapsUrl ? "View in Maps" : "Get Directions"}
+                            </Button>
+                        ) : (
+                            <>
+                                <Link href={`/${locale}/listing/${location.id}`} className="flex-1">
+                                    <Button size="sm" className="w-full">View Details</Button>
+                                </Link>
+                                <Button size="sm" variant="outline" onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`)}>
+                                    <Navigation className="h-3 w-3" />
+                                </Button>
+                            </>
+                        )}
                     </div>
                 </div>
             </Popup>

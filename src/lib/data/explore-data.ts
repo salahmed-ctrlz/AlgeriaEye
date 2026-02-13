@@ -112,6 +112,33 @@ export const CULTURE_ITEMS: ExploreItem[] = [
             gallery: ["/images/explore/tea-1.jpg", "/images/explore/tea-2.jpg", "/images/explore/tea-3.jpg"],
         },
     },
+    {
+        id: "algernian-music",
+        category: "culture",
+        title: "Algerian Music",
+        title_ar: "الموسيقى الجزائرية",
+        title_fr: "Musique Algérienne",
+        subtitle: "The Soul of Algeria",
+        subtitle_ar: "روح الجزائر",
+        subtitle_fr: "L'Âme de l'Algérie",
+        image: "/images/explore/chaabi.jpg",
+        region: "Nationwide",
+        region_ar: "وطني",
+        region_fr: "National",
+        description: "A blend of Berber, Arab, French, and Mediterranean influences, Algerian culture is rich in music, literature, and hospitality.",
+        description_ar: "مزيج من التأثيرات الأمازيغية، العربية، الفرنسية، والمتوسطية. الثقافة الجزائرية غنية بالموسيقى، الأدب، وكرم الضيافة.",
+        description_fr: "Un mélange d'influences berbères, arabes, françaises et méditerranéennes. La culture algérienne est riche en musique, littérature et hospitalité.",
+        history: "Algeria's diverse musical landscape features genres like Raï and Chaabi, each with unique origins and cultural significance.",
+        history_ar: "يتميز المشهد الموسيقي الجزائري المتنوع بأنواع مثل الراي والشعبي، لكل منها أصول وأهمية ثقافية فريدة.",
+        history_fr: "Le paysage musical diversifié de l'Algérie présente des genres comme le Raï et le Chaâbi, chacun avec des origines et une signification culturelle uniques.",
+        locations: ["Algiers", "Oran", "Tlemcen", "Constantine"],
+        locations_ar: ["الجزائر العاصمة", "وهران", "تلمسان", "قسنطينة"],
+        locations_fr: ["Alger", "Oran", "Tlemcen", "Constantine"],
+        media: {
+            videoUrl: "https://www.youtube.com/embed/X04nBjVRCPE",
+            gallery: ["/images/explore/chaabi-1.jpg", "/images/explore/rai-1.jpg", "/images/explore/chaabi.jpg"],
+        },
+    },
 
 ];
 
@@ -254,10 +281,24 @@ export const FOOD_ITEMS: ExploreItem[] = [
         region: "Nationwide",
         region_ar: "وطني",
         region_fr: "National",
-        description: "Couscous, Chakhchoukha, Rechta, Bourak, Doubara, Hmis, Mhajeb, Samsa & Zfiti — the rich and diverse savory dishes that define Algerian identity.",
-        description_ar: "كسكس، شخشوخة، رشتة، بوراك، دوبارة، حميس، محاجب، سامسا و زفيتي — الأطباق المالحة الغنية والمتنوعة التي تحدد الهوية الجزائرية.",
+        description: `
+             <ul class="list-disc pl-5 space-y-1 text-white">
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Couscous" target="_blank">Couscous</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Chakhchoukha" target="_blank">Chakhchoukha</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Rechta" target="_blank">Rechta</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Brik_(food)" target="_blank">Bourak</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Mhajeb" target="_blank">Mhajeb</a></strong></li>
+            </ul>
+        `,
+        description_ar: `
+             <ul class="list-disc pl-5 space-y-1 text-white">
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D9%83%D8%B3%D9%83%D8%B3" target="_blank">كسكس</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%B4%D8%AE%D8%B4%D9%88%D8%AE%D8%A9" target="_blank">شخشوخة</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%B1%D8%B4%D8%AA%D8%A9" target="_blank">رشتة</a></strong></li>
+            </ul>
+        `,
         description_fr: "Couscous, Chakhchoukha, Rechta, Bourak, Doubara, Hmis, Mhajeb, Samsa & Zfiti — les plats salés riches et diversifiés qui définissent l'identité algérienne.",
-        history: "Algerian savory cuisine is a tapestry of Berber, Ottoman, Andalusian, and French influences. Couscous, recognized by UNESCO as intangible world heritage, is the heartbeat — steamed semolina served with rich stews that vary by region. Chakhchoukha, the shepherd's dish from the Aurès, features torn flatbread soaked in spicy tomato sauce. Rechta — thin hand-rolled noodles — graces every Mawlid celebration. Bourak, crispy stuffed pastries, open every Ramadan iftar. Doubara, the chickpea soup of Biskra, and Hmis, the roasted pepper salad, are beloved staples across the country.",
+        history: "Algerian savory cuisine is a tapestry of Berber, Ottoman, Andalusian, and French influences.",
         history_ar: "المطبخ الجزائري المالح نسيج من التأثيرات الأمازيغية والعثمانية والأندلسية والفرنسية. الكسكس، المعترف به من قبل اليونسكو كتراث عالمي غير مادي، هو النبض — سميد مطهو بالبخار يقدم مع مرق غني يختلف حسب المنطقة. الشخشوخة، طبق الرعاة من الأوراس، تتكون من قطع خبز مسطح ممزقة منقوعة في صلصة طماطم حارة. الرشتة — نودلز رقيقة ملفوفة باليد — تزين كل احتفال بالمولد النبوي. البوراك، معجنات مقرمشة محشوة، تفتح كل إفطار رمضاني. الدوبارة، حساء الحمص في بسكرة، والحميس، سلطة الفلفل المشوي، هي أطباق أساسية محبوبة في جميع أنحاء البلاد.",
         history_fr: "La cuisine salée algérienne est une tapisserie d'influences berbères, ottomanes, andalouses et françaises. Le couscous, reconnu par l'UNESCO comme patrimoine mondial immatériel, en est le cœur — semoule cuite à la vapeur servie avec des ragoûts riches qui varient selon les régions. La Chakhchoukha, le plat du berger des Aurès, comprend du pain plat déchiré trempé dans une sauce tomate épicée. La Rechta — nouilles fines roulées à la main — orne chaque célébration du Mawlid. Le Bourak, pâtisseries farcies croustillantes, ouvre chaque iftar du Ramadan. La Doubara, la soupe de pois chiches de Biskra, et le Hmis, la salade de poivrons grillés, sont des incontournables aimés dans tout le pays.",
         locations: ["Algiers", "Constantine", "Biskra", "Tizi Ouzou"],
@@ -291,8 +332,24 @@ export const FOOD_ITEMS: ExploreItem[] = [
         region: "Nationwide",
         region_ar: "وطني",
         region_fr: "National",
-        description: "Kalb El Louz, Baklawa, Tamina, Baghrir & Braj — syrup-soaked semolina cakes, layered pastries, and honey-drenched crepes that sweeten every celebration.",
-        description_ar: "قلب اللوز، بقلاوة، طمينة، بغرير و براج — كعك السميد المنقوع بالشراب، معجنات متعددة الطبقات، و كريب بالعسل تحلي كل احتفال.",
+        description: `
+             <ul class="list-disc pl-5 space-y-1 text-white">
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Kalb_el_louz" target="_blank">Kalb El Louz</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Baklava" target="_blank">Baklawa</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Tamina" target="_blank">Tamina</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Baghrir" target="_blank">Baghrir</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Bradj" target="_blank">Braj</a></strong></li>
+            </ul>
+        `,
+        description_ar: `
+             <ul class="list-disc pl-5 space-y-1 text-white">
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D9%82%D9%84%D8%A8_%D8%A7%D9%84%D9%84%D9%88%D8%B2" target="_blank">قلب اللوز</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%A8%D9%82%D9%84%D8%A7%D9%88%D8%A9" target="_blank">بقلاوة</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%B7%D9%85%D9%8a%D9%86%D8%A9" target="_blank">طمينة</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%A8%D8%BA%D8%B1%D9%8A%D8%B1" target="_blank">بغرير</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%A8%D8%B1%D8%A7%D8%AC" target="_blank">براج</a></strong></li>
+            </ul>
+        `,
         description_fr: "Kalb El Louz, Baklawa, Tamina, Baghrir & Braj — gâteaux de semoule imbibés de sirop, pâtisseries étagées et crêpes arrosées de miel qui adoucissent chaque célébration.",
         history: "Algerian sweets are legendary across the Mediterranean. Kalb El Louz — 'Heart of Almonds' — is a dense semolina cake soaked in syrup, essential during Ramadan. Baklawa, layers of thin phyllo dough filled with almonds and bathed in honey, reflects Ottoman heritage. Tamina, a roasted semolina and honey paste, is prepared to celebrate newborns. Baghrir, the 'thousand-hole crepe', is drizzled with butter and honey for breakfast. Braj, date-filled cookies, are a Saharan specialty shared with coffee.",
         history_ar: "الحلويات الجزائرية أسطورية في جميع أنحاء البحر الأبيض المتوسط. قلب اللوز — كعكة سميد كثيفة غارقة في الشراب، ضرورية خلال رمضان. البقلاوة، طبقات من عجينة فيلو الرقيقة محشوة باللوز ومغمورة بالعسل، تعكس التراث العثماني. الطمينة، عجينة السميد المحمص والعسل، تحضر للاحتفال بالمواليد الجدد. البغرير، 'كريب الألف ثقب'، يُرش بالزبدة والعسل لوجبة الإفطار. البراج، كعك محشو بالتمر، تخصص صحراوي يُشارك مع القهوة.",
@@ -323,8 +380,20 @@ export const FOOD_ITEMS: ExploreItem[] = [
         region: "Nationwide",
         region_ar: "وطني",
         region_fr: "National",
-        description: "Karantika, Mhajeb, Pizza Carrée — the sizzling, fast, and flavorful bites that fuel Algeria's bustling streets and markets.",
-        description_ar: "كرانتيكا، محاجب، بيتزا كاري — اللقمات الساخنة والسريعة واللذيذة التي تغذي شوارع وأسواق الجزائر المزدحمة.",
+        description: `
+             <ul class="list-disc pl-5 space-y-1 text-white">
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Karantika" target="_blank">Karantika</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Mhajeb" target="_blank">Mhajeb</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Pizza_carr%C3%A9e" target="_blank">Pizza Carrée</a></strong></li>
+            </ul>
+        `,
+        description_ar: `
+             <ul class="list-disc pl-5 space-y-1 text-white">
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D9%83%D8%B1%D9%86%D8%AA%D9%8A%D9%83%D8%A7" target="_blank">كرانتيكا</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D9%85%D8%AD%D8%A7%D8%AC%D8%A8" target="_blank">محاجب</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors">بيتزا كاري</strong></li>
+            </ul>
+        `,
         description_fr: "Karantika, Mhajeb, Pizza Carrée — les bouchées grésillantes, rapides et savoureuses qui alimentent les rues et les marchés animés d'Algérie.",
         history: "Algerian street food is an institution. Karantika (Garantita), a baked chickpea flour custard seasoned with cumin and served with harissa, is the undisputed king — originally from Oran, it has conquered the entire country. Mhajeb, flaky hand-stretched flatbreads stuffed with spicy tomato-onion filling (Chekchouka), require incredible skill to make paper-thin dough. Pizza Carrée, Algeria's unique square pizza sold by the slice, is a Franco-Algerian fusion found on every corner. These are the flavors of daily Algerian life.",
         history_ar: "أكل الشوارع الجزائري مؤسسة قائمة بذاتها. الكرانتيكا (قرنتيطة)، كاسترد دقيق الحمص المخبوز بالكمون ويقدم مع الهريسة، هي الملك بلا منازع — نشأت في وهران وغزت البلاد بأكملها. المحاجب، خبز مسطح مقرمش معجون يدويًا ومحشو بحشوة طماطم وبصل حارة (شكشوكة)، تتطلب مهارة مذهلة لصنع عجين رقيق كالورق. بيتزا كاري، بيتزا الجزائر المربعة الفريدة التي تباع بالشريحة، هي اندماج فرنسي-جزائري موجود في كل زاوية. هذه هي نكهات الحياة الجزائرية اليومية.",
@@ -472,6 +541,74 @@ export const CLOTHING_ITEMS: ExploreItem[] = [
                 "/images/explore/hayk-3.jpg",
                 "/images/explore/hayk-4.jpg",
                 "/images/explore/hayk-5.jpg",
+            ],
+        },
+    },
+    {
+        id: "kaftan",
+        category: "clothing",
+        title: "The Kaftan",
+        title_ar: "القفطان",
+        title_fr: "Le Kaftan",
+        subtitle: "Elegance Reimagined",
+        subtitle_ar: "الأناقة المعاد تصورها",
+        subtitle_fr: "L'Élégance Réinventée",
+        image: "/images/explore/kaftan.webp",
+        region: "Nationwide",
+        region_ar: "وطني",
+        region_fr: "National",
+        description: "A long, flowing robe often made of silk or velvet, intricately embroidered and worn on special occasions.",
+        description_ar: "رداء طويل انسيابي مصنوع غالباً من الحرير أو المخمل، ومطرز بشكل معقد ويتم ارتداؤه في المناسبات الخاصة.",
+        description_fr: "Une longue robe fluide souvent faite de soie ou de velours, finement brodée et portée lors d'occasions spéciales.",
+        history: "The Algerian Kaftan has deep historical roots, influenced by Ottoman and Andalusian styles. Distinct from its Moroccan counterpart, the Algerian Kaftan (often called 'Mansouria' or castan) is known for its specific cut and embroidery techniques like 'Mejboud'. It remains a symbol of status and beauty.",
+        history_ar: "القفطان الجزائري له جذور تاريخية عميقة، وتأثر بالأنماط العثمانية والأندلسية. يختلف القفطان الجزائري (الذي يسمى غالباً 'المنصورية' أو القفطان) عن نظيره المغربي، ويتميز بقصته الخاصة وتقنيات التطريز مثل 'المجبود'. لا يزال رمزاً للمكانة والجمال.",
+        history_fr: "Le Kaftan algérien a des racines historiques profondes, influencé par les styles ottomans et andalous. Distinct de son homologue marocain, le Kaftan algérien (souvent appelé 'Mansouria' ou caftan) est connu pour sa coupe spécifique et ses techniques de broderie comme le 'Aâkad'. Il reste un symbole de statut et de beauté.",
+        locations: ["Algiers", "Tlemcen", "Constantine"],
+        locations_ar: ["الجزائر العاصمة", "تلمسان", "قسنطينة"],
+        locations_fr: ["Alger", "Tlemcen", "Constantine"],
+        media: {
+            gallery: [
+                "/images/explore/kaftan.webp",
+                "/images/explore/kaftan-1.webp",
+                "/images/explore/kaftan-2.webp",
+                "/images/explore/kaftan-3.jpg",
+                "/images/explore/kaftan-4.jpg",
+                "/images/explore/kaftan-6.jpg",
+                "/images/explore/kaftan-7.jpg",
+            ],
+        },
+    },
+    {
+        id: "naili",
+        category: "clothing",
+        title: "Naili Dress",
+        title_ar: "الزي النايلي",
+        title_fr: "Robe Naili",
+        subtitle: "Pride of the Ouled Naïl",
+        subtitle_ar: "فخر أولاد نايل",
+        subtitle_fr: "Fierté des Ouled Naïl",
+        image: "/images/explore/naili.jpg",
+        region: "Djelfa / Bou Saada",
+        region_ar: "الجلفة / بوسعادة",
+        region_fr: "Djelfa / Bou Saada",
+        description: "A winged white or flowery dress worn with a feather-adorned headdress and heavy silver jewelry.",
+        description_ar: "فستان أبيض أو مزهر مجنح يرتدى مع غطاء رأس مزين بالريش ومجوهرات فضية ثقيلة.",
+        description_fr: "Une robe blanche ou fleurie ailée portée avec une coiffe ornée de plumes et de lourds bijoux en argent.",
+        history: "The Naili dress is the attire of the Ouled Naïl tribe of the steppe. Famous for their dancers and freedom, the women wear this distinctive dress which accentuates movement. The jewelry, particularly the spiked bracelets and headchains, served both as ornamentation and defense.",
+        history_ar: "الزي النايلي هو زي قبيلة أولاد نايل في السهوب. تشتهر النساء براقصاتهن وحريتهن، ويرتدين هذا الفستان المميز الذي يبرز الحركة. المجوهرات، وخاصة الأساور المسننة وسلاسل الرأس، كانت بمثابة زينة ودفاع في نفس الوقت.",
+        history_fr: "La robe Naili est la tenue de la tribu Ouled Naïl de la steppe. Célèbres pour leurs danseuses et leur liberté, les femmes portent cette robe distinctive qui accentue le mouvement. Les bijoux, en particulier les bracelets à pointes et les chaînes de tête, servaient à la fois d'ornement et de défense.",
+        locations: ["Djelfa", "Bou Saada", "M'Sila"],
+        locations_ar: ["الجلفة", "بوسعادة", "المسيلة"],
+        locations_fr: ["Djelfa", "Bou Saada", "M'Sila"],
+        media: {
+            gallery: [
+                "/images/explore/naili.jpg",
+                "/images/explore/naili-1.jpeg",
+                "/images/explore/naili-2.jpg",
+                "/images/explore/naili-3.jpg",
+                "/images/explore/naili-4.jpg",
+                "/images/explore/naili-5.jpg",
+                "/images/explore/naili-6.jpg",
             ],
         },
     }

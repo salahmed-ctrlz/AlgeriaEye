@@ -293,6 +293,12 @@ export default function RegisterPage() {
                                                     <span>Restaurant</span>
                                                 </div>
                                             </SelectItem>
+                                            <SelectItem value="landlord">
+                                                <div className="flex items-center gap-2">
+                                                    <Building2 className="h-4 w-4" />
+                                                    <span>Landlord</span>
+                                                </div>
+                                            </SelectItem>
                                         </SelectContent>
                                     </Select>
                                     {partnerForm.formState.errors.businessType && (

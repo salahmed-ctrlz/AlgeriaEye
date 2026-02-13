@@ -44,6 +44,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Switch } from "@/components/ui/switch";
 import { createClient } from "@/lib/supabase/client";
 import { wilayas, getWilayaName } from "@/data/wilayas";
 import { updateProfile } from "@/actions/profile";
@@ -132,6 +133,8 @@ export default function DashboardPage() {
         bio: "",
         avatar_url: "",
     });
+
+    const [activeSettingsTab, setActiveSettingsTab] = useState<"general" | "security" | "notifications">("general");
 
     useEffect(() => {
         fetchData();
@@ -678,131 +681,214 @@ export default function DashboardPage() {
                         <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
                             <div className="grid gap-6 md:grid-cols-[250px_1fr]">
                                 <nav className="flex flex-col space-y-1">
-                                    <Button variant="ghost" className="justify-start font-semibold bg-muted">{t("general")}</Button>
-                                    <Button variant="ghost" className="justify-start">{t("security")}</Button>
-                                    <Button variant="ghost" className="justify-start">{t("notifications")}</Button>
+                                    <Button
+                                        variant={activeSettingsTab === "general" ? "secondary" : "ghost"}
+                                        className="justify-start font-semibold"
+                                        onClick={() => setActiveSettingsTab("general")}
+                                    >
+                                        {t("general")}
+                                    </Button>
+                                    <Button
+                                        variant={activeSettingsTab === "security" ? "secondary" : "ghost"}
+                                        className="justify-start font-semibold"
+                                        onClick={() => setActiveSettingsTab("security")}
+                                    >
+                                        {t("security")}
+                                    </Button>
+                                    <Button
+                                        variant={activeSettingsTab === "notifications" ? "secondary" : "ghost"}
+                                        className="justify-start font-semibold"
+                                        onClick={() => setActiveSettingsTab("notifications")}
+                                    >
+                                        {t("notifications")}
+                                    </Button>
                                 </nav>
 
                                 <div className="space-y-6">
-                                    <Card className="border-none shadow-md overflow-hidden">
-                                        <div className="h-32 bg-gradient-to-r from-brand/80 to-brand/40 relative">
-                                            <div className="absolute -bottom-12 left-8">
-                                                <div className="h-24 w-24 rounded-full border-4 border-background overflow-hidden bg-background shadow-sm">
-                                                    {profileForm.avatar_url ? (
-                                                        // eslint-disable-next-line @next/next/no-img-element
-                                                        <img
-                                                            src={profileForm.avatar_url}
-                                                            alt="Avatar"
-                                                            className="h-full w-full object-cover"
-                                                        />
-                                                    ) : (
-                                                        <div className="flex h-full w-full items-center justify-center bg-muted">
-                                                            <UserCircle className="h-12 w-12 text-muted-foreground/40" />
-                                                        </div>
-                                                    )}
+                                    {activeSettingsTab === "general" && (
+                                        <Card className="border-none shadow-md overflow-hidden">
+                                            <div className="h-32 bg-gradient-to-r from-brand/80 to-brand/40 relative">
+                                                <div className="absolute -bottom-12 left-8">
+                                                    <div className="h-24 w-24 rounded-full border-4 border-background overflow-hidden bg-background shadow-sm">
+                                                        {profileForm.avatar_url ? (
+                                                            // eslint-disable-next-line @next/next/no-img-element
+                                                            <img
+                                                                src={profileForm.avatar_url}
+                                                                alt="Avatar"
+                                                                className="h-full w-full object-cover"
+                                                            />
+                                                        ) : (
+                                                            <div className="flex h-full w-full items-center justify-center bg-muted">
+                                                                <UserCircle className="h-12 w-12 text-muted-foreground/40" />
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <CardHeader className="pt-16 pb-8 px-8">
-                                            <CardTitle className="text-2xl">{t("personalInfo")}</CardTitle>
-                                            <CardDescription>{t("personalInfoDesc") || "Manage your public profile and private details."}</CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="px-8 pb-8">
-                                            <form onSubmit={onSubmitProfile} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                                <div className="grid gap-8 lg:grid-cols-[200px_1fr]">
-                                                    <div className="space-y-4 text-center lg:text-left">
-                                                        <div className="flex flex-col gap-2">
-                                                            <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Profile Picture</Label>
-                                                            <div className="mx-auto lg:mx-0">
-                                                                <ImageUpload
-                                                                    value={profileForm.avatar_url ? [profileForm.avatar_url] : []}
-                                                                    onChange={(urls) =>
-                                                                        setProfileForm({ ...profileForm, avatar_url: urls[0] || "" })
-                                                                    }
-                                                                    maxFiles={1}
-                                                                    bucketName="avatars"
-                                                                    className="mt-0 w-full max-w-[200px]"
-                                                                />
+                                            <CardHeader className="pt-16 pb-8 px-8">
+                                                <CardTitle className="text-2xl">{t("personalInfo")}</CardTitle>
+                                                <CardDescription>{t("personalInfoDesc") || "Manage your public profile and private details."}</CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="px-8 pb-8">
+                                                <form onSubmit={onSubmitProfile} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                                    <div className="grid gap-8 lg:grid-cols-[200px_1fr]">
+                                                        <div className="space-y-4 text-center lg:text-left">
+                                                            <div className="flex flex-col gap-2">
+                                                                <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Profile Picture</Label>
+                                                                <div className="mx-auto lg:mx-0">
+                                                                    <ImageUpload
+                                                                        value={profileForm.avatar_url ? [profileForm.avatar_url] : []}
+                                                                        onChange={(urls) =>
+                                                                            setProfileForm({ ...profileForm, avatar_url: urls[0] || "" })
+                                                                        }
+                                                                        maxFiles={1}
+                                                                        bucketName="avatars"
+                                                                        className="mt-0 w-full max-w-[200px]"
+                                                                    />
+                                                                </div>
+                                                                <p className="text-[10px] text-muted-foreground">
+                                                                    Max 5MB. Formats: JPG, PNG.
+                                                                </p>
                                                             </div>
-                                                            <p className="text-[10px] text-muted-foreground">
-                                                                Max 5MB. Formats: JPG, PNG.
-                                                            </p>
                                                         </div>
-                                                    </div>
 
-                                                    <div className="space-y-6">
-                                                        <div className="grid gap-6 md:grid-cols-2">
+                                                        <div className="space-y-6">
+                                                            <div className="grid gap-6 md:grid-cols-2">
+                                                                <div className="space-y-2">
+                                                                    <Label htmlFor="full_name">Full Name</Label>
+                                                                    <Input
+                                                                        id="full_name"
+                                                                        value={profileForm.full_name}
+                                                                        onChange={(e) => setProfileForm({ ...profileForm, full_name: e.target.value })}
+                                                                        placeholder="e.g. Amine Benali"
+                                                                        className="h-10"
+                                                                    />
+                                                                </div>
+                                                                <div className="space-y-2">
+                                                                    <Label htmlFor="full_name">{t("auth.fullName")}</Label>
+                                                                    <Select
+                                                                        value={profileForm.wilaya}
+                                                                        onValueChange={(val) => setProfileForm({ ...profileForm, wilaya: val })}
+                                                                    >
+                                                                        <SelectTrigger className="h-10">
+                                                                            <SelectValue placeholder="Select your wilaya..." />
+                                                                        </SelectTrigger>
+                                                                        <SelectContent className="max-h-[250px]">
+                                                                            {wilayas.map((w) => (
+                                                                                <SelectItem key={w.code} value={w.slug}>
+                                                                                    {w.code} - {getWilayaName(w, "en")}
+                                                                                </SelectItem>
+                                                                            ))}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                </div>
+                                                            </div>
+
                                                             <div className="space-y-2">
-                                                                <Label htmlFor="full_name">Full Name</Label>
+                                                                <Label htmlFor="phone">{t("auth.phone") || "Phone Number"}</Label>
                                                                 <Input
-                                                                    id="full_name"
-                                                                    value={profileForm.full_name}
-                                                                    onChange={(e) => setProfileForm({ ...profileForm, full_name: e.target.value })}
-                                                                    placeholder="e.g. Amine Benali"
+                                                                    id="phone"
+                                                                    value={profileForm.phone}
+                                                                    onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                                                                    placeholder="+213 555 123 456"
                                                                     className="h-10"
                                                                 />
                                                             </div>
+
                                                             <div className="space-y-2">
-                                                                <Label htmlFor="full_name">{t("auth.fullName")}</Label>
-                                                                <Select
-                                                                    value={profileForm.wilaya}
-                                                                    onValueChange={(val) => setProfileForm({ ...profileForm, wilaya: val })}
-                                                                >
-                                                                    <SelectTrigger className="h-10">
-                                                                        <SelectValue placeholder="Select your wilaya..." />
-                                                                    </SelectTrigger>
-                                                                    <SelectContent className="max-h-[250px]">
-                                                                        {wilayas.map((w) => (
-                                                                            <SelectItem key={w.code} value={w.slug}>
-                                                                                {w.code} - {getWilayaName(w, "en")}
-                                                                            </SelectItem>
-                                                                        ))}
-                                                                    </SelectContent>
-                                                                </Select>
+                                                                <Label htmlFor="bio">Bio</Label>
+                                                                <Textarea
+                                                                    id="bio"
+                                                                    value={profileForm.bio}
+                                                                    onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
+                                                                    placeholder="Tell the community about yourself..."
+                                                                    rows={4}
+                                                                    className="resize-none min-h-[100px]"
+                                                                />
+                                                            </div>
+
+                                                            <div className="flex justify-end pt-4">
+                                                                <Button type="submit" disabled={profileSaving} className="bg-brand text-white hover:bg-brand-light min-w-[150px] h-10 shadow-sm transition-all hover:shadow">
+                                                                    {profileSaving ? (
+                                                                        <>
+                                                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <Save className="mr-2 h-4 w-4" /> {t("saveChanges")}
+                                                                        </>
+                                                                    )}
+                                                                </Button>
                                                             </div>
                                                         </div>
-
-                                                        <div className="space-y-2">
-                                                            <Label htmlFor="phone">{t("auth.phone") || "Phone Number"}</Label>
-                                                            <Input
-                                                                id="phone"
-                                                                value={profileForm.phone}
-                                                                onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
-                                                                placeholder="+213 555 123 456"
-                                                                className="h-10"
-                                                            />
-                                                        </div>
-
-                                                        <div className="space-y-2">
-                                                            <Label htmlFor="bio">Bio</Label>
-                                                            <Textarea
-                                                                id="bio"
-                                                                value={profileForm.bio}
-                                                                onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
-                                                                placeholder="Tell the community about yourself..."
-                                                                rows={4}
-                                                                className="resize-none min-h-[100px]"
-                                                            />
-                                                        </div>
-
-                                                        <div className="flex justify-end pt-4">
-                                                            <Button type="submit" disabled={profileSaving} className="bg-brand text-white hover:bg-brand-light min-w-[150px] h-10 shadow-sm transition-all hover:shadow">
-                                                                {profileSaving ? (
-                                                                    <>
-                                                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
-                                                                    </>
-                                                                ) : (
-                                                                    <>
-                                                                        <Save className="mr-2 h-4 w-4" /> {t("saveChanges")}
-                                                                    </>
-                                                                )}
-                                                            </Button>
-                                                        </div>
                                                     </div>
+                                                </form>
+                                            </CardContent>
+                                        </Card>
+                                    )}
+
+                                    {activeSettingsTab === "security" && (
+                                        <Card className="border-none shadow-md">
+                                            <CardHeader>
+                                                <CardTitle>{t("security")}</CardTitle>
+                                                <CardDescription>{t("securityDesc")}</CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="space-y-6">
+                                                <div className="space-y-4">
+                                                    <h3 className="text-lg font-medium">{t("changePassword")}</h3>
+                                                    <div className="grid gap-2">
+                                                        <Label htmlFor="current-password">{t("currentPassword")}</Label>
+                                                        <Input id="current-password" type="password" />
+                                                    </div>
+                                                    <div className="grid gap-2">
+                                                        <Label htmlFor="new-password">{t("newPassword")}</Label>
+                                                        <Input id="new-password" type="password" />
+                                                    </div>
+                                                    <Button>{t("updatePassword")}</Button>
                                                 </div>
-                                            </form>
-                                        </CardContent>
-                                    </Card>
+                                                <div className="pt-6 border-t">
+                                                    <h3 className="text-lg font-medium text-destructive">{t("deleteAccount")}</h3>
+                                                    <p className="text-sm text-muted-foreground mb-4">
+                                                        {t("deleteAccountDesc")}
+                                                    </p>
+                                                    <Button variant="destructive">{t("deleteAccount")}</Button>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    )}
+
+                                    {activeSettingsTab === "notifications" && (
+                                        <Card className="border-none shadow-md">
+                                            <CardHeader>
+                                                <CardTitle>{t("notifications")}</CardTitle>
+                                                <CardDescription>{t("notificationsDesc")}</CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="space-y-6">
+                                                <div className="flex items-center justify-between space-x-2">
+                                                    <Label htmlFor="email-notifs" className="flex flex-col space-y-1">
+                                                        <span>{t("emailNotifs")}</span>
+                                                        <span className="font-normal text-xs text-muted-foreground">{t("emailNotifsDesc")}</span>
+                                                    </Label>
+                                                    <Switch id="email-notifs" defaultChecked />
+                                                </div>
+                                                <div className="flex items-center justify-between space-x-2">
+                                                    <Label htmlFor="marketing-emails" className="flex flex-col space-y-1">
+                                                        <span>{t("marketingEmails")}</span>
+                                                        <span className="font-normal text-xs text-muted-foreground">{t("marketingEmailsDesc")}</span>
+                                                    </Label>
+                                                    <Switch id="marketing-emails" />
+                                                </div>
+                                                <div className="flex items-center justify-between space-x-2">
+                                                    <Label htmlFor="push-notifs" className="flex flex-col space-y-1">
+                                                        <span>{t("pushNotifs")}</span>
+                                                        <span className="font-normal text-xs text-muted-foreground">{t("pushNotifsDesc")}</span>
+                                                    </Label>
+                                                    <Switch id="push-notifs" defaultChecked />
+                                                </div>
+                                                <Button className="mt-4">{t("savePreferences")}</Button>
+                                            </CardContent>
+                                        </Card>
+                                    )}
 
                                     {/* Placeholder for future settings */}
                                     <Card className="opacity-50 pointer-events-none">

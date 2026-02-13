@@ -72,6 +72,13 @@
       "touristBtn": "Plan Your Trip",
       "hostBtn": "Partner With Us"
     },
+    "slogan": {
+      "line1": "Smart Travel, Ancient History",
+      "line2": "Discover the Past",
+      "line3": "In a Futuristic Style"
+    },
+    "visionQuote": "We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.",
+    "quote": "We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.",
     "ctaTitle": "Ready to Explore?",
     "ctaButton": "Start Your Journey"
   },
@@ -120,7 +127,9 @@
     "trendingNow": "Trending Now",
     "seenByCreators": "Seen by Creators",
     "creatorsSubtitle": "Discover Algeria through the lens of our top content creators.",
-    "viewProfile": "View Profile"
+    "viewProfile": "View Profile",
+    "community": "Community",
+    "meetCreators": "Meet Our Creators"
   },
   "wilayas": {
     "algiers": {
@@ -286,7 +295,8 @@
     "common": {
       "edit": "Edit",
       "delete": "Delete",
-      "view": "View"
+      "view": "View",
+      "dzd": "DZD"
     },
     "myListings": "My Listings",
     "addListing": "Add Listing",
@@ -303,10 +313,27 @@
       "images": "Images",
       "submit": "Save Listing"
     },
+    "purchaseHistoryDesc": "View your transaction history and payment details.",
+    "favoritesDesc": "Manage your saved listings and dream destinations.",
     "addNew": "Add New",
     "general": "General",
     "security": "Security",
     "notifications": "Notifications",
+    "securityDesc": "Manage your password and account security.",
+    "notificationsDesc": "Choose what updates you want to receive.",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "updatePassword": "Update Password",
+    "deleteAccount": "Delete Account",
+    "deleteAccountDesc": "Once you delete your account, there is no going back. Please be certain.",
+    "emailNotifs": "Email Notifications",
+    "emailNotifsDesc": "Receive updates about your account via email.",
+    "marketingEmails": "Marketing Emails",
+    "marketingEmailsDesc": "Receive promotional offers and newsletters.",
+    "pushNotifs": "Push Notifications",
+    "pushNotifsDesc": "Get real-time updates on your device.",
+    "savePreferences": "Save Preferences",
     "personalInfo": "Personal Information",
     "saveChanges": "Save Changes"
   },

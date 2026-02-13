@@ -72,6 +72,13 @@
             "touristBtn": "Planifiez Votre Voyage",
             "hostBtn": "Devenez Partenaire"
         },
+        "slogan": {
+            "line1": "Voyage Intelligent, Histoire Antique",
+            "line2": "Découvrez le Passé",
+            "line3": "Dans un Style Futuriste"
+        },
+        "visionQuote": "Nous comblons le fossé entre les voyageurs et la riche tapisserie culturelle de l'Algérie. De la réservation d'hôtels de luxe à la recherche de guides locaux pour les expéditions au Sahara, nous nous occupons de tout.",
+        "quote": "Nous comblons le fossé entre les voyageurs et la riche tapisserie culturelle de l'Algérie. De la réservation d'hôtels de luxe à la recherche de guides locaux pour les expéditions au Sahara, nous nous occupons de tout.",
         "ctaTitle": "Prêt à Explorer ?",
         "ctaButton": "Commencez Votre Voyage"
     },
@@ -120,7 +127,9 @@
         "trendingNow": "Tendance",
         "seenByCreators": "Vu par les Créateurs",
         "creatorsSubtitle": "Découvrez l'Algérie à travers l'objectif de nos meilleurs créateurs de contenu.",
-        "viewProfile": "Voir le Profil"
+        "viewProfile": "Voir le Profil",
+        "community": "Communauté",
+        "meetCreators": "Nos Créateurs"
     },
     "wilayas": {
         "algiers": {
@@ -274,7 +283,8 @@
         "common": {
             "edit": "Modifier",
             "delete": "Supprimer",
-            "view": "Voir"
+            "view": "Voir",
+            "dzd": "DZD"
         },
         "myListings": "Mes Annonces",
         "addListing": "Ajouter",
@@ -312,6 +322,21 @@
         "personalInfo": "Informations Personnelles",
         "security": "Sécurité",
         "notifications": "Notifications",
+        "securityDesc": "Gérez votre mot de passe et la sécurité de votre compte.",
+        "notificationsDesc": "Choisissez les mises à jour que vous souhaitez recevoir.",
+        "changePassword": "Changer le mot de passe",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "updatePassword": "Mettre à jour le mot de passe",
+        "deleteAccount": "Supprimer le compte",
+        "deleteAccountDesc": "Une fois que vous supprimez votre compte, il n'y a pas de retour en arrière. Veuillez être certain.",
+        "emailNotifs": "Notifications par email",
+        "emailNotifsDesc": "Recevez des mises à jour sur votre compte par email.",
+        "marketingEmails": "Emails marketing",
+        "marketingEmailsDesc": "Recevez des offres promotionnelles et des newsletters.",
+        "pushNotifs": "Notifications push",
+        "pushNotifsDesc": "Obtenez des mises à jour en temps réel sur votre appareil.",
+        "savePreferences": "Enregistrer les préférences",
         "saveChanges": "Enregistrer les modifications",
         "profileUpdateSuccess": "Profil mis à jour !",
         "noFavorites": "Pas encore de favoris.",

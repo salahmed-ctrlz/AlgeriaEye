@@ -91,18 +91,18 @@ export function Footer() {
                             {t("support")}
                         </h3>
                         <nav className="flex flex-col gap-3">
-                            <span className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
+                            <Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
                                 {t("helpCenter")}
-                            </span>
-                            <span className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
+                            </Link>
+                            <Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
                                 {t("terms")}
-                            </span>
-                            <span className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
+                            </Link>
+                            <Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
                                 {t("privacy")}
-                            </span>
-                            <span className="text-sm text-muted-foreground">
+                            </Link>
+                            <a href="mailto:contact@algeriaeye.com" className="text-sm text-muted-foreground hover:text-brand transition-colors">
                                 contact@algeriaeye.com
-                            </span>
+                            </a>
                         </nav>
                     </div>
 

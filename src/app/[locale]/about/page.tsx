@@ -34,9 +34,13 @@ export default function AboutPage() {
                             {t("title")}
                         </h1>
 
-                        <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                            {t("story.desc1")}
-                        </p>
+                        <div className="flex flex-col gap-1 text-2xl font-bold text-muted-foreground/90 my-6">
+                            <span>{t("slogan.line1")}</span>
+                            <span>{t("slogan.line2")}</span>
+                            <span>{t("slogan.line3")}</span>
+                        </div>
+
+
 
                         <div className="flex flex-wrap gap-4 pt-2">
                             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20" asChild>
@@ -85,7 +89,7 @@ export default function AboutPage() {
                             </div>
                             <div className="md:col-span-2 p-6 bg-background rounded-2xl shadow-sm border border-border/50 flex items-center">
                                 <p className="text-lg font-medium italic text-foreground/80">
-                                    &quot;We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.&quot;
+                                    &quot;{t("visionQuote")}&quot;
                                 </p>
                             </div>
                         </div>
