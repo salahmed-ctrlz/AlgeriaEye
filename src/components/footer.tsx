@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
-import { Eye, Send, ArrowUp } from "lucide-react";
+import { Eye, Send, ArrowUp, Instagram, Facebook } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
@@ -56,6 +56,24 @@ export function Footer() {
                         <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                             {t("description")}
                         </p>
+                        <div className="flex items-center gap-4 pt-2">
+                            <a
+                                href="https://www.instagram.com/algeria.eye1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-brand transition-colors"
+                            >
+                                <Instagram className="h-5 w-5" />
+                                <span className="sr-only">Instagram</span>
+                            </a>
+                            <div
+                                className="text-muted-foreground/40 cursor-not-allowed transition-colors"
+                                title="Coming Soon"
+                            >
+                                <Facebook className="h-5 w-5" />
+                                <span className="sr-only">Facebook</span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Explore */}
@@ -74,7 +92,7 @@ export function Footer() {
                                 href={`/${locale}/explore`}
                                 className="text-sm text-muted-foreground hover:text-brand transition-colors"
                             >
-                                Explore Page
+                                {nav("explorePage")}
                             </Link>
                         </nav>
                     </div>

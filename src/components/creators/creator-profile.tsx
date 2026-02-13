@@ -3,48 +3,147 @@
 import Image from "next/image";
 import { Creator } from "@/data/creators";
 import { InstagramEmbed } from "./instagram-embed";
-import { Badge } from "@/components/ui/badge";
 import {
-    Instagram,
     Youtube,
     BadgeCheck,
     Grid3X3,
-    ExternalLink,
-    Sparkles,
-    Users,
-    Heart,
+    UserPlus,
+    Check,
+    Film,
+    Play,
+    LayoutGrid,
+    ImageIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
+import { useState, useEffect, useMemo } from "react";
 
 interface CreatorProfileProps {
     creator: Creator;
 }
 
+type FilterType = "all" | "reels" | "posts" | "youtube";
+
+// Determine if an Instagram URL is a reel or a post
+function getInstagramType(url: string): "reels" | "posts" {
+    if (/\/(reel|reels)\//i.test(url)) return "reels";
+    return "posts";
+}
+
 export function CreatorProfile({ creator }: CreatorProfileProps) {
     const locale = useLocale() as "en" | "fr" | "ar";
+    const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [followerCount, setFollowerCount] = useState(0);
 
-    const instagramCount = creator.content.filter(
-        (c) => c.type === "instagram"
+    // Categorize content
+    const categorized = useMemo(() => {
+        return creator.content.map((item) => ({
+            ...item,
+            category:
+                item.type === "youtube"
+                    ? ("youtube" as const)
+                    : getInstagramType(item.url),
+        }));
+    }, [creator.content]);
+
+    const reelsCount = categorized.filter((c) => c.category === "reels").length;
+    const postsCount = categorized.filter((c) => c.category === "posts").length;
+    const youtubeCount = categorized.filter(
+        (c) => c.category === "youtube"
     ).length;
-    const youtubeCount = creator.content.filter(
-        (c) => c.type === "youtube"
-    ).length;
+
+    const filteredContent = categorized.filter((item) => {
+        if (activeFilter === "all") return true;
+        return item.category === activeFilter;
+    });
+
+    // Available filters (only show tabs that have content)
+    const filters = useMemo(() => {
+        const list: {
+            key: FilterType;
+            label: string;
+            icon: React.ReactNode;
+            count: number;
+        }[] = [
+                {
+                    key: "all",
+                    label: "All",
+                    icon: <LayoutGrid className="h-4 w-4" />,
+                    count: creator.content?.length || 0,
+                },
+            ];
+
+        if (reelsCount > 0) {
+            list.push({
+                key: "reels",
+                label: "Reels",
+                icon: <Film className="h-4 w-4" />,
+                count: reelsCount,
+            });
+        }
+
+        if (postsCount > 0) {
+            list.push({
+                key: "posts",
+                label: "Posts",
+                icon: <ImageIcon className="h-4 w-4" />,
+                count: postsCount,
+            });
+        }
+
+        if (youtubeCount > 0) {
+            list.push({
+                key: "youtube",
+                label: "Videos",
+                icon: <Play className="h-4 w-4" />,
+                count: youtubeCount,
+            });
+        }
+
+        return list;
+    }, [creator.content?.length, reelsCount, postsCount, youtubeCount]);
+
+    useEffect(() => {
+        let hash = 0;
+        for (let i = 0; i < creator.slug.length; i++) {
+            hash = (hash << 5) - hash + creator.slug.charCodeAt(i);
+            hash |= 0;
+        }
+        setFollowerCount(Math.abs(hash % 50000) + 10000);
+    }, [creator.slug]);
+
+    useEffect(() => {
+        const stored = localStorage.getItem(`follow-${creator.slug}`);
+        if (stored === "true") setIsFollowing(true);
+    }, [creator.slug]);
+
+    useEffect(() => {
+        localStorage.setItem(`follow-${creator.slug}`, String(isFollowing));
+    }, [isFollowing, creator.slug]);
+
+    const handleFollow = () => {
+        if (isFollowing) {
+            setIsFollowing(false);
+            setFollowerCount((c) => c - 1);
+        } else {
+            setIsFollowing(true);
+            setFollowerCount((c) => c + 1);
+        }
+    };
+
+    const formatCount = (n: number) => {
+        if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
+        if (n >= 1000) return (n / 1000).toFixed(1) + "K";
+        return n.toString();
+    };
 
     return (
-        <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-            {/* ── Hero ── */}
-            <div className="relative w-full overflow-hidden">
-                {/* Layered background */}
+        <div className="min-h-screen bg-background text-foreground">
+            {/* ── HERO ── */}
+            <section className="relative w-full overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    {/* Dark mode background - hidden in light mode */}
-                    <div className="absolute inset-0 bg-background dark:bg-black transition-colors duration-300" />
-
-                    {/* Base gradient - adjusted for better contrast in both modes */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-purple-500/10 dark:from-brand/15 dark:via-brand/5 dark:to-purple-500/10" />
-
-                    {/* Blurred avatar as backdrop */}
+                    <div className="absolute inset-0 bg-background" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-purple-500/10" />
                     <div className="absolute inset-0 opacity-10 dark:opacity-20">
                         <Image
                             src={creator.avatar}
@@ -55,294 +154,317 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                             priority
                         />
                     </div>
-
-                    {/* Gradient fade to background */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
                 </div>
 
-                {/* Content */}
-                <div className="container mx-auto px-4 md:px-8 relative z-10 pt-24 pb-16 md:pt-32 md:pb-20">
-                    <div className="flex flex-col items-center text-center gap-6">
-                        {/* Avatar */}
-                        <div className="relative group">
-                            {/* Glow ring */}
-                            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-brand/50 via-purple-500/30 to-brand/50 opacity-60 blur-sm group-hover:opacity-80 transition-opacity duration-500" />
+                <div className="relative z-10 flex flex-col items-center text-center px-4 pt-28 pb-10 md:pt-36 md:pb-14 gap-5 max-w-2xl mx-auto">
+                    {/* Avatar */}
+                    <div className="relative group shrink-0">
+                        <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-brand/50 via-purple-500/30 to-brand/50 opacity-60 blur-sm group-hover:opacity-80 transition-opacity duration-500" />
+                        <div className="relative h-28 w-28 md:h-36 md:w-36 rounded-full border-[3px] border-background overflow-hidden shadow-2xl">
+                            <Image
+                                src={creator.avatar}
+                                alt={creator.name}
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                sizes="(max-width: 768px) 112px, 144px"
+                                priority
+                            />
+                        </div>
+                        <div className="absolute bottom-1 right-1 md:bottom-2 md:right-2 h-5 w-5 rounded-full bg-emerald-500 border-[3px] border-background shadow-lg" />
+                    </div>
 
-                            <div className="relative h-28 w-28 md:h-36 md:w-36 rounded-full border-[3px] border-background overflow-hidden shadow-2xl">
-                                <Image
-                                    src={creator.avatar}
-                                    alt={creator.name}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    sizes="(max-width: 768px) 112px, 144px"
-                                    priority
+                    {/* Name + Verified */}
+                    <div className="flex items-center justify-center gap-2">
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+                            {creator.name}
+                        </h1>
+                        <BadgeCheck className="h-7 w-7 md:h-8 md:w-8 text-brand fill-brand/20 shrink-0" />
+                    </div>
+
+                    <p className="text-sm text-muted-foreground font-medium -mt-2">
+                        Content Creator · Algeria
+                    </p>
+
+                    {creator.bio && (
+                        <p className="text-muted-foreground text-base md:text-lg max-w-md leading-relaxed">
+                            {typeof creator.bio === "string"
+                                ? creator.bio
+                                : creator.bio?.[locale] || creator.bio?.en || ""}
+                        </p>
+                    )}
+
+                    {/* Stats */}
+                    <div className="flex items-center justify-center gap-8 md:gap-10 py-2">
+                        <Stat value={creator.content?.length || 0} label="Posts" />
+                        <div className="h-8 w-px bg-border/40" />
+                        <Stat value={formatCount(followerCount)} label="Followers" />
+                        <div className="h-8 w-px bg-border/40" />
+                        <Stat
+                            value={formatCount(Math.floor(followerCount * 0.3))}
+                            label="Following"
+                        />
+                    </div>
+
+                    {/* Follow button */}
+                    <FollowButton isFollowing={isFollowing} onToggle={handleFollow} />
+                </div>
+            </section>
+
+            {/* ── TAB BAR ── */}
+            <nav className="sticky top-16 z-30 bg-background/80 backdrop-blur-xl border-b border-border/40">
+                <div className="flex items-center justify-center overflow-x-auto scrollbar-none">
+                    <div className="flex items-center">
+                        {filters.map((filter) => (
+                            <FilterTab
+                                key={filter.key}
+                                active={activeFilter === filter.key}
+                                onClick={() => setActiveFilter(filter.key)}
+                                icon={filter.icon}
+                                label={filter.label}
+                                count={filter.count}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </nav>
+
+            {/* ── CONTENT GRID ── */}
+            <main className="container mx-auto px-4 md:px-8 py-10 md:py-14">
+                {/* Active filter indicator */}
+                <div className="flex items-center justify-between mb-6">
+                    <p className="text-sm text-muted-foreground">
+                        Showing{" "}
+                        <span className="font-semibold text-foreground">
+                            {filteredContent.length}
+                        </span>{" "}
+                        {activeFilter === "all"
+                            ? "items"
+                            : activeFilter === "reels"
+                                ? "reels"
+                                : activeFilter === "posts"
+                                    ? "posts"
+                                    : "videos"}
+                    </p>
+
+                    {activeFilter !== "all" && (
+                        <button
+                            onClick={() => setActiveFilter("all")}
+                            className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+                        >
+                            Clear filter
+                        </button>
+                    )}
+                </div>
+
+                {filteredContent.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-24 gap-4">
+                        <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                            <Grid3X3 className="h-7 w-7 text-muted-foreground/40" />
+                        </div>
+                        <p className="text-muted-foreground/60 text-sm">
+                            No content in this category yet
+                        </p>
+                    </div>
+                ) : (
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-5 [column-fill:_balance] space-y-5">
+                        {filteredContent.map((item, index) => (
+                            <div key={item.id} className="break-inside-avoid">
+                                <ContentCard
+                                    item={item}
+                                    category={item.category}
+                                    index={index}
+                                    total={filteredContent.length}
+                                    creator={creator}
                                 />
                             </div>
-
-                            {/* Online indicator */}
-                            <div className="absolute bottom-1 right-1 md:bottom-2 md:right-2 h-5 w-5 rounded-full bg-emerald-500 border-[3px] border-background shadow-lg" />
-                        </div>
-
-                        {/* Name + Verified + Handle */}
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-center gap-2.5">
-                                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
-                                    {creator.name}
-                                </h1>
-                                <BadgeCheck className="h-7 w-7 md:h-8 md:w-8 text-brand fill-brand/20 shrink-0" />
-                            </div>
-
-                            {/* Handle row */}
-                            <div className="flex items-center justify-center gap-3">
-                                <a
-                                    href={`https://instagram.com/${creator.slug}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-1.5 text-muted-foreground hover:text-brand transition-colors duration-200 group/handle"
-                                >
-                                    <Instagram className="h-4 w-4 group-hover/handle:text-brand transition-colors" />
-                                    <span className="text-sm font-medium">@{creator.slug}</span>
-                                    <ExternalLink className="h-3 w-3 opacity-0 -translate-x-1 group-hover/handle:opacity-100 group-hover/handle:translate-x-0 transition-all duration-200" />
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Bio (if available) - Safe Access */}
-                        {creator.bio && (
-                            <p className="text-muted-foreground text-base md:text-lg max-w-lg leading-relaxed">
-                                {typeof creator.bio === "string"
-                                    ? creator.bio
-                                    : (creator.bio?.[locale] || creator.bio?.en || "")}
-                            </p>
-                        )}
-
-                        {/* Stats row */}
-                        <div className="flex items-center gap-1">
-                            {/* Glass stat cards */}
-                            <div className="flex items-center gap-3 px-5 py-3 rounded-2xl border border-border/50 bg-background/50 backdrop-blur-xl shadow-sm dark:bg-white/[0.03] dark:border-white/[0.06]">
-                                <div className="flex items-center gap-2">
-                                    <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-brand/10">
-                                        <Grid3X3 className="h-4 w-4 text-brand" />
-                                    </div>
-                                    <div className="text-left">
-                                        <p className="text-lg font-bold text-foreground leading-none">
-                                            {creator.content?.length || 0}
-                                        </p>
-                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium">
-                                            Posts
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="h-8 w-px bg-border/50 dark:bg-white/[0.06]" />
-
-                                {instagramCount > 0 && (
-                                    <>
-                                        <div className="flex items-center gap-2">
-                                            <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-pink-500/10">
-                                                <Instagram className="h-4 w-4 text-pink-500" />
-                                            </div>
-                                            <div className="text-left">
-                                                <p className="text-lg font-bold text-foreground leading-none">
-                                                    {instagramCount}
-                                                </p>
-                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium">
-                                                    Reels
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-
-                                {youtubeCount > 0 && (
-                                    <>
-                                        <div className="h-8 w-px bg-border/50 dark:bg-white/[0.06]" />
-                                        <div className="flex items-center gap-2">
-                                            <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-red-500/10">
-                                                <Youtube className="h-4 w-4 text-red-500" />
-                                            </div>
-                                            <div className="text-left">
-                                                <p className="text-lg font-bold text-foreground leading-none">
-                                                    {youtubeCount}
-                                                </p>
-                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-medium">
-                                                    Videos
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* CTA buttons */}
-                        <div className="flex items-center gap-3 pt-2">
-                            <a
-                                href={`https://instagram.com/${creator.slug}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Button className="rounded-full px-6 gap-2 bg-gradient-to-r from-brand to-purple-500 hover:from-brand/90 hover:to-purple-500/90 text-white border-0 shadow-lg shadow-brand/20 transition-all duration-300 hover:shadow-xl hover:shadow-brand/30 hover:scale-[1.02]">
-                                    <Instagram className="h-4 w-4" />
-                                    Follow on Instagram
-                                </Button>
-                            </a>
-                        </div>
+                        ))}
                     </div>
-                </div>
-            </div>
+                )}
+            </main>
+        </div>
+    );
+}
 
-            {/* ── Content Section ── */}
-            <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
-                {/* Section header */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
-                    <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-brand/10 border border-brand/20">
-                            <Sparkles className="h-5 w-5 text-brand" />
+/* ── Stat ── */
+function Stat({ value, label }: { value: string | number; label: string }) {
+    return (
+        <div className="flex flex-col items-center gap-0.5 min-w-[3.5rem]">
+            <span className="text-xl md:text-2xl font-bold leading-none tabular-nums">
+                {value}
+            </span>
+            <span className="text-[11px] text-muted-foreground/60 font-medium">
+                {label}
+            </span>
+        </div>
+    );
+}
+
+/* ── Follow Button ── */
+function FollowButton({
+    isFollowing,
+    onToggle,
+}: {
+    isFollowing: boolean;
+    onToggle: () => void;
+}) {
+    return (
+        <button
+            onClick={onToggle}
+            className={[
+                "relative rounded-full px-8 py-2.5 min-w-[140px]",
+                "font-semibold text-sm",
+                "transition-all duration-300 ease-out",
+                "active:scale-95",
+                isFollowing
+                    ? [
+                        "border-2",
+                        "border-emerald-600 text-emerald-600",
+                        "dark:border-emerald-500 dark:text-emerald-500",
+                        "hover:border-red-500 hover:text-red-500",
+                        "dark:hover:border-red-400 dark:hover:text-red-400",
+                        "bg-transparent",
+                    ].join(" ")
+                    : [
+                        "border-2 border-transparent",
+                        "bg-foreground text-emerald-500",
+                        "dark:bg-white dark:text-emerald-600",
+                        "hover:opacity-90",
+                        "shadow-sm hover:shadow-md",
+                    ].join(" "),
+            ].join(" ")}
+        >
+            <span className="flex items-center justify-center gap-2">
+                {isFollowing ? (
+                    <>
+                        <Check className="h-4 w-4" />
+                        <span>Following</span>
+                    </>
+                ) : (
+                    <>
+                        <UserPlus className="h-4 w-4" />
+                        <span>Follow</span>
+                    </>
+                )}
+            </span>
+        </button>
+    );
+}
+
+/* ── Filter Tab ── */
+function FilterTab({
+    active,
+    onClick,
+    icon,
+    label,
+    count,
+}: {
+    active: boolean;
+    onClick: () => void;
+    icon: React.ReactNode;
+    label: string;
+    count: number;
+}) {
+    return (
+        <button
+            onClick={onClick}
+            className={[
+                "flex items-center justify-center gap-1.5",
+                "px-5 py-3",
+                "text-sm font-medium whitespace-nowrap",
+                "border-b-2",
+                "transition-all duration-200",
+                active
+                    ? "text-foreground border-foreground"
+                    : "text-muted-foreground border-transparent hover:text-foreground",
+            ].join(" ")}
+        >
+            {icon}
+            <span>{label}</span>
+            <span
+                className={[
+                    "text-[10px] font-mono ml-0.5 tabular-nums",
+                    active ? "opacity-100" : "opacity-50",
+                ].join(" ")}
+            >
+                {count}
+            </span>
+        </button>
+    );
+}
+
+/* ── Content Card ── */
+function ContentCard({
+    item,
+    category,
+    index,
+    total,
+    creator,
+}: {
+    item: Creator["content"][number];
+    category: "reels" | "posts" | "youtube";
+    index: number;
+    total: number;
+    creator: Creator;
+}) {
+    const categoryLabel =
+        category === "reels" ? "Reel" : category === "posts" ? "Post" : "Video";
+
+    const CategoryIcon =
+        category === "reels" ? Film : category === "posts" ? ImageIcon : Play;
+
+    return (
+        <div
+            className={[
+                "group relative rounded-2xl overflow-hidden",
+                "border border-border/40 dark:border-white/[0.06]",
+                "bg-card dark:bg-white/[0.02] backdrop-blur-xl",
+                "shadow-sm hover:shadow-md",
+                "hover:border-primary/20 dark:hover:border-white/[0.1]",
+                "transition-all duration-500 ease-out",
+            ].join(" ")}
+        >
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/5 dark:via-white/[0.08] to-transparent z-10" />
+
+            <div className="relative p-2.5 pb-3">
+                {item.type === "instagram" ? (
+                    <div className="rounded-xl overflow-hidden ring-1 ring-border/50 dark:ring-white/[0.04]">
+                        <InstagramEmbed url={item.url} captioned={true} />
+                    </div>
+                ) : (
+                    <div className="aspect-video bg-muted rounded-xl flex items-center justify-center ring-1 ring-border/50 dark:ring-white/[0.04]">
+                        <Youtube className="h-8 w-8 text-red-500/40" />
+                    </div>
+                )}
+
+                {/* Footer */}
+                <div className="flex items-center justify-between mt-2.5 px-1">
+                    {/* Left: avatar + name + badge */}
+                    <div className="flex items-center gap-2 min-w-0">
+                        <div className="relative h-6 w-6 shrink-0 rounded-full overflow-hidden ring-1 ring-border dark:ring-white/[0.08]">
+                            <Image
+                                src={creator.avatar}
+                                alt=""
+                                fill
+                                className="object-cover"
+                                sizes="24px"
+                            />
                         </div>
-                        <div>
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
-                                Latest Content
-                            </h2>
-                            <p className="text-sm text-muted-foreground/60">
-                                Explore {creator.name}&apos;s posts about Algeria
-                            </p>
-                        </div>
+                        <span className="text-xs font-medium text-muted-foreground truncate">
+                            {creator.name}
+                        </span>
+                        <BadgeCheck className="h-3 w-3 shrink-0 text-brand/60 fill-brand/10" />
                     </div>
 
-                    {/* Filter pills */}
-                    <div className="flex items-center gap-2">
-                        <Badge
-                            variant="outline"
-                            className="border-border bg-background hover:bg-muted text-foreground px-3 py-1.5 cursor-pointer transition-colors"
-                        >
-                            All ({creator.content?.length || 0})
-                        </Badge>
-                        {instagramCount > 0 && (
-                            <Badge
-                                variant="outline"
-                                className="border-pink-500/20 bg-pink-500/5 text-pink-500 px-3 py-1.5 cursor-pointer hover:bg-pink-500/10 transition-colors"
-                            >
-                                <Instagram className="h-3 w-3 mr-1" />
-                                Reels ({instagramCount})
-                            </Badge>
-                        )}
-                        {youtubeCount > 0 && (
-                            <Badge
-                                variant="outline"
-                                className="border-red-500/20 bg-red-500/5 text-red-500 px-3 py-1.5 cursor-pointer hover:bg-red-500/10 transition-colors"
-                            >
-                                <Youtube className="h-3 w-3 mr-1" />
-                                Videos ({youtubeCount})
-                            </Badge>
-                        )}
-                    </div>
-                </div>
-
-                {/* Masonry grid with glass cards */}
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-5 space-y-5">
-                    {creator.content?.map((item, index) => (
-                        <div key={item.id} className="break-inside-avoid">
-                            {/* Glass card wrapper */}
-                            <div
-                                className={[
-                                    "group relative rounded-2xl overflow-hidden",
-                                    "border border-border/40 dark:border-white/[0.06]",
-                                    "bg-card dark:bg-white/[0.02] backdrop-blur-xl",
-                                    "shadow-sm dark:shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_4px_24px_-4px_rgba(0,0,0,0.25)]",
-                                    "hover:shadow-md dark:hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_32px_-4px_rgba(0,0,0,0.35)]",
-                                    "hover:border-primary/20 dark:hover:border-white/[0.1]",
-                                    "hover:bg-muted/50 dark:hover:bg-white/[0.04]",
-                                    "transition-all duration-500 ease-out",
-                                ].join(" ")}
-                            >
-                                {/* Top highlight */}
-                                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/5 dark:via-white/[0.08] to-transparent z-10" />
-
-                                {/* Hover glow */}
-                                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-brand/[0.03] via-transparent to-transparent pointer-events-none z-10" />
-
-                                {/* Content */}
-                                <div className="relative p-2.5 pb-3">
-                                    {item.type === "instagram" ? (
-                                        <div className="rounded-xl overflow-hidden ring-1 ring-border/50 dark:ring-white/[0.04]">
-                                            <InstagramEmbed
-                                                url={item.url}
-                                                captioned={false}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <div className="aspect-video bg-muted rounded-xl flex items-center justify-center ring-1 ring-border/50 dark:ring-white/[0.04]">
-                                            <Youtube className="h-8 w-8 text-red-500/40" />
-                                        </div>
-                                    )}
-
-                                    {/* Card footer */}
-                                    <div className="flex items-center justify-between mt-2.5 px-1.5">
-                                        <div className="flex items-center gap-2">
-                                            <div className="relative h-6 w-6 rounded-full overflow-hidden ring-1 ring-border dark:ring-white/[0.08]">
-                                                <Image
-                                                    src={creator.avatar}
-                                                    alt=""
-                                                    fill
-                                                    className="object-cover"
-                                                    sizes="24px"
-                                                />
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                                <span className="text-xs font-medium text-muted-foreground">
-                                                    @{creator.slug}
-                                                </span>
-                                                <BadgeCheck className="h-3 w-3 text-brand/60 fill-brand/10" />
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center gap-2">
-                                            {item.type === "instagram" ? (
-                                                <Instagram className="h-3 w-3 text-pink-500/40" />
-                                            ) : (
-                                                <Youtube className="h-3 w-3 text-red-500/40" />
-                                            )}
-                                            <span className="text-[10px] text-muted-foreground/50 font-mono tracking-wider">
-                                                {String(index + 1).padStart(2, "0")}/
-                                                {String(creator.content?.length || 0).padStart(2, "0")}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Bottom CTA */}
-                <div className="flex justify-center mt-16">
-                    <div className="flex flex-col items-center gap-4 p-8 rounded-2xl border border-border/50 bg-card/50 dark:border-white/[0.06] dark:bg-white/[0.02] backdrop-blur-xl max-w-md w-full text-center">
-                        <div className="flex items-center justify-center h-12 w-12 rounded-full bg-brand/10">
-                            <Heart className="h-5 w-5 text-brand" />
-                        </div>
-                        <div>
-                            <p className="font-semibold text-foreground mb-1">
-                                Enjoy {creator.name}&apos;s content?
-                            </p>
-                            <p className="text-sm text-muted-foreground/60">
-                                Follow them on Instagram for more amazing content about Algeria
-                            </p>
-                        </div>
-                        <a
-                            href={`https://instagram.com/${creator.slug}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <Button
-                                variant="outline"
-                                className="rounded-full px-6 gap-2 border-border dark:border-white/[0.08] bg-background dark:bg-white/[0.03] hover:bg-muted dark:hover:bg-white/[0.08] backdrop-blur-sm"
-                            >
-                                <Instagram className="h-4 w-4" />
-                                Follow @{creator.slug}
-                            </Button>
-                        </a>
+                    {/* Right: category tag + counter */}
+                    <div className="flex items-center gap-2 shrink-0">
+                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-muted-foreground/60 bg-muted/50 dark:bg-white/[0.04] px-2 py-0.5 rounded-full">
+                            <CategoryIcon className="h-2.5 w-2.5" />
+                            {categoryLabel}
+                        </span>
+                        <span className="text-[10px] text-muted-foreground/50 font-mono tabular-nums tracking-wider">
+                            {String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}
+                        </span>
                     </div>
                 </div>
             </div>

@@ -85,6 +85,48 @@ export const creators: Creator[] = [
                 url: 'https://www.instagram.com/reel/C0meQB9IJak/',
                 title: 'Food Tour',
                 wilayas: ['oran', 'algiers']
+            },
+            {
+                id: 'CpYMLnNry-v',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/CpYMLnNry-v/',
+                title: 'Khoubai in Sahara',
+                wilayas: ['sahara']
+            },
+            {
+                id: 'CgzttRSLwbk',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/CgzttRSLwbk/',
+                title: 'Algerian Culture',
+                wilayas: ['algiers']
+            },
+            {
+                id: 'CpDJX5pj_fv',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/CpDJX5pj_fv/',
+                title: 'Discovery Trip',
+                wilayas: ['temouchent']
+            },
+            {
+                id: 'C0PbDMArVp-',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/C0PbDMArVp-/',
+                title: 'Algerian Landscapes',
+                wilayas: ['bejaia']
+            },
+            {
+                id: 'CULMQjlonfr',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/CULMQjlonfr/',
+                title: 'Traditional Market',
+                wilayas: ['ghardaia']
+            },
+            {
+                id: 'CDrAAXpnprg',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/CDrAAXpnprg/',
+                title: 'Algerian Heritage',
+                wilayas: ['tlemcen']
             }
         ]
     }

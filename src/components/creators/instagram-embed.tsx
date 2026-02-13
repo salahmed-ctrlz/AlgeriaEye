@@ -28,16 +28,14 @@ export function InstagramEmbed({
 
         const code = match[1];
         // Determine if it's a reel or regular post for the embed URL
-        const isReel = /\/(reel|reels)\//.test(originalUrl);
+        const isReel = /\/(reel|reels)\//i.test(originalUrl);
+        const embedPath = captioned ? "embed/captioned/" : "embed/";
+
         const base = isReel
-            ? `https://www.instagram.com/reel/${code}/embed/`
-            : `https://www.instagram.com/p/${code}/embed/`;
+            ? `https://www.instagram.com/reel/${code}/${embedPath}`
+            : `https://www.instagram.com/p/${code}/${embedPath}`;
 
-        const params = new URLSearchParams();
-        if (captioned) params.set("captioned", "true");
-        params.set("hidecaption", captioned ? "false" : "true");
-
-        return `${base}?${params.toString()}`;
+        return base;
     };
 
     const embedUrl = getEmbedUrl(url);
@@ -120,8 +118,8 @@ export function InstagramEmbed({
                 ].join(" ")}
                 style={{
                     maxWidth: `${maxWidth}px`,
-                    minHeight: "500px",
-                    height: "580px",
+                    minHeight: captioned ? "720px" : "500px",
+                    height: captioned ? "780px" : "580px",
                     colorScheme: "normal",
                 }}
                 allowFullScreen

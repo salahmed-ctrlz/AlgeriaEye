@@ -13,6 +13,7 @@
     "logout": "Logout",
     "language": "العربية",
     "explore": "Explore",
+    "explorePage": "Explore Page",
     "about": "About",
     "theme": "Theme"
   },
@@ -246,6 +247,61 @@
     "success": "Booking confirmed successfully!",
     "notes": "Special Requests"
   },
+  "shop": {
+    "title": "Curated Travel Plans",
+    "subtitle": "Pre-planned, stress-free adventures crafted by local experts. Choose your journey and let us handle the rest.",
+    "startingFrom": "Starting from",
+    "bookNow": "Book Now",
+    "highlights": "Highlights",
+    "moreActivities": "+ more activities",
+    "bookTitle": "Book {planTitle}",
+    "bookDesc": "Fill in your details to request more information or book this trip.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "date": "Date",
+    "submit": "Submit Request",
+    "alert": "Booking request sent for {planTitle}! Check your dashboard for status.",
+    "plans": {
+      "plan-algiers": {
+        "title": "Algiers: The White City",
+        "description": "Experience the magic of Algiers in a 3-day immersive tour. From the ancient Casbah to the modern bay, discover the city's rich history and vibrant culture.",
+        "itinerary": {
+          "day1": "Arrival & Casbah Tour",
+          "day2": "Colonial & Modern Algiers",
+          "day3": "Coastal Views & Departure"
+        }
+      },
+      "plan-constantine": {
+        "title": "Constantine: City of Bridges",
+        "description": "Walk across the suspended bridges of Constantine and gaze into the dramatic gorges. A breathtaking journey through history and geology.",
+        "itinerary": {
+          "day1": "Bridges & Palaces",
+          "day2": "Gorges & Ruins"
+        }
+      },
+      "plan-sahara": {
+        "title": "Sahara: Golden Adventure",
+        "description": "A once-in-a-lifetime expedition into the heart of the Algerian Sahara. Sleep under the stars and explore the Tassili n'Ajjer.",
+        "itinerary": {
+          "day1": "Gate to the Desert",
+          "day2": "Canyons & Rock Art",
+          "day3": "The Red Dunes",
+          "day4": "Oases",
+          "day5": "Farewell"
+        }
+      },
+      "plan-oran": {
+        "title": "Oran: The Radiant City",
+        "description": "Enjoy the laid-back coastal vibes of Oran. Famous for Rai music, Santa Cruz, and delicious street food.",
+        "itinerary": {
+          "day1": "Santa Cruz & City",
+          "day2": "History & Music",
+          "day3": "Beach & Relax"
+        }
+      }
+    }
+  },
   "auth": {
     "loginTitle": "Welcome Back",
     "loginSubtitle": "Sign in to your account",
@@ -282,6 +338,7 @@
     "analytics": "Analytics",
     "yourProperties": "My Properties",
     "myTrips": "My Trips",
+    "tripsDesc": "Upcoming and past bookings.",
     "purchases": "Purchases",
     "favorites": "Favorites",
     "settings": "Settings",
@@ -438,6 +495,18 @@
         "hammad": {
           "title": "Al Qal'a of Beni Hammad",
           "desc": "The first capital of the Hammadid emirs, founded in 1007. It is home to one of the largest mosques in Algeria."
+        },
+        "djamila": {
+          "title": "Cuicul (Djemila)",
+          "desc": "A uniquely preserved Roman city situated in mountainous terrain. It features a forum, temples, basilicas, arches and houses, offering a glimpse into Roman town planning adapted to mountain locations."
+        },
+        "mzab": {
+          "title": "M'zab Valley",
+          "desc": "A UNESCO World Heritage site consisting of five fortified cities (ksour) in the Sahara. Known for their unique architecture designed for community living and adaptation to the desert environment."
+        },
+        "tipaza": {
+          "title": "Tipaza Ruins",
+          "desc": "A site comprising a unique group of Phoenician, Roman, palaeo-Christian and Byzantine ruins alongside indigenous monuments such as the Kbor er Roumia, the great royal mausoleum of Mauretania."
         }
       }
     },
@@ -472,5 +541,33 @@
     "rights": "All rights reserved.",
     "goToTop": "Go to Top",
     "madeWith": "Made with ❤️ in Algeria"
+  },
+  "legal": {
+    "title": "Legal & Support",
+    "privacy": {
+      "title": "Privacy Policy",
+      "p1": "At Algeria Eye, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclosure, and safeguard your information when you visit our website including any other media form, media channel, mobile website, or mobile application related or connected thereto.",
+      "p2": "We may collect information about you in a variety of ways. The information we may collect on the Site includes:",
+      "list1": "Personal Data: Personally identifiable information, such as your name, shipping address, email address, and telephone number.",
+      "list2": "Derivative Data: Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.",
+      "p3": "We use the information we collect to provider specific services to you, to improve user experience, and to send you information about new features and services."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "p1": "These Terms of Service constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and Algeria Eye (“we,” “us” or “our”), concerning your access to and use of the algeriaeye.com website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”).",
+      "p2": "You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms of Service. If you do not agree with all of these Terms of Service, then you are expressly prohibited from using the Site and you must discontinue use immediately.",
+      "p3": "User Representations: By using the Site, you represent and warrant that: (1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy of such information and promptly update such registration information as necessary."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": "How do I book a hotel?",
+      "a1": "You can browse our extensive list of hotels in the \"Explore\" section. Once you find a hotel you like, simply click \"Book Now\" and follow the instructions to secure your reservation.",
+      "q2": "Is payment secure?",
+      "a2": "Yes, we use industry-standard encryption to protect your payment details. We verify all hosts and partners to ensure a safe transaction.",
+      "q3": "Can I cancel my booking?",
+      "a3": "Cancellation policies vary by property. You can review the cancellation policy for each listing before booking. Generally, you can cancel within a certain timeframe for a full refund.",
+      "q4": "How can I become a host?",
+      "a4": "To become a host, sign up for an account and select \"Property Owner\" as your role. You can then list your properties through your dashboard."
+    }
   }
 }

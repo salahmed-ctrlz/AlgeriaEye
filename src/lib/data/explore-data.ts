@@ -262,6 +262,84 @@ export const HISTORY_ITEMS: ExploreItem[] = [
                 "/images/explore/temple-2.jpg",
             ],
         },
+    },
+    {
+        id: "djamila",
+        category: "history",
+        title: "Cuicul (Djemila)",
+        title_ar: "كويكول (جميلة)",
+        title_fr: "Cuicul (Djemila)",
+        subtitle: "The Beautiful City",
+        subtitle_ar: "المدينة الجميلة",
+        subtitle_fr: "La Belle Ville",
+        image: "/images/explore/timgad-3.jpg",
+        region: "Sétif",
+        region_ar: "سطيف",
+        region_fr: "Sétif",
+        description: "A uniquely preserved Roman city situated in mountainous terrain, known for its adaptation to the landscape.",
+        description_ar: "مدينة رومانية محفوظة بشكل فريد تقع في تضاريس جبلية، وتشتهر بتكيفها مع المناظر الطبيعية.",
+        description_fr: "Une ville romaine unique et préservée située en terrain montagneux, connue pour son adaptation au paysage.",
+        history: "Djemila, or Cuicul, was founded in the 1st century AD as a Roman military garrison. Its impressive ruins, including the forum, temples, basilicas, arches, and houses, are a testament to Roman town planning adapted to mountain locations. It is a UNESCO World Heritage site.",
+        history_ar: "تأسست جميلة، أو كويكول، في القرن الأول الميلادي كحامية عسكرية رومانية. آثارها المثيرة للإعجاب، بما في ذلك المنتدى والمعابد والبازيليكا والأقواس والمنازل، هي شهادة على تخطيط المدن الرومانية المتكيف مع المواقع الجبلية. وهي موقع تراث عالمي لليونسكو.",
+        history_fr: "Djemila, ou Cuicul, a été fondée au 1er siècle après J.-C. comme garnison militaire romaine. Ses ruines impressionnantes, notamment le forum, les temples, les basiliques, les arcs et les maisons, témoignent de l'urbanisme romain adapté aux sites montagneux. C'est un site classé au patrimoine mondial de l'UNESCO.",
+        locations: ["Sétif", "Djemila"],
+        locations_ar: ["سطيف", "جميلة"],
+        locations_fr: ["Sétif", "Djemila"],
+        media: {
+            gallery: ["/images/explore/timgad-1.webp", "/images/explore/timgad-3.jpg"],
+        },
+    },
+    {
+        id: "mzab",
+        category: "history",
+        title: "M'zab Valley",
+        title_ar: "وادي ميزاب",
+        title_fr: "Vallée du M'zab",
+        subtitle: "The Pentapolis",
+        subtitle_ar: "المدن الخمس",
+        subtitle_fr: "La Pentapole",
+        image: "/images/explore/ghardaia.jpg",
+        region: "Ghardaïa",
+        region_ar: "غرداية",
+        region_fr: "Ghardaïa",
+        description: "A UNESCO World Heritage site consisting of five fortified cities (ksour) in the Sahara.",
+        description_ar: "موقع للتراث العالمي لليونسكو يتكون من خمس مدن محصنة (قصور) في الصحراء.",
+        description_fr: "Site classé au patrimoine mondial de l'UNESCO composé de cinq villes fortifiées (ksour) dans le Sahara.",
+        history: "The M'zab Valley was settled by the Ibadis in the 10th century. Its five ksour—Ghardaïa, Beni Isguen, Melika, Bounoura, and El Atteuf—are known for their unique architecture designed for community living and adaptation to the desert environment. The simple, functional style has inspired modern architects like Le Corbusier.",
+        history_ar: "استقر الإباضيون في وادي ميزاب في القرن العاشر. تشتهر قصوره الخمسة — غرداية، بني يزقن، مليكة، بونورة، والعطف — بهندستها المعمارية الفريدة المصممة للمعيشة المجتمعية والتكيف مع البيئة الصحراوية. ألهم الأسلوب البسيط والوظيفي المهندسين المعماريين الحديثين مثل لو كوربوزييه.",
+        history_fr: "La vallée du M'zab a été colonisée par les Ibadites au Xe siècle. Ses cinq ksour — Ghardaïa, Beni Isguen, Melika, Bounoura et El Atteuf — sont connus pour leur architecture unique conçue pour la vie communautaire et l'adaptation à l'environnement désertique. Le style simple et fonctionnel a inspiré des architectes modernes comme Le Corbusier.",
+        locations: ["Ghardaïa", "Beni Isguen"],
+        locations_ar: ["غرداية", "بني يزقن"],
+        locations_fr: ["Ghardaïa", "Beni Isguen"],
+        media: {
+            gallery: ["/images/explore/ghardaia.jpg"],
+        },
+    },
+    {
+        id: "tipaza",
+        category: "history",
+        title: "Tipaza Ruins",
+        title_ar: "آثار تيبازة",
+        title_fr: "Ruines de Tipaza",
+        subtitle: "Where Sea Meets History",
+        subtitle_ar: "أين يلتقي البحر بالتاريخ",
+        subtitle_fr: "Où la Mer Rencontre l'Histoire",
+        image: "/images/Tourist Spots in map images/tipaza_ruins.webp",
+        region: "Tipaza",
+        region_ar: "تيبازة",
+        region_fr: "Tipaza",
+        description: "A unique group of Phoenician, Roman, palaeo-Christian and Byzantine ruins overlooking the sea.",
+        description_ar: "مجموعة فريدة من الآثار الفينيقية والرومانية والمسيحية القديمة والبيزنطية المطلة على البحر.",
+        description_fr: "Un groupe unique de ruines phéniciennes, romaines, paléochrétiennes et byzantines surplombant la mer.",
+        history: "Tipaza seems to have been founded by the Phoenicians. It became a Roman military colony and later a major center of Christianity in North Africa. The site comprises a unique group of ruins alongside indigenous monuments, all situated in a stunning coastal landscape.",
+        history_ar: "يبدو أن تيبازة أسسها الفينيقيون. أصبحت مستعمرة عسكرية رومانية ولاحقًا مركزًا رئيسيًا للمسيحية في شمال إفريقيا. يضم الموقع مجموعة فريدة من الآثار إلى جانب الآثار الأصلية، وكلها تقع في مناظر طبيعية ساحلية خلابة.",
+        history_fr: "Tipaza semble avoir été fondée par les Phéniciens. Elle est devenue une colonie militaire romaine et plus tard un centre majeur du christianisme en Afrique du Nord. Le site comprend un groupe unique de ruines ainsi que des monuments indigènes, tous situés dans un paysage côtier magnifique.",
+        locations: ["Tipaza"],
+        locations_ar: ["تيبازة"],
+        locations_fr: ["Tipaza"],
+        media: {
+            gallery: ["/images/Tourist Spots in map images/tipaza_ruins.webp"],
+        },
     }
 
 ];
@@ -285,9 +363,9 @@ export const FOOD_ITEMS: ExploreItem[] = [
              <ul class="list-disc pl-5 space-y-1 text-white">
                 <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Couscous" target="_blank">Couscous</a></strong></li>
                 <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Chakhchoukha" target="_blank">Chakhchoukha</a></strong></li>
-                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Rechta" target="_blank">Rechta</a></strong></li>
-                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Brik_(food)" target="_blank">Bourak</a></strong></li>
-                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Mhajeb" target="_blank">Mhajeb</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%B1%D8%B4%D8%AA%D8%A9" target="_blank">Rechta</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%A8%D9%88%D8%B1%D8%A7%D9%83_(%D8%B7%D8%A8%D8%AE_%D8%AC%D8%B2%D8%A7%D8%A6%D8%B1%D9%8A)" target="_blank">Bourak</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D9%85%D8%AD%D8%A7%D8%AC%D8%A8" target="_blank">Mhajeb</a></strong></li>
             </ul>
         `,
         description_ar: `
@@ -335,10 +413,10 @@ export const FOOD_ITEMS: ExploreItem[] = [
         description: `
              <ul class="list-disc pl-5 space-y-1 text-white">
                 <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Kalb_el_louz" target="_blank">Kalb El Louz</a></strong></li>
-                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Baklava" target="_blank">Baklawa</a></strong></li>
-                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Tamina" target="_blank">Tamina</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Algerian_baklava" target="_blank">Baklawa</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D8%B7%D9%85%D9%8A%D9%86%D8%A9_(%D8%A3%D9%83%D9%84%D8%A9)" target="_blank">Tamina</a></strong></li>
                 <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Baghrir" target="_blank">Baghrir</a></strong></li>
-                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://en.wikipedia.org/wiki/Bradj" target="_blank">Braj</a></strong></li>
+                <li><strong class="text-white underline decoration-brand decoration-2 underline-offset-4 hover:text-brand transition-colors"><a href="https://ar.wikipedia.org/wiki/%D9%85%D8%A8%D8%B1%D8%AC%D8%A9" target="_blank">Braj</a></strong></li>
             </ul>
         `,
         description_ar: `
