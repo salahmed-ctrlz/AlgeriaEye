@@ -77,7 +77,7 @@
   },
   "hero": {
     "title": "Discover the Beauty of Algeria",
-    "subtitle": "From Saharan dunes to Mediterranean shores — explore 69 unique wilayas through handpicked hotels, tours, and local experiences.",
+    "subtitle": "Journey from the golden Saharan dunes to the azure Mediterranean shores. Explore 69 unique wilayas through handpicked hotels, tours, and authentic local experiences.",
     "searchPlaceholder": "Search destinations, hotels, experiences...",
     "searchButton": "Search",
     "badge": "🇩🇿 #1 Tourism Platform in Algeria",
@@ -110,7 +110,17 @@
     "feature3Desc": "Discover hidden gems curated by locals who know Algeria's beauty inside out.",
     "ctaTitle": "Own a Property in Algeria?",
     "ctaSubtitle": "Join hundreds of hosts earning income by listing their properties on Algeria Eye.",
-    "ctaButton": "List Your Property"
+    "ctaButton": "List Your Property",
+    "quickAccess": "Quick Access",
+    "recommended": "Recommended for You",
+    "specialOffers": "Special Offers",
+    "viewAll": "View All",
+    "bestPrice": "Best Price",
+    "topRated": "Top Rated",
+    "trendingNow": "Trending Now",
+    "seenByCreators": "Seen by Creators",
+    "creatorsSubtitle": "Discover Algeria through the lens of our top content creators.",
+    "viewProfile": "View Profile"
   },
   "wilayas": {
     "algiers": {
@@ -205,7 +215,16 @@
     "location": "Location",
     "reviews": "Reviews",
     "rating": "Rating",
-    "noReviews": "No reviews yet"
+    "noReviews": "No reviews yet",
+    "viewOnMap": "View on Map",
+    "amenities": "Amenities",
+    "noAmenities": "No specific amenities listed.",
+    "noDescription": "No description available.",
+    "noReviewsMsg": "No reviews yet. Be the first to review!",
+    "anonymous": "Anonymous",
+    "averageCost": "average cost",
+    "reserveTable": "Reserve Table",
+    "ourMenu": "Our Menu"
   },
   "booking": {
     "title": "Complete Your Booking",
@@ -236,7 +255,39 @@
     "orContinueWith": "or continue with"
   },
   "dashboard": {
-    "title": "Owner Dashboard",
+    "title": "Dashboard",
+    "owner": "Owner",
+    "tourist": "Traveler",
+    "headers": {
+      "owner": "Owner Dashboard",
+      "tourist": "Traveler Dashboard",
+      "guide": "Guide Dashboard",
+      "agency": "Agency Dashboard",
+      "hotel": "Hotel Dashboard",
+      "merchant": "Merchant Dashboard"
+    },
+    "nav": {
+      "logout": "Logout"
+    },
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "yourProperties": "My Properties",
+    "myTrips": "My Trips",
+    "purchases": "Purchases",
+    "favorites": "Favorites",
+    "settings": "Settings",
+    "manageMenu": "Manage Properties",
+    "managePropertiesDesc": "Add, edit, or remove your property listings.",
+    "personalInfoDesc": "Manage your public profile and private details.",
+    "auth": {
+      "fullName": "Full Name",
+      "phone": "Phone Number"
+    },
+    "common": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View"
+    },
     "myListings": "My Listings",
     "addListing": "Add Listing",
     "editListing": "Edit Listing",
@@ -251,7 +302,13 @@
       "price": "Price per Night (DZD)",
       "images": "Images",
       "submit": "Save Listing"
-    }
+    },
+    "addNew": "Add New",
+    "general": "General",
+    "security": "Security",
+    "notifications": "Notifications",
+    "personalInfo": "Personal Information",
+    "saveChanges": "Save Changes"
   },
   "common": {
     "loading": "Loading...",
@@ -265,7 +322,23 @@
     "view": "View",
     "dzd": "DZD",
     "exploreAll": "View All",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "general": "General"
+  },
+  "wilayaDetails": {
+    "country": "Algeria",
+    "bestPlaces": "Best Places to Visit",
+    "restaurants": "Restaurants",
+    "hotels": "Hotels & Stays",
+    "noRestaurants": "No restaurants listed yet.",
+    "noHotels": "No hotels listed yet.",
+    "seenByCreators": "Seen by Creators",
+    "seenByCreatorsSubtitle": "Discover this wilaya through the lens of Algeria's top content creators",
+    "culturalInsights": "Cultural Insights",
+    "historyHeritage": "History & Heritage",
+    "traditionsFacts": "Traditions & Facts",
+    "previous": "Previous",
+    "next": "Next"
   },
   "explore": {
     "title": "Explore Algeria",
@@ -370,6 +443,7 @@
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
     "rights": "All rights reserved.",
+    "goToTop": "Go to Top",
     "madeWith": "Made with ❤️ in Algeria"
   }
 }

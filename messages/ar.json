@@ -108,7 +108,17 @@
         "feature3Desc": "اكتشف الجواهر المخفية التي ينظمها سكان محليون يعرفون جمال الجزائر من الداخل.",
         "ctaTitle": "تملك عقاراً في الجزائر؟",
         "ctaSubtitle": "انضم إلى مئات المضيفين الذين يكسبون دخلاً بإدراج ممتلكاتهم على عين الجزائر.",
-        "ctaButton": "أدرج عقارك"
+        "ctaButton": "سجّل عقارك",
+        "quickAccess": "وصول سريع",
+        "recommended": "موصى به لك",
+        "specialOffers": "عروض خاصة",
+        "viewAll": "عرض الكل",
+        "bestPrice": "أفضل سعر",
+        "topRated": "الأعلى تقييماً",
+        "trendingNow": "رائج الآن",
+        "seenByCreators": "بعيون المبدعين",
+        "creatorsSubtitle": "اكتشف الجزائر بعدسة أفضل صناع المحتوى لدينا.",
+        "viewProfile": "زيارة الملف"
     },
     "wilayas": {
         "algiers": {
@@ -200,9 +210,18 @@
         "description": "الوصف",
         "details": "التفاصيل",
         "location": "الموقع",
-        "reviews": "التقييمات",
+        "reviews": "المراجعات",
         "rating": "التقييم",
-        "noReviews": "لا توجد تقييمات بعد"
+        "noReviews": "لا توجد مراجعات بعد",
+        "viewOnMap": "عرض على الخريطة",
+        "amenities": "المرافق",
+        "noAmenities": "لا توجد مرافق محددة.",
+        "noDescription": "لا يوجد وصف متاح.",
+        "noReviewsMsg": "لا توجد مراجعات بعد. كن أول من يراجع!",
+        "anonymous": "مجهول",
+        "averageCost": "متوسط التكلفة",
+        "reserveTable": "حجز طاولة",
+        "ourMenu": "قائمتنا"
     },
     "booking": {
         "title": "أكمل حجزك",
@@ -233,7 +252,18 @@
         "orContinueWith": "أو تابع مع"
     },
     "dashboard": {
-        "title": "لوحة تحكم المالك",
+        "title": "لوحة التحكم",
+        "headers": {
+            "owner": "لوحة تحكم المالك",
+            "tourist": "لوحة تحكم المسافر",
+            "guide": "لوحة تحكم المرشد",
+            "agency": "لوحة تحكم الوكالة",
+            "hotel": "لوحة تحكم الفندق",
+            "merchant": "لوحة تحكم التاجر"
+        },
+        "nav": {
+            "logout": "تسجيل الخروج"
+        },
         "myListings": "قوائمي",
         "addListing": "إضافة قائمة",
         "editListing": "تعديل القائمة",
@@ -248,7 +278,41 @@
             "price": "السعر لليلة (د.ج)",
             "images": "الصور",
             "submit": "حفظ القائمة"
-        }
+        },
+        "overview": "نظرة عامة",
+        "analytics": "تحليلات",
+        "managePropertiesDesc": "إضافة، تعديل، أو حذف قوائم ممتلكاتك.",
+        "personalInfoDesc": "إدارة ملفك الشخصي العام ومعلوماتك الخاصة.",
+        "auth": {
+            "fullName": "الاسم الكامل",
+            "phone": "رقم الهاتف"
+        },
+        "common": {
+            "edit": "تعديل",
+            "delete": "حذف",
+            "view": "عرض"
+        },
+        "myTrips": "رحلاتي",
+        "purchases": "مشتريات",
+        "favorites": "المفضلة",
+        "settings": "إعدادات",
+        "manageMenu": "إدارة القائمة",
+        "yourProperties": "ممتلكاتك",
+        "addNew": "إضافة جديد",
+        "createListing": "إنشاء إعلان",
+        "personalInfo": "معلومات شخصية",
+        "security": "الأمان",
+        "notifications": "إشعارات",
+        "saveChanges": "حفظ التغييرات",
+        "profileUpdateSuccess": "تم تحديث الملف الشخصي!",
+        "noFavorites": "لا توجد مفضلات بعد.",
+        "viewDetails": "عرض التفاصيل",
+        "purchaseHistory": "سجل الشراء",
+        "itemDetails": "تفاصيل العنصر",
+        "paymentSummary": "ملخص الدفع",
+        "paid": "مدفوع",
+        "totalAmount": "المبلغ الإجمالي",
+        "general": "عام"
     },
     "common": {
         "loading": "جاري التحميل...",
@@ -262,7 +326,23 @@
         "view": "عرض",
         "dzd": "د.ج",
         "exploreAll": "عرض الكل",
-        "learnMore": "اعرف المزيد"
+        "learnMore": "اقرأ المزيد",
+        "general": "عام"
+    },
+    "wilayaDetails": {
+        "country": "الجزائر",
+        "bestPlaces": "أماكن تستحق الزيارة",
+        "restaurants": "مطاعم",
+        "hotels": "فنادق وأماكن إقامة",
+        "noRestaurants": "لا توجد مطاعم مسجلة حالياً.",
+        "noHotels": "لا توجد فنادق مسجلة حالياً.",
+        "seenByCreators": "بعيون المبدعين",
+        "seenByCreatorsSubtitle": "اكتشف هذه الولاية بعدسة أفضل صناع المحتوى في الجزائر",
+        "culturalInsights": "ثقافة وتقاليد",
+        "historyHeritage": "نبذة تاريخية",
+        "traditionsFacts": "حقائق وتقاليد",
+        "previous": "السابق",
+        "next": "التالي"
     },
     "explore": {
         "title": "استكشف الجزائر",
@@ -367,6 +447,7 @@
         "terms": "شروط الخدمة",
         "privacy": "سياسة الخصوصية",
         "rights": "جميع الحقوق محفوظة.",
+        "goToTop": "العودة للأعلى",
         "madeWith": "صنع بـ ❤️ في الجزائر"
     }
 }

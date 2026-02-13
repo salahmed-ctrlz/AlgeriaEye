@@ -30,6 +30,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import { cn } from "@/lib/utils";
@@ -75,7 +76,7 @@ export function Navbar() {
     };
 
     const navLinks = [
-        { href: "/", label: t("home"), icon: Home, active: pathname === `/${locale}` },
+        { href: "/", label: t("home"), icon: Home, active: pathname === "/" },
         { href: "/explore", label: t("explore"), icon: Compass, active: pathname.includes("/explore") },
         ...(user ? [
             { href: "/dashboard", label: t("dashboard"), icon: LayoutDashboard, active: pathname.includes("/dashboard") },
@@ -87,7 +88,16 @@ export function Navbar() {
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
             <div className="container mx-auto flex h-24 items-center justify-between px-4 sm:px-8 relative">
                 {/* Logo - Left */}
-                <Link href="/" className="flex items-center gap-2">
+                <Link
+                    href="/"
+                    className="flex items-center gap-2"
+                    onClick={(e) => {
+                        if (pathname === "/") {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                    }}
+                >
                     <div className="relative h-16 w-[20rem] max-w-[40vw]">
                         {mounted ? (
                             <Image
@@ -110,11 +120,19 @@ export function Navbar() {
                             key={link.href}
                             href={link.href}
                             className={cn(
-                                "flex items-center gap-2 text-sm font-medium transition-colors hover:text-brand",
-                                link.active ? "text-brand" : "text-muted-foreground"
+                                "flex items-center gap-2 text-sm font-medium transition-colors hover:text-brand px-3 py-2 rounded-md hover:bg-muted/50",
+                                link.active ? "text-brand bg-muted/50" : "text-muted-foreground"
                             )}
+                            title={link.label}
+                            onClick={(e) => {
+                                if (link.active) {
+                                    e.preventDefault();
+                                    window.scrollTo({ top: 0, behavior: "smooth" });
+                                }
+                            }}
                         >
-                            {link.label}
+                            <link.icon className="h-5 w-5" />
+                            <span className="hidden xl:inline">{link.label}</span>
                         </Link>
                     ))}
                     <Link href="/about" className="text-sm font-medium text-muted-foreground hover:text-brand transition-colors">{t("about")}</Link>
@@ -122,11 +140,7 @@ export function Navbar() {
 
                 {/* Desktop Actions - Right */}
                 <div className="hidden items-center gap-4 md:flex">
-                    <Link href={pathname} locale={otherLocale} className="text-muted-foreground hover:text-foreground transition-colors mr-2">
-                        <span className="flex items-center justify-center h-9 w-9 rounded-full hover:bg-muted transition-colors">
-                            {locale === "en" ? <span className="text-lg font-bold">EN</span> : <span className="text-lg font-bold">ع</span>}
-                        </span>
-                    </Link>
+                    <LanguageSwitcher />
 
                     {/* Day/Night Toggle */}
                     <Button
@@ -198,7 +212,13 @@ export function Navbar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => {
+                                        if (link.active) {
+                                            e.preventDefault();
+                                            window.scrollTo({ top: 0, behavior: "smooth" });
+                                        }
+                                        setIsOpen(false);
+                                    }}
                                     className={cn(
                                         "flex items-center gap-4 rounded-xl px-4 py-4 text-xl font-medium transition-all hover:bg-muted active:scale-95",
                                         link.active ? "bg-muted text-brand" : "text-foreground"
@@ -228,10 +248,9 @@ export function Navbar() {
 
                         <div className="p-6 border-t bg-muted/20">
                             <div className="grid grid-cols-2 gap-4 mb-6">
-                                <Link href={pathname} locale={otherLocale} onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 rounded-lg bg-background border p-3 shadow-sm active:scale-95 transition-transform">
-                                    <span className="text-xl">{locale === "en" ? "🇺🇸" : "🇩🇿"}</span>
-                                    <span className="font-medium">{locale === "en" ? "English" : "العربية"}</span>
-                                </Link>
+                                <div className="flex items-center justify-center gap-2 rounded-lg bg-background border p-3 shadow-sm active:scale-95 transition-transform">
+                                    <LanguageSwitcher />
+                                </div>
                                 <button
                                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                                     className="flex items-center justify-center gap-2 rounded-lg bg-background border p-3 shadow-sm active:scale-95 transition-transform"

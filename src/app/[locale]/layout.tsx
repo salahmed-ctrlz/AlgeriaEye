@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -27,7 +28,7 @@ type Props = {
 export default async function LocaleLayout({ children, params }: Props) {
     const { locale } = await params;
 
-    if (!routing.locales.includes(locale as "en" | "ar")) {
+    if (!routing.locales.includes(locale as "en" | "ar" | "fr")) {
         notFound();
     }
 
@@ -45,6 +46,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     disableTransitionOnChange
                 >
                     <NextIntlClientProvider messages={messages}>
+                        <ScrollToTop />
                         <div className="flex min-h-screen flex-col relative">
                             <Navbar />
                             <main className="flex-1">{children}</main>

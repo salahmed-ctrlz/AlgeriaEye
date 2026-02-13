@@ -2,15 +2,17 @@ import { createClient } from "@/lib/supabase/client"; // Changed to client for s
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { getWilayaBySlug, getWilayaName, wilayas } from "@/data/wilayas";
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ListingCard } from "@/components/listing-card";
 import { AttractionCard } from "@/components/wilaya/attraction-card";
 import { WilayaListingGrid } from "@/components/wilaya/wilaya-listing-grid";
-import { MapPin, History, Camera, Info, Utensils, BedDouble, Palette, ArrowLeft, ArrowRight } from "lucide-react";
+import { MapPin, History, Camera, Info, Utensils, BedDouble, Palette, ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { creators } from "@/data/creators";
+import { InstagramEmbed } from "@/components/creators/instagram-embed";
 
 // Force dynamic rendering — cookies() conflicts with generateStaticParams on Netlify
 export const dynamic = "force-dynamic";
@@ -31,7 +33,8 @@ type Props = {
 
 export default async function WilayaPage({ params }: Props) {
     const { slug } = await params;
-    const locale = (await getLocale()) as "en" | "ar";
+    const locale = (await getLocale()) as "en" | "ar" | "fr";
+    const t = await getTranslations({ locale, namespace: "wilayaDetails" });
     const wilaya = getWilayaBySlug(slug);
 
     if (!wilaya) {
@@ -76,7 +79,7 @@ export default async function WilayaPage({ params }: Props) {
                     className="object-cover"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-black/40 to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 text-white">
                     <div className="mx-auto max-w-7xl">
                         <div className="flex items-center gap-3 mb-4 animate-fade-in">
@@ -85,7 +88,7 @@ export default async function WilayaPage({ params }: Props) {
                             </Badge>
                             <span className="flex items-center gap-1 text-sm text-white/80 uppercase tracking-widest">
                                 <MapPin className="h-4 w-4" />
-                                {locale === "ar" ? "الجزائر" : "Algeria"}
+                                {t("country")}
                             </span>
                         </div>
                         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 animate-fade-in-up">
@@ -107,7 +110,7 @@ export default async function WilayaPage({ params }: Props) {
                     <section className="animate-fade-in-up">
                         <div className="flex items-center gap-3 mb-10 border-b border-border/40 pb-4">
                             <Camera className="h-8 w-8 text-brand" />
-                            <h2 className="text-3xl font-bold tracking-tight">{locale === "ar" ? "أماكن تستحق الزيارة" : "Best Places to Visit"}</h2>
+                            <h2 className="text-3xl font-bold tracking-tight">{t("bestPlaces")}</h2>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                             {bestPlaces.map((place, index) => (
@@ -128,7 +131,7 @@ export default async function WilayaPage({ params }: Props) {
                         <div className="flex items-center gap-3">
                             <Utensils className="h-8 w-8 text-orange-500" />
                             <h2 className="text-3xl font-bold tracking-tight">
-                                {locale === "ar" ? "مطاعم" : "Restaurants"}
+                                {t("restaurants")}
                             </h2>
                         </div>
                     </div>
@@ -140,9 +143,7 @@ export default async function WilayaPage({ params }: Props) {
                                 <Utensils className="h-8 w-8 text-muted-foreground/50" />
                             </div>
                             <p className="text-lg text-muted-foreground font-medium">
-                                {locale === "ar"
-                                    ? "لا توجد مطاعم مسجلة حالياً."
-                                    : "No restaurants listed yet."}
+                                {t("noRestaurants")}
                             </p>
                         </div>
                     )}
@@ -154,7 +155,7 @@ export default async function WilayaPage({ params }: Props) {
                         <div className="flex items-center gap-3">
                             <BedDouble className="h-8 w-8 text-indigo-500" />
                             <h2 className="text-3xl font-bold tracking-tight">
-                                {locale === "ar" ? "فنادق وأماكن إقامة" : "Hotels & Stays"}
+                                {t("hotels")}
                             </h2>
                         </div>
                     </div>
@@ -166,20 +167,56 @@ export default async function WilayaPage({ params }: Props) {
                                 <BedDouble className="h-8 w-8 text-muted-foreground/50" />
                             </div>
                             <p className="text-lg text-muted-foreground font-medium">
-                                {locale === "ar"
-                                    ? "لا توجد فنادق مسجلة حالياً."
-                                    : "No hotels listed yet."}
+                                {t("noHotels")}
                             </p>
                         </div>
                     )}
                 </section>
+
+                {/* 4.5. Seen by Creators (New Section) */}
+                {(() => {
+                    const relevantContent = creators.flatMap(c =>
+                        c.content.filter(item => item.wilayas?.includes(slug))
+                            .map(item => ({ ...item, creator: c }))
+                    );
+
+                    if (relevantContent.length === 0) return null;
+
+                    return (
+                        <section className="animate-fade-in-up">
+                            <div className="flex items-center gap-3 mb-10 border-b border-border/40 pb-4">
+                                <Sparkles className="h-8 w-8 text-pink-500" />
+                                <div>
+                                    <h2 className="text-3xl font-bold tracking-tight">{t("seenByCreators")}</h2>
+                                    <p className="text-muted-foreground mt-1">{t("seenByCreatorsSubtitle")}</p>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {relevantContent.map((item) => (
+                                    <div key={item.id} className="flex flex-col gap-3">
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <div className="h-8 w-8 rounded-full bg-muted overflow-hidden border border-border">
+                                                {/* Placeholder for avatar until we have real ones, or use item.creator.avatar */}
+                                                <div className="w-full h-full bg-brand/10 flex items-center justify-center text-xs font-bold text-brand">
+                                                    {item.creator.name.charAt(0)}
+                                                </div>
+                                            </div>
+                                            <span className="text-sm font-medium">{item.creator.name}</span>
+                                        </div>
+                                        <InstagramEmbed url={item.url} maxWidth={400} />
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    );
+                })()}
 
                 {/* 5. Cultural Insights */}
                 {(wilaya.culture && wilaya.culture.length > 0) ? (
                     <section className="animate-fade-in-up">
                         <div className="flex items-center gap-3 mb-10 border-b border-border/40 pb-4">
                             <Palette className="h-8 w-8 text-purple-500" />
-                            <h2 className="text-3xl font-bold tracking-tight">{locale === "ar" ? "ثقافة وتقاليد" : "Cultural Insights"}</h2>
+                            <h2 className="text-3xl font-bold tracking-tight">{t("culturalInsights")}</h2>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-8">
@@ -222,7 +259,7 @@ export default async function WilayaPage({ params }: Props) {
                         <section className="animate-fade-in-up bg-muted/30 rounded-3xl p-8 md:p-12 border border-border/50">
                             <div className="flex items-center gap-3 mb-8">
                                 <Palette className="h-8 w-8 text-purple-500" />
-                                <h2 className="text-3xl font-bold tracking-tight">{locale === "ar" ? "ثقافة وتقاليد" : "Cultural Insights"}</h2>
+                                <h2 className="text-3xl font-bold tracking-tight">{t("culturalInsights")}</h2>
                             </div>
 
                             <div className="grid md:grid-cols-2 gap-12">
@@ -231,7 +268,7 @@ export default async function WilayaPage({ params }: Props) {
                                     <div>
                                         <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                                             <History className="h-5 w-5 text-muted-foreground" />
-                                            {locale === "ar" ? "نبذة تاريخية" : "History & Heritage"}
+                                            {t("historyHeritage")}
                                         </h3>
                                         <p className="text-muted-foreground leading-loose text-lg">
                                             {wilaya.history[locale]}
@@ -244,7 +281,7 @@ export default async function WilayaPage({ params }: Props) {
                                     <div>
                                         <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                                             <Info className="h-5 w-5 text-muted-foreground" />
-                                            {locale === "ar" ? "حقائق وتقاليد" : "Traditions & Facts"}
+                                            {t("traditionsFacts")}
                                         </h3>
                                         <ul className="space-y-4">
                                             {wilaya.funFacts[locale].map((fact, idx) => (
@@ -269,7 +306,7 @@ export default async function WilayaPage({ params }: Props) {
                         <Button variant="outline" size="lg" className="h-16 w-full sm:w-64 justify-start px-6 rounded-2xl border-border/50 hover:bg-muted/50 hover:border-brand/30 transition-all">
                             <ArrowLeft className="h-5 w-5 mr-3 text-muted-foreground group-hover:text-brand transition-colors rtl:rotate-180" />
                             <div className="flex flex-col items-start">
-                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{locale === "ar" ? "السابق" : "Previous"}</span>
+                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{t("previous")}</span>
                                 <span className="text-lg font-bold">{getWilayaName(prevWilaya, locale)}</span>
                             </div>
                         </Button>
@@ -278,7 +315,7 @@ export default async function WilayaPage({ params }: Props) {
                     <Link href={`/wilaya/${nextWilaya.slug}`} className="group">
                         <Button variant="outline" size="lg" className="h-16 w-full sm:w-64 justify-end px-6 rounded-2xl border-border/50 hover:bg-muted/50 hover:border-brand/30 transition-all">
                             <div className="flex flex-col items-end">
-                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{locale === "ar" ? "التالي" : "Next"}</span>
+                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{t("next")}</span>
                                 <span className="text-lg font-bold">{getWilayaName(nextWilaya, locale)}</span>
                             </div>
                             <ArrowRight className="h-5 w-5 ml-3 text-muted-foreground group-hover:text-brand transition-colors rtl:rotate-180" />

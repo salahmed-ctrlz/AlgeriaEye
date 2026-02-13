@@ -17,14 +17,14 @@ export default async function middleware(request: NextRequest) {
     const { user } = await updateSession(request, response);
 
     // 3. Check if route is protected
-    const pathnameWithoutLocale = pathname.replace(/^\/(en|ar)/, "");
+    const pathnameWithoutLocale = pathname.replace(/^\/(en|ar|fr)/, "");
     const isProtectedRoute = protectedRoutes.some((route) =>
         pathnameWithoutLocale.startsWith(route)
     );
 
     if (isProtectedRoute && !user) {
         // Extract locale from path
-        const locale = pathname.startsWith("/ar") ? "ar" : "en";
+        const locale = pathname.startsWith("/ar") ? "ar" : pathname.startsWith("/fr") ? "fr" : "en";
         const loginUrl = new URL(`/${locale}/login`, request.url);
         loginUrl.searchParams.set("redirect", pathname);
         return NextResponse.redirect(loginUrl);

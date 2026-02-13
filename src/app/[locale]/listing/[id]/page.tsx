@@ -63,7 +63,8 @@ export default function ListingPage() {
     const id = params.id as string;
     const locale = useLocale();
     const t = useTranslations("listing");
-    const ct = useTranslations("common");
+    const ct = useTranslations("categories");
+    const comm = useTranslations("common");
 
     const [listing, setListing] = useState<Listing | null>(null);
     const [loading, setLoading] = useState(true);
@@ -184,9 +185,9 @@ export default function ListingPage() {
     if (!listing) {
         return (
             <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
-                <p className="text-lg text-muted-foreground">{ct("error")}</p>
+                <p className="text-lg text-muted-foreground">{comm("error")}</p>
                 <Link href={`/${locale}`}>
-                    <Button variant="outline">{ct("back")}</Button>
+                    <Button variant="outline">{comm("back")}</Button>
                 </Link>
             </div>
         );
@@ -202,7 +203,7 @@ export default function ListingPage() {
                 className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
                 <ArrowLeft className="h-4 w-4" />
-                {ct("back")}
+                {comm("back")}
             </Link>
 
             <div className="grid gap-10 lg:grid-cols-3">
@@ -268,7 +269,7 @@ export default function ListingPage() {
                                     <Share2 className="h-4 w-4 text-muted-foreground" />
                                 </Button>
                                 <Badge variant="secondary" className="shrink-0 h-9 px-4 text-sm font-medium">
-                                    {listing.type}
+                                    {ct(listing.type.toLowerCase())}
                                 </Badge>
                             </div>
                         </div>
@@ -299,7 +300,7 @@ export default function ListingPage() {
                                         rel="noopener noreferrer"
                                     >
                                         <MapPin className="h-3.5 w-3.5" />
-                                        View on Map
+                                        {t("viewOnMap")}
                                     </a>
                                 </Button>
                             )}
@@ -310,7 +311,7 @@ export default function ListingPage() {
 
                     {/* Features */}
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                        <Label className="col-span-full text-base font-semibold">Amenities</Label>
+                        <Label className="col-span-full text-base font-semibold">{t("amenities")}</Label>
                         {listing.features && listing.features.length > 0 ? (
                             listing.features.map((feature) => {
                                 const Icon = getFeatureIcon(feature);
@@ -322,7 +323,7 @@ export default function ListingPage() {
                                 );
                             })
                         ) : (
-                            <p className="col-span-full text-sm text-muted-foreground italic">No specific amenities listed.</p>
+                            <p className="col-span-full text-sm text-muted-foreground italic">{t("noAmenities")}</p>
                         )}
                     </div>
 
@@ -330,7 +331,7 @@ export default function ListingPage() {
                     <div>
                         <h2 className="text-lg font-semibold">{t("description")}</h2>
                         <p className="mt-3 leading-relaxed text-muted-foreground whitespace-pre-line">
-                            {listing.description || "No description available."}
+                            {listing.description || t("noDescription")}
                         </p>
                     </div>
 
@@ -344,7 +345,7 @@ export default function ListingPage() {
                     {/* Reviews Section */}
                     <div className="space-y-6">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold">Reviews</h2>
+                            <h2 className="text-xl font-bold">{t("reviews")}</h2>
                             {userRole === "tourist" && (
                                 <ReviewDialog listingId={listing.id} onSuccess={refreshReviews} />
                             )}
@@ -352,7 +353,7 @@ export default function ListingPage() {
 
                         {reviews.length === 0 ? (
                             <div className="text-center py-8 bg-muted/30 rounded-lg">
-                                <p className="text-muted-foreground">No reviews yet. Be the first to review!</p>
+                                <p className="text-muted-foreground">{t("noReviewsMsg")}</p>
                             </div>
                         ) : (
                             <div className="space-y-6">
@@ -364,7 +365,7 @@ export default function ListingPage() {
                                         </Avatar>
                                         <div className="flex-1 space-y-1">
                                             <div className="flex items-center justify-between">
-                                                <span className="font-semibold">{review.profiles?.full_name || "Anonymous"}</span>
+                                                <span className="font-semibold">{review.profiles?.full_name || t("anonymous")}</span>
                                                 <span className="text-xs text-muted-foreground">
                                                     {format(new Date(review.created_at), "MMM d, yyyy")}
                                                 </span>
@@ -395,11 +396,11 @@ export default function ListingPage() {
                         {price > 0 && (
                             <div className="mb-4">
                                 <span className="text-2xl font-bold">
-                                    {price.toLocaleString()} {ct("dzd")}
+                                    {price.toLocaleString()} {comm("dzd")}
                                 </span>
                                 <span className="text-sm text-muted-foreground">
                                     {" "}
-                                    {listing.type === "restaurant" ? "average cost" : t("perNight")}
+                                    {listing.type === "restaurant" ? t("averageCost") : t("perNight")}
                                 </span>
                             </div>
                         )}
@@ -409,7 +410,7 @@ export default function ListingPage() {
                             className="w-full bg-brand text-white hover:bg-brand-light"
                             size="lg"
                         >
-                            {listing.type === "restaurant" ? "Reserve Table" : t("bookNow")}
+                            {listing.type === "restaurant" ? t("reserveTable") : t("bookNow")}
                         </Button>
 
                         {listing.rating_avg > 0 && (
@@ -439,6 +440,8 @@ export default function ListingPage() {
 }
 
 function RestaurantMenu({ listingId }: { listingId: string }) {
+    const t = useTranslations("listing");
+    const comm = useTranslations("common");
     const [menus, setMenus] = useState<any[]>([]);
     const [items, setItems] = useState<any[]>([]);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -481,7 +484,7 @@ function RestaurantMenu({ listingId }: { listingId: string }) {
 
     // Group items by category
     const groupedItems = items.reduce((acc, item) => {
-        const cat = item.category || "General";
+        const cat = item.category || comm("general");
         if (!acc[cat]) acc[cat] = [];
         acc[cat].push(item);
         return acc;
@@ -490,7 +493,7 @@ function RestaurantMenu({ listingId }: { listingId: string }) {
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold">Our Menu</h2>
+                <h2 className="text-xl font-bold">{t("ourMenu")}</h2>
             </div>
 
             {/* Menu Tabs */}
@@ -532,7 +535,7 @@ function RestaurantMenu({ listingId }: { listingId: string }) {
                                         <div>
                                             <div className="flex justify-between items-start gap-2">
                                                 <h4 className="font-medium line-clamp-1">{item.name}</h4>
-                                                <span className="font-semibold text-sm shrink-0">{item.price} DA</span>
+                                                <span className="font-semibold text-sm shrink-0">{item.price} {comm("dzd")}</span>
                                             </div>
                                             <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{item.description}</p>
                                         </div>

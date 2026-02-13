@@ -30,15 +30,17 @@ interface Listing {
 
 interface SearchPageProps {
     hideTitle?: boolean;
+    defaultType?: string;
+    defaultWilaya?: string;
 }
 
-export default function SearchPage({ hideTitle = false }: SearchPageProps) {
+export default function SearchPage({ hideTitle = false, defaultType, defaultWilaya }: SearchPageProps) {
     const t = useTranslations("search");
     const locale = useLocale();
     const searchParams = useSearchParams();
     const queryParam = searchParams.get("q") || "";
-    const wilayaParam = searchParams.get("wilaya") || "";
-    const typeParam = searchParams.get("type") || "";
+    const wilayaParam = searchParams.get("wilaya") || defaultWilaya || "";
+    const typeParam = searchParams.get("type") || defaultType || "";
 
     const [listings, setListings] = useState<Listing[]>([]);
     const [loading, setLoading] = useState(true);

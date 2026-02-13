@@ -183,7 +183,7 @@ export default function AboutPage() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-border/40">
                         {[
-                            { label: "Wilayas Covered", value: "48+" },
+                            { label: "Wilayas Covered", value: "69+" },
                             { label: "Active Listings", value: "500+" },
                             { label: "Happy Travelers", value: "10k+" },
                             { label: "Verified Guides", value: "120+" }, // Updated stat
@@ -201,7 +201,7 @@ export default function AboutPage() {
             <section className="py-24 container mx-auto px-4">
                 <div className="relative rounded-3xl overflow-hidden bg-primary text-primary-foreground px-6 py-16 md:px-12 md:py-24 text-center">
                     {/* Background Texture */}
-                    <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10"></div>
+                    <div className="absolute inset-0 opacity-10"></div>
                     <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-black/10 rounded-full blur-3xl"></div>
 

@@ -142,7 +142,7 @@ export function Footer() {
                         onClick={scrollToTop}
                         className="text-xs text-muted-foreground hover:text-brand hover:bg-transparent"
                     >
-                        Go to Top <ArrowUp className="ml-1 h-3 w-3" />
+                        {t("goToTop")} <ArrowUp className="ml-1 h-3 w-3" />
                     </Button>
                 </div>
             </div>

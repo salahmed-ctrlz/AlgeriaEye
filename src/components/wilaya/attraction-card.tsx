@@ -22,13 +22,10 @@ export function AttractionCard({ attraction, index }: AttractionCardProps) {
     const description = attraction.description ? (isAr ? attraction.description.ar : attraction.description.en) : "";
     const traditions = attraction.traditions ? (isAr ? attraction.traditions.ar : attraction.traditions.en) : "";
 
-    // Placeholder gallery images (using the main image and some fallbacks/variations if we had them, 
-    // but for now we'll just repeat the main image to simulate a gallery structure as requested)
-    const galleryImages = [
-        attraction.image,
-        attraction.image, // Placeholder 2
-        attraction.image  // Placeholder 3
-    ];
+    // Use actual gallery images if available, otherwise fallback to main image
+    const galleryImages = attraction.gallery && attraction.gallery.length > 0
+        ? attraction.gallery
+        : [attraction.image, attraction.image, attraction.image];
 
     return (
         <Dialog>

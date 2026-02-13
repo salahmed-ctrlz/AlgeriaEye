@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 import { MapPin, Star, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,10 +29,17 @@ export function ListingCard({
     ratingAvg,
 }: ListingCardProps) {
     const t = useTranslations("listing");
-    const ct = useTranslations("common");
+    const ct = useTranslations("categories");
+    const comm = useTranslations("common");
     const locale = useLocale();
     const { isFavorite, toggleFavorite } = useFavorites();
-    const fav = isFavorite(id);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const fav = mounted && isFavorite(id);
 
     return (
         <Link href={`/${locale}/listing/${id}`}>
@@ -62,8 +70,7 @@ export function ListingCard({
                         }}
                     >
                         <Heart
-                            className={`h-4 w-4 transition-colors ${fav ? "fill-red-500 text-red-500" : "text-muted-foreground"
-                                }`}
+                            className={`h-4 w-4 transition-colors ${fav ? "fill-red-500 text-red-500" : "text-muted-foreground"}`}
                         />
                     </Button>
 
@@ -72,7 +79,7 @@ export function ListingCard({
                         variant="secondary"
                         className="absolute bottom-3 left-3 bg-background/80 text-xs backdrop-blur-sm"
                     >
-                        {type}
+                        {ct(type.toLowerCase())}
                     </Badge>
                 </div>
 
@@ -87,7 +94,7 @@ export function ListingCard({
                     <div className="mt-3 flex items-center justify-between">
                         {price !== undefined && price > 0 && (
                             <span className="text-sm font-bold">
-                                {price.toLocaleString()} {ct("dzd")}{" "}
+                                {price.toLocaleString()} {comm("dzd")}{" "}
                                 <span className="text-xs font-normal text-muted-foreground">
                                     {t("perNight")}
                                 </span>

@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function HighRatedSection() {
+    const t = useTranslations("home");
     const [listings, setListings] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -31,7 +33,7 @@ export function HighRatedSection() {
     return (
         <section className="px-4 md:px-8">
             <div className="mx-auto max-w-7xl">
-                <h2 className="mb-4 text-lg font-medium text-muted-foreground">Top Rated</h2>
+                <h2 className="mb-4 text-lg font-medium text-muted-foreground">{t("topRated")}</h2>
                 <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
                     {listings.map((item) => (
                         <Link key={item.id} href={`/listing/${item.id}`} className="min-w-[200px] md:min-w-[240px]">

@@ -307,32 +307,33 @@ export default function DashboardPage() {
             {/* Sidebar Desktop */}
             <aside className="hidden w-64 flex-col gap-2 p-4 md:flex bg-background border-r">
                 <div className="flex items-center px-2 py-4">
+
                     <span className="text-xl font-bold tracking-tight capitalize">
-                        {role} Dashboard
+                        {t(`headers.${role}`)}
                     </span>
                 </div>
                 <nav className="flex flex-col gap-1">
                     {/* Role Specific Nav Items */}
                     {isSpecialProvider && (
-                        <NavItem id="overview" label="Overview" icon={LayoutDashboard} />
+                        <NavItem id="overview" label={t("overview")} icon={LayoutDashboard} />
                     )}
 
                     {role === "owner" && (
                         <>
-                            <NavItem id="analytics" label="Analytics" icon={BarChart3} />
-                            <NavItem id="listings" label="My Properties" icon={Building2} />
+                            <NavItem id="analytics" label={t("analytics")} icon={BarChart3} />
+                            <NavItem id="listings" label={t("yourProperties")} icon={Building2} />
                         </>
                     )}
 
                     {role === "tourist" && (
                         <>
-                            <NavItem id="trips" label="My Trips" icon={LayoutDashboard} />
-                            <NavItem id="purchases" label="Purchases" icon={ShoppingBag} />
-                            <NavItem id="favorites" label="Favorites" icon={Heart} />
+                            <NavItem id="trips" label={t("myTrips")} icon={LayoutDashboard} />
+                            <NavItem id="purchases" label={t("purchases")} icon={ShoppingBag} />
+                            <NavItem id="favorites" label={t("favorites")} icon={Heart} />
                         </>
                     )}
 
-                    <NavItem id="profile" label="Settings" icon={Settings} />
+                    <NavItem id="profile" label={t("settings")} icon={Settings} />
                 </nav>
                 <div className="mt-auto pt-4 border-t">
                     <button
@@ -340,7 +341,7 @@ export default function DashboardPage() {
                         className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors cursor-pointer"
                     >
                         <LogOut className="h-4 w-4" />
-                        Log out
+                        {t("nav.logout")}
                     </button>
                 </div>
             </aside>
@@ -356,34 +357,34 @@ export default function DashboardPage() {
                     <SheetContent side="left" className="w-64 p-0">
                         <div className="flex items-center px-6 py-4 border-b">
                             <span className="text-lg font-bold capitalize">
-                                {role} Dashboard
+                                {t(`headers.${role}`)}
                             </span>
                         </div>
                         <div className="p-4">
                             <nav className="flex flex-col gap-2">
                                 {isSpecialProvider && (
-                                    <NavItem id="overview" label="Overview" icon={LayoutDashboard} />
+                                    <NavItem id="overview" label={t("overview")} icon={LayoutDashboard} />
                                 )}
                                 {role === "owner" && (
                                     <>
-                                        <NavItem id="analytics" label="Analytics" icon={BarChart3} />
-                                        <NavItem id="listings" label="My Properties" icon={Building2} />
+                                        <NavItem id="analytics" label={t("analytics")} icon={BarChart3} />
+                                        <NavItem id="listings" label={t("yourProperties")} icon={Building2} />
                                     </>
                                 )}
                                 {role === "tourist" && (
                                     <>
-                                        <NavItem id="trips" label="My Trips" icon={LayoutDashboard} />
-                                        <NavItem id="purchases" label="Purchases" icon={ShoppingBag} />
-                                        <NavItem id="favorites" label="Favorites" icon={Heart} />
+                                        <NavItem id="trips" label={t("myTrips")} icon={LayoutDashboard} />
+                                        <NavItem id="purchases" label={t("purchases")} icon={ShoppingBag} />
+                                        <NavItem id="favorites" label={t("favorites")} icon={Heart} />
                                     </>
                                 )}
-                                <NavItem id="profile" label="Settings" icon={Settings} />
+                                <NavItem id="profile" label={t("settings")} icon={Settings} />
                             </nav>
                         </div>
                     </SheetContent>
                 </Sheet>
                 <h1 className="text-lg font-semibold capitalize">
-                    {activeTab === "overview" && role} Dashboard
+                    {activeTab === "overview" && t(`headers.${role}`)}
                 </h1>
             </header>
 
@@ -411,11 +412,11 @@ export default function DashboardPage() {
                         <>
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <h2 className="text-2xl font-bold tracking-tight">Your Properties</h2>
-                                    <p className="text-muted-foreground">Manage your listings and view their status.</p>
+                                    <h2 className="text-2xl font-bold tracking-tight">{t("yourProperties")}</h2>
+                                    <p className="text-muted-foreground">{t("managePropertiesDesc") || "Manage your listings and view their status."}</p>
                                 </div>
                                 <Button onClick={openAddDialog} className="bg-brand text-white hover:bg-brand-light shadow-sm">
-                                    <Plus className="mr-2 h-4 w-4" /> Add New
+                                    <Plus className="mr-2 h-4 w-4" /> {t("addNew")}
                                 </Button>
                             </div>
 
@@ -427,9 +428,9 @@ export default function DashboardPage() {
                                                 <Home className="h-8 w-8 text-brand" />
                                             </div>
                                         </div>
-                                        <h3 className="text-lg font-medium text-foreground">No listings yet</h3>
-                                        <p className="mb-6">Create your first listing to start hosting.</p>
-                                        <Button onClick={openAddDialog} className="bg-brand text-white">Create Listing</Button>
+                                        <h3 className="text-lg font-medium text-foreground">{t("noListings")}</h3>
+                                        <p className="mb-6">{t("createFirstListing") || "Create your first listing to start hosting."}</p>
+                                        <Button onClick={openAddDialog} className="bg-brand text-white">{t("createListing")}</Button>
                                     </Card>
                                 ) : (
                                     listings.map((listing) => (
@@ -474,7 +475,7 @@ export default function DashboardPage() {
                                                     size="sm"
                                                     onClick={() => openEditDialog(listing)}
                                                 >
-                                                    <Edit className="mr-2 h-3 w-3" /> Edit
+                                                    <Edit className="mr-2 h-3 w-3" /> {t("common.edit")}
                                                 </Button>
                                                 <Button
                                                     variant="outline"
@@ -482,7 +483,7 @@ export default function DashboardPage() {
                                                     className="text-destructive hover:text-destructive hover:bg-destructive/10"
                                                     onClick={() => handleDeleteListing(listing.id)}
                                                 >
-                                                    <Trash2 className="mr-2 h-3 w-3" /> Delete
+                                                    <Trash2 className="mr-2 h-3 w-3" /> {t("common.delete")}
                                                 </Button>
                                                 {listing.type === "restaurant" && (
                                                     <Button
@@ -491,7 +492,7 @@ export default function DashboardPage() {
                                                         className="col-span-2 mt-2 bg-brand/10 text-brand hover:bg-brand/20"
                                                         onClick={() => setSelectedListingForMenu(listing)}
                                                     >
-                                                        <Utensils className="mr-2 h-3 w-3" /> Manage Menu
+                                                        <Utensils className="mr-2 h-3 w-3" /> {t("manageMenu")}
                                                     </Button>
                                                 )}
                                             </CardFooter>
@@ -517,15 +518,15 @@ export default function DashboardPage() {
                     {activeTab === "trips" && role === "tourist" && (
                         <>
                             <div>
-                                <h2 className="text-2xl font-bold tracking-tight">My Trips</h2>
-                                <p className="text-muted-foreground">Upcoming and past bookings.</p>
+                                <h2 className="text-2xl font-bold tracking-tight">{t("myTrips")}</h2>
+                                <p className="text-muted-foreground">{t("tripsDesc") || "Upcoming and past bookings."}</p>
                             </div>
                             <div className="grid gap-4">
                                 {bookings.length === 0 ? (
                                     <div className="text-center py-12 border border-dashed rounded-lg">
-                                        <p className="text-muted-foreground">No trips booked yet.</p>
+                                        <p className="text-muted-foreground">{t("noTrips") || "No trips booked yet."}</p>
                                         <Link href={`/${locale}/search`}>
-                                            <Button variant="link" className="mt-2 text-brand">Explore Destinations</Button>
+                                            <Button variant="link" className="mt-2 text-brand">{t("exploreDestinations") || "Explore Destinations"}</Button>
                                         </Link>
                                     </div>
                                 ) : (
@@ -572,8 +573,8 @@ export default function DashboardPage() {
                     {activeTab === "purchases" && role === "tourist" && (
                         <>
                             <div>
-                                <h2 className="text-2xl font-bold tracking-tight">Purchase History</h2>
-                                <p className="text-muted-foreground">Detailed receipts of your transactions.</p>
+                                <h2 className="text-2xl font-bold tracking-tight">{t("purchaseHistory")}</h2>
+                                <p className="text-muted-foreground">{t("purchaseHistoryDesc") || "Detailed receipts of your transactions."}</p>
                             </div>
                             <div className="space-y-4">
                                 {bookings.length === 0 ? (
@@ -599,7 +600,7 @@ export default function DashboardPage() {
                                             </div>
                                             <div className="p-6 grid gap-6 md:grid-cols-2">
                                                 <div className="space-y-4">
-                                                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Item Details</h4>
+                                                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">{t("itemDetails")}</h4>
                                                     <div className="flex items-start gap-4">
                                                         <div className="h-16 w-16 rounded bg-muted overflow-hidden flex-shrink-0">
                                                             {booking.listing.images?.[0] && (
@@ -613,7 +614,7 @@ export default function DashboardPage() {
                                                     </div>
                                                 </div>
                                                 <div className="space-y-4">
-                                                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Payment Summary</h4>
+                                                    <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">{t("paymentSummary")}</h4>
                                                     <div className="space-y-2 text-sm">
                                                         <div className="flex justify-between">
                                                             <span className="text-muted-foreground">Payment Method</span>
@@ -624,8 +625,8 @@ export default function DashboardPage() {
                                                             <span className="font-mono text-xs text-muted-foreground">TRX-{booking.id.slice(0, 8).toUpperCase()}</span>
                                                         </div>
                                                         <div className="flex justify-between border-t pt-2 mt-2 font-bold text-base">
-                                                            <span>Total Amount</span>
-                                                            <span>{booking.total_price.toLocaleString()} DZD</span>
+                                                            <span>{t("totalAmount")}</span>
+                                                            <span>{booking.total_price.toLocaleString()} {t("common.dzd")}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -640,13 +641,13 @@ export default function DashboardPage() {
                     {activeTab === "favorites" && role === "tourist" && (
                         <>
                             <div>
-                                <h2 className="text-2xl font-bold tracking-tight">Favorites</h2>
-                                <p className="text-muted-foreground">Places you saved.</p>
+                                <h2 className="text-2xl font-bold tracking-tight">{t("favorites")}</h2>
+                                <p className="text-muted-foreground">{t("favoritesDesc") || "Places you saved."}</p>
                             </div>
                             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {favorites.length === 0 ? (
                                     <div className="col-span-full text-center py-12 border border-dashed rounded-lg">
-                                        <p className="text-muted-foreground">No favorites yet.</p>
+                                        <p className="text-muted-foreground">{t("noFavorites")}</p>
                                     </div>
                                 ) : (
                                     favorites.map((listing) => (
@@ -662,7 +663,7 @@ export default function DashboardPage() {
                                             </CardHeader>
                                             <CardFooter className="p-4 pt-0">
                                                 <Link href={`/${locale}/listing/${listing.id}`} className="w-full">
-                                                    <Button variant="outline" className="w-full">View Details</Button>
+                                                    <Button variant="outline" className="w-full">{t("viewDetails")}</Button>
                                                 </Link>
                                             </CardFooter>
                                         </Card>
@@ -677,9 +678,9 @@ export default function DashboardPage() {
                         <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
                             <div className="grid gap-6 md:grid-cols-[250px_1fr]">
                                 <nav className="flex flex-col space-y-1">
-                                    <Button variant="ghost" className="justify-start font-semibold bg-muted">General</Button>
-                                    <Button variant="ghost" className="justify-start">Security</Button>
-                                    <Button variant="ghost" className="justify-start">Notifications</Button>
+                                    <Button variant="ghost" className="justify-start font-semibold bg-muted">{t("general")}</Button>
+                                    <Button variant="ghost" className="justify-start">{t("security")}</Button>
+                                    <Button variant="ghost" className="justify-start">{t("notifications")}</Button>
                                 </nav>
 
                                 <div className="space-y-6">
@@ -703,8 +704,8 @@ export default function DashboardPage() {
                                             </div>
                                         </div>
                                         <CardHeader className="pt-16 pb-8 px-8">
-                                            <CardTitle className="text-2xl">Personal Information</CardTitle>
-                                            <CardDescription>Manage your public profile and private details.</CardDescription>
+                                            <CardTitle className="text-2xl">{t("personalInfo")}</CardTitle>
+                                            <CardDescription>{t("personalInfoDesc") || "Manage your public profile and private details."}</CardDescription>
                                         </CardHeader>
                                         <CardContent className="px-8 pb-8">
                                             <form onSubmit={onSubmitProfile} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -742,7 +743,7 @@ export default function DashboardPage() {
                                                                 />
                                                             </div>
                                                             <div className="space-y-2">
-                                                                <Label htmlFor="wilaya">Location</Label>
+                                                                <Label htmlFor="full_name">{t("auth.fullName")}</Label>
                                                                 <Select
                                                                     value={profileForm.wilaya}
                                                                     onValueChange={(val) => setProfileForm({ ...profileForm, wilaya: val })}
@@ -762,7 +763,7 @@ export default function DashboardPage() {
                                                         </div>
 
                                                         <div className="space-y-2">
-                                                            <Label htmlFor="phone">Phone Number</Label>
+                                                            <Label htmlFor="phone">{t("auth.phone") || "Phone Number"}</Label>
                                                             <Input
                                                                 id="phone"
                                                                 value={profileForm.phone}
@@ -792,7 +793,7 @@ export default function DashboardPage() {
                                                                     </>
                                                                 ) : (
                                                                     <>
-                                                                        <Save className="mr-2 h-4 w-4" /> Save Changes
+                                                                        <Save className="mr-2 h-4 w-4" /> {t("saveChanges")}
                                                                     </>
                                                                 )}
                                                             </Button>
@@ -836,7 +837,7 @@ export default function DashboardPage() {
                     )}
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 }
 

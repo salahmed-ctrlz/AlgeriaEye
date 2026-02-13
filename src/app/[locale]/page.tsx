@@ -8,6 +8,7 @@ import { FeaturesSection } from "@/components/features-section";
 import { CtaBanner } from "@/components/cta-banner";
 import { WelcomeHeader } from "@/components/home/welcome-header";
 import { QuickAccessGrid } from "@/components/home/quick-access";
+import { CreatorsCarousel } from "@/components/creators/creators-carousel";
 import { StoriesSection } from "@/components/home/stories-section";
 import { SmartFeed } from "@/components/home/smart-feed";
 import { OffersSection } from "@/components/home/offers-section";
@@ -34,6 +35,9 @@ export default function HomePage() {
             <div className="flex justify-center -mt-4 mb-4">
                 <QuickAccessGrid />
             </div>
+
+            {/* Creators Carousel */}
+            <CreatorsCarousel />
 
             <Separator className="my-4 opacity-20 max-w-7xl mx-auto" />
 

@@ -27,7 +27,7 @@ function useCountUp(end: number, duration: number, trigger: boolean) {
 }
 
 const STATS = [
-    { key: "statsWilayas", value: 48, icon: MapPin, suffix: "" },
+    { key: "statsWilayas", value: 69, icon: MapPin, suffix: "" },
     { key: "statsListings", value: 2000, icon: Building2, suffix: "+" },
     { key: "statsTravelers", value: 5000, icon: Users, suffix: "+" },
     { key: "statsHosts", value: 350, icon: BadgeCheck, suffix: "+" },

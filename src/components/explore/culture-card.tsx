@@ -223,8 +223,23 @@ export function CultureCard({
     const ref = useRef<HTMLDivElement>(null);
     const locale = useLocale();
     const isAr = locale === "ar";
+    const isFr = locale === "fr";
     const [notchHovered, setNotchHovered] = useState(false);
     const [showClip, setShowClip] = useState(false);
+
+    // Helper for localized fields
+    const getLocalized = (field: keyof ExploreItem) => {
+        if (isAr && item[`${field}_ar` as keyof ExploreItem]) return item[`${field}_ar` as keyof ExploreItem];
+        if (isFr && item[`${field}_fr` as keyof ExploreItem]) return item[`${field}_fr` as keyof ExploreItem];
+        return item[field];
+    };
+
+    const title = getLocalized("title") as string;
+    const subtitle = getLocalized("subtitle") as string;
+    const region = getLocalized("region") as string;
+    const description = getLocalized("description") as string;
+    const history = getLocalized("history") as string;
+    const locations = getLocalized("locations") as string[];
 
     // Delay clip-path until layout animation settles to prevent stutter
     useEffect(() => {
@@ -315,7 +330,7 @@ export function CultureCard({
                 {/* Background Image */}
                 <Image
                     src={item.image}
-                    alt={isAr ? item.title_ar : item.title}
+                    alt={title}
                     fill
                     className={cn(
                         "object-cover transition-transform duration-700",
@@ -345,32 +360,32 @@ export function CultureCard({
                                 {/* Title Section */}
                                 <div>
                                     <h5 className="text-sm font-medium tracking-widest text-emerald-400 uppercase mb-2">
-                                        {isAr ? item.subtitle_ar : item.subtitle}
+                                        {subtitle}
                                     </h5>
                                     <h2 className="text-4xl md:text-5xl font-light tracking-tight text-white mb-2 leading-tight">
-                                        {isAr ? item.title_ar : item.title}
+                                        {title}
                                     </h2>
                                     <div className={cn("flex items-center gap-2 text-white/60", isAr && "flex-row-reverse justify-end")}>
                                         <MapPin className="w-4 h-4" />
-                                        <span className="text-sm">{isAr ? item.region_ar : item.region}</span>
+                                        <span className="text-sm">{region}</span>
                                     </div>
                                 </div>
 
                                 <div className="space-y-4">
                                     <h3 className={cn("text-xl font-medium border-emerald-500 pl-4", isAr ? "border-r-2 pr-4 pl-0" : "border-l-2 pl-4")}>
-                                        {isAr ? "التاريخ والسياق" : "History & Context"}
+                                        {isAr ? "التاريخ والسياق" : (isFr ? "Histoire & Contexte" : "History & Context")}
                                     </h3>
                                     <p className="text-gray-300 leading-relaxed font-light text-lg">
-                                        {isAr ? item.history_ar : item.history}
+                                        {history}
                                     </p>
                                 </div>
 
                                 <div className="space-y-4">
                                     <h3 className={cn("text-xl font-medium border-emerald-500 pl-4", isAr ? "border-r-2 pr-4 pl-0" : "border-l-2 pl-4")}>
-                                        {isAr ? "أماكن الزيارة" : "Where to Find It"}
+                                        {isAr ? "أماكن الزيارة" : (isFr ? "Où le trouver" : "Where to Find It")}
                                     </h3>
                                     <div className="flex flex-wrap gap-2">
-                                        {(isAr ? item.locations_ar : item.locations).map((loc, idx) => (
+                                        {locations.map((loc, idx) => (
                                             <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-gray-200 border border-white/5">
                                                 {loc}
                                             </span>
@@ -397,7 +412,7 @@ export function CultureCard({
                                 {item.media.gallery.length > 0 && (
                                     <GalleryCarousel
                                         images={item.media.gallery}
-                                        title={item.title}
+                                        title={title}
                                         gridMode={item.category === "food" || item.category === "clothing"}
                                     />
                                 )}
@@ -415,12 +430,12 @@ export function CultureCard({
                         <div className="backdrop-blur-md bg-white/10 p-5 rounded-xl border border-white/10 text-white transition-all duration-300 hover:bg-white/20">
                             <div>
                                 <h4 className="text-xs font-semibold tracking-wider text-emerald-400 uppercase mb-1">
-                                    {isAr ? item.subtitle_ar : item.subtitle}
+                                    {subtitle}
                                 </h4>
-                                <h3 className="mb-2 text-2xl font-bold">{isAr ? item.title_ar : item.title}</h3>
+                                <h3 className="mb-2 text-2xl font-bold">{title}</h3>
                             </div>
                             <p className="text-gray-200 leading-relaxed text-sm line-clamp-2">
-                                {isAr ? item.description_ar : item.description}
+                                {description}
                             </p>
                         </div>
                     </div>

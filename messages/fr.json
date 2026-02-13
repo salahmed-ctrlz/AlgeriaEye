@@ -1,0 +1,462 @@
+{
+    "metadata": {
+        "title": "Algeria Eye — Découvrez l'Algérie",
+        "description": "Explorez les 69 wilayas de l'Algérie. Réservez des hôtels, restaurants, circuits et expériences uniques à travers le pays."
+    },
+    "nav": {
+        "home": "Accueil",
+        "search": "Explorer",
+        "dashboard": "Tableau de Bord",
+        "messages": "Messages",
+        "login": "Connexion",
+        "register": "Inscription",
+        "logout": "Déconnexion",
+        "language": "Français",
+        "explore": "Découvrir",
+        "about": "À Propos",
+        "theme": "Thème"
+    },
+    "aboutPage": {
+        "title": "À Propos d'Algeria Eye",
+        "subtitle": "Votre Compagnon Intelligent pour Découvrir les Trésors Cachés de l'Algérie",
+        "story": {
+            "title": "Notre Vision",
+            "desc1": "Algeria Eye n'est pas simplement un guide de voyage ; c'est un écosystème numérique complet conçu pour révolutionner le tourisme en Algérie. Né du désir de combler le fossé entre les paysages époustouflants de l'Algérie et le monde, nous offrons une expérience fluide et personnalisée pour chaque voyageur.",
+            "desc2": "Des sables dorés du Sahara à la côte azur de la Méditerranée, nous combinons une technologie d'IA avancée avec la chaleur humaine pour proposer des itinéraires sur mesure, des guides locaux certifiés et des réservations instantanées pour hôtels, transports et événements."
+        },
+        "mission": {
+            "title": "Notre Mission",
+            "desc": "Donner aux voyageurs les moyens d'explorer grâce à une plateforme intelligente et tout-en-un qui simplifie la découverte. Nous visons à mettre en valeur la riche histoire de l'Algérie, sa culture diversifiée et sa nature éblouissante tout en fournissant des solutions pratiques comme l'orientation, la traduction et la réservation sécurisée d'hébergements."
+        },
+        "whatWeDo": {
+            "title": "Ce Que Nous Offrons",
+            "subtitle": "Une suite complète de services pour l'explorateur moderne.",
+            "items": {
+                "guide": {
+                    "title": "Orientation Intelligente",
+                    "desc": "Recommandations pilotées par l'IA et itinéraires personnalisés basés sur vos intérêts — que ce soit l'histoire, le shopping ou la nature."
+                },
+                "connect": {
+                    "title": "Connexion Locale",
+                    "desc": "Accès direct à des guides touristiques certifiés qui facilitent la traduction et l'immersion culturelle."
+                },
+                "logistics": {
+                    "title": "Logistique Fluide",
+                    "desc": "Réservation sans tracas pour hôtels, transports (voiture, bus, tramway) et organisation d'événements."
+                },
+                "events": {
+                    "title": "Événements Culturels",
+                    "desc": "Découvrez et participez aux expositions nationales, festivals et compétitions locales."
+                }
+            }
+        },
+        "values": {
+            "title": "Nos Valeurs Fondamentales",
+            "subtitle": "Les principes qui guident tout ce que nous faisons.",
+            "authenticity": {
+                "title": "Authenticité",
+                "desc": "Plongée profonde dans la culture locale, de la dégustation culinaire aux récits historiques."
+            },
+            "innovation": {
+                "title": "Innovation",
+                "desc": "Exploitation de la technologie pour résoudre les obstacles au voyage comme les barrières linguistiques et la navigation."
+            },
+            "hospitality": {
+                "title": "Hospitalité",
+                "desc": "Garantir que chaque invité se sente chez lui avec un support 24/7 et des hôtes vérifiés."
+            }
+        },
+        "join": {
+            "title": "Faites Partie de l'Histoire",
+            "desc": "Que vous soyez un voyageur en quête d'aventure ou une entreprise locale prête à accueillir le monde, Algeria Eye est votre plateforme.",
+            "touristBtn": "Planifiez Votre Voyage",
+            "hostBtn": "Devenez Partenaire"
+        },
+        "ctaTitle": "Prêt à Explorer ?",
+        "ctaButton": "Commencez Votre Voyage"
+    },
+    "hero": {
+        "title": "Découvrez la Beauté de l'Algérie",
+        "subtitle": "Des dunes sahariennes aux rivages méditerranéens — explorez 69 wilayas uniques à travers des hôtels triés sur le volet, des circuits et des expériences locales.",
+        "searchPlaceholder": "Rechercher des destinations, hôtels, expériences...",
+        "searchButton": "Rechercher",
+        "badge": "🇩🇿 1ère Plateforme Touristique en Algérie",
+        "trust1": "69 Wilayas",
+        "trust2": "Hôtes Vérifiés",
+        "trust3": "Support 24/7"
+    },
+    "home": {
+        "wilayasTitle": "Explorez les 69 Wilayas",
+        "wilayasSubtitle": "Chaque wilaya détient sa propre histoire, attendant d'être découverte",
+        "featuredWilayasTitle": "Destinations En Vedette",
+        "featuredWilayasSubtitle": "Des wilayas sélectionnées dont vous tomberez amoureux",
+        "featuredTitle": "Annonces En Vedette",
+        "featuredSubtitle": "Expériences triées sur le volet à travers l'Algérie",
+        "categoriesTitle": "Naviguer par Catégorie",
+        "categoriesSubtitle": "Trouvez exactement ce que vous cherchez",
+        "statsWilayas": "Wilayas",
+        "statsListings": "Annonces",
+        "statsTravelers": "Voyageurs",
+        "statsHosts": "Hôtes Vérifiés",
+        "featuresTitle": "Pourquoi Algeria Eye ?",
+        "welcomeOwner": "Faites-les se sentir chez eux..",
+        "welcomeTourist": "Prêt à découvrir l'Algérie aujourd'hui ?",
+        "featuresSubtitle": "Tout ce dont vous avez besoin pour un voyage algérien inoubliable",
+        "feature1Title": "Hôtes Vérifiés",
+        "feature1Desc": "Chaque propriété est examinée et vérifiée par notre équipe pour garantir qualité et authenticité.",
+        "feature2Title": "Meilleurs Prix",
+        "feature2Desc": "Comparez les prix parmi des centaines d'annonces pour trouver l'offre parfaite pour votre budget.",
+        "feature3Title": "Expériences Locales",
+        "feature3Desc": "Découvrez des joyaux cachés sélectionnés par des locaux qui connaissent la beauté de l'Algérie de l'intérieur.",
+        "ctaTitle": "Vous possédez une propriété en Algérie ?",
+        "ctaSubtitle": "Rejoignez des centaines d'hôtes qui génèrent des revenus en inscrivant leurs propriétés sur Algeria Eye.",
+        "ctaButton": "Inscrivez Votre Propriété",
+        "quickAccess": "Accès Rapide",
+        "recommended": "Recommandé pour vous",
+        "specialOffers": "Offres Spéciales",
+        "viewAll": "Voir Tout",
+        "bestPrice": "Meilleur Prix",
+        "topRated": "Les Mieux Notés",
+        "trendingNow": "Tendance",
+        "seenByCreators": "Vu par les Créateurs",
+        "creatorsSubtitle": "Découvrez l'Algérie à travers l'objectif de nos meilleurs créateurs de contenu.",
+        "viewProfile": "Voir le Profil"
+    },
+    "wilayas": {
+        "algiers": {
+            "name": "Alger",
+            "desc": "La Ville Blanche — La capitale vibrante de l'Algérie sur la côte méditerranéenne, mêlant architecture haussmannienne et charme de la Casbah."
+        },
+        "oran": {
+            "name": "Oran",
+            "desc": "La Radieuse — Un creuset culturel vibrant et une beauté côtière, berceau du Raï et riche d'histoire espagnole et ottomane."
+        },
+        "annaba": {
+            "name": "Annaba",
+            "desc": "La Perle de l'Est — L'ancienne Hippo Regius rencontre le charme balnéaire moderne, où les ruines romaines côtoient les plages dorées."
+        },
+        "msila": {
+            "name": "M'sila",
+            "desc": "Porte du Hodna — Vastes plaines et riche héritage berbère, abritant la célèbre Kalâa des Béni Hammad."
+        },
+        "biskra": {
+            "name": "Biskra",
+            "desc": "Reine des Ziban — Là où le Sahara commence dans une splendeur dorée, célèbre pour ses dattes Deglet Nour de renommée mondiale."
+        },
+        "tamanrasset": {
+            "name": "Tamanrasset",
+            "desc": "Cœur du Hoggar — Montagnes désertiques majestueuses et culture Touareg ancestrale sous un ciel étoilé infini."
+        },
+        "constantine": {
+            "name": "Constantine",
+            "desc": "La Ville des Ponts — Suspendue dans l'histoire, offrant des vues à couper le souffle depuis ses fameux ponts reliant les rochers."
+        }
+    },
+    "categories": {
+        "exploreByType": "Explorer par Catégorie",
+        "hotels": "Hôtels",
+        "restaurants": "Restaurants",
+        "agencies": "Agences de Voyage",
+        "transport": "Transport",
+        "guides": "Guides Touristiques",
+        "tours": "Circuits",
+        "activities": "Activités",
+        "hotel": "Hôtels",
+        "restaurant": "Restaurants",
+        "agency": "Agence de Voyage",
+        "guide": "Guide Touristique",
+        "tour": "Visites Guidées",
+        "activity": "Activité",
+        "guesthouse": "Maisons d'Hôtes",
+        "experience": "Expériences"
+    },
+    "search": {
+        "title": "Résultats de Recherche",
+        "filters": "Filtres",
+        "priceRange": "Fourchette de Prix",
+        "type": "Type",
+        "allTypes": "Tous les Types",
+        "hotel": "Hôtel",
+        "restaurant": "Restaurant",
+        "guesthouse": "Maison d'Hôte",
+        "tour": "Circuit",
+        "experience": "Expérience",
+        "transport": "Transport",
+        "noResults": "Aucune annonce trouvée. Essayez d'ajuster vos filtres.",
+        "resultsCount": "{count} annonces trouvées",
+        "cuisine": "Cuisine",
+        "vibe": "Ambiance",
+        "cuisines": {
+            "traditional": "Traditionnelle",
+            "modern": "Moderne",
+            "fastFood": "Restauration Rapide",
+            "seafood": "Fruits de Mer",
+            "italian": "Italienne",
+            "french": "Française",
+            "asian": "Asiatique",
+            "syrian": "Syrienne"
+        },
+        "vibes": {
+            "casual": "Décontracté",
+            "fancy": "Chic",
+            "familyFriendly": "Familial",
+            "business": "Affaires",
+            "romantic": "Romantique",
+            "cafe": "Café",
+            "streetFood": "Street Food"
+        }
+    },
+    "listing": {
+        "bookNow": "Réserver Maintenant",
+        "perNight": "/ nuit",
+        "gallery": "Galerie",
+        "description": "Description",
+        "details": "Détails",
+        "location": "Localisation",
+        "reviews": "Avis",
+        "rating": "Évaluation",
+        "noReviews": "Pas encore d'avis",
+        "viewOnMap": "Voir sur la carte",
+        "amenities": "Commodités",
+        "noAmenities": "Aucune commodité spécifiée.",
+        "noDescription": "Aucune description disponible.",
+        "noReviewsMsg": "Pas encore d'avis. Soyez le premier !",
+        "anonymous": "Anonyme",
+        "averageCost": "coût moyen",
+        "reserveTable": "Réserver une table",
+        "ourMenu": "Notre Menu"
+    },
+    "booking": {
+        "title": "Finalisez Votre Réservation",
+        "checkIn": "Arrivée",
+        "checkOut": "Départ",
+        "guests": "Voyageurs",
+        "totalPrice": "Prix Total",
+        "confirm": "Confirmer la Réservation",
+        "paymentSimulated": "Paiement Simulé",
+        "success": "Réservation confirmée avec succès !",
+        "notes": "Demandes Spéciales"
+    },
+    "auth": {
+        "loginTitle": "Bon Retour",
+        "loginSubtitle": "Connectez-vous à votre compte",
+        "registerTitle": "Créer un Compte",
+        "registerSubtitle": "Rejoignez Algeria Eye dès aujourd'hui",
+        "email": "Email",
+        "password": "Mot de passe",
+        "fullName": "Nom Complet",
+        "role": "Je suis un...",
+        "tourist": "Touriste",
+        "owner": "Propriétaire",
+        "loginButton": "Se Connecter",
+        "registerButton": "Créer un Compte",
+        "noAccount": "Pas de compte ?",
+        "hasAccount": "Déjà un compte ?",
+        "orContinueWith": "ou continuez avec"
+    },
+    "dashboard": {
+        "title": "Tableau de Bord",
+        "headers": {
+            "owner": "Tableau de Bord Propriétaire",
+            "tourist": "Tableau de Bord Voyageur",
+            "guide": "Tableau de Bord Guide",
+            "agency": "Tableau de Bord Agence",
+            "hotel": "Tableau de Bord Hôtel",
+            "merchant": "Tableau de Bord Commerçant"
+        },
+        "nav": {
+            "logout": "Déconnexion"
+        },
+        "auth": {
+            "fullName": "Nom Complet",
+            "phone": "Numéro de Téléphone"
+        },
+        "common": {
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "view": "Voir"
+        },
+        "myListings": "Mes Annonces",
+        "addListing": "Ajouter",
+        "editListing": "Modifier l'Annonce",
+        "bookings": "Réservations",
+        "noListings": "Aucune annonce pour le moment.",
+        "createFirstListing": "Créez votre première annonce pour commencer.",
+        "listingForm": {
+            "title": "Titre",
+            "description": "Description",
+            "type": "Type",
+            "wilaya": "Wilaya",
+            "address": "Adresse",
+            "price": "Prix par nuit (DZD)",
+            "images": "Images",
+            "submit": "Enregistrer"
+        },
+        "overview": "Aperçu",
+        "analytics": "Analytiques",
+        "managePropertiesDesc": "Gérez vos annonces et consultez leur statut.",
+        "personalInfoDesc": "Gérez votre profil public et vos informations privées.",
+        "myTrips": "Mes Voyages",
+        "tripsDesc": "Réservations à venir et passées.",
+        "noTrips": "Aucun voyage réservé pour le moment.",
+        "exploreDestinations": "Explorer les Destinations",
+        "purchases": "Achats",
+        "purchaseHistoryDesc": "Reçus détaillés de vos transactions.",
+        "favorites": "Favoris",
+        "favoritesDesc": "Lieux que vous avez sauvegardés.",
+        "settings": "Paramètres",
+        "manageMenu": "Gérer le Menu",
+        "yourProperties": "Vos Propriétés",
+        "addNew": "Ajouter",
+        "createListing": "Créer une Annonce",
+        "personalInfo": "Informations Personnelles",
+        "security": "Sécurité",
+        "notifications": "Notifications",
+        "saveChanges": "Enregistrer les modifications",
+        "profileUpdateSuccess": "Profil mis à jour !",
+        "noFavorites": "Pas encore de favoris.",
+        "viewDetails": "Voir les détails",
+        "purchaseHistory": "Historique des Achats",
+        "itemDetails": "Détails de l'article",
+        "paymentSummary": "Résumé du paiement",
+        "paid": "Payé",
+        "totalAmount": "Montant Total",
+        "general": "Général"
+    },
+    "common": {
+        "loading": "Chargement...",
+        "error": "Une erreur est survenue",
+        "retry": "Réessayer",
+        "back": "Retour",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "view": "Voir",
+        "dzd": "DZD",
+        "exploreAll": "Voir Tout",
+        "learnMore": "En savoir plus",
+        "general": "Général"
+    },
+    "wilayaDetails": {
+        "country": "Algérie",
+        "bestPlaces": "Meilleurs Endroits à Visiter",
+        "restaurants": "Restaurants",
+        "hotels": "Hôtels & Hébergements",
+        "noRestaurants": "Aucun restaurant listé pour le moment.",
+        "noHotels": "Aucun hôtel listé pour le moment.",
+        "seenByCreators": "Vu par les Créateurs",
+        "seenByCreatorsSubtitle": "Découvrez cette wilaya à travers l'objectif des meilleurs créateurs de contenu algériens",
+        "culturalInsights": "Aperçu Culturel",
+        "historyHeritage": "Histoire & Patrimoine",
+        "traditionsFacts": "Traditions & Faits",
+        "previous": "Précédent",
+        "next": "Suivant"
+    },
+    "explore": {
+        "title": "Explorez l'Algérie",
+        "subtitle": "Découvrez l'histoire riche, la culture vibrante et la délicieuse cuisine du plus grand pays d'Afrique.",
+        "backHome": "Retour à l'Accueil",
+        "tabs": {
+            "culture": "Culture & Traditions",
+            "history": "Histoire & Monuments",
+            "food": "Gastronomie & Cuisine",
+            "clothing": "Tenues Traditionnelles"
+        },
+        "culture": {
+            "title": "Culture & Traditions Algériennes",
+            "desc": "Un mélange d'influences berbères, arabes, françaises et méditerranéennes. La culture algérienne est riche en musique, littérature et hospitalité.",
+            "fantasia": {
+                "title": "Fantasia (Tbourida)",
+                "desc": "Un spectacle équestre traditionnel simulant des assauts militaires, souvent observé lors des mariages et festivals. Les cavaliers chargent en ligne et tirent à la poudre noire simultanément."
+            },
+            "tea": {
+                "title": "La Cérémonie du Thé",
+                "desc": "Servir le thé à la menthe est une part centrale de l'hospitalité. Au Sahara, les Touaregs ont un rituel spécifique impliquant trois tournées de thé, chacune avec une saveur différente."
+            },
+            "music": {
+                "title": "Musique : Raï & Chaâbi",
+                "description": "Le paysage musical algérien est aussi diversifié que sa géographie. Deux genres se distinguent par leur impact mondial et leur profondeur culturelle : le Raï rebelle et le Chaâbi poétique.",
+                "rai": {
+                    "title": "Raï : La Voix de la Jeunesse",
+                    "desc": "Né à Oran dans les années 1920, le Raï (signifiant 'Opinion') a commencé comme une tradition bédouine avant d'évoluer en une fusion rebelle de folk, rock et musique électronique. Il parle de liberté, d'amour et de lutte sociale. Des icônes comme Cheb Khaled, Cheb Mami et Cheb Hasni l'ont propulsé sur la scène mondiale, lui valant le statut de patrimoine mondial de l'UNESCO en 2022."
+                },
+                "chaabi": {
+                    "title": "Chaâbi : L'Âme de la Casbah",
+                    "desc": "Originaire des ruelles sinueuses de la Casbah d'Alger au début du 20e siècle, le Chaâbi est la musique du peuple. Caractérisé par le mandole et des paroles poétiques (Melhoun) dérivées de la tradition andalouse, il crée une atmosphère intime. Des maîtres comme El Hadj M'Hamed El Anka ont défini le genre, en faisant un incontournable des mariages et des célébrations religieuses."
+                }
+            }
+        },
+        "food": {
+            "title": "Le Goût de l'Algérie",
+            "desc": "Les saveurs méditerranéennes rencontrent les épices africaines. Couscous, Tajine et pâtisseries au miel vous attendent.",
+            "items": {
+                "couscous": {
+                    "title": "Couscous",
+                    "desc": "Le plat national, des graines de semoule cuites à la vapeur servies généralement avec un ragoût de légumes et de viande."
+                },
+                "chakhchoukha": {
+                    "title": "Chakhchoukha",
+                    "desc": "Un mélange généreux de morceaux de pain plat (rougag) arrosés d'une sauce tomate épicée avec des pois chiches et de la viande."
+                },
+                "mhajeb": {
+                    "title": "Mhajeb",
+                    "desc": "Pain plat feuilleté généralement farci d'un mélange piquant d'oignons et de tomates. Une cuisine de rue très populaire."
+                },
+                "kelb": {
+                    "title": "Kalb El Louz",
+                    "desc": "Un dessert à base de semoule imbibé de sirop et d'eau de rose, signifiant 'Cœur d'Amande'."
+                }
+            }
+        },
+        "history": {
+            "title": "Monuments Historiques",
+            "desc": "Des ruines romaines à l'architecture islamique, l'histoire de l'Algérie s'étend sur des millénaires.",
+            "items": {
+                "timgad": {
+                    "title": "Timgad (Thamugadi)",
+                    "desc": "Connue comme la 'Pompéi de l'Afrique', cette ville romaine dans les montagnes des Aurès est un site du patrimoine mondial de l'UNESCO, doté d'un plan en grille massif et de l'arc de Trajan."
+                },
+                "poste": {
+                    "title": "Grande Poste d'Alger",
+                    "desc": "Un chef-d'œuvre d'architecture néo-mauresque construit en 1910, servant de symbole au centre d'Alger."
+                },
+                "hammad": {
+                    "title": "La Kalâa des Béni Hammad",
+                    "desc": "La première capitale des émirs hammadides, fondée en 1007. Elle abrite l'une des plus grandes mosquées d'Algérie."
+                }
+            }
+        },
+        "clothing": {
+            "title": "Tenue Traditionnelle",
+            "desc": "Un étalage coloré de patrimoine, variant considérablement d'une région à l'autre.",
+            "items": {
+                "karakou": {
+                    "title": "Le Karakou",
+                    "desc": "Originaire d'Alger, il se compose d'une veste en velours brodée de fils d'or (Majboud) et se porte généralement avec le 'Seroual Chelqa' (pantalon traditionnel)."
+                },
+                "chedda": {
+                    "title": "Chedda de Tlemcen",
+                    "desc": "Patrimoine culturel immatériel de l'UNESCO, cette robe de mariée de Tlemcen implique des couches de tissu, des bijoux et un chapeau conique."
+                }
+            }
+        }
+    },
+    "footer": {
+        "description": "Votre passerelle pour découvrir les joyaux cachés de l'Algérie — des oasis sahariennes aux côtes méditerranéennes.",
+        "quickLinks": "Liens Rapides",
+        "explore": "Explorer",
+        "support": "Support",
+        "newsletter": "Newsletter",
+        "newsletterDesc": "Recevez les derniers conseils de voyage et offres",
+        "emailPlaceholder": "votre@email.com",
+        "subscribe": "S'abonner",
+        "contact": "Contact",
+        "helpCenter": "Centre d'Aide",
+        "terms": "Conditions d'Utilisation",
+        "privacy": "Politique de Confidentialité",
+        "rights": "Tous droits réservés.",
+        "goToTop": "Haut de page",
+        "madeWith": "Fait avec ❤️ en Algérie"
+    }
+}

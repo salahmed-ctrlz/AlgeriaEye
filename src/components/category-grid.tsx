@@ -1,57 +1,62 @@
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { Building2, Map, Car, Briefcase, Tent, Palmtree, Utensils } from "lucide-react";
+import { Hotel, Utensils, Home, Map, Plane, Camera } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const categories = [
     {
-        icon: Building2,
+        icon: Hotel,
         key: "hotels",
+        label: "hotels",
         color: "text-brand",
         bg: "bg-brand/10",
-        href: "/search?type=hotel"
+        href: "/search/hotels",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
     },
     {
         icon: Utensils,
         key: "restaurants",
+        label: "restaurants",
         color: "text-brand",
         bg: "bg-brand/10",
-        href: "/search?type=restaurant"
+        href: "/search/restaurants",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80"
     },
     {
-        icon: Briefcase,
-        key: "agencies",
+        icon: Home,
+        key: "guesthouses",
+        label: "guesthouses",
         color: "text-brand",
         bg: "bg-brand/10",
-        href: "/search?type=agency"
-    },
-    {
-        icon: Car,
-        key: "transport",
-        color: "text-brand",
-        bg: "bg-brand/10",
-        href: "/search?type=taxi"
+        href: "/search/guesthouses",
+        image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80"
     },
     {
         icon: Map,
-        key: "guides",
-        color: "text-brand",
-        bg: "bg-brand/10",
-        href: "/search?type=guide"
-    },
-    {
-        icon: Tent,
         key: "tours",
+        label: "tours",
         color: "text-brand",
         bg: "bg-brand/10",
-        href: "/search?type=tour"
+        href: "/search/tours",
+        image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80"
     },
     {
-        icon: Palmtree,
-        key: "activities",
+        icon: Plane,
+        key: "transport",
+        label: "transport",
         color: "text-brand",
         bg: "bg-brand/10",
-        href: "/search?type=activity"
+        href: "/search/transport",
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80"
+    },
+    {
+        icon: Camera,
+        key: "activities",
+        label: "activities",
+        color: "text-brand",
+        bg: "bg-brand/10",
+        href: "/search/activities",
+        image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80"
     },
 ];
 
