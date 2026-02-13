@@ -35,7 +35,18 @@ export default async function CreatorPage({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-    return creators.map((creator) => ({
-        slug: creator.slug,
-    }));
+    const locales = ["en", "fr", "ar"];
+
+    // Create cartesian product of locales and creators
+    const params = [];
+    for (const locale of locales) {
+        for (const creator of creators) {
+            params.push({
+                locale,
+                slug: creator.slug,
+            });
+        }
+    }
+
+    return params;
 }
