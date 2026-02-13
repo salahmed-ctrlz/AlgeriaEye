@@ -71,16 +71,10 @@ export function Footer() {
                                 {nav("home")}
                             </Link>
                             <Link
-                                href={`/${locale}/search`}
+                                href={`/${locale}/explore`}
                                 className="text-sm text-muted-foreground hover:text-brand transition-colors"
                             >
-                                {nav("search")}
-                            </Link>
-                            <Link
-                                href={`/${locale}/login`}
-                                className="text-sm text-muted-foreground hover:text-brand transition-colors"
-                            >
-                                {nav("login")}
+                                Explore Page
                             </Link>
                         </nav>
                     </div>
@@ -91,13 +85,13 @@ export function Footer() {
                             {t("support")}
                         </h3>
                         <nav className="flex flex-col gap-3">
-                            <Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
+                            <Link href={`/${locale}/contact`} className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
                                 {t("helpCenter")}
                             </Link>
-                            <Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
+                            <Link href={`/${locale}/legal`} className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
                                 {t("terms")}
                             </Link>
-                            <Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
+                            <Link href={`/${locale}/legal`} className="text-sm text-muted-foreground hover:text-brand transition-colors cursor-pointer">
                                 {t("privacy")}
                             </Link>
                             <a href="mailto:contact@algeriaeye.com" className="text-sm text-muted-foreground hover:text-brand transition-colors">
