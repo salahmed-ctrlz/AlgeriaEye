@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 
 const reviewSchema = z.object({
     rating: z.number().min(1, "Please select a rating").max(5),
-    comment: z.string().min(10, "Review must be at least 10 characters").max(500, "Review is too long"),
+    comment: z.string().max(500, "Review is too long").optional(),
 });
 
 type ReviewFormData = z.infer<typeof reviewSchema>;

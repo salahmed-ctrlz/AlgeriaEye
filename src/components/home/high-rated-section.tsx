@@ -48,8 +48,9 @@ export function HighRatedSection() {
                                         </div>
                                     )}
                                     <div className="absolute top-2 right-2 flex items-center gap-1 rounded bg-black/50 px-1.5 py-0.5 text-xs text-white backdrop-blur-sm">
-                                        <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                                        <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
                                         <span>{item.rating_avg}</span>
+                                        <span className="text-[10px] text-white/70">({item.rating_count})</span>
                                     </div>
                                 </div>
                                 <div className="p-3">

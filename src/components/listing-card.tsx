@@ -17,6 +17,7 @@ interface ListingCardProps {
     image?: string;
     price?: number;
     ratingAvg?: number;
+    ratingCount?: number;
 }
 
 export function ListingCard({
@@ -27,6 +28,7 @@ export function ListingCard({
     image,
     price,
     ratingAvg,
+    ratingCount,
 }: ListingCardProps) {
     const t = useTranslations("listing");
     const ct = useTranslations("categories");
@@ -40,6 +42,7 @@ export function ListingCard({
     }, []);
 
     const fav = mounted && isFavorite(id);
+    const isTopRated = ratingAvg && ratingAvg >= 4.5 && ratingCount && ratingCount >= 5;
 
     return (
         <Link href={`/${locale}/listing/${id}`}>
@@ -74,13 +77,22 @@ export function ListingCard({
                         />
                     </Button>
 
-                    {/* Type Badge */}
-                    <Badge
-                        variant="secondary"
-                        className="absolute bottom-3 left-3 bg-background/80 text-xs backdrop-blur-sm"
-                    >
-                        {ct(type.toLowerCase())}
-                    </Badge>
+                    <div className="absolute top-3 left-3 flex flex-col gap-1 items-start">
+                        {/* Type Badge */}
+                        <Badge
+                            variant="secondary"
+                            className="bg-background/80 text-xs backdrop-blur-sm"
+                        >
+                            {ct(type.toLowerCase())}
+                        </Badge>
+
+                        {/* Top Rated Badge */}
+                        {isTopRated && (
+                            <Badge className="bg-amber-500/90 hover:bg-amber-500 text-white text-[10px] backdrop-blur-sm border-none shadow-sm">
+                                Top Rated
+                            </Badge>
+                        )}
+                    </div>
                 </div>
 
                 <CardContent className="p-4">
@@ -103,8 +115,11 @@ export function ListingCard({
 
                         {ratingAvg !== undefined && ratingAvg > 0 && (
                             <div className="flex items-center gap-1">
-                                <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                                <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                                 <span className="text-sm font-medium">{ratingAvg}</span>
+                                {ratingCount !== undefined && (
+                                    <span className="text-xs text-muted-foreground">({ratingCount})</span>
+                                )}
                             </div>
                         )}
                     </div>

@@ -26,6 +26,7 @@ interface Listing {
     images: string[];
     price_per_night: number;
     rating_avg: number;
+    rating_count: number;
 }
 
 interface SearchPageProps {
@@ -181,6 +182,7 @@ export default function SearchPage({ hideTitle = false, defaultType, defaultWila
                             image={listing.images?.[0]}
                             price={listing.price_per_night}
                             ratingAvg={listing.rating_avg}
+                            ratingCount={listing.rating_count}
                         />
                     ))}
                 </div>

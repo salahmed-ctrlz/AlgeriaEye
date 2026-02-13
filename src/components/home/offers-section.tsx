@@ -18,14 +18,19 @@ export function OffersSection() {
     useEffect(() => {
         const fetchOffers = async () => {
             const supabase = createClient();
+            // Fetch a mix of listings (random sort using UUID if supported or just random client side after fetch)
+            // Since Supabase random() is not directly exposed easily in JS client without RPC, 
+            // we will fetch a larger batch and shuffle client-side for "random mix" effect.
             const { data, error } = await supabase
                 .from("listings")
                 .select("*")
-                .order("price_per_night", { ascending: true }) // Cheapest first
-                .limit(4);
+                .limit(20);
 
             if (data) {
-                setOffers(data);
+                // Shuffle array
+                const shuffled = data.sort(() => 0.5 - Math.random());
+                // Take first 4
+                setOffers(shuffled.slice(0, 4));
             }
             setLoading(false);
         };
