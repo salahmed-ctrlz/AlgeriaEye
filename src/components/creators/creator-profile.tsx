@@ -273,7 +273,6 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                                         <div className="rounded-xl overflow-hidden ring-1 ring-white/[0.04]">
                                             <InstagramEmbed
                                                 url={item.url}
-                                                thumbnail={item.thumbnail}
                                                 captioned={false}
                                             />
                                         </div>

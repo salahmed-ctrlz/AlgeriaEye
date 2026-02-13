@@ -152,10 +152,6 @@ export function CreatorsCarousel() {
                                             <InstagramEmbed
                                                 url={item.url}
                                                 maxWidth={400}
-                                                creator={{
-                                                    name: featuredCreator.name,
-                                                    avatar: featuredCreator.avatar
-                                                }}
                                             />
                                         </div>
 
