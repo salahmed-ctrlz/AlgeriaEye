@@ -109,7 +109,7 @@ export function Navbar() {
             className={cn(
                 "fixed top-0 z-50 w-full transition-all duration-300 ease-in-out",
                 scrolled
-                    ? "top-6 left-1/2 -translate-x-1/2 w-auto rounded-full border border-border/40 shadow-xl bg-background/80 backdrop-blur-md px-2 py-2"
+                    ? "md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-auto md:rounded-full border-b md:border border-border/40 shadow-xl bg-background/80 backdrop-blur-md px-2 py-2"
                     : "border-b border-border/40 bg-background/80 backdrop-blur-xl"
             )}
         >
@@ -290,7 +290,7 @@ export function Navbar() {
                                 <Menu className="h-6 w-6" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side={dir === "rtl" ? "right" : "left"} className="w-full sm:max-w-sm border-r-0 p-0 flex flex-col">
+                        <SheetContent side="top" className="w-full h-[100dvh] border-none p-0 flex flex-col transition-all duration-500 ease-in-out bg-background/95 backdrop-blur-2xl">
                             {/* Mobile Menu (Same Content) */}
                             <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                             <SheetDescription className="sr-only">Navigation</SheetDescription>
