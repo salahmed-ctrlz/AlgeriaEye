@@ -150,17 +150,17 @@ export const creators: Creator[] = [
         },
         content: [
             {
-                id: 'DTs5-WXjHcs',
-                type: 'instagram',
-                url: 'https://www.instagram.com/reel/DTs5-WXjHcs/',
-                title: 'Algerian Vibes',
-                wilayas: []
-            },
-            {
                 id: 'DTqXhQAjCUV',
                 type: 'instagram',
                 url: 'https://www.instagram.com/reel/DTqXhQAjCUV/',
                 title: 'Hidden Gems',
+                wilayas: []
+            },
+            {
+                id: 'DTs5-WXjHcs',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTs5-WXjHcs/',
+                title: 'Algerian Vibes',
                 wilayas: []
             },
             {

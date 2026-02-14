@@ -52,7 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                             <div dir="ltr">
                                 <Navbar />
                             </div>
-                            <main className="flex-1">{children}</main>
+                            <main className="flex-1 pt-24">{children}</main>
                             <Footer />
                         </div>
                         <Toaster />

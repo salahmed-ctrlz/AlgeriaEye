@@ -423,7 +423,7 @@ export function CultureCard({
                                     <GalleryCarousel
                                         images={item.media.gallery}
                                         title={title}
-                                        gridMode={item.category === "food" || item.category === "clothing"}
+                                        gridMode={item.category === "food" || item.category === "clothing" || item.category === "culture"}
                                     />
                                 )}
 

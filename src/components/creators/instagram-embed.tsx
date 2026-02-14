@@ -27,15 +27,11 @@ export function InstagramEmbed({
         if (!match) return null;
 
         const code = match[1];
-        // Determine if it's a reel or regular post for the embed URL
-        const isReel = /\/(reel|reels)\//i.test(originalUrl);
         const embedPath = captioned ? "embed/captioned/" : "embed/";
 
-        const base = isReel
-            ? `https://www.instagram.com/reel/${code}/${embedPath}`
-            : `https://www.instagram.com/p/${code}/${embedPath}`;
-
-        return base;
+        // Using /p/ for all content (including reels) often bypasses the 
+        // "Watch on Instagram" overlay better than the /reel/ path.
+        return `https://www.instagram.com/p/${code}/${embedPath}`;
     };
 
     const embedUrl = getEmbedUrl(url);
@@ -120,7 +116,7 @@ export function InstagramEmbed({
                     maxWidth: `${maxWidth}px`,
                     minHeight: captioned ? "720px" : "500px",
                     height: captioned ? "780px" : "580px",
-                    colorScheme: "normal",
+                    colorScheme: "dark",
                 }}
                 allowFullScreen
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -134,7 +130,7 @@ export function InstagramEmbed({
                     setIsLoaded(true);
                 }}
                 title="Instagram embed"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
             />
 
             {/* Inject shimmer keyframe once */}
