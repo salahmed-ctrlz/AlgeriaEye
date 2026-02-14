@@ -1,0 +1,59 @@
+  "subscriptions": {
+    "title": "Partner Plans",
+    "subtitle": "Boost your business and reach more tourists across Algeria.",
+    "forOwners": "For Business Owners",
+    "starter": {
+      "name": "Starter Plan",
+      "price": "4,900",
+      "period": "/ month",
+      "desc": "Perfect for small guesthouses, cafés, and local tour guides.",
+      "features": [
+        "Business listing page",
+        "Up to 10 photos",
+        "Basic description (multilingual)",
+        "Map visibility",
+        "Customer reviews enabled",
+        "Booking request system",
+        "Basic analytics (views & clicks)"
+      ]
+    },
+    "growth": {
+      "name": "Growth Plan",
+      "price": "9,900",
+      "period": "/ month",
+      "desc": "For established hotels, restaurants, and agencies looking to grow visibility.",
+      "features": [
+        "Everything in Starter",
+        "Featured placement in Wilaya pages",
+        "Up to 30 photos + video embedding",
+        "Food pre-order options",
+        "Priority search ranking",
+        "Promotional badge (“Recommended”)",
+        "Advanced analytics",
+        "Direct messaging with tourists"
+      ]
+    },
+    "premium": {
+      "name": "Premium Plan",
+      "price": "19,900",
+      "period": "/ month",
+      "desc": "For leading brands and high-traffic businesses.",
+      "features": [
+        "Everything in Growth",
+        "Homepage featured placement",
+        "“Verified Partner” badge",
+        "Unlimited media uploads",
+        "Promotional campaigns spotlight",
+        "Seasonal promotional banners",
+        "Dedicated support",
+        "Early access to new features"
+      ]
+    },
+    "cta": {
+      "homeTitle": "Own a Business in Algeria?",
+      "homeSubtitle": "List your services and reach thousands of travelers.",
+      "button": "View Subscription Plans",
+      "subscribe": "Subscribe Now",
+      "freeForTourists": "Tourists always use the platform for free."
+    }
+  }

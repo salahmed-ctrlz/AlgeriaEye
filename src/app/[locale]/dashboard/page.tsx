@@ -170,6 +170,12 @@ export default function DashboardPage() {
                     avatar_url: profileData.avatar_url || "",
                 });
 
+                // Admin Redirect: Admins should use the Control Center
+                if (profileData.role === "admin") {
+                    router.push(`/${locale}/control-center`);
+                    return;
+                }
+
                 // Set default tab based on role if not set in URL
                 if (!searchParams.get("tab")) {
                     if (["guide", "agency", "hotel", "merchant"].includes(profileData.role || "")) {
@@ -254,21 +260,21 @@ export default function DashboardPage() {
             return;
         }
 
-        toast.success("Profile updated!");
+        toast.success(t("profile.updated"));
         setProfileSaving(false);
         fetchData();
     };
 
     const handleDeleteListing = async (id: string) => {
-        if (!confirm("Are you sure you want to delete this listing?")) return;
+        if (!confirm(t("dialogs.deleteConfirm"))) return;
 
         const supabase = createClient();
         const { error } = await supabase.from("listings").delete().eq("id", id);
 
         if (error) {
-            toast.error("Failed to delete listing");
+            toast.error(t("dialogs.deleteError"));
         } else {
-            toast.success("Listing deleted");
+            toast.success(t("dialogs.deleteSuccess"));
             fetchData();
         }
     };
@@ -510,7 +516,7 @@ export default function DashboardPage() {
                     <Dialog open={!!selectedListingForMenu} onOpenChange={(open) => !open && setSelectedListingForMenu(null)}>
                         <DialogContent className="sm:max-w-[95vw] w-[1400px] max-h-[92vh] overflow-hidden p-0">
                             <DialogHeader className="px-6 pt-5 pb-4 border-b bg-muted/30">
-                                <DialogTitle className="text-xl">Manage Menu: {selectedListingForMenu?.title}</DialogTitle>
+                                <DialogTitle className="text-xl">{t("manageMenu")}: {selectedListingForMenu?.title}</DialogTitle>
                             </DialogHeader>
                             <div className="px-6 py-5 overflow-y-auto max-h-[calc(92vh-80px)]">
                                 {selectedListingForMenu && <MenuManager listingId={selectedListingForMenu.id} />}
@@ -733,14 +739,14 @@ export default function DashboardPage() {
                                             </div>
                                             <CardHeader className="pt-16 pb-8 px-8">
                                                 <CardTitle className="text-2xl">{t("personalInfo")}</CardTitle>
-                                                <CardDescription>{t("personalInfoDesc") || "Manage your public profile and private details."}</CardDescription>
+                                                <CardDescription>{t("personalInfoDesc")}</CardDescription>
                                             </CardHeader>
                                             <CardContent className="px-8 pb-8">
                                                 <form onSubmit={onSubmitProfile} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                                     <div className="grid gap-8 lg:grid-cols-[200px_1fr]">
                                                         <div className="space-y-4 text-center lg:text-left">
                                                             <div className="flex flex-col gap-2">
-                                                                <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Profile Picture</Label>
+                                                                <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t("profile.avatar")}</Label>
                                                                 <div className="mx-auto lg:mx-0">
                                                                     <ImageUpload
                                                                         value={profileForm.avatar_url ? [profileForm.avatar_url] : []}
@@ -753,7 +759,7 @@ export default function DashboardPage() {
                                                                     />
                                                                 </div>
                                                                 <p className="text-[10px] text-muted-foreground">
-                                                                    Max 5MB. Formats: JPG, PNG.
+                                                                    {t("profile.avatarDesc")}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -761,12 +767,12 @@ export default function DashboardPage() {
                                                         <div className="space-y-6">
                                                             <div className="grid gap-6 md:grid-cols-2">
                                                                 <div className="space-y-2">
-                                                                    <Label htmlFor="full_name">Full Name</Label>
+                                                                    <Label htmlFor="full_name">{t("profile.fullName")}</Label>
                                                                     <Input
                                                                         id="full_name"
                                                                         value={profileForm.full_name}
                                                                         onChange={(e) => setProfileForm({ ...profileForm, full_name: e.target.value })}
-                                                                        placeholder="e.g. Amine Benali"
+                                                                        placeholder={t("profile.fullNamePlaceholder")}
                                                                         className="h-10"
                                                                     />
                                                                 </div>
@@ -817,7 +823,7 @@ export default function DashboardPage() {
                                                                 <Button type="submit" disabled={profileSaving} className="bg-brand text-white hover:bg-brand-light min-w-[150px] h-10 shadow-sm transition-all hover:shadow">
                                                                     {profileSaving ? (
                                                                         <>
-                                                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Saving...
+                                                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t("profile.saving")}
                                                                         </>
                                                                     ) : (
                                                                         <>
@@ -914,9 +920,9 @@ export default function DashboardPage() {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[1000px] md:max-w-[1200px]">
                     <DialogHeader>
-                        <DialogTitle>{editingListing ? "Edit Listing" : "Create New Listing"}</DialogTitle>
+                        <DialogTitle>{editingListing ? t("dialogs.editListing") : t("dialogs.createListing")}</DialogTitle>
                         <DialogDescription>
-                            {editingListing ? "Update your property details below." : "Fill in the details to publish your property."}
+                            {editingListing ? t("dialogs.editListingDesc") : t("dialogs.createListingDesc")}
                         </DialogDescription>
                     </DialogHeader>
                     {isDialogOpen && userId && (

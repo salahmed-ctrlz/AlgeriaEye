@@ -1,0 +1,59 @@
+    "subscriptions": {
+        "title": "Offres Partenaires",
+        "subtitle": "Boostez votre activité et touchez plus de touristes en Algérie.",
+        "forOwners": "Pour les Propriétaires",
+        "starter": {
+            "name": "Formule Starter",
+            "price": "4 900",
+            "period": "/ mois",
+            "desc": "Idéal pour maisons d’hôtes, cafés et guides locaux.",
+            "features": [
+                "Page de présentation",
+                "Jusqu’à 10 photos",
+                "Description multilingue",
+                "Visibilité sur la carte",
+                "Avis clients activés",
+                "Système de demande de réservation",
+                "Statistiques basiques"
+            ]
+        },
+        "growth": {
+            "name": "Formule Croissance",
+            "price": "9 900",
+            "period": "/ mois",
+            "desc": "Pour hôtels, restaurants et agences établis.",
+            "features": [
+                "Inclut Starter +",
+                "Mise en avant sur les pages Wilaya",
+                "30 photos + intégration vidéo",
+                "Option précommande repas",
+                "Priorité dans la recherche",
+                "Badge “Recommandé”",
+                "Statistiques avancées",
+                "Messagerie directe"
+            ]
+        },
+        "premium": {
+            "name": "Formule Premium",
+            "price": "19 900",
+            "period": "/ mois",
+            "desc": "Pour marques leaders et entreprises à forte visibilité.",
+            "features": [
+                "Inclut Croissance +",
+                "Mise en avant en page d’accueil",
+                "Badge “Partenaire Vérifié”",
+                "Médias illimités",
+                "Campagnes promotionnelles",
+                "Bannières saisonnières",
+                "Support dédié",
+                "Accès anticipé"
+            ]
+        },
+        "cta": {
+            "homeTitle": "Vous possédez une entreprise en Algérie ?",
+            "homeSubtitle": "Listez vos services et touchez des milliers de voyageurs.",
+            "button": "Voir les Offres",
+            "subscribe": "Souscrire maintenant",
+            "freeForTourists": "L'utilisation de la plateforme est gratuite pour les touristes."
+        }
+    }

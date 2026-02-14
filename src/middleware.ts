@@ -5,7 +5,7 @@ import { updateSession } from "@/lib/supabase/middleware";
 
 const intlMiddleware = createMiddleware(routing);
 
-const protectedRoutes = ["/dashboard", "/messages"];
+const protectedRoutes = ["/dashboard", "/messages", "/control-center"];
 
 export default async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -28,6 +28,16 @@ export default async function middleware(request: NextRequest) {
         const loginUrl = new URL(`/${locale}/login`, request.url);
         loginUrl.searchParams.set("redirect", pathname);
         return NextResponse.redirect(loginUrl);
+    }
+
+    // 4. Role-based protection for /control-center
+    if (pathnameWithoutLocale.startsWith("/control-center")) {
+        // We check metadata first (fastest)
+        const role = user?.user_metadata?.role;
+        if (role !== "admin") {
+            const locale = pathname.startsWith("/ar") ? "ar" : pathname.startsWith("/fr") ? "fr" : "en";
+            return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
+        }
     }
 
     return response;

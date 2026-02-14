@@ -21,31 +21,11 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import {
-    Plus,
-    Trash2,
-    Edit,
-    Utensils,
-    Coffee,
-    IceCream,
-    Wine,
-    Sandwich,
-    Search,
-    ChevronDown,
-    ChevronRight,
-    ImagePlus,
-    X,
-    Eye,
-    EyeOff,
-    Package,
-    DollarSign,
-    Grid3X3,
-    Loader2,
-    Upload,
-} from "lucide-react";
+import { Plus, Trash2, Edit, Utensils, Coffee, IceCream, Sandwich, Search, ChevronDown, ChevronRight, Eye, EyeOff, Package, DollarSign, Grid3X3, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { ImageUpload } from "@/components/image-upload";
+import { useTranslations } from "next-intl";
 
 interface Menu {
     id: string;
@@ -70,22 +50,24 @@ interface MenuManagerProps {
     listingId: string;
 }
 
-const CATEGORIES = [
-    { value: "appetizer", label: "Appetizers", icon: Sandwich, color: "text-amber-600 bg-amber-50" },
-    { value: "main", label: "Main Dishes", icon: Utensils, color: "text-red-600 bg-red-50" },
-    { value: "dessert", label: "Desserts", icon: IceCream, color: "text-pink-600 bg-pink-50" },
-    { value: "drink", label: "Drinks", icon: Coffee, color: "text-blue-600 bg-blue-50" },
-    { value: "other", label: "Other", icon: Package, color: "text-gray-600 bg-gray-50" },
-];
-
-const getCategoryInfo = (cat: string) =>
-    CATEGORIES.find((c) => c.value === cat) || CATEGORIES[CATEGORIES.length - 1];
-
 export function MenuManager({ listingId }: MenuManagerProps) {
+    const t = useTranslations("dashboard.menuManager");
+    const tCommon = useTranslations("common");
     const [menus, setMenus] = useState<Menu[]>([]);
     const [items, setItems] = useState<MenuItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+
+    const CATEGORIES = [
+        { value: "appetizer", label: t("categories.appetizer"), icon: Sandwich, color: "text-amber-600 bg-amber-50" },
+        { value: "main", label: t("categories.main"), icon: Utensils, color: "text-red-600 bg-red-50" },
+        { value: "dessert", label: t("categories.dessert"), icon: IceCream, color: "text-pink-600 bg-pink-50" },
+        { value: "drink", label: t("categories.drink"), icon: Coffee, color: "text-blue-600 bg-blue-50" },
+        { value: "other", label: t("categories.other"), icon: Package, color: "text-gray-600 bg-gray-50" },
+    ];
+
+    const getCategoryInfo = (cat: string) =>
+        CATEGORIES.find((c) => c.value === cat) || CATEGORIES[CATEGORIES.length - 1];
 
     // Dialog states
     const [menuDialogOpen, setMenuDialogOpen] = useState(false);
@@ -150,7 +132,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
         setSaving(true);
         if (editingMenu) {
             await supabase.from("menus").update({ title: menuTitle }).eq("id", editingMenu.id);
-            toast.success("Menu updated");
+            toast.success(t("toasts.menuUpdated"));
         } else {
             const { data } = await supabase
                 .from("menus")
@@ -158,7 +140,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                 .select()
                 .single();
             if (data) setActiveMenuId(data.id);
-            toast.success("Menu created");
+            toast.success(t("toasts.menuCreated"));
         }
         setSaving(false);
         setMenuDialogOpen(false);
@@ -173,11 +155,11 @@ export function MenuManager({ listingId }: MenuManagerProps) {
     };
 
     const deleteMenu = async (id: string) => {
-        if (!confirm("Delete this entire menu and all its items?")) return;
+        if (!confirm(t("confirms.deleteMenu"))) return;
         await supabase.from("menu_items").delete().eq("menu_id", id);
         await supabase.from("menus").delete().eq("id", id);
         if (activeMenuId === id) setActiveMenuId(null);
-        toast.success("Menu deleted");
+        toast.success(t("toasts.menuDeleted"));
         fetchMenus();
     };
 
@@ -218,10 +200,10 @@ export function MenuManager({ listingId }: MenuManagerProps) {
 
         if (editingItem) {
             await supabase.from("menu_items").update(payload).eq("id", editingItem.id);
-            toast.success("Item updated");
+            toast.success(t("toasts.itemUpdated"));
         } else {
             await supabase.from("menu_items").insert(payload);
-            toast.success("Item added");
+            toast.success(t("toasts.itemAdded"));
         }
 
         setSaving(false);
@@ -230,10 +212,10 @@ export function MenuManager({ listingId }: MenuManagerProps) {
     };
 
     const deleteItem = async (id: string) => {
-        if (!confirm("Remove this item?")) return;
+        if (!confirm(t("confirms.deleteItem"))) return;
         await supabase.from("menu_items").delete().eq("id", id);
         if (activeMenuId) fetchItems(activeMenuId);
-        toast.success("Item removed");
+        toast.success(t("toasts.itemRemoved"));
     };
 
     const toggleItemAvailability = async (item: MenuItem) => {
@@ -283,12 +265,12 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                 <div>
                     <h2 className="text-xl font-bold flex items-center gap-2">
                         <Utensils className="h-5 w-5 text-brand" />
-                        Menu Management
+                        {t("title")}
                     </h2>
-                    <p className="text-sm text-muted-foreground mt-1">Create and manage menus, categories, and items for your restaurant.</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t("desc")}</p>
                 </div>
                 <Button onClick={() => { setEditingMenu(null); setMenuTitle(""); setMenuDialogOpen(true); }} className="bg-brand text-white hover:bg-brand/90">
-                    <Plus className="mr-2 h-4 w-4" /> New Menu
+                    <Plus className="mr-2 h-4 w-4" /> {t("newMenu")}
                 </Button>
             </div>
 
@@ -296,13 +278,13 @@ export function MenuManager({ listingId }: MenuManagerProps) {
             <div className="flex gap-5 min-h-[400px]">
                 {/* Menu Sidebar */}
                 <div className="w-52 shrink-0 space-y-3">
-                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1">Your Menus ({menus.length})</h3>
+                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-1">{t("yourMenus")} ({menus.length})</h3>
                     {menus.length === 0 ? (
                         <div className="rounded-xl border-2 border-dashed p-6 text-center">
                             <Utensils className="h-8 w-8 text-muted-foreground/30 mx-auto mb-2" />
-                            <p className="text-sm text-muted-foreground">No menus yet</p>
+                            <p className="text-sm text-muted-foreground">{t("noMenus")}</p>
                             <Button size="sm" variant="outline" className="mt-3" onClick={() => { setEditingMenu(null); setMenuTitle(""); setMenuDialogOpen(true); }}>
-                                Create First Menu
+                                {t("createFirstMenu")}
                             </Button>
                         </div>
                     ) : (
@@ -322,7 +304,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                                         <h4 className="font-semibold text-sm truncate">{menu.title}</h4>
                                         <span className={cn("inline-flex items-center gap-1 mt-1 text-xs font-medium rounded-full px-2 py-0.5", menu.is_active ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500")}>
                                             {menu.is_active ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
-                                            {menu.is_active ? "Active" : "Hidden"}
+                                            {menu.is_active ? t("available") : t("unavailable")}
                                         </span>
                                     </div>
                                 </div>
@@ -347,8 +329,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                     {!activeMenu ? (
                         <div className="flex flex-col items-center justify-center h-full rounded-xl border-2 border-dashed p-12 text-center">
                             <Grid3X3 className="h-12 w-12 text-muted-foreground/20 mb-4" />
-                            <h3 className="text-lg font-medium">Select a menu</h3>
-                            <p className="text-sm text-muted-foreground mt-1">Choose a menu from the sidebar or create a new one.</p>
+                            <h3 className="text-lg font-medium">{t("searchPlaceholder")}</h3>
                         </div>
                     ) : (
                         <div className="space-y-5">
@@ -357,17 +338,17 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                                 <div className="flex items-center gap-4 rounded-xl border bg-card px-4 py-3">
                                     <div className="text-center">
                                         <p className="text-2xl font-bold">{stats.total}</p>
-                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Items</p>
+                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">{t("items")}</p>
                                     </div>
                                     <Separator orientation="vertical" className="h-8" />
                                     <div className="text-center">
                                         <p className="text-2xl font-bold text-green-600">{stats.available}</p>
-                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Available</p>
+                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">{t("available")}</p>
                                     </div>
                                     <Separator orientation="vertical" className="h-8" />
                                     <div className="text-center">
                                         <p className="text-2xl font-bold text-red-500">{stats.unavailable}</p>
-                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Unavailable</p>
+                                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">{t("unavailable")}</p>
                                     </div>
                                     {stats.priceRange && (
                                         <>
@@ -377,7 +358,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                                                     <DollarSign className="h-3.5 w-3.5 inline -mt-0.5" />
                                                     {stats.priceRange.min}–{stats.priceRange.max} DA
                                                 </p>
-                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Price Range</p>
+                                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">{t("priceRange")}</p>
                                             </div>
                                         </>
                                     )}
@@ -386,14 +367,14 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                                 <div className="relative">
                                     <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                                     <Input
-                                        placeholder="Search items..."
+                                        placeholder={t("searchPlaceholder")}
                                         className="pl-9 w-56"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                     />
                                 </div>
                                 <Button onClick={openAddItem} className="bg-brand text-white hover:bg-brand/90">
-                                    <Plus className="mr-2 h-4 w-4" /> Add Item
+                                    <Plus className="mr-2 h-4 w-4" /> {t("addItem")}
                                 </Button>
                             </div>
 
@@ -401,10 +382,9 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                             {Object.keys(groupedItems).length === 0 ? (
                                 <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-16 text-center">
                                     <Utensils className="h-12 w-12 text-muted-foreground/20 mb-3" />
-                                    <h3 className="text-lg font-medium">No items in &quot;{activeMenu.title}&quot; yet.</h3>
-                                    <p className="text-sm text-muted-foreground mt-1">Start building your menu by adding your first item.</p>
+                                    <h3 className="text-lg font-medium">No items yet.</h3>
                                     <Button onClick={openAddItem} className="mt-4 bg-brand text-white">
-                                        <Plus className="mr-2 h-4 w-4" /> Add First Item
+                                        <Plus className="mr-2 h-4 w-4" /> {t("addItem")}
                                     </Button>
                                 </div>
                             ) : (
@@ -454,7 +434,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                                                                 {/* Availability Indicator */}
                                                                 {!item.is_available && (
                                                                     <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
-                                                                        <span className="bg-red-100 text-red-700 text-xs font-semibold rounded-full px-3 py-1">Unavailable</span>
+                                                                        <span className="bg-red-100 text-red-700 text-xs font-semibold rounded-full px-3 py-1">{t("unavailable")}</span>
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -467,7 +447,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                                                                 {/* Actions */}
                                                                 <div className="flex items-center gap-1 mt-3 pt-3 border-t">
                                                                     <Button size="sm" variant="ghost" className="h-7 text-xs gap-1" onClick={() => openEditItem(item)}>
-                                                                        <Edit className="h-3 w-3" /> Edit
+                                                                        <Edit className="h-3 w-3" /> {tCommon("edit")}
                                                                     </Button>
                                                                     <Button size="sm" variant="ghost" className="h-7 text-xs gap-1" onClick={() => toggleItemAvailability(item)}>
                                                                         {item.is_available ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
@@ -496,22 +476,22 @@ export function MenuManager({ listingId }: MenuManagerProps) {
             <Dialog open={menuDialogOpen} onOpenChange={setMenuDialogOpen}>
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
-                        <DialogTitle>{editingMenu ? "Edit Menu" : "Create New Menu"}</DialogTitle>
+                        <DialogTitle>{editingMenu ? t("dialogs.editMenu") : t("dialogs.createMenu")}</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4 pt-2">
                         <div className="space-y-2">
-                            <Label>Menu Name</Label>
+                            <Label>{t("dialogs.menuName")}</Label>
                             <Input
-                                placeholder="e.g. Lunch Menu, Weekend Special..."
+                                placeholder={t("dialogs.menuPlaceholder")}
                                 value={menuTitle}
                                 onChange={(e) => setMenuTitle(e.target.value)}
                             />
                         </div>
                         <div className="flex gap-2 justify-end">
-                            <Button variant="outline" onClick={() => setMenuDialogOpen(false)}>Cancel</Button>
+                            <Button variant="outline" onClick={() => setMenuDialogOpen(false)}>{tCommon("cancel")}</Button>
                             <Button className="bg-brand text-white" onClick={handleSaveMenu} disabled={saving || !menuTitle.trim()}>
                                 {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                {editingMenu ? "Update" : "Create"}
+                                {editingMenu ? tCommon("save") : tCommon("save")}
                             </Button>
                         </div>
                     </div>
@@ -522,12 +502,12 @@ export function MenuManager({ listingId }: MenuManagerProps) {
             <Dialog open={itemDialogOpen} onOpenChange={setItemDialogOpen}>
                 <DialogContent className="sm:max-w-lg">
                     <DialogHeader>
-                        <DialogTitle>{editingItem ? "Edit Menu Item" : "Add New Menu Item"}</DialogTitle>
+                        <DialogTitle>{editingItem ? t("dialogs.editItem") : t("dialogs.addItem")}</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4 pt-2">
                         {/* Image Upload */}
                         <div className="space-y-2">
-                            <Label>Item Photo</Label>
+                            <Label>{t("dialogs.itemPhoto")}</Label>
                             <ImageUpload
                                 value={itemForm.image_url ? [itemForm.image_url] : []}
                                 onChange={(urls) => setItemForm({ ...itemForm, image_url: urls[0] || "" })}
@@ -538,15 +518,15 @@ export function MenuManager({ listingId }: MenuManagerProps) {
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <Label>Name *</Label>
+                                <Label>{t("dialogs.itemName")} *</Label>
                                 <Input
-                                    placeholder="Item name"
+                                    placeholder={t("dialogs.itemName")}
                                     value={itemForm.name}
                                     onChange={(e) => setItemForm({ ...itemForm, name: e.target.value })}
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label>Price (DA) *</Label>
+                                <Label>{t("dialogs.itemPrice")} *</Label>
                                 <Input
                                     type="number"
                                     placeholder="0"
@@ -557,7 +537,7 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                         </div>
 
                         <div className="space-y-2">
-                            <Label>Category</Label>
+                            <Label>{t("dialogs.itemCategory")}</Label>
                             <Select value={itemForm.category} onValueChange={(v) => setItemForm({ ...itemForm, category: v })}>
                                 <SelectTrigger>
                                     <SelectValue />
@@ -576,9 +556,9 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                         </div>
 
                         <div className="space-y-2">
-                            <Label>Description</Label>
+                            <Label>{t("dialogs.itemDesc")}</Label>
                             <Textarea
-                                placeholder="Brief description of the item..."
+                                placeholder={t("dialogs.itemDescPlaceholder")}
                                 value={itemForm.description}
                                 onChange={(e) => setItemForm({ ...itemForm, description: e.target.value })}
                                 rows={2}
@@ -587,8 +567,8 @@ export function MenuManager({ listingId }: MenuManagerProps) {
 
                         <div className="flex items-center justify-between rounded-lg border p-3 bg-muted/30">
                             <div>
-                                <Label className="text-sm font-medium">Available</Label>
-                                <p className="text-xs text-muted-foreground">Show this item on your menu</p>
+                                <Label className="text-sm font-medium">{t("dialogs.availableSwitch")}</Label>
+                                <p className="text-xs text-muted-foreground">{t("dialogs.availableDesc")}</p>
                             </div>
                             <Switch
                                 checked={itemForm.is_available}
@@ -597,10 +577,10 @@ export function MenuManager({ listingId }: MenuManagerProps) {
                         </div>
 
                         <div className="flex gap-2 justify-end pt-2">
-                            <Button variant="outline" onClick={() => setItemDialogOpen(false)}>Cancel</Button>
+                            <Button variant="outline" onClick={() => setItemDialogOpen(false)}>{tCommon("cancel")}</Button>
                             <Button className="bg-brand text-white" onClick={handleSaveItem} disabled={saving || !itemForm.name.trim() || !itemForm.price}>
                                 {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                {editingItem ? "Update Item" : "Add Item"}
+                                {editingItem ? t("dialogs.editItem") : t("dialogs.addItem")}
                             </Button>
                         </div>
                     </div>

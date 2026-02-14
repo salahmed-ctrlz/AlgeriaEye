@@ -36,9 +36,9 @@ export function WelcomeHeader() {
     // Dynamic greeting based on time of day
     const getGreeting = () => {
         const hour = new Date().getHours();
-        if (hour < 12) return "Good morning";
-        if (hour < 18) return "Good afternoon";
-        return "Good evening";
+        if (hour < 12) return t("greetings.morning");
+        if (hour < 18) return t("greetings.afternoon");
+        return t("greetings.evening");
     };
 
     return (

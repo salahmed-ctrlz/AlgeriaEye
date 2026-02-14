@@ -14,6 +14,7 @@ import { SmartFeed } from "@/components/home/smart-feed";
 import { OffersSection } from "@/components/home/offers-section";
 import { HighRatedSection } from "@/components/home/high-rated-section";
 import { Separator } from "@/components/ui/separator";
+import { SubscriptionCta } from "@/components/home/subscription-cta";
 
 export default function HomePage() {
     return (
@@ -85,6 +86,9 @@ export default function HomePage() {
             <HighRatedSection />
 
             <Separator className="my-2 opacity-20 max-w-7xl mx-auto" />
+
+            {/* Subscription CTA for Owners */}
+            <SubscriptionCta />
 
             {/* Secondary Content */}
             <StatsSection />

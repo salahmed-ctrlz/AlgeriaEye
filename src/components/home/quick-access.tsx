@@ -17,21 +17,23 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
-const tiles = [
-    { icon: Map, label: "Tourist Spots", href: "/map?filter=nature", color: "text-blue-500", bg: "bg-blue-500/10" },
-    { icon: Hotel, label: "Hotels", href: "/search/hotels", color: "text-indigo-500", bg: "bg-indigo-500/10" },
-    { icon: Utensils, label: "Restaurants", href: "/search/restaurants", color: "text-orange-500", bg: "bg-orange-500/10" },
-    { icon: User, label: "Guides", href: "/search/tours", color: "text-green-500", bg: "bg-green-500/10" },
-    { icon: Bus, label: "Tours", href: "/search/tours", color: "text-yellow-500", bg: "bg-yellow-500/10" },
-    { icon: Home, label: "Realty", href: "/search/guesthouses", color: "text-purple-500", bg: "bg-purple-500/10" },
-    { icon: ShoppingBag, label: "Shop", href: "/shop", color: "text-pink-500", bg: "bg-pink-500/10" },
-    { icon: Car, label: "Transport", href: "/transport", color: "text-red-500", bg: "bg-red-500/10" },
-    { icon: Compass, label: "Map", href: "/map", color: "text-teal-500", bg: "bg-teal-500/10" },
-    { icon: BookOpen, label: "Culture", href: "/explore", color: "text-amber-500", bg: "bg-amber-500/10" },
-];
 
 export function QuickAccessGrid() {
     const t = useTranslations("home");
+    const tQuick = useTranslations("quickAccess");
+
+    const tiles = [
+        { icon: Map, label: tQuick("touristSpots"), href: "/map?filter=nature" },
+        { icon: Hotel, label: tQuick("hotels"), href: "/search/hotels" },
+        { icon: Utensils, label: tQuick("restaurants"), href: "/search/restaurants" },
+        { icon: User, label: tQuick("guides"), href: "/search/tours" },
+        { icon: Bus, label: tQuick("tours"), href: "/search/tours" },
+        { icon: Home, label: tQuick("realty"), href: "/search/guesthouses" },
+        { icon: ShoppingBag, label: tQuick("shop"), href: "/shop" },
+        { icon: Car, label: tQuick("transport"), href: "/transport" },
+        { icon: Compass, label: tQuick("map"), href: "/map" },
+        { icon: BookOpen, label: tQuick("culture"), href: "/explore" },
+    ];
     return (
         <section className="px-4 md:px-8">
             <div className="mx-auto max-w-7xl">

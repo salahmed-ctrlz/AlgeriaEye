@@ -116,6 +116,11 @@
     "welcomeOwner": "Make them feel at home..",
     "welcomeTourist": "Ready to discover Algeria today?",
     "featuresSubtitle": "Everything you need for an unforgettable Algerian journey",
+    "greetings": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
     "feature1Title": "Verified Hosts",
     "feature1Desc": "Every property is vetted and verified by our team to ensure quality and authenticity.",
     "feature2Title": "Best Prices",
@@ -337,7 +342,8 @@
       "guide": "Guide Dashboard",
       "agency": "Agency Dashboard",
       "hotel": "Hotel Dashboard",
-      "merchant": "Merchant Dashboard"
+      "merchant": "Merchant Dashboard",
+      "admin": "Control Center"
     },
     "nav": {
       "logout": "Logout"
@@ -366,9 +372,10 @@
     "noListings": "No properties found",
     "createFirstListing": "List your first property to start hosting travelers.",
     "createListing": "Create Listing",
-    "notTrips": "No trips booked yet.",
+    "noTrips": "No trips booked yet.",
     "exploreDestinations": "Explore Destinations",
     "purchaseHistory": "Purchase History",
+    "noFavorites": "No favorites yet.",
     "myListings": "My Listings",
     "addListing": "Add Listing",
     "editListing": "Edit Listing",
@@ -405,7 +412,132 @@
     "pushNotifsDesc": "Get real-time updates on your device.",
     "savePreferences": "Save Preferences",
     "personalInfo": "Personal Information",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "viewDetails": "View Details",
+    "itemDetails": "Item Details",
+    "paymentSummary": "Payment Summary",
+    "paid": "Paid",
+    "totalAmount": "Total Amount",
+    "profile": {
+      "avatar": "Profile Picture",
+      "avatarDesc": "Max 5MB. Formats: JPG, PNG.",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "e.g. Amine Benali",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell the community about yourself...",
+      "saving": "Saving...",
+      "updated": "Profile updated!"
+    },
+    "dialogs": {
+      "editListing": "Edit Listing",
+      "createListing": "Create New Listing",
+      "editListingDesc": "Update your property details below.",
+      "createListingDesc": "Fill in the details to publish your property.",
+      "deleteConfirm": "Are you sure you want to delete this listing?",
+      "deleteSuccess": "Listing deleted",
+      "deleteError": "Failed to delete listing"
+    },
+    "merchant": {
+      "title": "Merchant Dashboard",
+      "subtitle": "Track sales and inventory.",
+      "addProduct": "Add Product",
+      "dailyOrders": "Daily Orders",
+      "pendingShipment": "{count} pending shipment",
+      "totalSales": "Total Sales",
+      "dzdToday": "DZD today",
+      "lowStock": "Low Stock",
+      "needsRestocking": "{count} items need restocking",
+      "recentOrders": "Recent Orders",
+      "processing": "Processing",
+      "tips": "Tips",
+      "rugsTip": "Your \"Traditional Rugs\" are getting many views but few purchases. Try adding a video to showcase the texture!",
+      "reviewProduct": "Review Product"
+    },
+    "agency": {
+      "title": "Agency Dashboard",
+      "subtitle": "Overview of bookings and packages.",
+      "addPackage": "Add Package",
+      "activeTrips": "Active Trips",
+      "totalBookings": "Total Bookings",
+      "revenue": "Revenue",
+      "recentBookings": "Recent Bookings",
+      "confirmed": "Confirmed"
+    },
+    "hotel": {
+      "title": "Hotel Dashboard",
+      "subtitle": "Manage rooms and reservations.",
+      "addOffer": "Add Room Offer",
+      "occupancy": "Occupancy",
+      "roomsAvailable": "{count} rooms available",
+      "checkinsToday": "Check-ins Today",
+      "pendingArrival": "{count} pending arrival",
+      "monthlyRevenue": "Monthly Revenue",
+      "guestRating": "Guest Rating",
+      "roomStatus": "Room Status",
+      "occupied": "Occupied",
+      "cleaning": "Cleaning"
+    },
+    "guide": {
+      "title": "Guide Dashboard",
+      "subtitle": "Manage your tours and requests.",
+      "createTour": "Create New Tour",
+      "upcomingTours": "Upcoming Tours",
+      "newRequests": "New Requests",
+      "totalIncome": "Total Income",
+      "rating": "Rating",
+      "upcomingSchedule": "Upcoming Schedule",
+      "recentMessages": "Recent Messages",
+      "confirmed": "Confirmed"
+    },
+    "menuManager": {
+      "title": "Menu Management",
+      "desc": "Create and manage menus, categories, and items for your restaurant.",
+      "newMenu": "New Menu",
+      "yourMenus": "Your Menus",
+      "noMenus": "No menus yet",
+      "createFirstMenu": "Create First Menu",
+      "items": "Items",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "priceRange": "Price Range",
+      "searchPlaceholder": "Search items...",
+      "addItem": "Add Item",
+      "categories": {
+        "appetizer": "Appetizers",
+        "main": "Main Dishes",
+        "dessert": "Desserts",
+        "drink": "Drinks",
+        "other": "Other"
+      },
+      "dialogs": {
+        "editMenu": "Edit Menu",
+        "createMenu": "Create New Menu",
+        "menuName": "Menu Name",
+        "menuPlaceholder": "e.g. Lunch Menu, Weekend Special...",
+        "editItem": "Edit Menu Item",
+        "addItem": "Add New Menu Item",
+        "itemPhoto": "Item Photo",
+        "itemName": "Name",
+        "itemPrice": "Price (DA)",
+        "itemCategory": "Category",
+        "itemDesc": "Description",
+        "itemDescPlaceholder": "Brief description of the item...",
+        "availableSwitch": "Available",
+        "availableDesc": "Show this item on your menu"
+      },
+      "toasts": {
+        "menuUpdated": "Menu updated",
+        "menuCreated": "Menu created",
+        "menuDeleted": "Menu deleted",
+        "itemUpdated": "Item updated",
+        "itemAdded": "Item added",
+        "itemRemoved": "Item removed"
+      },
+      "confirms": {
+        "deleteMenu": "Delete this entire menu and all its items?",
+        "deleteItem": "Remove this item?"
+      }
+    }
   },
   "common": {
     "loading": "Loading...",
@@ -477,7 +609,7 @@
       "items": {
         "couscous": {
           "title": "Couscous",
-          "desc": "The national dish, steamed semolina granules usually served with a stew of vegetables and meat."
+          "desc": "The national dish, steamed semolina granules usually served with a duo of vegetables and meat."
         },
         "chakhchoukha": {
           "title": "Chakhchoukha",
@@ -562,7 +694,9 @@
       "p1": "At Algeria Eye, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclosure, and safeguard your information when you visit our website including any other media form, media channel, mobile website, or mobile application related or connected thereto.",
       "p2": "We may collect information about you in a variety of ways. The information we may collect on the Site includes:",
       "list1": "Personal Data: Personally identifiable information, such as your name, shipping address, email address, and telephone number.",
+      "list1_desc": "Used exclusively for listing management and identity verification.",
       "list2": "Derivative Data: Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.",
+      "list2_desc": "Cookies are used only for regional preferences and secure session handling.",
       "p3": "We use the information we collect to provider specific services to you, to improve user experience, and to send you information about new features and services."
     },
     "terms": {
@@ -581,6 +715,32 @@
       "a3": "Cancellation policies vary by property. You can review the cancellation policy for each listing before booking. Generally, you can cancel within a certain timeframe for a full refund.",
       "q4": "How can I become a host?",
       "a4": "To become a host, sign up for an account and select \"Property Owner\" as your role. You can then list your properties through your dashboard."
+    },
+    "hero_badge": "Transparency & Safety",
+    "slogan": "Everything you need to know about our legal frameworks, privacy commitment, and emergency resources in Algeria.",
+    "emergency": {
+      "title": "Emergency Services",
+      "subtitle": "Critical contacts for your safety while exploring Algeria.",
+      "police": {
+        "title": "Police (Sûreté Nationale)",
+        "number": "1548 / 17",
+        "desc": "For immediate security assistance or reporting incidents in urban areas."
+      },
+      "protection": {
+        "title": "Civil Protection",
+        "number": "14 / 1021",
+        "desc": "For fire, medical emergencies, rescue, or accidents."
+      },
+      "gendarmerie": {
+        "title": "Gendarmerie Nationale",
+        "number": "1055",
+        "desc": "For security assistance in rural areas and inter-city highways."
+      },
+      "general": {
+        "title": "General Emergency",
+        "number": "112",
+        "desc": "Alternative international emergency line accessible from any mobile."
+      }
     }
   },
   "transport": {
@@ -601,6 +761,127 @@
     "services": {
       "carRental": "Car Rental – With or without driver",
       "airportTransfer": "For your airport transfers"
+    }
+  },
+  "quickAccess": {
+    "touristSpots": "Tourist Spots",
+    "hotels": "Hotels",
+    "restaurants": "Restaurants",
+    "guides": "Guides",
+    "tours": "Tours",
+    "realty": "Realty",
+    "shop": "Shop",
+    "transport": "Transport",
+    "map": "Map",
+    "culture": "Culture"
+  },
+  "admin": {
+    "title": "Control Center",
+    "unauthorized": "Unauthorized Access",
+    "overview": "Overview",
+    "listings": "Listings",
+    "reviews": "Reviews",
+    "users": "Users",
+    "newUser": "New User",
+    "noPhone": "No phone",
+    "totalUsers": "Total Users",
+    "totalListings": "Total Listings",
+    "totalReviews": "Total Reviews",
+    "activeListings": "Active Listings",
+    "actions": "Actions",
+    "delete": "Delete",
+    "manage": "Manage",
+    "edit": "Edit",
+    "feature": "Feature",
+    "unfeature": "Unfeature",
+    "listing": "Listing",
+    "category": "Category",
+    "owner": "Owner",
+    "user": "User",
+    "role": "Role",
+    "contact": "Contact",
+    "joined": "Joined",
+    "tourist": "Tourist",
+    "ownerRole": "Owner",
+    "adminRole": "Admin",
+    "updateRole": "Update Role",
+    "banUser": "Ban User",
+    "noListings": "No listings found",
+    "noReviews": "No reviews yet",
+    "noUsers": "No users found",
+    "confirmDelete": "Are you sure you want to delete this?",
+    "confirmRoleChange": "Are you sure you want to change this user's role to {role}?",
+    "roleUpdated": "User role updated to {role}",
+    "listingDeleted": "Listing deleted successfully",
+    "reviewDeleted": "Review deleted successfully",
+    "featuredSuccess": "Listing featured successfully",
+    "unfeaturedSuccess": "Listing unfeatured successfully"
+  },
+  "subscriptions": {
+    "title": "Partner Plans",
+    "subtitle": "Boost your business and reach more tourists across Algeria.",
+    "commission": "+ {percent}% commission per confirmed booking",
+    "starter": {
+      "name": "Starter Plan",
+      "price": "2,900",
+      "commission": "8",
+      "period": "/ month",
+      "desc": "Best for small guesthouses, cafés, and local guides starting online.",
+      "features": [
+        "Business listing page",
+        "Up to 10 photos",
+        "Basic description (multilingual)",
+        "Map visibility",
+        "Customer reviews enabled",
+        "Booking request system",
+        "Basic analytics (views & clicks)"
+      ]
+    },
+    "growth": {
+      "name": "Growth Plan",
+      "price": "6,900",
+      "commission": "5",
+      "period": "/ month",
+      "desc": "For established hotels, restaurants, and agencies looking to grow visibility.",
+      "features": [
+        "Everything in Starter",
+        "Featured placement in Wilaya pages",
+        "Up to 30 photos + video embedding",
+        "Food pre-order options",
+        "Priority search ranking",
+        "Promotional badge (“Recommended”)",
+        "Advanced analytics",
+        "Direct messaging with tourists"
+      ]
+    },
+    "premium": {
+      "name": "Premium Plan",
+      "price": "12,900",
+      "commission": "2",
+      "period": "/ month",
+      "desc": "For leading brands and high-traffic businesses.",
+      "features": [
+        "Everything in Growth",
+        "Homepage featured placement",
+        "“Verified Partner” badge",
+        "Unlimited media uploads",
+        "Promotional campaigns spotlight",
+        "Seasonal promotional banners",
+        "Dedicated support",
+        "Early access to new features"
+      ]
+    },
+    "cta": {
+      "forOwners": "For Business Owners",
+      "businessProfile": "Business Profile",
+      "verifiedBadge": "Verified Badge",
+      "analytics": "Analytics",
+      "growthTools": "Growth Tools",
+      "homeTitle": "Own a Business in Algeria?",
+      "homeSubtitle": "List your services and reach thousands of travelers.",
+      "button": "View Subscription Plans",
+      "subscribe": "Subscribe Now",
+      "freeForTourists": "Tourists always use the platform for free."
     }
   }
 }

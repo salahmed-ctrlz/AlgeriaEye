@@ -53,7 +53,7 @@
         },
         "values": {
             "title": "Valeurs Fondamentales",
-            "subtitle": "Les principes qui guident tout ce que nous faisons.",
+            "subtitle": "Les principes que guident tout ce que nous faisons.",
             "authenticity": {
                 "title": "Authenticité",
                 "desc": "Plongée profonde dans la culture locale."
@@ -116,6 +116,11 @@
         "welcomeOwner": "Faites-les se sentir chez eux..",
         "welcomeTourist": "Prêt à découvrir l'Algérie aujourd'hui ?",
         "featuresSubtitle": "Tout ce dont vous avez besoin pour un voyage inoubliable",
+        "greetings": {
+            "morning": "Bon matin",
+            "afternoon": "Bon après-midi",
+            "evening": "Bonsoir"
+        },
         "feature1Title": "Hôtes Vérifiés",
         "feature1Desc": "Chaque propriété est vérifiée par notre équipe.",
         "feature2Title": "Meilleurs Prix",
@@ -337,7 +342,8 @@
             "guide": "Tableau de Bord Guide",
             "agency": "Tableau de Bord Agence",
             "hotel": "Tableau de Bord Hôtel",
-            "merchant": "Tableau de Bord Commerçant"
+            "merchant": "Tableau de Bord Commerçant",
+            "admin": "Centre de Contrôle"
         },
         "nav": {
             "logout": "Déconnexion"
@@ -348,7 +354,9 @@
         "myTrips": "Mes Voyages",
         "tripsDesc": "Réservations à venir et passées.",
         "purchases": "Achats",
+        "purchaseHistory": "Historique des achats",
         "favorites": "Favoris",
+        "noFavorites": "Aucun favori pour le moment.",
         "settings": "Paramètres",
         "manageMenu": "Gérer les Propriétés",
         "managePropertiesDesc": "Ajouter, modifier ou supprimer vos annonces.",
@@ -367,7 +375,11 @@
         "addListing": "Ajouter une Annonce",
         "editListing": "Modifier l'Annonce",
         "bookings": "Réservations",
+        "noTrips": "Aucun voyage réservé pour le moment.",
+        "exploreDestinations": "Explorer les destinations",
+        "createFirstListing": "Mettez votre premier bien en vente pour commencer à accueillir des voyageurs.",
         "noListings": "Vous n'avez pas encore ajouté d'annonces.",
+        "createListing": "Créer une Nouvelle Annonce",
         "listingForm": {
             "title": "Titre",
             "description": "Description",
@@ -400,7 +412,133 @@
         "pushNotifsDesc": "Obtenir des mises à jour en temps réel.",
         "savePreferences": "Enregistrer les Préférences",
         "personalInfo": "Informations Personnelles",
-        "saveChanges": "Enregistrer les Changements"
+        "saveChanges": "Enregistrer les Changements",
+        "viewDetails": "Voir les Détails",
+        "itemDetails": "Détails de l'article",
+        "paymentSummary": "Résumé du Paiement",
+        "paid": "Payé",
+        "totalAmount": "Montant Total",
+        "profile": {
+            "avatar": "Photo de Profil",
+            "avatarDesc": "Max 5Mo. Formats : JPG, PNG.",
+            "fullName": "Nom Complet",
+            "fullNamePlaceholder": "ex. Amine Benali",
+            "bio": "Biographie",
+            "bioPlaceholder": "Parlez de vous à la communauté...",
+            "saving": "Enregistrement...",
+            "updated": "Profil mis à jour !"
+        },
+        "dialogs": {
+            "editListing": "Modifier l'Annonce",
+            "createListing": "Créer une Nouvelle Annonce",
+            "createFirstListing": "Mettez votre premier bien en vente pour commencer à accueillir des voyageurs.",
+            "editListingDesc": "Mettez à jour les détails de votre propriété ci-dessous.",
+            "createListingDesc": "Remplissez les détails pour publier votre propriété.",
+            "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette annonce ?",
+            "deleteSuccess": "Annonce supprimée",
+            "deleteError": "Échec de la suppression de l'annonce"
+        },
+        "merchant": {
+            "title": "Tableau de Bord Commerçant",
+            "subtitle": "Suivez les ventes et l'inventaire.",
+            "addProduct": "Ajouter un Produit",
+            "dailyOrders": "Commandes du Jour",
+            "pendingShipment": "{count} en attente d'expédition",
+            "totalSales": "Ventes Totales",
+            "dzdToday": "DZD aujourd'hui",
+            "lowStock": "Stock Faible",
+            "needsRestocking": "{count} articles à réapprovisionner",
+            "recentOrders": "Commandes Récentes",
+            "processing": "En cours",
+            "tips": "Conseils",
+            "rugsTip": "Vos \"Tapis Traditionnels\" reçoivent beaucoup de vues mais peu d'achats. Essayez d'ajouter une vidéo pour montrer la texture !",
+            "reviewProduct": "Réviser le Produit"
+        },
+        "agency": {
+            "title": "Tableau de Bord Agence",
+            "subtitle": "Aperçu des réservations et des forfaits.",
+            "addPackage": "Ajouter un Forfait",
+            "activeTrips": "Voyages Actifs",
+            "totalBookings": "Total des Réservations",
+            "revenue": "Revenu",
+            "recentBookings": "Réservations Récentes",
+            "confirmed": "Confirmé"
+        },
+        "hotel": {
+            "title": "Tableau de Bord Hôtel",
+            "subtitle": "Gérez les chambres et les réservations.",
+            "addOffer": "Ajouter une Offre de Chambre",
+            "occupancy": "Occupation",
+            "roomsAvailable": "{count} chambres disponibles",
+            "checkinsToday": "Arrivées Aujourd'hui",
+            "pendingArrival": "{count} en attente d'arrivée",
+            "monthlyRevenue": "Revenu Mensuel",
+            "guestRating": "Note des Clients",
+            "roomStatus": "Statut des Chambres",
+            "occupied": "Occupé",
+            "cleaning": "Nettoyage"
+        },
+        "guide": {
+            "title": "Tableau de Bord Guide",
+            "subtitle": "Gérez vos circuits et demandes.",
+            "createTour": "Créer Nouveau Circuit",
+            "upcomingTours": "Circuits à Venir",
+            "newRequests": "Nouvelles Demandes",
+            "totalIncome": "Revenu Total",
+            "rating": "Note",
+            "upcomingSchedule": "Calendrier à Venir",
+            "recentMessages": "Messages Récents",
+            "confirmed": "Confirmé"
+        },
+        "menuManager": {
+            "title": "Gestion du Menu",
+            "desc": "Créez et gérez les menus, les catégories et les articles pour votre restaurant.",
+            "newMenu": "Nouveau Menu",
+            "yourMenus": "Vos Menus",
+            "noMenus": "Aucun menu pour le moment",
+            "createFirstMenu": "Créer le Premier Menu",
+            "items": "Articles",
+            "available": "Disponible",
+            "unavailable": "Indisponible",
+            "priceRange": "Gamme de Prix",
+            "searchPlaceholder": "Rechercher des articles...",
+            "addItem": "Ajouter un Article",
+            "categories": {
+                "appetizer": "Entrées",
+                "main": "Plats Principaux",
+                "dessert": "Desserts",
+                "drink": "Boissons",
+                "other": "Autre"
+            },
+            "dialogs": {
+                "editMenu": "Modifier le Menu",
+                "createMenu": "Créer un Nouveau Menu",
+                "menuName": "Nom du Menu",
+                "menuPlaceholder": "ex: Menu Déjeuner, Spécial Weekend...",
+                "editItem": "Modifier l'Article",
+                "addItem": "Ajouter un Nouvel Article",
+                "itemPhoto": "Photo de l'Article",
+                "itemName": "Nom",
+                "itemPrice": "Prix (DA)",
+                "itemCategory": "Catégorie",
+                "itemDesc": "Description",
+                "itemDescPlaceholder": "Brève description de l'article...",
+                "availableSwitch": "Disponible",
+                "availableDesc": "Afficher cet article sur votre menu"
+            },
+            "toasts": {
+                "menuUpdated": "Menu mis à jour",
+                "menuCreated": "Menu créé",
+                "menuDeleted": "Menu supprimé",
+                "itemUpdated": "Article mis à jour",
+                "itemAdded": "Article ajouté",
+                "itemRemoved": "Article supprimé"
+            },
+            "confirms": {
+                "deleteMenu": "Supprimer tout ce menu et tous ses articles ?",
+                "deleteItem": "Supprimer cet article ?"
+            }
+        }
     },
     "common": {
         "loading": "Chargement...",
@@ -554,11 +692,13 @@
         "title": "Juridique & Support",
         "privacy": {
             "title": "Politique de Confidentialité",
-            "p1": "Chez Algeria Eye, nous prenons votre vie privée au sérieux. Cette politique explique comment nous collectons et utilisons vos informations.",
-            "p2": "Nous pouvons collecter des informations de diverses manières :",
-            "list1": "Données Personnelles : Nom, adresse, email, téléphone.",
-            "list2": "Données Dérivées : Adresse IP, type de navigateur, etc.",
-            "p3": "Nous utilisons ces informations pour améliorer nos services."
+            "p1": "Chez Algeria Eye, nous prenons votre vie privée au sérieux. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez notre site web.",
+            "p2": "Nous pouvons collecter des informations vous concernant de diverses manières. Les informations que nous pouvons collecter sur le site incluent :",
+            "list1": "Données Personnelles : Informations personnellement identifiables, telles que votre nom, adresse, e-mail et numéro de téléphone.",
+            "list1_desc": "Utilisé exclusivement pour la gestion des annonces et la vérification d'identité.",
+            "list2": "Données Dérivées : Informations que nos serveurs collectent automatiquement lorsque vous accédez au site, telles que votre adresse IP et le type de votre navigateur.",
+            "list2_desc": "Les cookies sont utilisés uniquement pour les préférences régionales et la gestion sécurisée des sessions.",
+            "p3": "Nous utilisons les informations que nous collectons pour vous fournir des services spécifiques, améliorer l'expérience utilisateur et vous informer des nouvelles fonctionnalités."
         },
         "terms": {
             "title": "Conditions d'Utilisation",
@@ -576,6 +716,32 @@
             "a3": "Les politiques varient selon la propriété.",
             "q4": "Comment devenir hôte ?",
             "a4": "Inscrivez-vous et choisissez le rôle Propriétaire."
+        },
+        "hero_badge": "Transparence & Sécurité",
+        "slogan": "Tout ce que vous devez savoir sur nos cadres juridiques, notre engagement en matière de confidentialité et les ressources d'urgence en Algérie.",
+        "emergency": {
+            "title": "Services d'Urgence",
+            "subtitle": "Contacts critiques pour votre sécurité en Algérie.",
+            "police": {
+                "title": "Police (Sûreté Nationale)",
+                "number": "1548 / 17",
+                "desc": "Assistance immédiate ou signalement d'incident en zone urbaine."
+            },
+            "protection": {
+                "title": "Protection Civile",
+                "number": "14 / 1021",
+                "desc": "Incendies, urgences médicales, sauvetage ou accidents."
+            },
+            "gendarmerie": {
+                "title": "Gendarmerie Nationale",
+                "number": "1055",
+                "desc": "Assistance en zone rurale et sur les autoroutes inter-villes."
+            },
+            "general": {
+                "title": "Urgences Générales",
+                "number": "112",
+                "desc": "Ligne d'urgence internationale accessible depuis tout mobile."
+            }
         }
     },
     "transport": {
@@ -596,6 +762,127 @@
         "services": {
             "carRental": "Location de voitures – Avec ou sans chauffeur",
             "airportTransfer": "Pour vos transferts aéroport"
+        }
+    },
+    "quickAccess": {
+        "touristSpots": "Lieux touristiques",
+        "hotels": "Hôtels",
+        "restaurants": "Restaurants",
+        "guides": "Guides",
+        "tours": "Circuits",
+        "realty": "Immobilier",
+        "shop": "Boutique",
+        "transport": "Transport",
+        "map": "Carte",
+        "culture": "Culture"
+    },
+    "admin": {
+        "title": "Centre de Contrôle",
+        "unauthorized": "Accès non autorisé",
+        "overview": "Aperçu",
+        "listings": "Annonces",
+        "reviews": "Avis",
+        "users": "Utilisateurs",
+        "newUser": "Nouvel Utilisateur",
+        "noPhone": "Pas de téléphone",
+        "totalUsers": "Total Utilisateurs",
+        "totalListings": "Total Annonces",
+        "totalReviews": "Total Avis",
+        "activeListings": "Annonces Actives",
+        "actions": "Actions",
+        "delete": "Supprimer",
+        "manage": "Gérer",
+        "edit": "Modifier",
+        "feature": "Mettre en vedette",
+        "unfeature": "Retirer de la vedette",
+        "listing": "Annonce",
+        "category": "Catégorie",
+        "owner": "Propriétaire",
+        "user": "Utilisateur",
+        "role": "Rôle",
+        "contact": "Contact",
+        "joined": "Inscrit le",
+        "tourist": "Touriste",
+        "ownerRole": "Propriétaire",
+        "adminRole": "Admin",
+        "updateRole": "Mettre à jour le rôle",
+        "banUser": "Bannir l'utilisateur",
+        "noListings": "Aucune annonce trouvée",
+        "noReviews": "Pas encore d'avis",
+        "noUsers": "Aucun utilisateur trouvé",
+        "confirmDelete": "Êtes-vous sûr de vouloir supprimer ceci ?",
+        "confirmRoleChange": "Êtes-vous sûr de vouloir changer le rôle de cet utilisateur en {role} ?",
+        "roleUpdated": "Rôle de l'utilisateur mis à jour en {role}",
+        "listingDeleted": "Annonce supprimée avec succès",
+        "reviewDeleted": "Avis supprimé avec succès",
+        "featuredSuccess": "Annonce mise en vedette avec succès",
+        "unfeaturedSuccess": "Annonce retirée de la vedette avec succès"
+    },
+    "subscriptions": {
+        "title": "Offres Partenaires",
+        "subtitle": "Boostez votre activité et touchez plus de touristes en Algérie.",
+        "commission": "+ {percent} % de commission par réservation confirmée",
+        "starter": {
+            "name": "Formule Starter",
+            "price": "2 900",
+            "commission": "8",
+            "period": "/ mois",
+            "desc": "Idéal pour maisons d’hôtes, cafés et guides locaux débutant en ligne.",
+            "features": [
+                "Page de présentation",
+                "Jusqu’à 10 photos",
+                "Description multilingue",
+                "Visibilité sur la carte",
+                "Avis clients activés",
+                "Système de demande de réservation",
+                "Statistiques basiques"
+            ]
+        },
+        "growth": {
+            "name": "Formule Croissance",
+            "price": "6 900",
+            "commission": "5",
+            "period": "/ mois",
+            "desc": "Pour hôtels, restaurants et agences voulant plus de visibilité.",
+            "features": [
+                "Inclut Starter +",
+                "Mise en avant sur les pages Wilaya",
+                "30 photos + intégration vidéo",
+                "Option précommande repas",
+                "Priorité dans la recherche",
+                "Badge “Recommandé”",
+                "Statistiques avancées",
+                "Messagerie directe"
+            ]
+        },
+        "premium": {
+            "name": "Formule Premium",
+            "price": "12 900",
+            "commission": "2",
+            "period": "/ mois",
+            "desc": "Pour marques leaders et entreprises à fort volume.",
+            "features": [
+                "Inclut Croissance +",
+                "Mise en avant en page d’accueil",
+                "Badge “Partenaire Vérifié”",
+                "Médias illimités",
+                "Campagnes promotionnelles",
+                "Bannières saisonnières",
+                "Support dédié",
+                "Accès anticipé"
+            ]
+        },
+        "cta": {
+            "forOwners": "Pour les Propriétaires",
+            "businessProfile": "Profil Commercial",
+            "verifiedBadge": "Badge Vérifié",
+            "analytics": "Analytiques",
+            "growthTools": "Outils de Croissance",
+            "homeTitle": "Vous possédez une entreprise en Algérie ?",
+            "homeSubtitle": "Listez vos services et touchez des milliers de voyageurs.",
+            "button": "Voir les Offres",
+            "subscribe": "Souscrire maintenant",
+            "freeForTourists": "L'utilisation de la plateforme est gratuite pour les touristes."
         }
     }
 }
