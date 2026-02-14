@@ -102,20 +102,25 @@ export default function TransportPage() {
 
             if (data) {
                 const augmented = data
-                    .filter((item: any) => !item.title.toLowerCase().includes("samir"))
+                    .filter((item: any) => {
+                        const title = (item.title || "").toLowerCase();
+                        const desc = (item.description || "").toLowerCase();
+                        const ownerName = (item.owner?.full_name || "").toLowerCase();
+                        return !title.includes("samir") && !desc.includes("samir") && !ownerName.includes("samir");
+                    })
                     .map((item: any) => {
                         // Keep AutoLuxe logic if it exists separately, or just return item
                         if (item.title === "AutoLuxe Yanis" || item.title.includes("AutoLuxe")) {
                             return {
                                 ...item,
-                                title: "autoluxeyanis",
+                                title: "AutoLuxe Yanis",
                                 description: `Car Rental
- ${t('services.carRental')}
- ${t('services.airportTransfer')}
- 0560.90.51.31`,
+${t('services.carRental')}
+${t('services.airportTransfer')}
+0560.90.51.31`,
                                 owner: {
                                     ...item.owner,
-                                    full_name: "yanisautoluxe",
+                                    full_name: "Yanis AutoLuxe",
                                     avatar_url: "/images/yanisautolux.png",
                                     phone: "0560.90.51.31"
                                 },

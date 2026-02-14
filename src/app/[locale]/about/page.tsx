@@ -146,9 +146,9 @@ export default function AboutPage() {
             </section>
 
             {/* CORE VALUES */}
-            <section className="py-24 bg-foreground text-background relative overflow-hidden">
+            <section className="py-24 bg-muted/50 relative overflow-hidden">
                 {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black"></div>
+                <div className="absolute inset-0 opacity-5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
 
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="text-center mb-16 space-y-4">
@@ -161,22 +161,22 @@ export default function AboutPage() {
                             <div className="mx-auto w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                                 <Globe className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold">{t("values.authenticity.title")}</h3>
-                            <p className="text-gray-400">{t("values.authenticity.desc")}</p>
+                            <h3 className="text-xl font-bold text-foreground">{t("values.authenticity.title")}</h3>
+                            <p className="text-muted-foreground">{t("values.authenticity.desc")}</p>
                         </div>
                         <div className="space-y-4">
                             <div className="mx-auto w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                                 <Lightbulb className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold">{t("values.innovation.title")}</h3>
-                            <p className="text-gray-400">{t("values.innovation.desc")}</p>
+                            <h3 className="text-xl font-bold text-foreground">{t("values.innovation.title")}</h3>
+                            <p className="text-muted-foreground">{t("values.innovation.desc")}</p>
                         </div>
                         <div className="space-y-4">
                             <div className="mx-auto w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                                 <HeartHandshake className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold">{t("values.hospitality.title")}</h3>
-                            <p className="text-gray-400">{t("values.hospitality.desc")}</p>
+                            <h3 className="text-xl font-bold text-foreground">{t("values.hospitality.title")}</h3>
+                            <p className="text-muted-foreground">{t("values.hospitality.desc")}</p>
                         </div>
                     </div>
                 </div>

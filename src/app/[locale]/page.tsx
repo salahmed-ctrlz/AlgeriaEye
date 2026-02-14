@@ -17,7 +17,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function HomePage() {
     return (
-        <div className="flex flex-col gap-6 pb-20">
+        <div className="flex flex-col gap-10 pb-20 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-zinc-50 via-white to-white dark:from-zinc-900 dark:via-background dark:to-background min-h-screen">
             {/* Hero Search (Restored) */}
             <HeroSearch />
 

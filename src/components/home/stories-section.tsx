@@ -44,7 +44,7 @@ export function StoriesSection() {
                     <div className="flex w-max space-x-4 p-1">
                         {/* Add Story Button */}
                         <div className="flex flex-col items-center gap-2 cursor-pointer group">
-                            <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-muted-foreground/50 bg-muted/50 transition-colors group-hover:border-brand">
+                            <div className="relative flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-brand/30 bg-brand/5 transition-colors group-hover:border-brand group-hover:bg-brand/10">
                                 <Plus className="h-6 w-6 text-muted-foreground group-hover:text-brand" />
                                 <div className="absolute bottom-0 right-0 h-5 w-5 rounded-full bg-brand text-white flex items-center justify-center border-2 border-background">
                                     <Plus className="h-3 w-3" />
@@ -56,7 +56,7 @@ export function StoriesSection() {
                         {/* Stories List */}
                         {stories.map((story) => (
                             <div key={story.id} className="flex flex-col items-center gap-2 cursor-pointer group">
-                                <div className="p-[2px] rounded-full bg-gradient-to-tr from-yellow-400 via-orange-500 to-purple-600">
+                                <div className="p-[2px] rounded-full bg-gradient-to-tr from-brand via-green-400 to-red-500 animate-gradient-xy">
                                     <div className="rounded-full p-[2px] bg-background">
                                         <Avatar className="h-14 w-14 border-2 border-background transition-transform group-hover:scale-95">
                                             <AvatarImage src={story.user.avatar_url} />

@@ -46,7 +46,7 @@ export function ListingCard({
 
     return (
         <Link href={`/${locale}/listing/${id}`}>
-            <Card className="group overflow-hidden border-border/50 bg-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <Card className="group overflow-hidden border-border/50 bg-white/60 dark:bg-card/60 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-brand/5 hover:-translate-y-1 hover:border-brand/20">
                 {/* Image */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                     {image ? (

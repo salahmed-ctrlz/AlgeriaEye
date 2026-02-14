@@ -42,20 +42,22 @@ export function WelcomeHeader() {
     };
 
     return (
-        <section className="relative overflow-hidden py-8 px-4 md:px-8">
-            <div className="mx-auto max-w-7xl">
-                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                    <span className="block text-brand">
-                        {getGreeting()} {userName ? `, ${userName}` : ""} 👋
-                    </span>
-                    <span className="block text-muted-foreground mt-2 text-2xl sm:text-3xl">
+        <section className="py-12 px-4 md:px-8">
+            <div className="mx-auto max-w-7xl text-center">
+                <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-brand/5 mb-6 animate-fade-in">
+                    <span className="text-3xl sm:text-4xl">👋</span>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground sm:text-4xl font-outfit">
+                        {getGreeting()}{userName ? `, ${userName}` : ""}
+                    </h1>
+                    <p className="text-muted-foreground text-lg sm:text-2xl font-medium max-w-2xl mx-auto mt-2">
                         {userRole === "owner" ? t("welcomeOwner") : t("welcomeTourist")}
-                    </span>
-                </h1>
+                    </p>
+                </div>
+                {/* Visual Separator */}
+                <div className="w-24 h-1.5 bg-gradient-to-r from-brand to-emerald-500 mx-auto mt-10 rounded-full opacity-30 shadow-[0_0_10px_rgba(34,197,94,0.3)]" />
             </div>
-
-            {/* Decorative background elements could go here */}
-            <div className="absolute top-0 right-0 -z-10 h-64 w-64 rounded-full bg-brand/5 blur-3xl" />
         </section>
     );
 }

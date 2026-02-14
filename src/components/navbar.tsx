@@ -47,9 +47,19 @@ export function Navbar() {
 
     const [scrolled, setScrolled] = useState(false);
 
+    const [expanded, setExpanded] = useState(false);
+
+    // Close expanded menu when scrolling
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
+            if (window.scrollY > 50) {
+                // Keep expanded state if desired, or close it. 
+                // Let's keep it open if user opened it, but maybe close if they scroll back up? 
+                // Actually, let's close it if they scroll back to top (scrolled=false)
+            } else {
+                setExpanded(false);
+            }
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -177,101 +187,111 @@ export function Navbar() {
                     >
                         {scrolled ? <span className="font-bold text-lg h-5 w-5 flex items-center justify-center">?</span> : t("about")}
                     </Link>
-                </nav>
 
-                {/* Mobile Menu Trigger & Settings Toggle */}
-                <div className="flex items-center gap-2">
-                    {/* Settings Toggle (Visible on Scroll) */}
+                    {/* EXPANDED SETTINGS (Visible only when scrolled + expanded) */}
                     <div className={cn(
-                        "flex items-center gap-2 overflow-hidden transition-all duration-300",
-                        scrolled ? "w-auto opacity-100" : "w-0 opacity-0"
+                        "flex items-center gap-1 overflow-hidden transition-all duration-500 ease-in-out",
+                        scrolled && expanded ? "w-auto opacity-100 ml-2 pl-2 border-l border-border/50" : "w-0 opacity-0"
                     )}>
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" className="rounded-full">
-                                    <Menu className="h-5 w-5" />
+                        <div className="flex items-center gap-1 min-w-max">
+                            <LanguageSwitcher />
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                className="rounded-full hover:bg-muted transition-colors cursor-pointer h-10 w-10"
+                            >
+                                <Sun className="h-5 w-5 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                                <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                                <span className="sr-only">Toggle theme</span>
+                            </Button>
+                            {user && (
+                                <Button variant="ghost" size="icon" onClick={handleLogout} className="rounded-full h-10 w-10 text-destructive hover:bg-destructive/10">
+                                    <LogOut className="h-5 w-5" />
                                 </Button>
-                            </SheetTrigger>
-                            <SheetContent side="bottom" className="sm:max-w-md mx-auto rounded-t-[2rem]">
-                                <SheetTitle className="sr-only">Quick Settings</SheetTitle>
-                                <SheetDescription className="sr-only">Settings</SheetDescription>
-                                <div className="p-6 grid gap-6">
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-lg font-semibold">{t("theme")}</h3>
-                                        <Button
-                                            variant="outline"
-                                            size="icon"
-                                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                            className="rounded-full"
-                                        >
-                                            {theme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-                                        </Button>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <h3 className="text-lg font-semibold">{t("language")}</h3>
-                                        <LanguageSwitcher />
-                                    </div>
-                                    {user && (
-                                        <Button onClick={handleLogout} variant="destructive" className="w-full mt-2">
-                                            {t("logout")}
-                                        </Button>
-                                    )}
-                                </div>
-                            </SheetContent>
-                        </Sheet>
+                            )}
+                        </div>
                     </div>
 
-                    {/* Default Right Actions - Hide on Scroll */}
-                    <div className={cn(
-                        "hidden md:flex items-center gap-4 transition-all duration-300",
-                        scrolled ? "w-0 overflow-hidden opacity-0" : "w-auto opacity-100"
-                    )}>
-                        <LanguageSwitcher />
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="rounded-full hover:bg-muted transition-colors cursor-pointer"
-                        >
-                            <Sun className="h-5 w-5 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                            <span className="sr-only">Toggle theme</span>
-                        </Button>
-
-                        <Link href="/contact" className="flex items-center justify-center h-9 w-9 rounded-full bg-brand/10 text-brand hover:bg-brand/20 transition-colors">
-                            <Phone className="h-5 w-5" />
-                        </Link>
-
-                        {user ? (
-                            <div className="flex items-center gap-2">
-                                <Link href="/dashboard?tab=profile">
-                                    <Button variant="ghost" size="icon" className="rounded-full">
-                                        <UserCircle className="h-6 w-6" />
-                                    </Button>
-                                </Link>
-                                <Button variant="ghost" size="sm" onClick={handleLogout} className="text-xs">
-                                    <LogOut className="mr-1.5 h-3.5 w-3.5" />
-                                    {t("logout")}
-                                </Button>
+                    {/* EXPAND TOGGLE BUTTON (Visible only when scrolled) */}
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setExpanded(!expanded)}
+                        className={cn(
+                            "rounded-full transition-all duration-300 hover:bg-muted",
+                            scrolled ? "w-10 h-10 opacity-100 ml-1" : "w-0 h-0 opacity-0 overflow-hidden"
+                        )}
+                    >
+                        {expanded ? (
+                            <div className="flex items-center justify-center">
+                                <span className="sr-only">Collapse</span>
+                                {/* Chevron Left/Right based on direction could be better, or just X */}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right rotate-180"><path d="m9 18 6-6-6-6" /></svg>
                             </div>
                         ) : (
-                            <Link href="/login">
-                                <Button size="sm" className="bg-brand text-white hover:bg-brand-light">
-                                    {t("login")}
+                            <div className="flex items-center justify-center">
+                                <span className="sr-only">Expand</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6" /></svg>
+                            </div>
+                        )}
+                    </Button>
+                </nav>
+
+                {/* Default Right Actions - Hide on Scroll */}
+                <div className={cn(
+                    "hidden md:flex items-center gap-4 transition-all duration-300",
+                    scrolled ? "w-0 overflow-hidden opacity-0" : "w-auto opacity-100"
+                )}>
+                    <LanguageSwitcher />
+
+                    {/* Day/Night Toggle */}
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                        className="rounded-full hover:bg-muted transition-colors cursor-pointer"
+                    >
+                        <Sun className="h-5 w-5 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                        <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                        <span className="sr-only">Toggle theme</span>
+                    </Button>
+
+                    <Link href="/contact" className="flex items-center justify-center h-9 w-9 rounded-full bg-brand/10 text-brand hover:bg-brand/20 transition-colors">
+                        <Phone className="h-5 w-5" />
+                    </Link>
+
+                    {user ? (
+                        <div className="flex items-center gap-2">
+                            <Link href="/dashboard?tab=profile">
+                                <Button variant="ghost" size="icon" className="rounded-full">
+                                    <UserCircle className="h-6 w-6" />
                                 </Button>
                             </Link>
-                        )}
-                    </div>
+                            <Button variant="ghost" size="sm" onClick={handleLogout} className="text-xs">
+                                <LogOut className="mr-1.5 h-3.5 w-3.5" />
+                                {t("logout")}
+                            </Button>
+                        </div>
+                    ) : (
+                        <Link href="/login">
+                            <Button size="sm" className="bg-brand text-white hover:bg-brand-light">
+                                {t("login")}
+                            </Button>
+                        </Link>
+                    )}
+                </div>
 
-                    {/* Mobile Menu Trigger (Unchanged behavior) */}
+                {/* Mobile Menu Trigger & Sheet (Unchanged for Mobile) */}
+                <div className={cn("md:hidden flex items-center gap-2", scrolled ? "pl-2" : "")}>
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" className={cn("md:hidden", scrolled && "hidden")}>
+                            <Button variant="ghost" size="icon" className={cn("md:hidden")}>
                                 <Menu className="h-6 w-6" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side={dir === "rtl" ? "right" : "left"} className="w-full sm:max-w-sm border-r-0 p-0 flex flex-col">
-                            {/* Mobile Menu Content (Same as before) */}
+                            {/* Mobile Menu (Same Content) */}
                             <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                             <SheetDescription className="sr-only">Navigation</SheetDescription>
 
@@ -290,7 +310,7 @@ export function Navbar() {
                                     )}
                                 </div>
                             </div>
-
+                            {/* ... Mobile Links ... */}
                             <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
                                 {navLinks.map((link) => (
                                     <Link
@@ -343,32 +363,16 @@ export function Navbar() {
                                         <span className="font-medium">{theme === "dark" ? "Dark" : "Light"}</span>
                                     </button>
                                 </div>
-
                                 {user ? (
-                                    <Button
-                                        onClick={() => { handleLogout(); setIsOpen(false); }}
-                                        className="w-full justify-center gap-2"
-                                        variant="outline"
-                                        size="lg"
-                                    >
+                                    <Button onClick={() => { handleLogout(); setIsOpen(false); }} className="w-full justify-center gap-2" variant="outline" size="lg">
                                         <LogOut className="h-5 w-5" />
                                         {t("logout")}
                                     </Button>
                                 ) : (
                                     <Link href="/login" onClick={() => setIsOpen(false)}>
-                                        <Button className="w-full bg-brand text-white text-lg h-12">
-                                            {t("login")}
-                                        </Button>
+                                        <Button className="w-full bg-brand text-white text-lg h-12">{t("login")}</Button>
                                     </Link>
                                 )}
-
-                                <div className="mt-8 flex justify-center gap-6 text-muted-foreground">
-                                    <Link href="#" className="hover:text-brand transition-colors"><Mail className="h-6 w-6" /></Link>
-                                    <Link href="#" className="hover:text-brand transition-colors"><Linkedin className="h-6 w-6" /></Link>
-                                    <Link href="#" className="hover:text-brand transition-colors"><Facebook className="h-6 w-6" /></Link>
-                                    <Link href="#" className="hover:text-brand transition-colors"><Instagram className="h-6 w-6" /></Link>
-                                    <Link href="#" className="hover:text-brand transition-colors"><Twitter className="h-6 w-6" /></Link>
-                                </div>
                             </div>
                         </SheetContent>
                     </Sheet>
