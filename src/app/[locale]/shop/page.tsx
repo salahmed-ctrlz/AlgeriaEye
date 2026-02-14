@@ -99,7 +99,7 @@ export default function ShopPage() {
                 end_date: date, // For now single date or calculate based on duration
                 status: "pending",
                 total_price: selectedPlan?.price,
-                payment_status: "pending",
+                payment_status: "unpaid",
                 type: "travel_plan",
                 guests_count: 1 // Default
             });

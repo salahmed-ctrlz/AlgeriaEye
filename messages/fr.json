@@ -81,7 +81,13 @@
         "visionQuote": "Nous comblons le fossé entre les voyageurs et la riche tapisserie culturelle de l'Algérie.",
         "quote": "Nous comblons le fossé entre les voyageurs et la riche tapisserie culturelle de l'Algérie.",
         "ctaTitle": "Prêt à explorer ?",
-        "ctaButton": "Commencez votre voyage"
+        "ctaButton": "Commencez votre voyage",
+        "stats": {
+            "wilayas": "Wilayas Couvertes",
+            "listings": "Annonces Actives",
+            "travelers": "Voyageurs Heureux",
+            "guides": "Guides Vérifiés"
+        }
     },
     "hero": {
         "title": "Découvrez la Beauté de l'Algérie",
@@ -234,7 +240,8 @@
         "anonymous": "Anonyme",
         "averageCost": "coût moyen",
         "reserveTable": "Réserver une Table",
-        "ourMenu": "Notre Menu"
+        "ourMenu": "Notre Menu",
+        "linkCopied": "Lien copié dans le presse-papier!"
     },
     "booking": {
         "title": "Complétez Votre Réservation",
@@ -568,6 +575,26 @@
             "a3": "Les politiques varient selon la propriété.",
             "q4": "Comment devenir hôte ?",
             "a4": "Inscrivez-vous et choisissez le rôle Propriétaire."
+        }
+    },
+    "transport": {
+        "title": "Transport en Algérie",
+        "subtitle": "Déplacez-vous facilement avec les meilleures applications et services de location.",
+        "rideApps": "Applications VTC",
+        "rideAppsDesc": "Téléchargez des applications de confiance pour vos déplacements.",
+        "carRentals": "Location de Voitures",
+        "carRentalsDesc": "Louez des véhicules auprès d'agences vérifiées.",
+        "busSchedules": "Horaires de Bus",
+        "comingSoon": "Bientôt Disponible",
+        "download": "Télécharger",
+        "ios": "App Store",
+        "android": "Play Store",
+        "bookNow": "Réserver",
+        "perDay": "/jour",
+        "verified": "Agence Vérifiée",
+        "services": {
+            "carRental": "Location de voitures – Avec ou sans chauffeur",
+            "airportTransfer": "Pour vos transferts aéroport"
         }
     }
 }

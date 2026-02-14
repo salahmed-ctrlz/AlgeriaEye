@@ -33,7 +33,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     }
 
     const messages = await getMessages();
-    const dir = "ltr"; // User requested to never reverse layout
+    const dir = locale === "ar" ? "rtl" : "ltr";
     const fontVariable = locale === "ar" ? cairo.variable : inter.variable;
 
     return (
@@ -48,7 +48,10 @@ export default async function LocaleLayout({ children, params }: Props) {
                     <NextIntlClientProvider messages={messages}>
                         <ScrollToTop />
                         <div className="flex min-h-screen flex-col relative">
-                            <Navbar />
+                            {/* Navbar should always be LTR as per user request */}
+                            <div dir="ltr">
+                                <Navbar />
+                            </div>
                             <main className="flex-1">{children}</main>
                             <Footer />
                         </div>

@@ -187,10 +187,10 @@ export default function AboutPage() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-border/40">
                         {[
-                            { label: "Wilayas Covered", value: "69+" },
-                            { label: "Active Listings", value: "500+" },
-                            { label: "Happy Travelers", value: "10k+" },
-                            { label: "Verified Guides", value: "120+" }, // Updated stat
+                            { label: t("stats.wilayas"), value: "69+" },
+                            { label: t("stats.listings"), value: "500+" },
+                            { label: t("stats.travelers"), value: "10k+" },
+                            { label: t("stats.guides"), value: "120+" },
                         ].map((stat, i) => (
                             <div key={i} className="space-y-1">
                                 <div className="text-3xl md:text-5xl font-bold text-primary">{stat.value}</div>

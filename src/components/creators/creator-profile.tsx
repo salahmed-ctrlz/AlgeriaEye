@@ -13,8 +13,10 @@ import {
     Play,
     LayoutGrid,
     ImageIcon,
+    ArrowLeft,
 } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useState, useEffect, useMemo } from "react";
 
 interface CreatorProfileProps {
@@ -31,6 +33,7 @@ function getInstagramType(url: string): "reels" | "posts" {
 
 export function CreatorProfile({ creator }: CreatorProfileProps) {
     const locale = useLocale() as "en" | "fr" | "ar";
+    const t = useTranslations("common");
     const [activeFilter, setActiveFilter] = useState<FilterType>("all");
     const [isFollowing, setIsFollowing] = useState(false);
     const [followerCount, setFollowerCount] = useState(0);
@@ -155,6 +158,15 @@ export function CreatorProfile({ creator }: CreatorProfileProps) {
                         />
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+                </div>
+
+                <div className="absolute top-4 left-4 z-20">
+                    <Link href="/creators">
+                        <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/20 backdrop-blur-md border border-white/10 hover:bg-background/40 transition-colors text-foreground">
+                            <ArrowLeft className="w-4 h-4" />
+                            <span className="text-sm font-medium">{t("back")}</span>
+                        </button>
+                    </Link>
                 </div>
 
                 <div className="relative z-10 flex flex-col items-center text-center px-4 pt-28 pb-10 md:pt-36 md:pb-14 gap-5 max-w-2xl mx-auto">

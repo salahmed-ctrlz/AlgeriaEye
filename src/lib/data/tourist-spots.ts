@@ -86,7 +86,7 @@ export const touristSpots: TouristSpot[] = [
         city: "Constantine",
         location: { lat: 36.463333, lng: 6.483889 },
         mapsUrl: "https://maps.google.com/?q=36.463333,6.483889",
-        image: "/images/Tourist Spots in map images/Tiddis_Ruins.jpg",
+        image: "/images/Tourist Spots in map images/Tiddis_Ruins.webp",
         type: "cultural"
     },
     // Oran
@@ -138,7 +138,7 @@ export const touristSpots: TouristSpot[] = [
         city: "M'Sila",
         location: { lat: 35.133, lng: 4.083 },
         mapsUrl: "https://maps.google.com/?q=35.133,4.083",
-        image: "/images/Tourist Spots in map images/Zaouia_El_Hamel.jpg",
+        image: "/images/Tourist Spots in map images/Zaouia_El_Hamel.webp",
         type: "cultural"
     },
     {

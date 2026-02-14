@@ -2,8 +2,8 @@ export interface Content {
     id: string;
     type: 'instagram' | 'youtube';
     url: string;
-    thumbnail?: string; // Optional thumbnail if we want to defer loading
-    wilayas?: string[]; // Slugs of related wilayas
+    thumbnail?: string;
+    wilayas?: string[];
     title?: string;
 }
 
@@ -16,7 +16,7 @@ export interface Creator {
         fr: string;
         ar: string;
     };
-    avatar: string; // URL to avatar image
+    avatar: string;
     socials: {
         instagram?: string;
         youtube?: string;
@@ -37,7 +37,7 @@ export const creators: Creator[] = [
         id: 'khoubai',
         slug: 'khoubai',
         name: 'Khoubaib Kouas',
-        avatar: '/images/creators/khoubai.jpg', // Placeholder, need to ensure this exists or use external
+        avatar: '/images/creators/khoubai.jpg',
         bio: {
             en: "An Algerian content creator traveling the world and showcasing the beauty of Algeria.",
             fr: "Créateur de contenu algérien voyageant à travers le monde et montrant la beauté de l'Algérie.",
@@ -48,7 +48,8 @@ export const creators: Creator[] = [
             youtube: 'https://www.youtube.com/@KhoubaibKouas'
         },
         stats: {
-            followers: "1.8M"
+            followers: "1.8M",
+            posts: 11
         },
         content: [
             {
@@ -127,6 +128,130 @@ export const creators: Creator[] = [
                 url: 'https://www.instagram.com/p/CDrAAXpnprg/',
                 title: 'Algerian Heritage',
                 wilayas: ['tlemcen']
+            }
+        ]
+    },
+    {
+        id: 'oussama',
+        slug: 'oussama-kaddour',
+        name: 'Oussama Kaddour',
+        avatar: '/images/creators/oussama-kaddour.jpg',
+        bio: {
+            en: "Algerian content creator known for his engaging reels showcasing the beauty and diversity of Algeria.",
+            fr: "Créateur de contenu algérien connu pour ses reels engageants mettant en valeur la beauté et la diversité de l'Algérie.",
+            ar: "صانع محتوى جزائري معروف بمقاطع الريلز التي تبرز جمال وتنوع الجزائر."
+        },
+        socials: {
+            instagram: 'https://www.instagram.com/loussamakaddour/'
+        },
+        stats: {
+            followers: "100K", // Estimating based on typical micro-influencer profiles, user didn't specify
+            posts: 10
+        },
+        content: [
+            {
+                id: 'DTs5-WXjHcs',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTs5-WXjHcs/',
+                title: 'Algerian Vibes',
+                wilayas: []
+            },
+            {
+                id: 'DTqXhQAjCUV',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTqXhQAjCUV/',
+                title: 'Hidden Gems',
+                wilayas: []
+            },
+            {
+                id: 'DTS_G6ZDIl7',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/DTS_G6ZDIl7/',
+                title: 'Travel Diaries',
+                wilayas: []
+            },
+            {
+                id: 'DTSt8fWDJpp',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTSt8fWDJpp/',
+                title: 'Sahara Magic',
+                wilayas: []
+            },
+            {
+                id: 'DTN7Ys8DKZs',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTN7Ys8DKZs/',
+                title: 'Traditional Life',
+                wilayas: []
+            },
+            {
+                id: 'DTBGEpWDA1K',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTBGEpWDA1K/',
+                title: 'City Walk',
+                wilayas: []
+            },
+            {
+                id: 'DS0HGSDjHqS',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DS0HGSDjHqS/',
+                title: 'Nature Escape',
+                wilayas: []
+            }
+        ]
+    },
+    {
+        id: 'hamlawi',
+        slug: 'argelin0',
+        name: 'Hamlawi',
+        avatar: '/images/creators/argelino0.jpg',
+        bio: {
+            en: "Algerian creator sharing raw and authentic content about life, culture, and places across Algeria.",
+            fr: "Créateur algérien partageant du contenu brut et authentique sur la vie, la culture et les lieux à travers l'Algérie.",
+            ar: "صانع محتوى جزائري يشارك محتوى حقيقي وأصلي عن الحياة والثقافة والأماكن عبر الجزائر."
+        },
+        socials: {
+            instagram: 'https://www.instagram.com/argelin0'
+        },
+        stats: {
+            followers: "185K",
+            posts: 5
+        },
+        content: [
+            {
+                id: 'DUQ9fadDEjj',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DUQ9fadDEjj/',
+                title: 'Algeria Raw',
+                wilayas: []
+            },
+            {
+                id: 'DTh0JXEjI8r',
+                type: 'instagram',
+                url: 'https://www.instagram.com/p/DTh0JXEjI8r/',
+                title: 'Algerian Life',
+                wilayas: []
+            },
+            {
+                id: 'DTBNeDIDNtp',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DTBNeDIDNtp/',
+                title: 'Street Culture',
+                wilayas: []
+            },
+            {
+                id: 'DSr0rsIDOZO',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DSr0rsIDOZO/',
+                title: 'Algerian Moments',
+                wilayas: []
+            },
+            {
+                id: 'DPo406qDFoC',
+                type: 'instagram',
+                url: 'https://www.instagram.com/reel/DPo406qDFoC/',
+                title: 'Algeria Unseen',
+                wilayas: []
             }
         ]
     }

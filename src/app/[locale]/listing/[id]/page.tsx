@@ -40,6 +40,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 interface Listing {
     id: string;
@@ -265,7 +266,15 @@ export default function ListingPage() {
                                     <Heart className={`h-5 w-5 ${isFavorite ? "fill-brand text-brand" : "text-muted-foreground"}`} />
                                 </Button>
                                 <MessageDialog listingId={listing.id} ownerId={listing.owner_id} listingTitle={listing.title} />
-                                <Button variant="outline" size="icon" className="rounded-full">
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        toast.success(t("linkCopied"));
+                                    }}
+                                    className="rounded-full"
+                                >
                                     <Share2 className="h-4 w-4 text-muted-foreground" />
                                 </Button>
                                 <Badge variant="secondary" className="shrink-0 h-9 px-4 text-sm font-medium">

@@ -49,6 +49,7 @@ export function BookingModal({
     const [success, setSuccess] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("visa");
     const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+
     // Restaurant Specific State
     const [time, setTime] = useState("");
     const [selectedItems, setSelectedItems] = useState<{ id: string; name: string; price: number; quantity: number }[]>([]);
@@ -82,6 +83,29 @@ export function BookingModal({
         });
     };
 
+    // Transport Specific State
+    const [vehicleType, setVehicleType] = useState("sedan");
+    const [withDriver, setWithDriver] = useState(false);
+
+    // Car Rental Specific Constants
+    const VEHICLE_TYPES = [
+        { id: "small", label: "Small (Clio 4, Ibiza)", price: 4000 },
+        { id: "sedan", label: "Sedan (Symbol, Logan)", price: 5000 },
+        { id: "suv", label: "SUV (Tucson, Sportage)", price: 9000 },
+        { id: "luxury", label: "Luxury (Range Rover, Mercedes)", price: 25000 },
+    ];
+    const DRIVER_FEE_PER_DAY = 3000;
+
+    useEffect(() => {
+        if (!open) {
+            setStep(1);
+            setSuccess(false);
+            setIsProcessingPayment(false);
+            setVehicleType("sedan");
+            setWithDriver(false);
+        }
+    }, [open]);
+
     // Pricing Calculation
     const nights =
         checkIn && checkOut
@@ -96,24 +120,25 @@ export function BookingModal({
 
     // Calculate Totals
     const foodTotal = selectedItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-
-    // Logic split based on type
     const isRestaurant = listingType === "restaurant";
+    const isTransport = listingType === "transport";
 
-    // For restaurants: base cost = pricePerNight * guests (reservation fee per person) + any pre-ordered food
-    // For hotels: standard nights * pricePerNight
-    const reservationCost = isRestaurant ? pricePerNight * guests : 0;
-    const subtotal = isRestaurant ? (reservationCost + foodTotal) : (nights * pricePerNight);
+    let reservationCost = 0;
+    let subtotal = 0;
+
+    if (isRestaurant) {
+        reservationCost = pricePerNight * guests;
+        subtotal = reservationCost + foodTotal;
+    } else if (isTransport) {
+        const vehiclePrice = VEHICLE_TYPES.find(v => v.id === vehicleType)?.price || pricePerNight;
+        const driverCost = withDriver ? (DRIVER_FEE_PER_DAY * nights) : 0;
+        subtotal = (vehiclePrice * nights) + driverCost;
+    } else {
+        // Hotel / Generic
+        subtotal = nights * pricePerNight;
+    }
+
     const totalPrice = subtotal;
-
-    // Reset state when modal opens/closes
-    useEffect(() => {
-        if (!open) {
-            setStep(1);
-            setSuccess(false);
-            setIsProcessingPayment(false);
-        }
-    }, [open]);
 
     const handleBooking = async () => {
         setIsProcessingPayment(true);
@@ -135,6 +160,14 @@ export function BookingModal({
                 return;
             }
 
+            // Prepare notes with extra info
+            let bookingNotes = notes;
+            if (isTransport) {
+                const vehicle = VEHICLE_TYPES.find(v => v.id === vehicleType)?.label;
+                const driverTxt = withDriver ? "With Driver" : "Without Driver";
+                bookingNotes = `Vehicle: ${vehicle}\nOption: ${driverTxt}\n${notes}`;
+            }
+
             // Insert Booking
             const bookingData = {
                 listing_id: listingId,
@@ -146,9 +179,9 @@ export function BookingModal({
                 total_price: totalPrice,
                 status: "confirmed",
                 payment_status: "simulated_paid",
-                type: isRestaurant ? "table" : "stay",
+                type: listingType === "hotel" ? "stay" : (isRestaurant ? "table" : "transport"),
                 booking_time: isRestaurant ? (time ? `${time}:00` : null) : null,
-                notes: notes,
+                notes: bookingNotes,
             };
 
             const { data: booking, error: bookingError } = await supabase.from("bookings").insert(bookingData).select().single();
@@ -204,12 +237,24 @@ export function BookingModal({
                         <p className="text-center text-sm text-muted-foreground max-w-xs">
                             Your reservation at <span className="font-semibold">{listingTitle}</span> is secured.
                         </p>
-                        <div className="bg-slate-50 p-4 rounded-lg w-full text-sm space-y-2 mt-2">
+                        <div className="bg-muted/40 p-4 rounded-lg w-full text-sm space-y-2 mt-2">
                             {isRestaurant && (
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Time:</span>
                                     <span className="font-bold">{checkIn} at {time}</span>
                                 </div>
+                            )}
+                            {isTransport && (
+                                <>
+                                    <div className="flex justify-between">
+                                        <span className="text-muted-foreground">Vehicle:</span>
+                                        <span className="font-bold">{VEHICLE_TYPES.find(v => v.id === vehicleType)?.label.split('(')[0]}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-muted-foreground">Dates:</span>
+                                        <span className="font-bold">{checkIn} to {checkOut}</span>
+                                    </div>
+                                </>
                             )}
                             <div className="flex justify-between">
                                 <span className="text-muted-foreground">Amount Paid:</span>
@@ -262,7 +307,7 @@ export function BookingModal({
                             </Button>
                         )}
                         <DialogTitle className="text-xl">
-                            {step === 1 ? (isRestaurant ? "Reserve a Table" : t("title")) : "Secure Checkout"}
+                            {step === 1 ? (isRestaurant ? "Reserve a Table" : (isTransport ? "Rent a Car" : t("title"))) : "Secure Checkout"}
                         </DialogTitle>
                     </div>
                     {step === 1 && isRestaurant && <p className="text-sm text-muted-foreground">Select date, time, and pre-order food.</p>}
@@ -273,7 +318,7 @@ export function BookingModal({
 
                 {step === 1 ? (
                     <div className="space-y-4 pt-2">
-                        {/* Restaurant / Hotel Input Split */}
+                        {/* Restaurant / Hotel / Transport Input Split */}
                         {isRestaurant ? (
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
@@ -323,21 +368,55 @@ export function BookingModal({
                             </div>
                         )}
 
-                        <div className="space-y-2">
-                            <Label className="flex items-center gap-1.5 text-xs">
-                                <Users className="h-3.5 w-3.5" />
-                                {t("guests")}
-                            </Label>
-                            <Input
-                                type="number"
-                                min={1}
-                                max={20}
-                                value={guests}
-                                onChange={(e) => setGuests(parseInt(e.target.value) || 1)}
-                            />
-                        </div>
+                        {!isTransport && (
+                            <div className="space-y-2">
+                                <Label className="flex items-center gap-1.5 text-xs">
+                                    <Users className="h-3.5 w-3.5" />
+                                    {t("guests")}
+                                </Label>
+                                <Input
+                                    type="number"
+                                    min={1}
+                                    max={20}
+                                    value={guests}
+                                    onChange={(e) => setGuests(parseInt(e.target.value) || 1)}
+                                />
+                            </div>
+                        )}
 
+                        {/* Transport Specific Inputs */}
+                        {isTransport && (
+                            <div className="space-y-4 border-t pt-4">
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-medium">Select Vehicle Type</Label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {VEHICLE_TYPES.map((type) => (
+                                            <div
+                                                key={type.id}
+                                                className={`p-3 rounded-lg border cursor-pointer transition-all ${vehicleType === type.id ? "border-brand bg-brand/5 ring-1 ring-brand" : "hover:border-gray-400"}`}
+                                                onClick={() => setVehicleType(type.id)}
+                                            >
+                                                <div className="font-semibold text-sm">{type.label}</div>
+                                                <div className="text-xs text-muted-foreground">{type.price.toLocaleString()} DA/day</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
 
+                                <div className="flex items-center justify-between p-3 rounded-lg border">
+                                    <div>
+                                        <div className="font-medium text-sm">Add Driver</div>
+                                        <div className="text-xs text-muted-foreground">Professional chauffeur service (+{DRIVER_FEE_PER_DAY.toLocaleString()} DA/day)</div>
+                                    </div>
+                                    <input
+                                        type="checkbox"
+                                        className="h-5 w-5 rounded border-gray-300 text-brand focus:ring-brand"
+                                        checked={withDriver}
+                                        onChange={(e) => setWithDriver(e.target.checked)}
+                                    />
+                                </div>
+                            </div>
+                        )}
 
                         {/* Food Pre-ordering for Restaurant */}
                         {isRestaurant && menuItems.length > 0 && (
@@ -389,7 +468,7 @@ export function BookingModal({
                         )}
 
                         {(nights > 0 || isRestaurant) && totalPrice > 0 && (
-                            <div className="rounded-lg border bg-slate-50 p-4 space-y-2">
+                            <div className="rounded-lg border bg-muted/40 p-4 space-y-2">
                                 <h4 className="font-medium text-sm flex items-center gap-2">
                                     <Receipt className="h-4 w-4" />
                                     Price Breakdown
@@ -406,6 +485,19 @@ export function BookingModal({
                                                 <div className="flex justify-between">
                                                     <span className="text-muted-foreground">Food & Drinks pre-order</span>
                                                     <span>{foodTotal.toLocaleString()} {ct("dzd")}</span>
+                                                </div>
+                                            )}
+                                        </>
+                                    ) : isTransport ? (
+                                        <>
+                                            <div className="flex justify-between">
+                                                <span className="text-muted-foreground">Vehicle ({nights} nights)</span>
+                                                <span>{(VEHICLE_TYPES.find(v => v.id === vehicleType)?.price || 0) * nights} {ct("dzd")}</span>
+                                            </div>
+                                            {withDriver && (
+                                                <div className="flex justify-between">
+                                                    <span className="text-muted-foreground">Driver ({nights} days)</span>
+                                                    <span>{(DRIVER_FEE_PER_DAY * nights).toLocaleString()} {ct("dzd")}</span>
                                                 </div>
                                             )}
                                         </>
@@ -435,9 +527,9 @@ export function BookingModal({
                         </Button>
                     </div>
                 ) : (
-                    <div className="space-y-6 pt-2">
+                    <div className="space-y-6 pt-2 text-left" dir="ltr">
                         {/* Checkout Step (Reused) */}
-                        <div className="bg-slate-50 p-4 rounded-lg border">
+                        <div className="bg-muted/40 p-4 rounded-lg border">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="font-medium">Total to pay</span>
                                 <span className="text-xl font-bold text-brand">{totalPrice.toLocaleString()} {ct("dzd")}</span>
@@ -453,7 +545,11 @@ export function BookingModal({
                                     <>
                                         <span>{nights} nights</span>
                                         <span>•</span>
-                                        <span>{guests} guests</span>
+                                        {isTransport ? (
+                                            <span>{VEHICLE_TYPES.find(v => v.id === vehicleType)?.label}</span>
+                                        ) : (
+                                            <span>{guests} guests</span>
+                                        )}
                                         <span>•</span>
                                         <span>{checkIn} to {checkOut}</span>
                                     </>

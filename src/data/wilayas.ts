@@ -320,6 +320,16 @@ export const wilayas: Wilaya[] = [
                 },
                 image: "/images/culture/djouzia.jpg",
                 tags: ["Food", "Gastronomy"]
+            },
+            {
+                title: { en: "El Mejboud", ar: "مجبود قسنطينة", fr: "El Mejboud" },
+                description: {
+                    en: "A traditional velvet dress embroidered with gold thread, originating from the Constantine heritage.",
+                    ar: "لباس تقليدي من القطيفة مطرز بخيوط الذهب، يعود أصله إلى التراث القسنطيني.",
+                    fr: "Une robe traditionnelle en velours brodée de fil d'or, originaire du patrimoine constantinois."
+                },
+                image: "/images/culture/gendoura_mejboud_cnstntn.jpg",
+                tags: ["Fashion", "Heritage"]
             }
         ],
         bestPlaces: [
@@ -380,6 +390,19 @@ export const wilayas: Wilaya[] = [
                 locationUrl: "https://www.google.com/maps/place/36.46,6.49",
                 lat: 36.46,
                 lng: 6.49
+            },
+            {
+                name: { en: "Tiddis Roman Ruins", ar: "آثار تيديس الرومانية", fr: "Ruines Romaines de Tiddis" },
+                category: "History",
+                image: "/images/Tourist Spots in map images/Tiddis_Ruins.webp",
+                description: {
+                    en: "Also known as Castellum Tidditanorum, this Roman city is perched on a mountain, offering breathtaking views and unique red earth.",
+                    ar: "تُعرف أيضًا باسم كاستيلوم تيديتانوروم، وهي مدينة رومانية تقع على جبل، وتوفر إطلالات خلابة وتربة حمراء فريدة.",
+                    fr: "Aussi connue sous le nom de Castellum Tidditanorum, cette cité romaine est perchée sur une montagne, offrant des vues imprenables et une terre rouge unique."
+                },
+                locationUrl: "https://www.google.com/maps/place/36.456,6.489",
+                lat: 36.456,
+                lng: 6.489
             }
         ]
     },

@@ -9,6 +9,7 @@ const categoryMap: Record<string, string> = {
     "activities": "experience",
     "transport": "transport",
     "agencies": "agency",
+    "guides": "tour", // Fallback to tour for now
 };
 
 interface PageProps {

@@ -81,7 +81,13 @@
     "visionQuote": "We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.",
     "quote": "We bridge the gap between travelers and the rich cultural tapestry of Algeria. From booking luxury hotels to finding local guides for Sahara expeditions, we handle it all.",
     "ctaTitle": "Ready to Explore?",
-    "ctaButton": "Start Your Journey"
+    "ctaButton": "Start Your Journey",
+    "stats": {
+      "wilayas": "Wilayas Covered",
+      "listings": "Active Listings",
+      "travelers": "Happy Travelers",
+      "guides": "Verified Guides"
+    }
   },
   "hero": {
     "title": "Discover the Beauty of Algeria",
@@ -234,7 +240,8 @@
     "anonymous": "Anonymous",
     "averageCost": "average cost",
     "reserveTable": "Reserve Table",
-    "ourMenu": "Our Menu"
+    "ourMenu": "Our Menu",
+    "linkCopied": "Link copied to clipboard!"
   },
   "booking": {
     "title": "Complete Your Booking",
@@ -355,11 +362,16 @@
       "view": "View",
       "dzd": "DZD"
     },
+    "noListings": "No properties found",
+    "createFirstListing": "List your first property to start hosting travelers.",
+    "createListing": "Create Listing",
+    "notTrips": "No trips booked yet.",
+    "exploreDestinations": "Explore Destinations",
+    "purchaseHistory": "Purchase History",
     "myListings": "My Listings",
     "addListing": "Add Listing",
     "editListing": "Edit Listing",
     "bookings": "Bookings",
-    "noListings": "You haven't added any listings yet.",
     "listingForm": {
       "title": "Title",
       "description": "Description",
@@ -568,6 +580,26 @@
       "a3": "Cancellation policies vary by property. You can review the cancellation policy for each listing before booking. Generally, you can cancel within a certain timeframe for a full refund.",
       "q4": "How can I become a host?",
       "a4": "To become a host, sign up for an account and select \"Property Owner\" as your role. You can then list your properties through your dashboard."
+    }
+  },
+  "transport": {
+    "title": "Transport in Algeria",
+    "subtitle": "Move around with ease using top ride-hailing apps and rental services.",
+    "rideApps": "Ride-Hailing Apps",
+    "rideAppsDesc": "Download trusted apps for city travel.",
+    "carRentals": "Car Rentals",
+    "carRentalsDesc": "Rent vehicles from verified agencies.",
+    "busSchedules": "Bus Schedules",
+    "comingSoon": "Coming Soon",
+    "download": "Download",
+    "ios": "App Store",
+    "android": "Play Store",
+    "bookNow": "Book Now",
+    "perDay": "/day",
+    "verified": "Verified Agency",
+    "services": {
+      "carRental": "Car Rental – With or without driver",
+      "airportTransfer": "For your airport transfers"
     }
   }
 }

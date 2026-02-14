@@ -184,7 +184,7 @@ export default function DashboardPage() {
                 }
 
                 // Fetch data based on role
-                if (profileData.role === "owner" || profileData.role === "hotel") {
+                if (["owner", "agency", "hotel"].includes(profileData.role || "")) {
                     const { data: listingsData } = await supabase
                         .from("listings")
                         .select("*")
@@ -321,9 +321,9 @@ export default function DashboardPage() {
                         <NavItem id="overview" label={t("overview")} icon={LayoutDashboard} />
                     )}
 
-                    {role === "owner" && (
+                    {(role === "owner" || role === "agency" || role === "hotel") && (
                         <>
-                            <NavItem id="analytics" label={t("analytics")} icon={BarChart3} />
+                            {role === "owner" && <NavItem id="analytics" label={t("analytics")} icon={BarChart3} />}
                             <NavItem id="listings" label={t("yourProperties")} icon={Building2} />
                         </>
                     )}
@@ -368,9 +368,9 @@ export default function DashboardPage() {
                                 {isSpecialProvider && (
                                     <NavItem id="overview" label={t("overview")} icon={LayoutDashboard} />
                                 )}
-                                {role === "owner" && (
+                                {(role === "owner" || role === "agency" || role === "hotel") && (
                                     <>
-                                        <NavItem id="analytics" label={t("analytics")} icon={BarChart3} />
+                                        {role === "owner" && <NavItem id="analytics" label={t("analytics")} icon={BarChart3} />}
                                         <NavItem id="listings" label={t("yourProperties")} icon={Building2} />
                                     </>
                                 )}
@@ -410,8 +410,8 @@ export default function DashboardPage() {
                         <OwnerAnalytics />
                     )}
 
-                    {/* Reuse Owner Listings View for "owner" role (legacy) */}
-                    {activeTab === "listings" && role === "owner" && (
+                    {/* Reuse Owner Listings View for other providers */}
+                    {activeTab === "listings" && ["owner", "agency", "hotel"].includes(role) && (
                         <>
                             <div className="flex items-center justify-between">
                                 <div>
@@ -561,8 +561,14 @@ export default function DashboardPage() {
                                                         <span>{booking.start_date} - {booking.end_date}</span>
                                                     </div>
                                                 </div>
-                                                <div className="mt-2 font-medium">
-                                                    Total: {booking.total_price} DZD
+                                                <div className="mt-4 flex items-center justify-between">
+                                                    <div className="font-medium">
+                                                        Total: {booking.total_price} DZD
+                                                    </div>
+                                                    <Button variant="outline" size="sm" onClick={() => toast.info("Edit feature coming soon!")}>
+                                                        <Edit className="mr-2 h-3 w-3" />
+                                                        {t("common.edit")}
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </Card>

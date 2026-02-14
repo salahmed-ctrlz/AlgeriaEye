@@ -22,10 +22,10 @@ const tiles = [
     { icon: Hotel, label: "Hotels", href: "/search/hotels", color: "text-indigo-500", bg: "bg-indigo-500/10" },
     { icon: Utensils, label: "Restaurants", href: "/search/restaurants", color: "text-orange-500", bg: "bg-orange-500/10" },
     { icon: User, label: "Guides", href: "/search/tours", color: "text-green-500", bg: "bg-green-500/10" },
-    { icon: Bus, label: "Trips", href: "/search/transport", color: "text-yellow-500", bg: "bg-yellow-500/10" },
+    { icon: Bus, label: "Tours", href: "/search/tours", color: "text-yellow-500", bg: "bg-yellow-500/10" },
     { icon: Home, label: "Realty", href: "/search/guesthouses", color: "text-purple-500", bg: "bg-purple-500/10" },
     { icon: ShoppingBag, label: "Shop", href: "/shop", color: "text-pink-500", bg: "bg-pink-500/10" },
-    { icon: Car, label: "Transport", href: "/search/transport", color: "text-red-500", bg: "bg-red-500/10" },
+    { icon: Car, label: "Transport", href: "/transport", color: "text-red-500", bg: "bg-red-500/10" },
     { icon: Compass, label: "Map", href: "/map", color: "text-teal-500", bg: "bg-teal-500/10" },
     { icon: BookOpen, label: "Culture", href: "/explore", color: "text-amber-500", bg: "bg-amber-500/10" },
 ];
