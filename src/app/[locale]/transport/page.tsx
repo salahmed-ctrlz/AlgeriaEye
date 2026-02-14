@@ -28,6 +28,9 @@ interface Listing {
     socials?: {
         instagram?: string;
         tiktok?: string;
+        posts?: string;
+        followers?: string;
+        following?: string;
     };
     content?: { type: 'instagram' | 'tiktok', url: string }[];
 }
