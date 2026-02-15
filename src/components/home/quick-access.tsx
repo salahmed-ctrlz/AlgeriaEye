@@ -26,7 +26,7 @@ export function QuickAccessGrid() {
         { icon: Map, label: tQuick("touristSpots"), href: "/map?filter=nature" },
         { icon: Hotel, label: tQuick("hotels"), href: "/search/hotels" },
         { icon: Utensils, label: tQuick("restaurants"), href: "/search/restaurants" },
-        { icon: User, label: tQuick("guides"), href: "/search/tours" },
+        { icon: User, label: tQuick("guides"), href: "/guides" },
         { icon: Bus, label: tQuick("tours"), href: "/search/tours" },
         { icon: Home, label: tQuick("realty"), href: "/search/guesthouses" },
         { icon: ShoppingBag, label: tQuick("shop"), href: "/shop" },

@@ -17,6 +17,53 @@
         "about": "حول",
         "theme": "المظهر"
     },
+    "auth": {
+        "title": "إنشاء حساب",
+        "subtitle": "انضم إلى أكبر مجتمع سياحي في الجزائر",
+        "loginTitle": "مرحباً بعودتك",
+        "loginSubtitle": "سجل الدخول إلى حسابك",
+        "registerTitle": "إنشاء حساب",
+        "registerSubtitle": "انضم إلى عين الجزائر اليوم",
+        "touristTab": "سائح",
+        "partnerTab": "شريك",
+        "joinAsTourist": "الانضمام كسائح",
+        "joinAsPartner": "الانضمام كشريك",
+        "touristBenefits": "خطط لرحلاتك، احفظ وجهاتك المفضلة، واستكشف الجزائر كما لم تفعل من قبل.",
+        "partnerBenefits": "اعرض عملك، وصل إلى عملاء أكثر، وأدر حجوزاتك.",
+        "fullName": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "phone": "رقم الهاتف",
+        "nationality": "الجنسية",
+        "businessName": "اسم النشاط التجاري",
+        "businessType": "نوع النشاط",
+        "wilaya": "الولاية",
+        "selectWilaya": "اختر ولايتك...",
+        "types": {
+            "taxi": "سيارة",
+            "landlord": "صاحب منزل",
+            "hotel": "فندق",
+            "restaurant": "مطعم",
+            "guide": "مرشد سياحي",
+            "agency": "وكالة سفر",
+            "merchant": "تاجر",
+            "other": "آخر"
+        },
+        "role": "أنا...",
+        "tourist": "سائح",
+        "owner": "مالك عقار",
+        "loginButton": "تسجيل الدخول",
+        "register": "تسجيل",
+        "registerButton": "إنشاء حساب",
+        "creatingAccount": "جاري إنشاء الحساب...",
+        "alreadyHaveAccount": "لديك حساب بالفعل؟",
+        "noAccount": "ليس لديك حساب؟",
+        "hasAccount": "لديك حساب بالفعل؟",
+        "login": "تسجيل الدخول",
+        "orContinueWith": "أو تابع مع",
+        "success": "تم التسجيل بنجاح!",
+        "error": "فشل التسجيل. يرجى المحاولة مرة أخرى."
+    },
     "aboutPage": {
         "title": "عن عين الجزائر",
         "subtitle": "رفيقك الذكي لاكتشاف جواهر الجزائر المخفية",
@@ -312,23 +359,6 @@
             }
         }
     },
-    "auth": {
-        "loginTitle": "مرحباً بعودتك",
-        "loginSubtitle": "سجل الدخول إلى حسابك",
-        "registerTitle": "إنشاء حساب",
-        "registerSubtitle": "انضم إلى عين الجزائر اليوم",
-        "email": "البريد الإلكتروني",
-        "password": "كلمة المرور",
-        "fullName": "الاسم الكامل",
-        "role": "أنا...",
-        "tourist": "سائح",
-        "owner": "مالك عقار",
-        "loginButton": "تسجيل الدخول",
-        "registerButton": "إنشاء حساب",
-        "noAccount": "ليس لديك حساب؟",
-        "hasAccount": "لديك حساب بالفعل؟",
-        "orContinueWith": "أو تابع مع"
-    },
     "dashboard": {
         "title": "لوحة التحكم",
         "headers": {
@@ -371,7 +401,8 @@
             "edit": "تعديل",
             "delete": "حذف",
             "view": "عرض",
-            "dzd": "د.ج"
+            "dzd": "د.ج",
+            "month": "شهر"
         },
         "myTrips": "رحلاتي",
         "tripsDesc": "الحجوزات القادمة والسابقة.",
@@ -548,7 +579,8 @@
         "dzd": "د.ج",
         "exploreAll": "عرض الكل",
         "learnMore": "اقرأ المزيد",
-        "general": "عام"
+        "general": "عام",
+        "month": "شهر"
     },
     "wilayaDetails": {
         "country": "الجزائر",
@@ -598,6 +630,19 @@
                     "desc": "الشعبي، الذي نشأ في الأزقة المتعرجة لقصبة الجزائر في أوائل القرن العشرين، هو موسيقى الشعب. يتميز بآلة المندول والقصائد الشعرية (الملحون) المستمدة من التراث الأندلسي، ويخلق جواً حميمياً. حدد أساتذة مثل الحاج محمد العنقة هذا النوع، مما جعله ركيزة أساسية للأعراس والاحتفالات الدينية."
                 }
             }
+        },
+        "guidesPage": {
+            "title": "المرشدون السياحيون",
+            "subtitle": "اكتشف الجزائر من خلال عيون المرشدين المحترفين",
+            "searchPlaceholder": "ابحث عن المرشدين بالاسم أو الولاية...",
+            "specialties": "التخصصات",
+            "experience": "الخبرة",
+            "languages": "اللغات",
+            "viewProfile": "عرض الملف الشخصي",
+            "contact": "اتصل بالمرشد",
+            "years": "سنوات",
+            "reviews": "التقييمات",
+            "perDay": "/يوم"
         },
         "food": {
             "title": "مذاق الجزائر",
@@ -750,7 +795,8 @@
         "comingSoon": "قريباً",
         "download": "تحميل",
         "ios": "App Store",
-        "android": "Play Store"
+        "android": "Play Store",
+        "perDay": "/يوم"
     },
     "quickAccess": {
         "touristSpots": "الأماكن السياحية",
@@ -807,9 +853,15 @@
         "unfeaturedSuccess": "تم إلغاء تمييز الإعلان بنجاح"
     },
     "subscriptions": {
+        "totalAmount": "المجموع {amount} دج",
         "title": "باقات الشركاء",
         "subtitle": "عزز نشاطك التجاري وصل إلى المزيد من السياح في الجزائر.",
         "commission": "+ {percent}٪ عمولة على كل حجز مؤكد",
+        "durations": {
+            "1Month": "شهر واحد",
+            "3Months": "3 أشهر (خصم 10٪)",
+            "12Months": "12 شهرًا (خصم 25٪)"
+        },
         "starter": {
             "name": "باقة البداية",
             "price": "2,900",

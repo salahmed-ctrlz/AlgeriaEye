@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatDistanceToNow } from "date-fns";
 import { MessageCircle, User, Send, ChevronLeft, Languages, MapPin, Image as ImageIcon, Loader2 } from "lucide-react";
 import { useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -42,6 +43,8 @@ export default function MessagesPage() {
     const [selectedConvId, setSelectedConvId] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [newMessage, setNewMessage] = useState("");
+    const searchParams = useSearchParams();
+    const targetUserId = searchParams.get("userId");
     const [currentUser, setCurrentUser] = useState<any>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -78,7 +81,6 @@ export default function MessagesPage() {
                 data.forEach((msg: any) => {
                     const isSender = msg.sender_id === user.id;
                     const otherUser = isSender ? msg.receiver : msg.sender;
-                    // Skip if otherUser is null (deleted account etc)
                     if (!otherUser) return;
 
                     const key = otherUser.id;
@@ -93,16 +95,43 @@ export default function MessagesPage() {
 
                     const conv = grouped.get(key)!;
                     conv.messages.push(msg);
-                    conv.lastMessage = msg; // Since we ordered by ascending, last one is latest
+                    conv.lastMessage = msg;
                 });
 
-                // Sort conversations by last message time descending
-                const sorted = Array.from(grouped.values()).sort((a, b) =>
-                    new Date(b.lastMessage.created_at).getTime() - new Date(a.lastMessage.created_at).getTime()
-                );
+                // If specialized userId requested, ensure they are in the list
+                if (targetUserId && !grouped.has(targetUserId) && targetUserId !== user.id) {
+                    const { data: targetProfile } = await supabase
+                        .from("profiles")
+                        .select("id, full_name, avatar_url")
+                        .eq("id", targetUserId)
+                        .single();
+
+                    if (targetProfile) {
+                        grouped.set(targetUserId, {
+                            otherUser: targetProfile,
+                            messages: [],
+                            lastMessage: {
+                                id: "new",
+                                content: "Start a conversation",
+                                created_at: new Date().toISOString(),
+                                sender_id: user.id,
+                                receiver_id: targetUserId
+                            }
+                        });
+                    }
+                }
+
+                const sorted = Array.from(grouped.values()).sort((a, b) => {
+                    if (a.lastMessage.id === "new") return -1;
+                    if (b.lastMessage.id === "new") return 1;
+                    return new Date(b.lastMessage.created_at).getTime() - new Date(a.lastMessage.created_at).getTime();
+                });
 
                 setConversations(sorted);
-                if (sorted.length > 0 && window.innerWidth >= 768) {
+
+                if (targetUserId) {
+                    setSelectedConvId(targetUserId);
+                } else if (sorted.length > 0 && window.innerWidth >= 768) {
                     setSelectedConvId(sorted[0].otherUser.id);
                 }
             }

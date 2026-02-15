@@ -85,6 +85,7 @@ interface Profile {
     bio: string | null;
     avatar_url: string | null;
     role: "owner" | "tourist" | "admin" | "guide" | "agency" | "hotel" | "merchant";
+    business_type?: string;
 }
 
 interface Booking {
@@ -178,14 +179,20 @@ export default function DashboardPage() {
 
                 // Set default tab based on role if not set in URL
                 if (!searchParams.get("tab")) {
-                    if (["guide", "agency", "hotel", "merchant"].includes(profileData.role || "")) {
+                    const r = profileData.role;
+                    const bt = profileData.business_type;
+                    const isSpec = ["guide", "agency", "hotel", "merchant"].includes(r || "") ||
+                        (r === "owner" && ["guide", "agency", "hotel", "merchant"].includes(bt || ""));
+
+                    if (isSpec) {
                         setActiveTab("overview");
-                    } else if (profileData.role === "owner") {
+                    } else if (r === "owner") {
                         setActiveTab("analytics"); // Default to analytics for owners
                     } else {
                         setActiveTab("trips");
                     }
-                } else {
+                }
+                else {
                     setActiveTab(searchParams.get("tab") as Tab);
                 }
 
@@ -309,7 +316,13 @@ export default function DashboardPage() {
     }
 
     const role = profile?.role || "tourist";
-    const isSpecialProvider = ["guide", "agency", "hotel", "merchant"].includes(role);
+    const businessType = profile?.business_type;
+    const isGuide = role === "guide" || (role === "owner" && businessType === "guide");
+    const isAgency = role === "agency" || (role === "owner" && businessType === "agency");
+    const isHotel = role === "hotel" || (role === "owner" && businessType === "hotel");
+    const isMerchant = role === "merchant" || (role === "owner" && businessType === "merchant");
+
+    const isSpecialProvider = isGuide || isAgency || isHotel || isMerchant;
 
     return (
         <div className="flex min-h-screen bg-muted/10">
@@ -404,10 +417,10 @@ export default function DashboardPage() {
                     {/* Render Specialized Dashboards */}
                     {activeTab === "overview" && (
                         <>
-                            {role === "guide" && <GuideDashboard />}
-                            {role === "agency" && <AgencyDashboard />}
-                            {role === "hotel" && <HotelDashboard />}
-                            {role === "merchant" && <MerchantDashboard />}
+                            {isGuide && <GuideDashboard />}
+                            {isAgency && <AgencyDashboard />}
+                            {isHotel && <HotelDashboard />}
+                            {isMerchant && <MerchantDashboard />}
                         </>
                     )}
 

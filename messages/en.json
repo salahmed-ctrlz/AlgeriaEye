@@ -17,6 +17,53 @@
     "about": "About",
     "theme": "Theme"
   },
+  "auth": {
+    "title": "Create an Account",
+    "subtitle": "Join Algeria's largest tourism community",
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to your account",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Join Algeria Eye today",
+    "touristTab": "Tourist",
+    "partnerTab": "Partner",
+    "joinAsTourist": "Join as a Tourist",
+    "joinAsPartner": "Join as a Partner",
+    "touristBenefits": "Plan trips, save favorites, and explore Algeria like never before.",
+    "partnerBenefits": "List your business, reach more customers, and manage bookings.",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "password": "Password",
+    "phone": "Phone Number",
+    "nationality": "Nationality",
+    "businessName": "Business Name",
+    "businessType": "Business Type",
+    "wilaya": "Wilaya",
+    "selectWilaya": "Select your wilaya...",
+    "types": {
+      "taxi": "Taxi",
+      "landlord": "Landlord",
+      "hotel": "Hotel",
+      "restaurant": "Restaurant",
+      "guide": "Tour Guide",
+      "agency": "Travel Agency",
+      "merchant": "Merchant",
+      "other": "Other"
+    },
+    "role": "I am a...",
+    "tourist": "Tourist",
+    "owner": "Property Owner",
+    "loginButton": "Sign In",
+    "register": "Register",
+    "registerButton": "Create Account",
+    "creatingAccount": "Creating account...",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "login": "Login",
+    "orContinueWith": "or continue with",
+    "success": "Registration successful!",
+    "error": "Registration failed. Please try again."
+  },
   "aboutPage": {
     "title": "About Algeria Eye",
     "subtitle": "Your Smart Companion to Algeria's Hidden Gems",
@@ -315,23 +362,6 @@
       }
     }
   },
-  "auth": {
-    "loginTitle": "Welcome Back",
-    "loginSubtitle": "Sign in to your account",
-    "registerTitle": "Create Account",
-    "registerSubtitle": "Join Algeria Eye today",
-    "email": "Email",
-    "password": "Password",
-    "fullName": "Full Name",
-    "role": "I am a...",
-    "tourist": "Tourist",
-    "owner": "Property Owner",
-    "loginButton": "Sign In",
-    "registerButton": "Create Account",
-    "noAccount": "Don't have an account?",
-    "hasAccount": "Already have an account?",
-    "orContinueWith": "or continue with"
-  },
   "dashboard": {
     "title": "Dashboard",
     "owner": "Owner",
@@ -550,6 +580,7 @@
     "edit": "Edit",
     "view": "View",
     "dzd": "DZD",
+    "month": "month",
     "exploreAll": "View All",
     "learnMore": "Learn More",
     "general": "General"
@@ -602,6 +633,19 @@
           "desc": "Originating in the winding streets of the Casbah of Algiers in the early 20th century, Chaâbi is the music of the people. Characterized by the mandole and poetic lyrics (Melhoun) derived from Andalusian tradition, it creates an intimate atmosphere. Masters like El Hadj M'Hamed El Anka defined the genre, making it a staple of weddings and religious celebrations."
         }
       }
+    },
+    "guidesPage": {
+      "title": "Tour Guides",
+      "subtitle": "Discover Algeria through the eyes of professional guides",
+      "searchPlaceholder": "Search guides by name or location...",
+      "specialties": "Specialties",
+      "experience": "Experience",
+      "languages": "Languages",
+      "viewProfile": "View Profile",
+      "contact": "Contact Guide",
+      "years": "years",
+      "reviews": "Reviews",
+      "perDay": "/day"
     },
     "food": {
       "title": "Taste of Algeria",
@@ -685,7 +729,7 @@
     "privacy": "Privacy Policy",
     "rights": "All rights reserved.",
     "goToTop": "Go to Top",
-    "madeWith": "Made with ❤️ in Algeria"
+    "madeWith": "Made with love in Algeria"
   },
   "legal": {
     "title": "Legal & Support",
@@ -821,6 +865,11 @@
     "title": "Partner Plans",
     "subtitle": "Boost your business and reach more tourists across Algeria.",
     "commission": "+ {percent}% commission per confirmed booking",
+    "durations": {
+      "1Month": "1 Month",
+      "3Months": "3 Months (10% Off)",
+      "12Months": "12 Months (25% Off)"
+    },
     "starter": {
       "name": "Starter Plan",
       "price": "2,900",
@@ -881,7 +930,8 @@
       "homeSubtitle": "List your services and reach thousands of travelers.",
       "button": "View Subscription Plans",
       "subscribe": "Subscribe Now",
-      "freeForTourists": "Tourists always use the platform for free."
+      "freeForTourists": "Tourists always use the platform for free.",
+      "totalAmount": "Total {amount} DZD"
     }
   }
 }

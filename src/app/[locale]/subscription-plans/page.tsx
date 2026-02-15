@@ -11,22 +11,45 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { PaymentMethods } from "@/components/booking/payment-methods";
 import { CardScanner } from "@/components/booking/card-scanner";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export default function SubscriptionPlansPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = use(params);
     const t = useTranslations("subscriptions");
     const ct = useTranslations("common");
     const [selectedPlan, setSelectedPlan] = useState<any>(null);
+    const [duration, setDuration] = useState<"1" | "3" | "12">("1");
     const [isProcessing, setIsProcessing] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("visa");
+
+    const getPriceDetails = (basePriceValue: string | number) => {
+        const basePrice = typeof basePriceValue === 'string' ? parseInt(basePriceValue.replace(/,/g, '')) : (basePriceValue || 0);
+        if (isNaN(basePrice as number)) return { price: 0, total: 0, discount: 0 };
+        if (duration === "1") return { price: basePrice as number, total: basePrice as number, discount: 0 };
+        if (duration === "3") {
+            const total = Math.round(((basePrice as number) * 3) * 0.9);
+            return { price: Math.round(total / 3), total, discount: 10 };
+        }
+        if (duration === "12") {
+            const total = Math.round(((basePrice as number) * 12) * 0.75);
+            return { price: Math.round(total / 12), total, discount: 25 };
+        }
+        return { price: basePrice as number, total: basePrice as number, discount: 0 };
+    };
+
+    const getDurationLabel = () => {
+        if (duration === "1") return t("durations.1Month");
+        if (duration === "3") return t("durations.3Months");
+        return t("durations.12Months");
+    };
 
     const plans = [
         {
             id: "starter",
             name: t("starter.name"),
-            price: t("starter.price"),
-            commission: t("starter.commission"),
+            basePrice: "2900",
+            commission: "8",
             desc: t("starter.desc"),
             features: [
                 t("starter.features.0"),
@@ -43,8 +66,8 @@ export default function SubscriptionPlansPage({ params }: { params: Promise<{ lo
         {
             id: "growth",
             name: t("growth.name"),
-            price: t("growth.price"),
-            commission: t("growth.commission"),
+            basePrice: "6900",
+            commission: "5",
             desc: t("growth.desc"),
             features: [
                 t("growth.features.0"),
@@ -63,8 +86,8 @@ export default function SubscriptionPlansPage({ params }: { params: Promise<{ lo
         {
             id: "premium",
             name: t("premium.name"),
-            price: t("premium.price"),
-            commission: t("premium.commission"),
+            basePrice: "12900",
+            commission: "2",
             desc: t("premium.desc"),
             features: [
                 t("premium.features.0"),
@@ -132,6 +155,39 @@ export default function SubscriptionPlansPage({ params }: { params: Promise<{ lo
                     <p className="text-xl text-muted-foreground">
                         {t("subtitle")}
                     </p>
+
+                    {/* Duration Toggle */}
+                    <div className="flex items-center justify-center pt-8">
+                        <div className="inline-flex p-1 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border">
+                            <button
+                                onClick={() => setDuration("1")}
+                                className={cn(
+                                    "px-6 py-2 rounded-xl text-sm font-bold transition-all",
+                                    duration === "1" ? "bg-white dark:bg-zinc-800 shadow-sm text-red-600" : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                                )}
+                            >
+                                {t("durations.1Month")}
+                            </button>
+                            <button
+                                onClick={() => setDuration("3")}
+                                className={cn(
+                                    "px-6 py-2 rounded-xl text-sm font-bold transition-all",
+                                    duration === "3" ? "bg-white dark:bg-zinc-800 shadow-sm text-red-600" : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                                )}
+                            >
+                                {t("durations.3Months")}
+                            </button>
+                            <button
+                                onClick={() => setDuration("12")}
+                                className={cn(
+                                    "px-6 py-2 rounded-xl text-sm font-bold transition-all",
+                                    duration === "12" ? "bg-white dark:bg-zinc-800 shadow-sm text-red-600" : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                                )}
+                            >
+                                {t("durations.12Months")}
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8 items-start">
@@ -160,9 +216,19 @@ export default function SubscriptionPlansPage({ params }: { params: Promise<{ lo
                                 </CardDescription>
                                 <div className="mt-6 space-y-2">
                                     <div className="flex items-baseline gap-1">
-                                        <span className="text-4xl font-black">{plan.price}</span>
-                                        <span className={`font-medium ${plan.popular ? "text-red-100" : "text-muted-foreground"}`}>{ct("dzd")} / month</span>
+                                        <span className="text-4xl font-black">
+                                            {getPriceDetails(plan.basePrice).price.toLocaleString()}
+                                        </span>
+                                        <span className={`font-medium ${plan.popular ? "text-red-100" : "text-muted-foreground"}`}>{ct("dzd")} / {ct("month")}</span>
                                     </div>
+                                    {duration !== "1" && (
+                                        <div className={cn(
+                                            "text-xs font-bold",
+                                            plan.popular ? "text-red-100" : "text-green-600"
+                                        )}>
+                                            {t("totalAmount", { amount: getPriceDetails(plan.basePrice).total.toLocaleString() })}
+                                        </div>
+                                    )}
                                     <div className={`text-sm font-bold bg-white/10 w-fit px-3 py-1 rounded-full ${plan.popular ? "text-white" : "text-red-600 bg-red-50 dark:bg-red-950/30"}`}>
                                         {t("commission", { percent: plan.commission })}
                                     </div>
@@ -207,56 +273,74 @@ export default function SubscriptionPlansPage({ params }: { params: Promise<{ lo
 
             {/* Simulated Payment Dialog */}
             <Dialog open={!!selectedPlan} onOpenChange={(open) => !isProcessing && !open && setSelectedPlan(null)}>
-                <DialogContent className="sm:max-w-md border-zinc-100 dark:border-zinc-800 rounded-3xl p-0 overflow-hidden" dir="ltr">
-                    <div className="sr-only">
-                        <DialogTitle>Subscription Checkout</DialogTitle>
-                        <DialogDescription>Complete your purchase for {selectedPlan?.name}</DialogDescription>
-                    </div>
-                    {isProcessing ? (
-                        <div className="py-12 flex flex-col items-center justify-center text-center space-y-8">
-                            <h2 className="text-2xl font-black">Secure Payment</h2>
-                            <div className="scale-125">
-                                <CardScanner price={parseInt(selectedPlan?.price.replace(/,/g, ''))} />
-                            </div>
-                            <p className="animate-pulse text-muted-foreground font-medium px-8">
-                                Securely processing your subscription for <span className="text-red-600 font-bold">{selectedPlan?.name}</span>...
-                            </p>
-                        </div>
-                    ) : (
-                        <div>
-                            <div className="p-8 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
-                                <div className="flex justify-between items-center mb-4">
-                                    <div className="space-y-1">
-                                        <h3 className="text-xl font-bold">{selectedPlan?.name}</h3>
-                                        <p className="text-sm text-muted-foreground italic">Business Subscription</p>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-2xl font-black text-red-600">{selectedPlan?.price}</div>
-                                        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{ct("dzd")} / month</div>
-                                    </div>
+                <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden rounded-3xl border-none shadow-2xl">
+                    {selectedPlan && (
+                        <>
+                            <DialogHeader className="p-8 pb-0">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="absolute left-4 top-4 rounded-full h-10 w-10 bg-white/10 hover:bg-white/20 text-zinc-500"
+                                    onClick={() => setSelectedPlan(null)}
+                                >
+                                    <ArrowLeft className="h-5 w-5" />
+                                </Button>
+                                <div className="space-y-1 mt-4">
+                                    <DialogTitle className="text-3xl font-black tracking-tighter">Confirmation</DialogTitle>
+                                    <DialogDescription className="text-zinc-500 font-medium">Review your subscription details</DialogDescription>
                                 </div>
-                            </div>
+                            </DialogHeader>
 
-                            <div className="p-8 space-y-6">
-                                <div className="space-y-3">
-                                    <label className="text-sm font-bold uppercase tracking-widest text-zinc-500">Payment Method</label>
-                                    <PaymentMethods selected={paymentMethod} onSelect={setPaymentMethod} />
+                            {isProcessing ? (
+                                <div className="py-12 flex flex-col items-center justify-center text-center space-y-8">
+                                    <h2 className="text-2xl font-black">Secure Payment</h2>
+                                    <div className="scale-125">
+                                        <CardScanner price={getPriceDetails(selectedPlan.basePrice).total} />
+                                    </div>
+                                    <p className="animate-pulse text-muted-foreground font-medium px-8">
+                                        Securely processing your subscription for <span className="text-red-600 font-bold">{selectedPlan.name}</span>...
+                                    </p>
                                 </div>
+                            ) : (
+                                <div>
+                                    <div className="p-8 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
+                                        <div className="flex justify-between items-center mb-4">
+                                            <div className="space-y-1">
+                                                <h3 className="text-xl font-bold">{selectedPlan.name}</h3>
+                                                <p className="text-sm text-muted-foreground italic">Business Subscription</p>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-2xl font-black text-red-600">
+                                                    {getPriceDetails(selectedPlan.basePrice).total.toLocaleString()}
+                                                </div>
+                                                <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                                                    {getDurationLabel()}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div className="space-y-4 pt-2">
-                                    <Button
-                                        onClick={handleSubscribe}
-                                        className="w-full h-14 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-bold text-lg shadow-xl shadow-red-600/20"
-                                    >
-                                        Activate Plan
-                                    </Button>
-                                    <div className="flex items-center justify-center gap-2 text-xs text-zinc-400 font-medium italic">
-                                        <ShieldCheck className="w-3 h-3" />
-                                        <span>Secure 256-bit SSL Encrypted Payment</span>
+                                    <div className="p-8 space-y-6">
+                                        <div className="space-y-3">
+                                            <label className="text-sm font-bold uppercase tracking-widest text-zinc-500">Payment Method</label>
+                                            <PaymentMethods selected={paymentMethod} onSelect={setPaymentMethod} />
+                                        </div>
+
+                                        <div className="space-y-4 pt-2">
+                                            <Button
+                                                onClick={handleSubscribe}
+                                                className="w-full h-14 bg-red-600 hover:bg-red-700 text-white rounded-2xl font-bold text-lg shadow-xl shadow-red-600/20"
+                                            >
+                                                Activate Plan
+                                            </Button>
+                                            <p className="text-[10px] text-center text-zinc-400 font-medium px-4">
+                                                By clicking Activate, you agree to Algeria Eye's Terms of Service and Privacy Policy. Securely processed by Algeria Eye Pay.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            )}
+                        </>
                     )}
                 </DialogContent>
             </Dialog>

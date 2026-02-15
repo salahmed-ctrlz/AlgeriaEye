@@ -17,6 +17,53 @@
         "about": "À propos",
         "theme": "Thème"
     },
+    "auth": {
+        "title": "Créer un Compte",
+        "subtitle": "Rejoignez la plus grande communauté touristique d'Algérie",
+        "loginTitle": "Bon retour",
+        "loginSubtitle": "Connectez-vous à votre compte",
+        "registerTitle": "Créer un Compte",
+        "registerSubtitle": "Rejoignez Algeria Eye aujourd'hui",
+        "touristTab": "Touriste",
+        "partnerTab": "Partenaire",
+        "joinAsTourist": "S'inscrire comme Touriste",
+        "joinAsPartner": "S'inscrire comme Partenaire",
+        "touristBenefits": "Planifiez des voyages, enregistrez vos favoris et explorez l'Algérie.",
+        "partnerBenefits": "Listez votre entreprise, touchez plus de clients et gérez vos réservations.",
+        "fullName": "Nom Complet",
+        "email": "Adresse E-mail",
+        "password": "Mot de passe",
+        "phone": "Numéro de Téléphone",
+        "nationality": "Nationalité",
+        "businessName": "Nom de l'Entreprise",
+        "businessType": "Type d'Entreprise",
+        "wilaya": "Wilaya",
+        "selectWilaya": "Sélectionnez votre wilaya...",
+        "types": {
+            "taxi": "Taxi",
+            "landlord": "Propriétaire",
+            "hotel": "Hôtel",
+            "restaurant": "Restaurant",
+            "guide": "Guide Touristique",
+            "agency": "Agence de Voyages",
+            "merchant": "Commerçant",
+            "other": "Autre"
+        },
+        "role": "Je suis un...",
+        "tourist": "Touriste",
+        "owner": "Propriétaire",
+        "loginButton": "Se Connecter",
+        "register": "S'inscrire",
+        "registerButton": "Créer un Compte",
+        "creatingAccount": "Création du compte...",
+        "alreadyHaveAccount": "Vous avez déjà un compte ?",
+        "noAccount": "Pas de compte ?",
+        "hasAccount": "Déjà un compte ?",
+        "login": "Connexion",
+        "orContinueWith": "ou continuer avec",
+        "success": "Inscription réussie !",
+        "error": "Échec de l'inscription. Veuillez réessayer."
+    },
     "aboutPage": {
         "title": "À propos d'Algeria Eye",
         "subtitle": "Votre compagnon intelligent pour les trésors cachés de l'Algérie",
@@ -315,23 +362,6 @@
             }
         }
     },
-    "auth": {
-        "loginTitle": "Bon retour",
-        "loginSubtitle": "Connectez-vous à votre compte",
-        "registerTitle": "Créer un Compte",
-        "registerSubtitle": "Rejoignez Algeria Eye aujourd'hui",
-        "email": "Email",
-        "password": "Mot de passe",
-        "fullName": "Nom Complet",
-        "role": "Je suis un...",
-        "tourist": "Touriste",
-        "owner": "Propriétaire",
-        "loginButton": "Se Connecter",
-        "registerButton": "Créer un Compte",
-        "noAccount": "Pas de compte ?",
-        "hasAccount": "Déjà un compte ?",
-        "orContinueWith": "ou continuer avec"
-    },
     "dashboard": {
         "title": "Tableau de Bord",
         "owner": "Propriétaire",
@@ -551,6 +581,7 @@
         "edit": "Modifier",
         "view": "Voir",
         "dzd": "DZD",
+        "month": "mois",
         "exploreAll": "Voir Tout",
         "learnMore": "En savoir plus",
         "general": "Général"
@@ -603,6 +634,19 @@
                     "desc": "Originaire des rues sinueuses de la Casbah d'Alger."
                 }
             }
+        },
+        "guidesPage": {
+            "title": "Guides Touristiques",
+            "subtitle": "Découvrez l'Algérie à travers les yeux de guides professionnels",
+            "searchPlaceholder": "Rechercher des guides par nom ou wilaya...",
+            "specialties": "Spécialités",
+            "experience": "Expérience",
+            "languages": "Langues",
+            "viewProfile": "Voir le profil",
+            "contact": "Contacter le guide",
+            "years": "ans",
+            "reviews": "Avis",
+            "perDay": "/jour"
         },
         "food": {
             "title": "Goût de l'Algérie",
@@ -822,6 +866,12 @@
         "title": "Offres Partenaires",
         "subtitle": "Boostez votre activité et touchez plus de touristes en Algérie.",
         "commission": "+ {percent} % de commission par réservation confirmée",
+        "totalAmount": "Total {amount} DZD",
+        "durations": {
+            "1Month": "1 Mois",
+            "3Months": "3 Mois (-10 %)",
+            "12Months": "12 Mois (-25 %)"
+        },
         "starter": {
             "name": "Formule Starter",
             "price": "2 900",

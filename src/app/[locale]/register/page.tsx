@@ -85,12 +85,12 @@ export default function RegisterPage() {
                 toast.error(result.error);
             } else {
                 setSuccess(true);
-                toast.success("Account created successfully!");
+                toast.success(t("success"));
             }
         } catch (err) {
             console.error(err);
-            setError("An unexpected error occurred.");
-            toast.error("An unexpected error occurred.");
+            setError(t("error"));
+            toast.error(t("error"));
         } finally {
             setLoading(false);
         }
@@ -104,15 +104,15 @@ export default function RegisterPage() {
                         <CheckCircle2 className="h-16 w-16 text-green-500" />
                     </div>
                     <h1 className="text-2xl font-bold tracking-tight">
-                        Registration Successful!
+                        {t("success")}
                     </h1>
                     <p className="text-muted-foreground">
-                        Welcome to Algeria Eye. You can now log in to your account.
+                        {t("subtitle")}
                     </p>
                     <div className="pt-4">
                         <Button asChild className="w-full bg-brand hover:bg-brand-light">
                             <Link href={`/${locale}/login`}>
-                                Go to Login
+                                {t("login")}
                             </Link>
                         </Button>
                     </div>
@@ -150,10 +150,10 @@ export default function RegisterPage() {
                         </div>
                     </Link>
                     <h1 className="text-3xl font-bold tracking-tight">
-                        Create an Account
+                        {t("title")}
                     </h1>
                     <p className="text-muted-foreground">
-                        Join our community to explore or host in Algeria
+                        {t("subtitle")}
                     </p>
                 </div>
 
@@ -169,7 +169,7 @@ export default function RegisterPage() {
                         )}
                     >
                         <User className="h-4 w-4" />
-                        Join as Tourist
+                        {t("touristTab")}
                     </button>
                     <button
                         onClick={() => setActiveTab("partner")}
@@ -181,7 +181,7 @@ export default function RegisterPage() {
                         )}
                     >
                         <Building2 className="h-4 w-4" />
-                        Join as Partner
+                        {t("partnerTab")}
                     </button>
                 </div>
 
@@ -196,7 +196,7 @@ export default function RegisterPage() {
                     {activeTab === "tourist" && (
                         <form onSubmit={touristForm.handleSubmit(onTouristSubmit)} className="space-y-4">
                             <div className="space-y-2">
-                                <Label>Full Name</Label>
+                                <Label>{t("fullName")}</Label>
                                 <Input placeholder="Ahmed Bensalem" {...touristForm.register("fullName")} />
                                 {touristForm.formState.errors.fullName && (
                                     <p className="text-xs text-destructive">{touristForm.formState.errors.fullName.message}</p>
@@ -204,7 +204,7 @@ export default function RegisterPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label>Email</Label>
+                                <Label>{t("email")}</Label>
                                 <Input type="email" placeholder="you@example.com" {...touristForm.register("email")} />
                                 {touristForm.formState.errors.email && (
                                     <p className="text-xs text-destructive">{touristForm.formState.errors.email.message}</p>
@@ -212,10 +212,9 @@ export default function RegisterPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label>Nationality</Label>
                                 <Select onValueChange={(val) => touristForm.setValue("nationality", val)}>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select nationality" />
+                                        <SelectValue placeholder={t("nationality")} />
                                     </SelectTrigger>
                                     <SelectContent className="max-h-[300px]">
                                         {countries.map((country: any) => (
@@ -231,7 +230,7 @@ export default function RegisterPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label>Password</Label>
+                                <Label>{t("password")}</Label>
                                 <Input type="password" placeholder="••••••••" {...touristForm.register("password")} />
                                 {touristForm.formState.errors.password && (
                                     <p className="text-xs text-destructive">{touristForm.formState.errors.password.message}</p>
@@ -239,7 +238,7 @@ export default function RegisterPage() {
                             </div>
 
                             <Button type="submit" disabled={loading} className="w-full bg-brand text-white hover:bg-brand-light mt-2">
-                                {loading ? "Creating Account..." : "Create Tourist Account"}
+                                {loading ? t("creatingAccount") : t("register")}
                             </Button>
                         </form>
                     )}
@@ -248,7 +247,7 @@ export default function RegisterPage() {
                     {activeTab === "partner" && (
                         <form onSubmit={partnerForm.handleSubmit(onPartnerSubmit)} className="space-y-4">
                             <div className="space-y-2">
-                                <Label>Business Name</Label>
+                                <Label>{t("businessName")}</Label>
                                 <Input placeholder="Hotel El Aurassi" {...partnerForm.register("businessName")} />
                                 {partnerForm.formState.errors.businessName && (
                                     <p className="text-xs text-destructive">{partnerForm.formState.errors.businessName.message}</p>
@@ -257,46 +256,46 @@ export default function RegisterPage() {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label>Type</Label>
+                                    <Label>{t("businessType")}</Label>
                                     <Select onValueChange={(val: any) => partnerForm.setValue("businessType", val)}>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select type" />
+                                            <SelectValue placeholder={t("businessType")} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectItem value="hotel">
                                                 <div className="flex items-center gap-2">
                                                     <Building2 className="h-4 w-4" />
-                                                    <span>Hotel</span>
+                                                    <span>{t("types.hotel")}</span>
                                                 </div>
                                             </SelectItem>
                                             <SelectItem value="agency">
                                                 <div className="flex items-center gap-2">
                                                     <Briefcase className="h-4 w-4" />
-                                                    <span>Travel Agency</span>
+                                                    <span>{t("types.agency")}</span>
                                                 </div>
                                             </SelectItem>
                                             <SelectItem value="taxi">
                                                 <div className="flex items-center gap-2">
                                                     <Car className="h-4 w-4" />
-                                                    <span>Taxi / Transport</span>
+                                                    <span>{t("types.taxi")}</span>
                                                 </div>
                                             </SelectItem>
                                             <SelectItem value="guide">
                                                 <div className="flex items-center gap-2">
                                                     <Map className="h-4 w-4" />
-                                                    <span>Tour Guide</span>
+                                                    <span>{t("types.guide")}</span>
                                                 </div>
                                             </SelectItem>
                                             <SelectItem value="restaurant">
                                                 <div className="flex items-center gap-2">
                                                     <Utensils className="h-4 w-4" />
-                                                    <span>Restaurant</span>
+                                                    <span>{t("types.restaurant")}</span>
                                                 </div>
                                             </SelectItem>
                                             <SelectItem value="landlord">
                                                 <div className="flex items-center gap-2">
                                                     <Building2 className="h-4 w-4" />
-                                                    <span>Landlord</span>
+                                                    <span>{t("types.landlord")}</span>
                                                 </div>
                                             </SelectItem>
                                         </SelectContent>
@@ -306,10 +305,10 @@ export default function RegisterPage() {
                                     )}
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>Wilaya</Label>
+                                    <Label>{t("wilaya")}</Label>
                                     <Select onValueChange={(val) => partnerForm.setValue("wilaya", val)}>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select..." />
+                                            <SelectValue placeholder={t("selectWilaya")} />
                                         </SelectTrigger>
                                         <SelectContent className="max-h-[200px]">
                                             {wilayas.map((w) => (
@@ -326,7 +325,7 @@ export default function RegisterPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label>Email</Label>
+                                <Label>{t("email")}</Label>
                                 <Input type="email" placeholder="business@example.com" {...partnerForm.register("email")} />
                                 {partnerForm.formState.errors.email && (
                                     <p className="text-xs text-destructive">{partnerForm.formState.errors.email.message}</p>
@@ -334,7 +333,7 @@ export default function RegisterPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label>Password</Label>
+                                <Label>{t("password")}</Label>
                                 <Input type="password" placeholder="••••••••" {...partnerForm.register("password")} />
                                 {partnerForm.formState.errors.password && (
                                     <p className="text-xs text-destructive">{partnerForm.formState.errors.password.message}</p>
@@ -342,19 +341,19 @@ export default function RegisterPage() {
                             </div>
 
                             <Button type="submit" disabled={loading} className="w-full bg-brand text-white hover:bg-brand-light mt-2">
-                                {loading ? "Creating Account..." : "Create Partner Account"}
+                                {loading ? t("creatingAccount") : t("register")}
                             </Button>
                         </form>
                     )}
                 </div>
 
                 <p className="text-center text-sm text-muted-foreground">
-                    Already have an account?{" "}
+                    {t("alreadyHaveAccount")}{" "}
                     <Link
                         href={`/${locale}/login`}
                         className="font-medium text-brand hover:underline"
                     >
-                        Sign in
+                        {t("login")}
                     </Link>
                 </p>
             </div>
