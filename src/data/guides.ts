@@ -9,6 +9,7 @@ export interface Guide {
     price: number;
     specialties: string[];
     languages: string[];
+    translationKey: string;
     isAgency?: boolean;
     featured?: boolean;
     businessType?: string;
@@ -24,8 +25,9 @@ export const guides: Guide[] = [
         rating: 4.9,
         reviews: 320,
         price: 4500,
-        specialties: ["History", "Desert Safari", "Cultural Tours", "Translation"],
+        specialties: ["history", "desert", "culture", "translation"],
         languages: ["Arabic", "French", "English", "Spanish"],
+        translationKey: "sami",
         businessType: "guide",
         featured: true
     },
@@ -38,8 +40,9 @@ export const guides: Guide[] = [
         rating: 4.8,
         reviews: 210,
         price: 3800,
-        specialties: ["Archaeology", "Educational Tours", "Museums"],
+        specialties: ["archaeology", "education", "museums"],
         languages: ["Arabic", "French", "English", "Italian"],
+        translationKey: "lila",
         businessType: "guide",
         featured: true
     },
@@ -52,8 +55,9 @@ export const guides: Guide[] = [
         rating: 4.9,
         reviews: 410,
         price: 4000,
-        specialties: ["Hiking", "Camping", "Nature Photography", "Mountain Safety"],
+        specialties: ["hiking", "camping", "photography", "safety"],
         languages: ["Arabic", "Tamazight", "French", "English"],
+        translationKey: "karim",
         businessType: "guide"
     },
     {
@@ -65,8 +69,9 @@ export const guides: Guide[] = [
         rating: 5.0,
         reviews: 500,
         price: 6500,
-        specialties: ["4x4 Safari", "Luxury Camping", "Astrophotography", "VIP Tours"],
+        specialties: ["safari", "luxury", "astro", "vip"],
         languages: ["Arabic", "Tamashoq", "French", "English", "German"],
+        translationKey: "amel",
         businessType: "guide",
         featured: true
     }

@@ -570,6 +570,8 @@
     }
   },
   "common": {
+    "algeria": "Algeria",
+    "country": "Algeria",
     "loading": "Loading...",
     "error": "Something went wrong",
     "retry": "Try again",
@@ -645,7 +647,52 @@
       "contact": "Contact Guide",
       "years": "years",
       "reviews": "Reviews",
-      "perDay": "/day"
+      "perDay": "/day",
+      "profiles": {
+        "sami": {
+          "name": "Sami Haddad",
+          "location": "Constantine",
+          "description": "Professional guide with 10+ years experience. Specializing in cultural and historical tours across Algiers, Constantine, and the Sahara.",
+          "specialties": {
+            "history": "History",
+            "desert": "Desert Safari",
+            "culture": "Cultural Tours",
+            "translation": "Translation"
+          }
+        },
+        "lila": {
+          "name": "Lila Mansouri",
+          "location": "Algiers",
+          "description": "Master's degree in History and Archaeology. Expert in Andalusian heritage and Roman ruins across Tipaza and Tlemcen.",
+          "specialties": {
+            "archaeology": "Archaeology",
+            "education": "Educational Tours",
+            "museums": "Museums"
+          }
+        },
+        "karim": {
+          "name": "Karim Kabyle",
+          "location": "Bejaia",
+          "description": "Specialized in ecotourism and mountain safety. 12 years of experience leading expeditions in Djurdjura and the Aurès mountains.",
+          "specialties": {
+            "hiking": "Hiking",
+            "camping": "Camping",
+            "photography": "Nature Photography",
+            "safety": "Mountain Safety"
+          }
+        },
+        "amel": {
+          "name": "Amel Touareg",
+          "location": "Tamanrasset",
+          "description": "Expert desert guide with 20 years experience in the Hoggar and Tassili regions. Providing luxury safaris and stargazing experiences.",
+          "specialties": {
+            "safari": "4x4 Safari",
+            "luxury": "Luxury Camping",
+            "astro": "Astrophotography",
+            "vip": "VIP Tours"
+          }
+        }
+      }
     },
     "food": {
       "title": "Taste of Algeria",
@@ -729,7 +776,7 @@
     "privacy": "Privacy Policy",
     "rights": "All rights reserved.",
     "goToTop": "Go to Top",
-    "madeWith": "Made with love in Algeria"
+    "madeWith": "Made in Algeria"
   },
   "legal": {
     "title": "Legal & Support",

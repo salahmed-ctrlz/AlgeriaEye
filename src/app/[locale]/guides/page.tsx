@@ -15,11 +15,17 @@ export default function GuidesPage() {
     const ct = useTranslations("common");
     const [searchQuery, setSearchQuery] = useState("");
 
-    const filteredGuides = guides.filter(guide =>
-        guide.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        guide.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        guide.specialties.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
+    const filteredGuides = guides.filter(guide => {
+        const name = t(`profiles.${guide.translationKey}.name`).toLowerCase();
+        const location = t(`profiles.${guide.translationKey}.location`).toLowerCase();
+        const query = searchQuery.toLowerCase();
+
+        return name.includes(query) ||
+            location.includes(query) ||
+            guide.specialties.some(s =>
+                t(`profiles.${guide.translationKey}.specialties.${s}`).toLowerCase().includes(query)
+            );
+    });
 
     return (
         <div className="min-h-screen bg-background pb-20">
@@ -84,15 +90,15 @@ export default function GuidesPage() {
 
                                 <div className="space-y-1 mb-4">
                                     <h3 className="text-2xl font-black group-hover:text-brand transition-colors">
-                                        {guide.name}
+                                        {t(`profiles.${guide.translationKey}.name`)}
                                     </h3>
                                     <p className="text-muted-foreground font-bold text-sm flex items-center gap-1">
-                                        <MapPin className="h-3.5 w-3.5 text-brand" /> {guide.location}, Algeria
+                                        <MapPin className="h-3.5 w-3.5 text-brand" /> {t(`profiles.${guide.translationKey}.location`)}, {ct("algeria")}
                                     </p>
                                 </div>
 
                                 <p className="text-muted-foreground line-clamp-2 mb-6 text-sm leading-relaxed italic">
-                                    {guide.description}
+                                    {t(`profiles.${guide.translationKey}.description`)}
                                 </p>
 
                                 <div className="space-y-4 pt-4 border-t border-border/40">
@@ -113,7 +119,7 @@ export default function GuidesPage() {
                                     <div className="flex flex-wrap gap-2">
                                         {guide.specialties.slice(0, 3).map((spec) => (
                                             <Badge key={spec} variant="outline" className="text-[11px] border-brand/10 bg-brand/5 text-brand-dark font-bold rounded-lg capitalize">
-                                                {spec}
+                                                {t(`profiles.${guide.translationKey}.specialties.${spec}`)}
                                             </Badge>
                                         ))}
                                     </div>

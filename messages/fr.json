@@ -571,6 +571,8 @@
         }
     },
     "common": {
+        "algeria": "Algérie",
+        "country": "Algérie",
         "loading": "Chargement...",
         "error": "Une erreur est survenue",
         "retry": "Réessayer",
@@ -584,7 +586,8 @@
         "month": "mois",
         "exploreAll": "Voir Tout",
         "learnMore": "En savoir plus",
-        "general": "Général"
+        "general": "Général",
+        "guides": "Guides"
     },
     "wilayaDetails": {
         "country": "Algérie",
@@ -638,15 +641,60 @@
         "guidesPage": {
             "title": "Guides Touristiques",
             "subtitle": "Découvrez l'Algérie à travers les yeux de guides professionnels",
-            "searchPlaceholder": "Rechercher des guides par nom ou wilaya...",
+            "searchPlaceholder": "Rechercher des guides par nom ou lieu...",
             "specialties": "Spécialités",
             "experience": "Expérience",
             "languages": "Langues",
-            "viewProfile": "Voir le profil",
-            "contact": "Contacter le guide",
+            "viewProfile": "Voir le Profil",
+            "contact": "Contacter le Guide",
             "years": "ans",
             "reviews": "Avis",
-            "perDay": "/jour"
+            "perDay": "/jour",
+            "profiles": {
+                "sami": {
+                    "name": "Sami Haddad",
+                    "location": "Constantine",
+                    "description": "Guide professionnel avec plus de 10 ans d'expérience. Spécialisé dans les visites culturelles et historiques à travers Alger, Constantine et le Sahara.",
+                    "specialties": {
+                        "history": "Histoire",
+                        "desert": "Safari Désertique",
+                        "culture": "Visites Culturelles",
+                        "translation": "Traduction"
+                    }
+                },
+                "lila": {
+                    "name": "Lila Mansouri",
+                    "location": "Alger",
+                    "description": "Titulaire d'un Master en Histoire et Archéologie. Experte en patrimoine andalou et ruines romaines à travers Tipaza et Tlemcen.",
+                    "specialties": {
+                        "archaeology": "Archéologie",
+                        "education": "Visites Éducatives",
+                        "museums": "Musées"
+                    }
+                },
+                "karim": {
+                    "name": "Karim Kabyle",
+                    "location": "Béjaïa",
+                    "description": "Spécialisé dans l'écotourisme et la sécurité en montagne. 12 ans d'expérience à diriger des expéditions dans le Djurdjura et les montagnes des Aurès.",
+                    "specialties": {
+                        "hiking": "Randonnée",
+                        "camping": "Camping",
+                        "photography": "Photographie de Nature",
+                        "safety": "Sécurité en Montagne"
+                    }
+                },
+                "amel": {
+                    "name": "Amel Touareg",
+                    "location": "Tamanrasset",
+                    "description": "Guide désertique experte avec 20 ans d'expérience dans les régions du Hoggar et du Tassili. Proposant des safaris de luxe et des expériences d'observation des étoiles.",
+                    "specialties": {
+                        "safari": "Safari 4x4",
+                        "luxury": "Camping de Luxe",
+                        "astro": "Astrophotographie",
+                        "vip": "Visites VIP"
+                    }
+                }
+            }
         },
         "food": {
             "title": "Goût de l'Algérie",
@@ -730,7 +778,7 @@
         "privacy": "Politique de Confidentialité",
         "rights": "Tous droits réservés.",
         "goToTop": "Haut de Page",
-        "madeWith": "Fait avec ❤️ en Algérie"
+        "madeWith": "Made in Algeria"
     },
     "legal": {
         "title": "Juridique & Support",
